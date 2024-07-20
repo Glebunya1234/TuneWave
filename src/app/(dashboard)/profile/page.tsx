@@ -1,7 +1,7 @@
-import styles from "@/app/profile/profile.module.scss";
+
 const Profile = () => {
   return (
-    <div className={styles.profile}>
+    <div >
       <p>Hello Wold</p>
     </div>
   );
