@@ -1,26 +1,23 @@
-@import url('https://fonts-online.ru/path-to-fonts/versus.css');
-$font-family-versus: 'Versus', sans-serif;
-
 .NavigationBar {
   width: 100vw;
-  background-color: yellow;
+  background-color: #161719;
   height: 120px;
-  overflow: hidden; /* Скрывает текст, выходящий за пределы контейнера */
+  overflow: hidden;
 
-  .container {
-    display: flex;
+  div {
+    display: inline-block;
     align-items: center;
     width: 100%;
     height: 24px;
     overflow: hidden;
-    background-color: white;
-    font-family: $font-family-versus;
+
 
     p {
-      margin: 0; /* Убирает любые отступы */
-      padding: 0; /* Убирает любые поля */
-      white-space: nowrap; /* Предотвращает перенос текста на новую строку */
-      background-color: white;
+      margin: 0;
+      padding: 0; 
+      white-space: nowrap; 
     }
+    
   }
+  
 }
