@@ -1,0 +1,70 @@
+@import url('https://fonts-online.ru/path-to-fonts/versus.css');
+$font-family-versus: 'Versus', sans-serif;
+
+.marqueeContainer {
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+    width: 100%;
+
+
+    p {
+        text-transform: uppercase;
+        display: inline-flex;
+        background-color: white;
+        font-family: $font-family-versus;
+    }
+
+    div {
+        width: 100%;
+        animation: animate 20s linear infinite;
+        animation-delay: calc(20s * -1)
+    }
+
+    div:nth-child(2) {
+        width: 100%;
+        animation: animate2 20s linear infinite;
+        animation-delay: calc(20s / -2)
+    }
+}
+
+@keyframes animate {
+    0% {
+        transform: translateX(100%);
+    }
+
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+@keyframes animate2 {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-200%);
+    }
+}
+
+// .marqueeContent {
+//     width: 100%;
+//     animation: animate 20s linear infinite;
+//     animation-delay: calc(20s * -1)
+// }
+
+// .marqueeContent2 {
+//     width: 100%;
+//     animation: animate2 20s linear infinite;
+//     animation-delay: calc(20s / -2)
+// }
+
+// .marqueeText {
+//     text-transform: uppercase;
+//     display: inline-flex;
+//     background-color: white;
+//     font-family: $font-family-versus;
+//     // padding-right: 50px; // Adjust spacing between text
+// }
+
