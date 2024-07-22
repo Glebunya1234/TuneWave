@@ -1,4 +1,33 @@
+@import url('https://fonts-online.ru/path-to-fonts/versus.css');
+$font-family-versus: 'Versus', sans-serif;
+
 .profile {
+    width: 100%;
+    height: 100%;
+
+    svg {
+        width: 100%;
+        height: 100%;
+
+        text {
+            font-family: $font-family-versus;
+            text-transform: uppercase;
+        }
+    }
+
+    // .outlinedText {
+    //     font-size: 30px;
+    //     color: transparent; 
+    //     font-family: $font-family-versus;/* Делает текст прозрачным */
+    //     text-shadow: 
+    //       .5px .5px 0 #000000, 
+    //       -.5px -.5px 0 #ffffff,  
+    //       .5px -.5px 0 #ffffff,  
+    //       -.5px .5px 0 #ffffff; /* Настроить цвет и толщину обводки */
+    //   }
+
+    // background-image: 
+
 
     /* background-color: aqua;
     height: 60px;
