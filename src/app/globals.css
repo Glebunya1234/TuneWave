@@ -1,4 +1,3 @@
-@import url('https://fonts-online.ru/path-to-fonts/versus.css');
 body {
   padding: 0;
   margin: 0;
@@ -8,9 +7,11 @@ body {
   background-color: #161719;
 }
 :root {
---lengthText:1; 
---invertFilter:0; 
+  --lengthText: 1;
+  --invertFilter: 0;
 }
+
+
 
 /* @tailwind base;
 @tailwind components;
@@ -44,4 +45,4 @@ body {
   .text-balance {
     text-wrap: balance;
   }
-} */ 
+} */
