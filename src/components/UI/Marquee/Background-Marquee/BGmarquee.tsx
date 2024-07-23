@@ -84,7 +84,7 @@ export const BackgroundMarquee: React.FC<MarqueeProps> = ({
     >
       {Array(2)
         .fill(null)
-        .map((index) => (
+        .map((_, index) => (
           <aside
             className={style.marqueeContainer__textConteiner}
             style={

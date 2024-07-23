@@ -1,12 +1,23 @@
 @import url('https://fonts-online.ru/path-to-fonts/versus.css');
 $font-family-versus: 'Versus', sans-serif;
+
 .MediaLibrary {
     width: 350px;
     height: 100%;
     margin: 10px;
     margin-top: 5px;
     margin-bottom: 0;
-    background-color: #00000091
+    background-color: #00000091;
+    overflow: hidden;
+}
+
+.MediaLibrary__Navigation {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding-left: 20px;
+    padding-top: 5vh;
+
 }
 
 // .MediaLibrary__RoutingBT {

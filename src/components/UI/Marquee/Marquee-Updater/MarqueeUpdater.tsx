@@ -13,7 +13,7 @@ export const MarqueeUpdater = () => {
       dataContext?.setDefaultText(pathname?.split("/").pop() || "");
     };
     UF();
-  }, [dataContext, pathname]);
+  }, [pathname]);
   // useEffect(() => {}, [dataContext?.getDefaultText]);
   return <></>;
 };
