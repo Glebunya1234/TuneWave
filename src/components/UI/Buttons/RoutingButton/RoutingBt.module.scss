@@ -1,16 +1,57 @@
 @import url("https://fonts-online.ru/path-to-fonts/versus.css");
 $font-family-versus: "Versus", sans-serif;
 
+
 .RoutingBTN {
+  width: 100%;
+  position: relative;
+}
+.RoutingBTN__Button {
   text-wrap: nowrap;
   padding-left: 5px;
   padding-right: 5px;
   font-family: $font-family-versus;
-  background-color: white;
+  font-size: 25px;
+  text-transform: uppercase;
   transition: all .1s ease-in-out;
-  
+  color: white;
+  width: min-content;
+  margin-bottom: 10px;
+
   &:hover {
+    color: black;
+    background-color: white;
     scale: 1.2;
-    transform: rotate(2deg);
+    transform: rotate(1deg);
   }
+
+}
+
+.RoutingBTN__Holder_Visible {
+  width: 100%;
+  // padding-left: 5px;
+  // padding-right: 5px;
+  display: flex;
+  align-items: center;
+  
+  
+  span {
+    padding-left: 5px;
+    padding-right: 5px;
+    transform: scaleX(0.7); 
+    border-radius: 5px;  
+    position: absolute;
+    top: 35px;
+    left: 20px;
+    transform: rotate(-1deg);
+    background-color: #20232a;
+    font-size: 70%;
+    text-wrap: nowrap;
+    text-transform: uppercase;
+    color: #cecece;
+
+  }
+}
+.RoutingBTN__Holder_UnVisible{
+  display: none;
 }

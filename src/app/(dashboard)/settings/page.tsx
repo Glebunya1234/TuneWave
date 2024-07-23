@@ -1,6 +1,6 @@
 import { MarqueeUpdater } from "@/components/UI/Marquee/Marquee-Updater/MarqueeUpdater";
 
-const Profile = () => {
+const Settings = () => {
   return (
     <div>
       <p>Hello </p>
@@ -8,4 +8,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default Settings;
