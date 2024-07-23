@@ -9,6 +9,7 @@ body {
 }
 :root {
 --lengthText:1; 
+--invertFilter:0; 
 }
 
 /* @tailwind base;
