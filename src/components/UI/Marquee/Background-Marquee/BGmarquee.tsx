@@ -2,8 +2,9 @@
 import { Marquee } from "@devnomic/marquee";
 import "@devnomic/marquee/dist/index.css";
 import style from "./BGmarquee.module.scss";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { usePathname } from "next/navigation";
+import { HoverTextContext } from "@/Context";
 interface MarqueeProps {
   text: string;
   className?: string;
@@ -11,12 +12,12 @@ interface MarqueeProps {
 }
 
 export const MarqueeContainer = () => {
+  const dataContext = useContext(HoverTextContext);
   const [duration, setDuration] = useState(style.duration1s);
   const pathname = usePathname();
 
-  const newText = pathname?.split("/").pop() || "";
-  // const newText = "Tunewave";
-  const text = newText + " ";
+  dataContext?.setDefaultText(pathname?.split("/").pop() || "");
+
   useEffect(() => {
     const timer = setTimeout(() => {
       setDuration("duration40s");
@@ -32,20 +33,40 @@ export const MarqueeContainer = () => {
 
     return () => clearTimeout(timer2);
   }, []);
-
+  useEffect(() => {}, [dataContext.getTemporaryText]);
   return (
     <>
-      <BackgroundMarquee text={text} className={duration} />
       <BackgroundMarquee
-        text={text}
+        text={dataContext?.getTemporaryText + " "}
+        className={duration}
+      />
+      <BackgroundMarquee
+        text={dataContext?.getTemporaryText + " "}
         isReverse={true}
         className={`${duration}`}
       />
-      <BackgroundMarquee text={text} className={duration} />
-      <BackgroundMarquee text={text} isReverse={true} className={duration} />
-      <BackgroundMarquee text={text} className={duration} />
-      <BackgroundMarquee text={text} isReverse={true} className={duration} />
-      <BackgroundMarquee text={text} className={duration} />
+      <BackgroundMarquee
+        text={dataContext?.getTemporaryText + " "}
+        className={duration}
+      />
+      <BackgroundMarquee
+        text={dataContext?.getTemporaryText + " "}
+        isReverse={true}
+        className={duration}
+      />
+      <BackgroundMarquee
+        text={dataContext?.getTemporaryText + " "}
+        className={duration}
+      />
+      <BackgroundMarquee
+        text={dataContext?.getTemporaryText + " "}
+        isReverse={true}
+        className={duration}
+      />
+      <BackgroundMarquee
+        text={dataContext?.getTemporaryText + " "}
+        className={duration}
+      />
     </>
   );
 };

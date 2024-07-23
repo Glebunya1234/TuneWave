@@ -6,22 +6,25 @@ import { MediaLibraryBar } from "@components/Side-Bars/MediaLibrary-side-bar/Lef
 import { InfoBar } from "@components/Side-Bars/Info-side-bar/Right-side-bar";
 import { NavigationBar } from "../Side-Bars/NavigationTrack-side-bar/Bottom-side-bar";
 import { Header } from "../UI/Header/header";
-import {MarqueeContainer} from "../UI/Marquee/Background-Marquee/BGmarquee";
+import { MarqueeContainer } from "../UI/Marquee/Background-Marquee/BGmarquee";
+import { Context } from "../Context-component/Context";
 export const Dashboard = ({ children }: { children: React.ReactNode }) => {
   return (
     <main className={`${style.dashboard}`}>
-      <section className= {style.backgroundMarq}>
-       <MarqueeContainer/>
-      </section>
-      <div className={style.dashboard__content}>
-        <MediaLibraryBar />
-        <aside>
-          <Header />
-          {children}
-        </aside>
-        <InfoBar />
-      </div>
-      <NavigationBar />
+      <Context>
+        <section className={style.backgroundMarq}>
+          <MarqueeContainer />
+        </section>
+        <div className={style.dashboard__content}>
+          <MediaLibraryBar />
+          <aside>
+            <Header />
+            {children}
+          </aside>
+          <InfoBar />
+        </div>
+        <NavigationBar />
+      </Context>
     </main>
   );
 };
