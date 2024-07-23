@@ -1,30 +1,27 @@
-"use client";
+// "use client";
+import { BtnRouting } from "@/components/UI/Buttons/RoutingButton/RoutingBt";
 import style from "./profile.module.scss";
 import { useRouter } from "next/navigation";
 import React from "react";
+import { HoverTextContext } from "@/Context";
 
 const Profile = () => {
-  const handleMouseEnter = () => {
-    document.documentElement.style.setProperty("--invertFilter", "1");
-    const timer = setTimeout(() => {
-      document.documentElement.style.setProperty("--invertFilter", "0");
-    }, 350);
-
-    return () => clearTimeout(timer);
-  };
-
   // const handleMouseLeave = () => {
   //   document.documentElement.style.setProperty("--invertFilter", "0");
   // };
+  
   return (
     <div className={style.profile}>
-      <p
+      
+       
+      
+      {/* <p
         className={style.outlinedText}
         onMouseEnter={handleMouseEnter}
         // onMouseLeave={handleMouseLeave}
       >
         Hello Wold
-      </p>
+      </p> */}
     </div>
   );
 };
