@@ -13,7 +13,7 @@ export const Dashboard = ({ children }: { children: React.ReactNode }) => {
       <section className= {style.backgroundMarq}>
        <MarqueeContainer/>
       </section>
-      <div>
+      <div className={style.dashboard__content}>
         <MediaLibraryBar />
         <aside>
           <Header />

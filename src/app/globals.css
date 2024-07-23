@@ -7,6 +7,9 @@ body {
   overflow: hidden;
   background-color: #161719;
 }
+:root {
+--lengthText:1; 
+}
 
 /* @tailwind base;
 @tailwind components;
