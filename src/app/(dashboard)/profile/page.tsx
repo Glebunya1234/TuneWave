@@ -4,6 +4,7 @@ import style from "./profile.module.scss";
 import { useRouter } from "next/navigation";
 import React from "react";
 import { HoverTextContext } from "@/Context";
+import { MarqueeUpdater } from "@/components/UI/Marquee/Marquee-Updater/MarqueeUpdater";
 
 const Profile = () => {
   // const handleMouseLeave = () => {
@@ -12,7 +13,6 @@ const Profile = () => {
   
   return (
     <div className={style.profile}>
-      
        
       
       {/* <p
