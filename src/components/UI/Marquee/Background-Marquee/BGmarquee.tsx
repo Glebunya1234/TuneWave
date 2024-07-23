@@ -14,8 +14,8 @@ export const MarqueeContainer = () => {
   const [duration, setDuration] = useState(style.duration1s);
   const pathname = usePathname();
 
-  // const text = pathname?.split("/").pop() || "";
-  const newText = "Tunewave";
+  const newText = pathname?.split("/").pop() || "";
+  // const newText = "Tunewave";
   const text = newText + " ";
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -24,6 +24,15 @@ export const MarqueeContainer = () => {
 
     return () => clearTimeout(timer);
   }, []);
+
+  useEffect(() => {
+    const timer2 = setTimeout(() => {
+      setDuration("filter: invert(100%);");
+    }, 100);
+
+    return () => clearTimeout(timer2);
+  }, []);
+
   return (
     <>
       <BackgroundMarquee text={text} className={duration} />
@@ -102,8 +111,10 @@ export const FillText: React.FC<MarqueeProps> = ({ text }) => {
       <text
         x="50%"
         y="63.5%"
-        fill="#b8c9e1"
-        stroke="#b8c9e1"
+        // fill="#b8c9e1"
+        // stroke="#b8c9e1"
+        fill="white"
+        stroke="white"
         strokeWidth="1"
         dominant-baseline="middle"
         textAnchor="middle"
@@ -119,8 +130,10 @@ export const BorderText: React.FC<MarqueeProps> = ({ text }) => {
       <text
         x="50%"
         y="63.5%"
+        // fill="none"
+        // stroke="#b8c9e1"
         fill="none"
-        stroke="#b8c9e1"
+        stroke="white"
         strokeWidth="1"
         textAnchor="middle"
         dominant-baseline="middle"

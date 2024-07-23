@@ -13,10 +13,17 @@ $font-family-versus: 'Versus', sans-serif;
             font-family: $font-family-versus;
             text-transform: uppercase;
         }
-        p{
-            font-size: calc(12px + (100 - 12) * ((100vw - 320px) / (1900 - 320)));
-        }
+      
+        
+        
     }
+    // .outlinedText {
+
+    //     font-size: 20px;
+    //     &:hover{
+    //         --invertFilter:1;
+    //     }
+    // }
 
     // .outlinedText {
     //     font-size: 30px;
