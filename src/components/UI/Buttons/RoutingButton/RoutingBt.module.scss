@@ -1,6 +1,7 @@
 @import url("https://fonts-online.ru/path-to-fonts/versus.css");
+ 
 $font-family-versus: "Versus", sans-serif;
-
+ 
 
 .RoutingBTN {
   width: 100%;
@@ -24,6 +25,9 @@ $font-family-versus: "Versus", sans-serif;
     scale: 1.2;
     // transform: rotate(1deg);
   }
+  &:active{
+    background-color: #00dc00;
+  }
 
 }
 
@@ -38,7 +42,7 @@ $font-family-versus: "Versus", sans-serif;
   span {
     padding-left: 5px;
     padding-right: 5px;
-    transform: scaleX(0.7); 
+   
     border-radius: 5px;  
     position: absolute;
     top: 35px;

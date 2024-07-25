@@ -2,13 +2,12 @@
 import { BtnRouting } from "@/components/UI/Buttons/RoutingButton/RoutingBt";
 import style from "./Left-side-bar.module.scss";
 import { useState } from "react";
-export const MediaLibrary = ({
-  children,
-}: {
-  children: React.ReactNode;
-}) => {
+import { CloseBarBtn } from "@/components/UI/Buttons/CloseSideBarBT/CloseBarBT";
+import { IoArrowRedoSharp } from "react-icons/io5";
+export const MediaLibrary = ({ children }: { children: React.ReactNode }) => {
   const [isRemove, setRemove] = useState(" ");
   const [isComponentVisible, setIsComponentVisible] = useState(true);
+
   const holder = {
     Home: "go to home page",
     Search: "new music search page",
@@ -16,10 +15,14 @@ export const MediaLibrary = ({
   };
 
   const handleClick = () => {
+   
+  };
+
+  const handleAction = () => {
     setRemove(style.MediaLibrary__remove);
     const timer2 = setTimeout(() => {
       setRemove(" ");
-      setIsComponentVisible(false);
+      setIsComponentVisible(prevState => !prevState);
     }, 500);
     return timer2;
   };
@@ -27,6 +30,13 @@ export const MediaLibrary = ({
     <>
       {isComponentVisible && (
         <section className={`${style.MediaLibrary} ${isRemove}`}>
+          <aside>
+            <span>
+              <p>Hide window</p> <IoArrowRedoSharp />
+            </span>
+
+            <CloseBarBtn onToggle={handleAction}  />
+          </aside>
           <nav className={style.MediaLibrary__Navigation}>
             <BtnRouting
               helpHolder={holder.Home}
@@ -43,7 +53,6 @@ export const MediaLibrary = ({
               text="Settings"
               path={"../../../settings"}
             />
-            <button onClick={handleClick}>Bebraaaaaaaaaaaaaa</button>
           </nav>
           {children}
         </section>

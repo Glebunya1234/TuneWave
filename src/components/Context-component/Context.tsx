@@ -1,27 +1,36 @@
-"use client"
+"use client";
 import { useState } from "react";
-import { HoverTextContext, HovertextType } from "@/Context";
+import { GlobalContext } from "@/Context";
+
 import { usePathname } from "next/navigation";
+import { ContextType } from "@/types/TypeContext/type";
 export const Context = ({ children }: { children: React.ReactNode }) => {
   const pathname = usePathname();
   const text = pathname?.split("/").pop() || "";
   const [getTemporaryText, setTemporaryText] =
-    useState<HovertextType["getTemporaryText"]>(text);
+    useState<ContextType["getTemporaryText"]>(text);
   const [getDefaultText, setDefaultText] =
-    useState<HovertextType["getDefaultText"]>(text);
-   
+    useState<ContextType["getDefaultText"]>(text);
+  const [isHiddenLeftBar, setHiddenLeftBar] =
+    useState<ContextType["isHiddenLeftBar"]>(true);
+  const [isHiddenRightBar, setHiddenRightBar] =
+    useState<ContextType["isHiddenRightBar"]>(true);
 
   const valueHover = {
     getTemporaryText,
     setTemporaryText,
     getDefaultText,
     setDefaultText,
+    isHiddenLeftBar,
+    setHiddenLeftBar,
+    isHiddenRightBar,
+    setHiddenRightBar,
   };
   // getDefaultText: "",
   // setDefaultText: () => { },
   return (
-    <HoverTextContext.Provider value={valueHover}>
+    <GlobalContext.Provider value={valueHover}>
       {children}
-    </HoverTextContext.Provider>
+    </GlobalContext.Provider>
   );
 };
