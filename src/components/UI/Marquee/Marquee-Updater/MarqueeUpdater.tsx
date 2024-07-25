@@ -13,6 +13,7 @@ export const MarqueeUpdater = () => {
       dataContext?.setDefaultText(pathname?.split("/").pop() || "");
     };
     UF();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
   // useEffect(() => {}, [dataContext?.getDefaultText]);
   return <></>;
