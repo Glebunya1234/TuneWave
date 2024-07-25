@@ -1,4 +1,3 @@
-import { MarqueeUpdater } from "@/components/UI/Marquee/Marquee-Updater/MarqueeUpdater";
 
 const Settings = () => {
   return (

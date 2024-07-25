@@ -1,3 +1,5 @@
-import { Dispatch, SetStateAction } from "react";
-
-export type TypeSetState<T> = Dispatch<SetStateAction<T>>
+export type MarqueeProps = {
+  text: string;
+  className?: string;
+  isReverse?: boolean;
+};

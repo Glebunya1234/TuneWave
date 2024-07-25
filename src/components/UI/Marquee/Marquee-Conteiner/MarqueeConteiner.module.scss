@@ -1,0 +1,43 @@
+// @import url('https://fonts-online.ru/path-to-fonts/versus.css');
+// $font-family-versus: 'Versus', sans-serif;
+
+.marqueeContainer {
+    width: 100%;
+    height: 9vh;
+    overflow: hidden;
+    white-space: nowrap;
+    z-index: 9999;
+    margin-bottom: 9vh;
+   
+    
+
+    .marqueeContainer__textConteiner {
+
+        width: calc(var(--lengthText) * 10vw);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+    }
+
+
+    text {
+        font-size: 6vw;
+        // font-size: calc(12px + (100 - 12) * (100vw - 320px) / 1600);
+        font-family: 'Versus', sans-serif;
+        text-transform: uppercase;
+    }
+
+}
+
+
+.duration1s {
+    --duration: 2s;
+    transition: var(--duration) ease-in-out;
+}
+
+.duration40s {
+    --duration: 40s;
+    transition: var(--duration) ease-in-out;
+
+}
