@@ -4,11 +4,11 @@ import "@devnomic/marquee/dist/index.css";
 import style from "./MarqueeConteiner.module.scss";
 import { useState, useEffect, useContext } from "react";
 import { usePathname } from "next/navigation";
-import { HoverTextContext } from "@/Context";
+import { GlobalContext } from "@/Context";
 import { BackgroundMarquee } from "../Background-Marquee/BGmarquee";
 
 export const MarqueeContainer = () => {
-  const dataContext = useContext(HoverTextContext);
+  const dataContext = useContext(GlobalContext);
   const [duration, setDuration] = useState(style.duration1s);
   const pathname = usePathname();
 

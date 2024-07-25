@@ -1,6 +1,6 @@
 "use client";
 import { useContext, useState } from "react";
-import { HoverTextContext } from "@/Context";
+import { GlobalContext } from "@/Context";
 import { useRouter } from "next/navigation";
 import style from "./RoutingBt.module.scss";
 
@@ -20,23 +20,18 @@ export const BtnRouting: React.FC<IMarqueeProps> = ({
   helpHolder,
 }) => {
   const router = useRouter();
-  const [isVisible, setVisible] = useState(false) 
-  const dataContext = useContext(HoverTextContext);
+  const [isVisible, setVisible] = useState(false);
+  const dataContext = useContext(GlobalContext);
   const handleMouseEnter = () => {
-    
-
     dataContext?.setTemporaryText(text);
     setVisible(true);
     document.documentElement.style.setProperty("--invertFilter", "1");
 
-    
     const timer = setTimeout(() => {
       document.documentElement.style.setProperty("--invertFilter", "0");
     }, 250);
 
     return () => clearTimeout(timer);
-
-
   };
   const handleMouseLeave = () => {
     setVisible(false);
@@ -62,7 +57,13 @@ export const BtnRouting: React.FC<IMarqueeProps> = ({
         {text}
         {children}
       </button>
-      <div className={`${isVisible? style.RoutingBTN__Holder_Visible : style.RoutingBTN__Holder_UnVisible}`}>
+      <div
+        className={`${
+          isVisible
+            ? style.RoutingBTN__Holder_Visible
+            : style.RoutingBTN__Holder_UnVisible
+        }`}
+      >
         <span>{helpHolder}</span>
       </div>
     </div>

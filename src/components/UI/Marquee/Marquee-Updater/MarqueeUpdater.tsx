@@ -1,10 +1,10 @@
 "use client";
-import { HoverTextContext } from "@/Context";
+import { GlobalContext} from "@/Context";
 import { usePathname } from "next/navigation";
 import { useContext, useEffect } from "react";
 
 export const MarqueeUpdater = () => {
-  const dataContext = useContext(HoverTextContext);
+  const dataContext = useContext(GlobalContext);
   const pathname = usePathname();
 
   useEffect(() => {
