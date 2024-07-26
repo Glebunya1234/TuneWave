@@ -1,5 +1,14 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Ropa+Sans&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --lengthText: 1;
+  --invertFilter: 0;
+}
+
 body {
   padding: 0;
   margin: 0;
@@ -8,17 +17,8 @@ body {
   overflow: hidden;
   background-color: #161719;
 }
-:root {
-  --lengthText: 1;
-  --invertFilter: 0;
-}
 
-
-
-/* @tailwind base;
-@tailwind components;
-@tailwind utilities;
-
+ 
 /* :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
