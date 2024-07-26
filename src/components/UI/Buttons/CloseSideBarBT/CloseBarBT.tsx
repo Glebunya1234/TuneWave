@@ -1,18 +1,16 @@
-import { MdOutlineHideSource } from "react-icons/md";
-import { useContext, useState } from "react";
-import { useRouter } from "next/navigation";
+import { MdOutlineCircle, MdOutlineHideSource } from "react-icons/md";
 import style from "./CloseBarBT.module.scss";
 
-import { GlobalContext } from "@/Context";
 interface IMarqueeProps {
   text?: string;
   className?: string;
-
+  children: React.ReactNode;
   onToggle: () => void;
 }
 
 export const CloseBarBtn: React.FC<IMarqueeProps> = ({
   className,
+  children,
   onToggle,
 }) => {
   return (
@@ -21,7 +19,7 @@ export const CloseBarBtn: React.FC<IMarqueeProps> = ({
         className={`${style.CloseBarBtn__Button} ${className}`}
         onClick={onToggle}
       >
-        <MdOutlineHideSource className={style.CloseBarBtn__Icon} />
+        {children}
       </button>
     </div>
   );
