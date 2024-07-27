@@ -1,27 +1,18 @@
-// "use client";
-import { BtnRouting } from "@/components/UI/Buttons/RoutingButton/RoutingBt";
 import style from "./profile.module.scss";
-import { useRouter } from "next/navigation";
 import React from "react";
-import { HoverTextContext } from "@/Context";
-import { MarqueeUpdater } from "@/components/UI/Marquee/Marquee-Updater/MarqueeUpdater";
+import { PanelTarget } from "@/components/UI/Target/PanelTarget";
 
 const Profile = () => {
-  // const handleMouseLeave = () => {
-  //   document.documentElement.style.setProperty("--invertFilter", "0");
-  // };
-  
   return (
     <div className={style.profile}>
-       
-      
-      {/* <p
-        className={style.outlinedText}
-        onMouseEnter={handleMouseEnter}
-        // onMouseLeave={handleMouseLeave}
-      >
-        Hello Wold
-      </p> */}
+      <section className={style.profile__Dashboard}>
+        <PanelTarget side="Top" />
+        <aside className={style.profile__Content}>
+          <div className={style.dash}></div>
+          <div className={style.squarDash}></div>
+        </aside>
+        <PanelTarget side="Bottom" />
+      </section>
     </div>
   );
 };

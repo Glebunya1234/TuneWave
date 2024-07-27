@@ -17,7 +17,7 @@ $font-family-versus: 'Versus', sans-serif;
 
     animation: AnimationRender .4s linear;
     background-color: #00000091;
-    transition: all 5s;
+ 
 
     aside {
         width: 100%;
@@ -46,6 +46,10 @@ $font-family-versus: 'Versus', sans-serif;
                 margin-right: .2rem;
             }
         }
+    }
+
+    @media (max-width: 750px) {
+        display: none;
     }
 }
 
