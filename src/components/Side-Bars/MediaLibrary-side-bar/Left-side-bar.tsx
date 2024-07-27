@@ -6,6 +6,7 @@ import { CloseBarBtn } from "@/components/UI/Buttons/CloseSideBarBT/CloseBarBT";
 import { IoMdArrowDropright } from "react-icons/io";
 import { MdOutlineHideSource } from "react-icons/md";
 import { GlobalContext } from "@/Context";
+import { Target } from "../../UI/Target/target";
 export const MediaLibraryBar = ({
   children,
 }: {

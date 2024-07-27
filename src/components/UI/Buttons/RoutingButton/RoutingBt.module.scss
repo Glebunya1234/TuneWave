@@ -1,12 +1,15 @@
 @import url("https://fonts-online.ru/path-to-fonts/versus.css");
- 
+
 $font-family-versus: "Versus", sans-serif;
- 
+
 
 .RoutingBTN {
   width: 100%;
   position: relative;
+
+
 }
+
 .RoutingBTN__Button {
   text-wrap: nowrap;
   padding-left: 5px;
@@ -18,15 +21,54 @@ $font-family-versus: "Versus", sans-serif;
   color: white;
   width: min-content;
   margin-bottom: 10px;
+  position: relative;
+  z-index: 1;
+
+
+
 
   &:hover {
     color: black;
     background-color: white;
     scale: 1.2;
+
     // transform: rotate(1deg);
+
+    &:after {
+      content: '';
+      position: absolute;
+
+      width: 100%;
+      height: 100%;
+      top: 1px;
+      left: 1px;
+
+
+      border-width: 1px;
+      border-top: 0px;
+      border-left: 0px;
+      border-color: #8e56ad;
+
+
+
+      z-index: -1;
+    }
+
+
   }
-  &:active{
+
+  &:active {
     background-color: #00dc00;
+  }
+
+
+
+  @media (max-width: 1000px) {
+    font-size: 20px;
+  }
+
+  @media (max-width: 750px) {
+    font-size: 15px;
   }
 
 }
@@ -37,13 +79,13 @@ $font-family-versus: "Versus", sans-serif;
   // padding-right: 5px;
   display: flex;
   align-items: center;
-  
-  
+
+
   span {
     padding-left: 5px;
     padding-right: 5px;
-   
-    border-radius: 5px;  
+
+    border-radius: 5px;
     position: absolute;
     top: 35px;
     left: 20px;
@@ -53,9 +95,20 @@ $font-family-versus: "Versus", sans-serif;
     text-wrap: nowrap;
     text-transform: uppercase;
     color: #cecece;
+    user-select: none;
 
+    z-index: 2;
+
+    @media (max-width: 1000px) {
+      top: 25px;
+      font-size: 60%;
+    }
   }
+
+
+
 }
-.RoutingBTN__Holder_UnVisible{
+
+.RoutingBTN__Holder_UnVisible {
   display: none;
 }
