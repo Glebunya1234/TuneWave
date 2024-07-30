@@ -1,0 +1,74 @@
+@import url("https://fonts-online.ru/path-to-fonts/versus.css");
+
+$font-family-versus: "Versus", sans-serif;
+
+
+$heightMarq: 16px;
+
+.BorderMarquee {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+
+  background: #000;
+  color: black;
+
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  overflow: hidden;
+
+  &:hover {
+    .marq {
+      opacity: 1;
+    }
+  }
+
+  .BorderMarquee__Conteiner {
+
+    overflow: hidden;
+    width: 100%;
+
+    display: flex;
+    align-content: center;
+    justify-content: center;
+
+    margin: $heightMarq + 5px;
+  }
+}
+
+.marq {
+  position: absolute;
+  width: 100%;
+  height: $heightMarq;
+  overflow: hidden;
+  font-size: x-small;
+  display: inline-block;
+  opacity: 0;
+
+}
+
+.marq_Top {
+  @extend .marq;
+  top: calc(-10% + $heightMarq - 2px);
+  transform: rotate(0deg);
+}
+
+.marq_Left {
+  @extend .marq;
+  left: calc(-50% + $heightMarq - 8px);
+  transform: rotate(-90deg);
+}
+
+.marq_Right {
+  @extend .marq;
+  left: calc(50% - $heightMarq + 8px);
+  transform: rotate(90deg);
+}
+
+.marq_Bottom {
+  @extend .marq;
+  top: calc(100% - $heightMarq);
+  transform: rotate(180deg);
+}
