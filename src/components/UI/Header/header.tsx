@@ -6,7 +6,7 @@ export const Header = () => {
     <header className={style.header}>
       <div className={style.header__content}>
         <PanelBurger side="Left"/>
-        <aside>Bebraa</aside>
+        <aside>TuneWave</aside>
         <PanelBurger side="Right"/>
       </div>
     </header>

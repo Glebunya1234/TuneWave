@@ -1,5 +1,5 @@
 import style from "./dashboard.module.scss";
- 
+
 import { NavigationBar } from "@components/Side-Bars/NavigationTrack-side-bar/Bottom-side-bar";
 import { Context } from "@components/Context-component/Context";
 import { MarqueeContainer } from "@UI/Marquee/Marquee-Conteiner/MarqueeConteiner";
@@ -12,9 +12,6 @@ export const Dashboard = ({ children }: { children: React.ReactNode }) => {
     <main className={`${style.dashboard}`}>
       <Context>
         <MarqueeUpdater />
-        <section className={style.backgroundMarq}>
-          <MarqueeContainer />
-        </section>
         <div className={style.dashboard__content}>
           <MediaLibrary />
           <aside>
@@ -25,6 +22,9 @@ export const Dashboard = ({ children }: { children: React.ReactNode }) => {
           <InfoBar />
         </div>
         <NavigationBar />
+        <section className={style.backgroundMarq}>
+          <MarqueeContainer />
+        </section>
       </Context>
     </main>
   );

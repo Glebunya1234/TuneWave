@@ -1,11 +1,53 @@
-.profile {
+@import url('https://fonts-online.ru/path-to-fonts/versus.css');
+$font-family-versus: 'Versus', sans-serif;
 
-    background-color: antiquewhite;
-    height: 60px;
-    color: black;
+.Settings {
+    width: 100%;
+    height: 100%;
+    margin-top: 10px;
+    padding-bottom: 75px;
+    position: relative;
 
-    h1 {
-        background-color: red;
-        color: white;
+
+
+    .Settings__Dashboard {
+        width: 100%;
+        height: 100%;
+        background-color: #00000091;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .Settings__Content {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 60px;
+        padding-right: 60px;
+
+        h1 {
+            color: white;
+
+        }
+    }
+
+    .dash {
+        position: absolute;
+        top: 50px;
+        left: 10px;
+        width: 22px;
+        height: 70px;
+        background: repeating-linear-gradient(315deg, #b9becc, #b9becc 1.5px, transparent 0px, transparent 5px);
+    }
+
+    .squarDash {
+        @extend .dash;
+        top: 130px;
+        width: 22px;
+        height: 22px;
+        background: repeating-linear-gradient(45deg, #b9becc, #b9becc 1.5px, transparent 0px, transparent 5px);
     }
 }

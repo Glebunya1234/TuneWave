@@ -5,24 +5,41 @@ $font-family-versus: 'Versus', sans-serif;
     overflow: hidden;
     white-space: nowrap;
     position: relative;
+    display: inline-block;
+    align-items: center;
     width: 100%;
-   
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+
 
     p {
+        color: black;
+        text-align: center;
+        white-space: nowrap;
         text-transform: uppercase;
-        display: inline-flex;
+        display: flex;
+        align-items: center;
         background-color: white;
         font-family: $font-family-versus;
+        height: 100%;
+
     }
 
     div {
+        align-items: center;
         width: 100%;
+        display: inline-block;
+        overflow: hidden;
+        white-space: nowrap;
+        height: 100%;
+
         animation: animate 20s linear infinite;
         animation-delay: calc(20s * -1)
     }
 
     div:nth-child(2) {
-        width: 100%;
+        @extend div;
         animation: animate2 20s linear infinite;
         animation-delay: calc(20s / -2)
     }
@@ -47,23 +64,3 @@ $font-family-versus: 'Versus', sans-serif;
         transform: translateX(-200%);
     }
 }
-
-// .marqueeContent {
-//     width: 100%;
-//     animation: animate 20s linear infinite;
-//     animation-delay: calc(20s * -1)
-// }
-
-// .marqueeContent2 {
-//     width: 100%;
-//     animation: animate2 20s linear infinite;
-//     animation-delay: calc(20s / -2)
-// }
-
-// .marqueeText {
-//     text-transform: uppercase;
-//     display: inline-flex;
-//     background-color: white;
-//     font-family: $font-family-versus;
-//     // padding-right: 50px; // Adjust spacing between text
-// }

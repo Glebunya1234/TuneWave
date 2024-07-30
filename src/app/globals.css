@@ -1,5 +1,3 @@
-
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -15,10 +13,27 @@ body {
   width: 100%;
   height: 100%;
   overflow: hidden;
-  background-color: #161719;
+  background: linear-gradient(to bottom, #15181d6c, #3e454bad),
+    url("../../public/pattern3.png") center center;
+
+  background-size: 50%, 30%;
+}
+body::before {
+  filter: invert(var(--invertFilter));
+  content: " ";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -9999;
+  animation: Filter 3s;
+  background: linear-gradient(to bottom, #15181d6c, #3e454bad),
+    url("../../public/pattern3.png") center center;
+
+  background-size: 50%, 30%;
 }
 
- 
 /* :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
