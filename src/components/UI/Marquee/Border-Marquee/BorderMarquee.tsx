@@ -1,8 +1,7 @@
 "use client";
-import { supabase } from "@/providers/supabaseClient";
-import React, { Children, FC, useEffect } from "react";
-import { useRouter } from "next/navigation";
-import { Auth } from "@supabase/auth-ui-react";
+
+import React, { FC } from "react";
+
 import style from "./BorderMarquee.module.scss";
 import Marquee from "../Sound-Marquee/marquee";
 type props = {

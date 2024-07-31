@@ -51,7 +51,7 @@ $heightMarq: 16px;
 
 .marq_Top {
   @extend .marq;
-  top: calc(-10% + $heightMarq - 2px);
+  top: calc(-10% + $heightMarq - 3px);
   transform: rotate(0deg);
 }
 

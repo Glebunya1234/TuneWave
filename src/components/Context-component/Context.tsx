@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import { ContextType } from "@/types/TypeContext/type";
 export const Context = ({ children }: { children: React.ReactNode }) => {
   const pathname = usePathname();
-  const text = pathname?.split("/").pop() || "";
+  const text = pathname?.split("/").pop() || "tunewave";
   const [getTemporaryText, setTemporaryText] =
     useState<ContextType["getTemporaryText"]>(text);
   const [getDefaultText, setDefaultText] =

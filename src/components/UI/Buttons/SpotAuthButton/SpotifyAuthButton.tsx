@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { GlobalContext } from "@/Context";
 import style from "./SpotifyAuthButton.module.scss";
 import { oAuthSignIn } from "@/app/login/action";
+import { useContext, useEffect } from "react";
 
 const SpotifyAuthButton: React.FC = () => {
   // const router = useRouter();
@@ -47,12 +47,37 @@ const SpotifyAuthButton: React.FC = () => {
   //   router.push("/profile");
   // };
 
+  const dataContext = useContext(GlobalContext);
+  const handleMouseEnter = () => {
+    dataContext?.setTemporaryText("Sign In");
+    dataContext?.setDefaultText("tunewave");
+
+    document.documentElement.style.setProperty("--invertFilter", "1");
+
+    const timer = setTimeout(() => {
+      document.documentElement.style.setProperty("--invertFilter", "0");
+    }, 250);
+
+    return () => clearTimeout(timer);
+  };
+
+  const handleMouseLeave = () => {
+    dataContext?.setTemporaryText(dataContext.getDefaultText);
+    document.documentElement.style.setProperty("--invertFilter", "1");
+    const timer = setTimeout(() => {
+      document.documentElement.style.setProperty("--invertFilter", "0");
+    }, 250);
+
+    return () => clearTimeout(timer);
+  };
+
   return (
-    // <button onClick={handleClick} className={style.SpotifyAuthButton__Button}>
     <button
       onClick={async () => {
         await oAuthSignIn("spotify");
       }}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
       className={style.SpotifyAuthButton__Button}
     >
       Sign in with Spotify

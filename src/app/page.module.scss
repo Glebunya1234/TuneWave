@@ -7,26 +7,24 @@ $font-family-versus: 'Versus', sans-serif;
     width: 100%;
     height: 100%;
     overflow: hidden;
-    background: linear-gradient(to bottom, #15181d6c, #3e454bad),
+    background: linear-gradient(to bottom, #15181de3, #3e454be3),
         url("../../public/pattern3.png") center center;
 
     background-size: 50%, 30%;
+
 }
 
-.Body::before {
-    filter: invert(var(--invertFilter));
-    content: " ";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -9999;
-    animation: Filter 3s;
-    background: linear-gradient(to bottom, #15181d6c, #3e454bad),
-        url("../../public/pattern3.png") center center;
 
-    background-size: 50%, 30%;
+
+@keyframes Filter {
+    0% {
+        filter: invert(1);
+    }
+
+    50% {
+        filter: invert(0);
+
+    }
 }
 
 .Home {
@@ -36,8 +34,11 @@ $font-family-versus: 'Versus', sans-serif;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    background-color: #00000091;
+    background-color: #000000a2;
     overflow: hidden;
+
+
+
 
 
     .Home__Nav {
@@ -46,6 +47,7 @@ $font-family-versus: 'Versus', sans-serif;
 
         display: flex;
         justify-content: end;
+
 
         @media (max-width: 700px) {
             justify-content: center;
@@ -58,12 +60,14 @@ $font-family-versus: 'Versus', sans-serif;
             height: min-content;
 
         }
+
+
     }
 
     .Home__Dashboard {
         width: 100%;
         height: 100%;
-        background-color: #00000091;
+
         display: flex;
         flex-direction: column;
 
@@ -96,6 +100,8 @@ $font-family-versus: 'Versus', sans-serif;
             .Arrow1 {
                 display: none;
                 filter: invert(1);
+                opacity: 0;
+                animation: gradientFadeIn 2s ease-in-out forwards;
 
                 @media (min-width: 720px) {
                     display: block;
@@ -123,6 +129,9 @@ $font-family-versus: 'Versus', sans-serif;
             .Arrow2 {
                 display: none;
                 filter: invert(1);
+                opacity: 0;
+                animation: gradientFadeIn 2s ease-in-out forwards;
+                animation-delay: .4s;
 
                 @media (min-width: 720px) {
                     position: absolute;
@@ -145,9 +154,24 @@ $font-family-versus: 'Versus', sans-serif;
                 left: 0;
                 top: 0;
                 transform: rotate(90deg) scale(.8);
+                opacity: 0;
+                animation: gradientFadeIn 2s ease-in-out forwards;
+                animation-delay: .4s;
 
                 @media (min-width:720px) {
                     display: none;
+                }
+            }
+
+            @keyframes gradientFadeIn {
+                75% {
+                    background: linear-gradient(90deg, #ff7f5f00 0%rgba(254, 180, 123, 0)7b 100%);
+                    opacity: 0;
+                }
+
+                100% {
+                    background: linear-gradient(90deg, #ff7f5f00 0%, #feb47b00 100%);
+                    opacity: 1;
                 }
             }
         }
@@ -178,7 +202,7 @@ $font-family-versus: 'Versus', sans-serif;
 
         top: 10%;
         z-index: -9999;
-        animation: Filter 3s;
+
         filter: invert(var(--invertFilter));
         transition: .1s ease-in-out;
     }
