@@ -1,6 +1,8 @@
 import style from "./profile.module.scss";
 import React from "react";
 import { PanelTarget } from "@/components/UI/Target/PanelTarget";
+import { createClient } from "@/utils/supabase/server";
+import { redirect } from "next/navigation";
 
 const Profile = () => {
   return (

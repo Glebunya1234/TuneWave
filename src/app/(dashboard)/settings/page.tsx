@@ -1,6 +1,6 @@
 import { PanelTarget } from "@/components/UI/Target/PanelTarget";
 import style from "./Settings.module.scss";
-import SingOut from "@/components/UI/Buttons/out";
+import { SingOutBTN } from "@/components/UI/Buttons/AuthBtn/SignOut-button/SignOutBtn";
 
 const Settings = () => {
   return (
@@ -10,8 +10,8 @@ const Settings = () => {
         <aside className={style.Settings__Content}>
           <div className={style.dash}></div>
           <div className={style.squarDash}></div>
-          <SingOut />
-          <h1>Settings</h1>
+          <SingOutBTN />
+          <div className={style.ss}>Settings</div>
         </aside>
         <PanelTarget side="Bottom" />
       </section>

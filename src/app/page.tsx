@@ -10,6 +10,7 @@ import { SignInBanner } from "@/components/Banner/SignInBanner/SignIn-Banner";
 import { Context } from "@/components/Context-component/Context";
 
 export default function Home() {
+  
   return (
     <main className={style.Home}>
       <Context>
