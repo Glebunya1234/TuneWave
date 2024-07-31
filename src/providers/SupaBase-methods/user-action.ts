@@ -36,6 +36,14 @@ export const SignOut = async () => {
     // console.log((await GetDataProfileUser()).user)
 };
 
+export const IsAuthorized = async () => {
+    const data = await GetDataProfileUser()
+    console.log(data)
+    if (data === null) {
+        return redirect("/?messange=You must log in")
+    }
+}
+
 export const GetDataProfileUser = async () => {
     const supabase = createClient()
 
