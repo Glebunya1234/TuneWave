@@ -1,8 +1,9 @@
-"use client"
-import SpotifyAuthButton from "@/components/UI/Buttons/SpotAuthButton/SpotifyAuthButton";
+"use client";
+import SpotifyAuthButton from "@/components/UI/Buttons/AuthBtn/SignIn-button/SignInBtn";
 import { BorderMarquee } from "@/components/UI/Marquee/Border-Marquee/BorderMarquee";
 import style from "./SignInBanner.module.scss";
 import { useState, useEffect } from "react";
+
 export const SignInBanner = () => {
   const [isVisible, setIsVisible] = useState(false);
   useEffect(() => {
