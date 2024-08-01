@@ -13,10 +13,7 @@ body {
   width: 100%;
   height: 100%;
   overflow: hidden;
-  background: linear-gradient(to bottom, #15181de3, #3e454be3),
-    url("../../public/pattern3.png") center center;
 
-  background-size: 50%, 30%;
 }
 
 /* :root {

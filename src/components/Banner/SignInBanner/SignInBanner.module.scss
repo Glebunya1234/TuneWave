@@ -11,7 +11,19 @@
 
         &::after {
             position: absolute;
-            animation: AnimHover .2s linear ;
+            animation: AnimHover .2s linear;
+            top: -30px;
+            left: -35px;
+            width: 330px;
+            height: 190px;
+            z-index: -20;
+
+
+        }
+
+        &::before {
+            position: absolute;
+            animation: AnimHover .2s linear;
             top: -30px;
             left: -35px;
             width: 330px;
