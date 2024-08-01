@@ -7,11 +7,7 @@ $font-family-versus: 'Versus', sans-serif;
     width: 100%;
     height: 100%;
     overflow: hidden;
-    background: linear-gradient(to bottom, #15181de3, #3e454be3),
-        url("../../public/pattern3.png") center center;
-
-    background-size: 50%, 30%;
-
+    background-color: black;
 }
 
 
@@ -34,11 +30,31 @@ $font-family-versus: 'Versus', sans-serif;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    background-color: #000000a2;
+    background:
+        // url('../../../public/21375.png') center center ,
+        linear-gradient(to bottom, #15181d6c, #3e454bad),
+        url('/pattern3.png') center center;
     overflow: hidden;
 
 
 
+    &::before {
+        filter: invert(var(--invertFilter));
+        content: " ";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -9999;
+        animation: Filter 3s;
+        background:
+            // url('../../../public/21375.png') center center ,
+            linear-gradient(to bottom, #15181d6c, #3e454bad),
+            url('/pattern3.png') center center;
+
+        background-size: 50%, 30%;
+    }
 
 
     .Home__Nav {
@@ -68,6 +84,9 @@ $font-family-versus: 'Versus', sans-serif;
         width: 100%;
         height: 100%;
 
+
+        background-color: #00000083;
+        background-size: 50%, 30%;
         display: flex;
         flex-direction: column;
 
@@ -97,11 +116,15 @@ $font-family-versus: 'Versus', sans-serif;
             justify-content: center;
             align-items: center;
 
+
+
             .Arrow1 {
                 display: none;
                 filter: invert(1);
                 opacity: 0;
                 animation: gradientFadeIn 2s ease-in-out forwards;
+                -webkit-user-drag: none;
+                user-select: none;
 
                 @media (min-width: 720px) {
                     display: block;
@@ -131,7 +154,9 @@ $font-family-versus: 'Versus', sans-serif;
                 filter: invert(1);
                 opacity: 0;
                 animation: gradientFadeIn 2s ease-in-out forwards;
-                animation-delay: .4s;
+                animation-delay: .8s;
+                -webkit-user-drag: none;
+                user-select: none;
 
                 @media (min-width: 720px) {
                     position: absolute;
@@ -157,6 +182,8 @@ $font-family-versus: 'Versus', sans-serif;
                 opacity: 0;
                 animation: gradientFadeIn 2s ease-in-out forwards;
                 animation-delay: .4s;
+                -webkit-user-drag: none;
+                user-select: none;
 
                 @media (min-width:720px) {
                     display: none;
@@ -199,10 +226,9 @@ $font-family-versus: 'Versus', sans-serif;
         position: absolute;
         width: 100%;
         height: 100%;
-
         top: 10%;
         z-index: -9999;
-
+        animation: Filter 3s;
         filter: invert(var(--invertFilter));
         transition: .1s ease-in-out;
     }

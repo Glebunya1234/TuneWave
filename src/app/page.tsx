@@ -10,7 +10,6 @@ import { SignInBanner } from "@/components/Banner/SignInBanner/SignIn-Banner";
 import { Context } from "@/components/Context-component/Context";
 
 export default function Home() {
-  
   return (
     <main className={style.Home}>
       <Context>
@@ -33,14 +32,14 @@ export default function Home() {
                 width={200}
                 height={200}
                 className={style.Arrow2}
-                alt="Arrow"
+                alt="Arrow2"
               />
               <Image
                 src={src3}
                 width={200}
                 height={200}
                 className={style.Arrow3}
-                alt="Arrow"
+                alt="Arrow3"
               />
             </div>
             <nav className={style.Home__Nav}>

@@ -1,0 +1,83 @@
+.UserDataHeader {
+    width: 100%;
+    height: 100%;
+
+    // background-color: fuchsia;
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    align-items: center;
+    overflow: hidden;
+
+    aside {
+        @extend .UserDataHeader;
+        background-color: rgba(160, 160, 160, 0.144);
+        width: max-content;
+
+        @media (max-width:500px) {
+            width: 100%;
+            justify-content: center;
+        }
+    }
+
+    h1 {
+        margin-right: auto;
+        margin-left: 5px;
+        text-wrap: nowrap;
+
+        @media (max-width:750px) {
+            display: none;
+        }
+
+    }
+
+    h2 {
+        margin-right: .75rem;
+        margin-left: 5px;
+
+    }
+
+    h3 {
+        margin-right: .75rem;
+        border-left-width: 1px;
+        border-color: aliceblue;
+        display: flex;
+        align-items: center;
+        text-wrap: nowrap;
+    }
+
+    // .header__content {
+    //     display: flex;
+    //     align-items: center;
+    //     max-width: 1300px;
+    //     width: 100%;
+    //     height: 100%;
+    //     padding: 10px;
+
+
+    // }
+}
+
+.mask {
+    margin-left: 5px;
+    clip-path: polygon(25% 15%, 100% 15%, 76% 85%, 0 85%);
+}
+
+// .mask {
+//     position: relative;
+//     overflow: hidden;
+
+//     &-parallelogram {
+//         &::before {
+//             content: '';
+//             position: absolute;
+//             top: 0;
+//             left: 0;
+//             width: 100%;
+//             height: 100%;
+//             background-color: inherit; // или любой другой фон
+//             transform: skew(-20deg); // Скос параллелограмма
+//             transform-origin: top left;
+//         }
+//     }
+// }

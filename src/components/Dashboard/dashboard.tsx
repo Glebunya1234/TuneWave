@@ -4,7 +4,7 @@ import { NavigationBar } from "@components/Side-Bars/NavigationTrack-side-bar/Bo
 import { Context } from "@components/Context-component/Context";
 import { MarqueeContainer } from "@UI/Marquee/Marquee-Conteiner/MarqueeConteiner";
 import { MarqueeUpdater } from "@UI/Marquee/Marquee-Updater/MarqueeUpdater";
-import { Header } from "@UI/Header/header";
+import { Header } from "@/components/UI/Header/header-main/header";
 import { MediaLibrary } from "@sidebars/MediaLibrary-side-bar/MediaLibrary";
 import { InfoBar } from "@sidebars/Info-side-bar/InfoBar";
 import { IsAuthorized } from "@/providers/SupaBase-methods/user-action";
