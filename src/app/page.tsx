@@ -8,6 +8,7 @@ import src2 from "../../public/arrow2.png";
 import src3 from "../../public/pngegg3.png";
 import { SignInBanner } from "@/components/Banner/SignInBanner/SignIn-Banner";
 import { Context } from "@/components/Context-component/Context";
+import { Dddassaa } from "@/components/UI/Target/ddd";
 
 export default function Home() {
   return (
@@ -42,6 +43,7 @@ export default function Home() {
                 alt="Arrow3"
               />
             </div>
+            <Dddassaa/>
             <nav className={style.Home__Nav}>
               <SignInBanner />
             </nav>
