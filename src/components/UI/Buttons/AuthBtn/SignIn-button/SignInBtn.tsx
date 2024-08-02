@@ -6,6 +6,7 @@ import { oAuthSignIn } from "@/providers/SupaBase-methods/user-action";
 
 const SpotifyAuthButton: React.FC = () => {
   const dataContext = useContext(GlobalContext);
+
   const handleMouseEnter = () => {
     dataContext?.setTemporaryText("Sign In");
     dataContext?.setDefaultText("tunewave");
