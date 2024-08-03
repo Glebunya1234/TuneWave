@@ -3,6 +3,7 @@ import React from "react";
 import { PanelTarget } from "@/components/UI/Target/PanelTarget";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
+import { FavoriteBanner } from "@/components/Banner/FavoriteBanner/FavoriteBanner";
 
 const Profile = () => {
   return (
@@ -13,7 +14,7 @@ const Profile = () => {
           <div className={style.dash}></div>
           <div className={style.squarDash}></div>
 
-          <h1>Content Here</h1>
+          <FavoriteBanner />
         </aside>
         <PanelTarget side="Bottom" />
       </section>
