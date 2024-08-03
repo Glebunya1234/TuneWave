@@ -1,4 +1,4 @@
-"use server"
+"use server";
 import style from "./dashboard.module.scss";
 import { NavigationBar } from "@components/Side-Bars/NavigationTrack-side-bar/Bottom-side-bar";
 import { Context } from "@components/Context-component/Context";
@@ -9,8 +9,12 @@ import { MediaLibrary } from "@sidebars/MediaLibrary-side-bar/MediaLibrary";
 import { InfoBar } from "@sidebars/Info-side-bar/InfoBar";
 import { IsAuthorized } from "@/providers/SupaBase-methods/user-action";
 import { redirect } from "next/navigation";
-export const Dashboard = async ({ children }: { children: React.ReactNode }) => {
-  await IsAuthorized()
+export const Dashboard = async ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
+  await IsAuthorized();
   // redirect("/?messange=You must log in")
   return (
     <main className={`${style.dashboard}`}>
@@ -18,9 +22,8 @@ export const Dashboard = async ({ children }: { children: React.ReactNode }) => 
         <MarqueeUpdater />
         <div className={style.dashboard__content}>
           <MediaLibrary />
-          <aside>
+          <aside className={style.content__child}>
             <Header />
-
             {children}
           </aside>
           <InfoBar />
