@@ -1,10 +1,14 @@
-import Image from "next/image";
+"use client"
 import style from "./FavoriteBanner.module.scss";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
 export const FavoriteBanner = () => {
+ const route = useRouter()
   return (
     <aside className={style.FavoriteBanner}>
       <nav className={style.FavoriteBanner__Nav}>
-        <button className={style.Btn__Left}>
+        <button className={style.Btn__Left}
+        onClick={()=>{route.push('/collection/tracks')}}>
           <Image
             src="https://i.scdn.co/image/ab6761610000e5eb7ff08b2df89c415997a91aff"
             width={40}

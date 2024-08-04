@@ -8,7 +8,6 @@ import { Header } from "@/components/UI/Header/header-main/header";
 import { MediaLibrary } from "@sidebars/MediaLibrary-side-bar/MediaLibrary";
 import { InfoBar } from "@sidebars/Info-side-bar/InfoBar";
 import { IsAuthorized } from "@/providers/SupaBase-methods/user-action";
-import { redirect } from "next/navigation";
 export const Dashboard = async ({
   children,
 }: {
@@ -34,5 +33,5 @@ export const Dashboard = async ({
         </section>
       </Context>
     </main>
-  );
+  );  
 };
