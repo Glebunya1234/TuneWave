@@ -1,8 +1,10 @@
 "use server";
 import { _getSavedTrackUser, _getToken } from "@/api/ApiSpotify";
 import style from "./tracks.module.scss";
+
 import { PanelTarget } from "@/components/UI/Target/PanelTarget";
 import Image from "next/image";
+import { formatDuration } from "@/utils/DurationFormatFunc";
 interface Artist {
   name: string;
 }
@@ -20,6 +22,7 @@ interface Track {
   name: string;
   artists: Artist[];
   album: Album;
+  duration_ms: number;
 }
 
 interface SavedTrack {
@@ -28,8 +31,9 @@ interface SavedTrack {
 }
 const tracks = async () => {
   const token = await _getToken();
-  const data: SavedTrack[] = await _getSavedTrackUser(token);
 
+  const data: SavedTrack[] = await _getSavedTrackUser(token);
+  console.log("data", data);
   return (
     <div className={style.Tracks}>
       <PanelTarget side="Top" />
@@ -54,7 +58,8 @@ const tracks = async () => {
                 : "";
 
             return (
-              <div key={index} className={style.Playlist__track}>
+              <div key={index} className={style.Playlist__Track}>
+                <div className={style.TrackIndex}>{index + 1}</div>
                 <div className={style.TrackImage}>
                   {albumImageUrl && (
                     <Image
@@ -72,6 +77,8 @@ const tracks = async () => {
                     {item.track.artists.map((artist) => artist.name).join(", ")}
                   </div>
                 </div>
+                <div className={style.TrackAlbum}>{item.track.album.name}</div>
+                <div>{formatDuration(item.track.duration_ms)}</div>
               </div>
             );
           })}

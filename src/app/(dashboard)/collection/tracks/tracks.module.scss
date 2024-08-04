@@ -12,8 +12,9 @@ $font-family-versus: 'Versus', sans-serif;
     background-color: #00000091;
     overflow: hidden;
 
-    .mark{
-        clip-path: circle(50% at 50% 50%);
+    .mark {
+        z-index: 2;
+        clip-path: circle(45% at 50% 50%);
     }
 
     .Tracks__Content {
@@ -41,6 +42,17 @@ $font-family-versus: 'Versus', sans-serif;
                 width: 170px;
                 height: 170px;
                 position: relative;
+
+                &:before {
+
+                    position: absolute;
+                    clip-path: circle(50% at 50% 50%);
+                    content: "";
+                    width: 100%;
+                    height: 100%;
+                    background-color: #4ade80;
+                    z-index: 1;
+                }
 
                 @media (max-width:1200px) {
                     width: 120px;
@@ -85,15 +97,31 @@ $font-family-versus: 'Versus', sans-serif;
             grid-template-columns: 1fr;
 
 
-            .Playlist__track {
+            .Playlist__Track {
                 display: grid;
-                grid-template-columns: 50px 2fr; // Первый столбец для изображения, второй для информации
+                grid-template-columns: 20px 50px 2fr 2fr auto;
                 align-items: center;
                 margin-bottom: 10px;
                 box-sizing: border-box;
 
+                @media (max-width:820px) {
+                    grid-template-columns: 20px 50px 2fr auto auto;
+                }
+
                 &:hover {
                     background-color: rgba(160, 160, 160, 0.144);
+                }
+
+                div {
+                    font-size: 12px;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+
+                .TrackIndex {
+                    width: 100%;
+                    text-align: center;
                 }
 
                 .TrackImage {
@@ -110,6 +138,7 @@ $font-family-versus: 'Versus', sans-serif;
                     object-fit: cover;
                     width: 100%;
                     height: auto;
+
                 }
 
                 .TrackInfo {
@@ -117,15 +146,20 @@ $font-family-versus: 'Versus', sans-serif;
                     flex-direction: column;
                     overflow: hidden;
 
-                    .TrackName {
-                        font-size: 12px;
-                        white-space: nowrap;
-                        overflow: hidden;
-                        text-overflow: ellipsis;
-                    }
+
 
                     .TrackArtist {
                         font-size: 10px;
+                    }
+                }
+
+                .TrackDuration {}
+
+                .TrackAlbum {
+                    padding-left: 10px;
+
+                    @media (max-width:820px) {
+                        display: none;
                     }
                 }
             }
