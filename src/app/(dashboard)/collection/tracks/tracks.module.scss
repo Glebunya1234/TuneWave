@@ -12,7 +12,9 @@ $font-family-versus: 'Versus', sans-serif;
     background-color: #00000091;
     overflow: hidden;
 
-
+    .mark{
+        clip-path: circle(50% at 50% 50%);
+    }
 
     .Tracks__Content {
         width: 100%;
@@ -32,7 +34,7 @@ $font-family-versus: 'Versus', sans-serif;
             display: flex;
             flex-direction: row;
             align-items: end;
-            margin-bottom: 10px;
+            margin-bottom: 100px;
 
 
             .Preview__image {
@@ -79,22 +81,53 @@ $font-family-versus: 'Versus', sans-serif;
         .Content__playlist {
             width: 100%;
             height: 100%;
-            display: flex;
-            flex-direction: column;
+            display: grid;
+            grid-template-columns: 1fr;
+
 
             .Playlist__track {
-                width: 100%;
-                height: min-content;
-                display: flex;
-                flex-direction: row;
+                display: grid;
+                grid-template-columns: 50px 2fr; // Первый столбец для изображения, второй для информации
                 align-items: center;
-                background-color: #ff0000e1;
                 margin-bottom: 10px;
+                box-sizing: border-box;
 
-                h2 {
-                    margin-right: 10px;
+                &:hover {
+                    background-color: rgba(160, 160, 160, 0.144);
                 }
 
+                .TrackImage {
+                    position: relative;
+                    width: 100%;
+                    height: 100px;
+                    max-width: 40px;
+                    max-height: 40px;
+                    overflow: hidden;
+
+                }
+
+                .AlbumImage {
+                    object-fit: cover;
+                    width: 100%;
+                    height: auto;
+                }
+
+                .TrackInfo {
+                    display: flex;
+                    flex-direction: column;
+                    overflow: hidden;
+
+                    .TrackName {
+                        font-size: 12px;
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                    }
+
+                    .TrackArtist {
+                        font-size: 10px;
+                    }
+                }
             }
         }
     }

@@ -7,9 +7,19 @@ interface Artist {
   name: string;
 }
 
+interface AlbumImage {
+  url: string;
+}
+
+interface Album {
+  images: AlbumImage[];
+  name: string;
+}
+
 interface Track {
   name: string;
   artists: Artist[];
+  album: Album;
 }
 
 interface SavedTrack {
@@ -19,8 +29,7 @@ interface SavedTrack {
 const tracks = async () => {
   const token = await _getToken();
   const data: SavedTrack[] = await _getSavedTrackUser(token);
-  //   console.log(token);
-  // console.log(data);
+
   return (
     <div className={style.Tracks}>
       <PanelTarget side="Top" />
@@ -28,23 +37,44 @@ const tracks = async () => {
         <section className={style.Content__Preview}>
           <div className={style.Preview__image}>
             <Image
-              src="https://i.scdn.co/image/ab6761610000e5eb7ff08b2df89c415997a91aff"
+              src="/FavoriteTrack.png"
               layout="fill"
               objectFit="cover"
+              className={style.mark}
               alt="alt"
             />
           </div>
           <h1>Favorite tracks</h1>
         </section>
         <section className={style.Content__playlist}>
-          {data.map((item, index) => (
-            <div key={index} className={style.Playlist__track}>
-              <h2>{item.track.name}</h2>
-              <p>
-                {item.track.artists.map((artist) => artist.name).join(", ")}
-              </p>
-            </div>
-          ))}
+          {data.map((item, index) => {
+            const albumImageUrl =
+              item.track.album.images.length > 0
+                ? item.track.album.images[0].url
+                : "";
+
+            return (
+              <div key={index} className={style.Playlist__track}>
+                <div className={style.TrackImage}>
+                  {albumImageUrl && (
+                    <Image
+                      src={albumImageUrl}
+                      alt={item.track.album.name}
+                      layout="fill"
+                      objectFit="cover"
+                      className={style.AlbumImage}
+                    />
+                  )}
+                </div>
+                <div className={style.TrackInfo}>
+                  <div className={style.TrackName}>{item.track.name}</div>
+                  <div className={style.TrackArtist}>
+                    {item.track.artists.map((artist) => artist.name).join(", ")}
+                  </div>
+                </div>
+              </div>
+            );
+          })}
         </section>
       </aside>
       <div className={style.dash}></div>
