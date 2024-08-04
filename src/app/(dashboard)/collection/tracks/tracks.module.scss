@@ -1,0 +1,118 @@
+@import url('https://fonts-online.ru/path-to-fonts/versus.css');
+$font-family-versus: 'Versus', sans-serif;
+
+.Tracks {
+    width: 100%;
+    height: 100%;
+    margin-top: 10px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    background-color: #00000091;
+    overflow: hidden;
+
+
+
+    .Tracks__Content {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        overflow-y: scroll;
+        padding: 10px;
+        padding-left: 60px;
+        padding-right: 60px;
+        color: white;
+
+        .Content__Preview {
+            width: 100%;
+            height: 170px;
+            display: flex;
+            flex-direction: row;
+            align-items: end;
+            margin-bottom: 10px;
+
+
+            .Preview__image {
+                width: 170px;
+                height: 170px;
+                position: relative;
+
+                @media (max-width:1200px) {
+                    width: 120px;
+                    height: 120px;
+                }
+
+                @media (max-width:870px) {
+                    width: 100px;
+                    height: 100px;
+                }
+
+                @media (max-width:420px) {
+                    width: 80px;
+                    height: 80px;
+                }
+            }
+
+            h1 {
+                margin-left: 10px;
+                font-family: $font-family-versus;
+                font-size: clamp(3.063rem, -0.613rem + 4.2vw, 4.375rem);
+                text-transform: uppercase;
+
+                @media (max-width:1400px) {
+                    font-size: clamp(0.938rem, -2.969rem + 6.25vw, 2.5rem);
+                }
+
+                @media (max-width:420px) {
+                    font-size: clamp(0.438rem, 0.438rem + 1.19vw, 0.75rem);
+
+                }
+
+            }
+
+
+        }
+
+        .Content__playlist {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+
+            .Playlist__track {
+                width: 100%;
+                height: min-content;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                background-color: #ff0000e1;
+                margin-bottom: 10px;
+
+                h2 {
+                    margin-right: 10px;
+                }
+
+            }
+        }
+    }
+
+    .dash {
+        position: absolute;
+        top: 50px;
+        left: 10px;
+        width: 22px;
+        height: 70px;
+        background: repeating-linear-gradient(315deg, #b9becc, #b9becc 1.5px, transparent 0px, transparent 5px);
+    }
+
+    .squarDash {
+        @extend .dash;
+        top: 130px;
+        width: 22px;
+        height: 22px;
+        background: repeating-linear-gradient(45deg, #b9becc, #b9becc 1.5px, transparent 0px, transparent 5px);
+    }
+}

@@ -60,7 +60,7 @@ export const SignOut = async () => {
     await supabase.auth.signOut().then(() => {
         const cookieStore = cookies();
 
-        // Удаляем все cookies, связанные с Supabase
+
         const supabaseCookies = cookieStore.getAll();
         supabaseCookies.forEach(({ name }) => cookieStore.delete(name));
 

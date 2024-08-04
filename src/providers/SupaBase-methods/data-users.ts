@@ -1,15 +1,9 @@
 import { createClient } from '@/utils/supabase/server'; // Ваш путь к createClient
-import { _getToken } from './data-user';
 
 export const getUserToken = async (): Promise<string | null> => {
     try {
-        // Создайте клиент Supabase
         const supabase = createClient();
-
-        // Получите текущую сессию
         const { data: session, error } = await supabase.auth.getSession();
-        // console.log('Access Token:', session.session?.provider_token);
-
         if (error || !session) {
             console.error('Ошибка получения сессии:', error);
             return null;

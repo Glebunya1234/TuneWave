@@ -4,7 +4,7 @@ import { GetDataProfileUser } from "@/providers/SupaBase-methods/user-action";
 import style from "./headerUser.module.scss";
 import Image from "next/image";
 import { FaCircle } from "react-icons/fa";
-import { getUserSpotifyData } from "@/providers/SupaBase-methods/ss";
+import { getUserSpotifyData } from "@/providers/SupaBase-methods/data-users";
 export const UserDataHeader = async () => {
   const userData = await GetDataProfileUser();
   // const lib = await getUserSpotifyData();
