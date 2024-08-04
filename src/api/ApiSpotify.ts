@@ -61,11 +61,10 @@ export const _getToken = async (): Promise<string | null> => {
         }
 
         const token = session.session?.provider_token;
-        const refreshToken = session.session?.provider_refresh_token; // предполагаем, что refresh_token также хранится в сессии
+        const refreshToken = session.session?.provider_refresh_token;
 
         if (token && refreshToken) {
-            // Проверка срока действия токена (добавьте логику проверки если есть)
-            // Если токен истек, обновляем его
+
             const newToken = await _refreshToken(refreshToken);
             if (newToken) {
                 // Обновляем токен в Supabase
