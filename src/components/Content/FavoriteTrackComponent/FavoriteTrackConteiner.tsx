@@ -3,8 +3,10 @@ import style from "./FavoriteTrackComponent.module.scss";
 import Image from "next/image";
 import { _getSavedTrackUser, _getToken } from "@/api/ApiSpotify";
 import { formatDuration } from "@/utils/DurationFormatFunc";
-import { useEffect, useState } from "react";
-import { fetching, SpotifyTracksResponse } from "./FavoriteTrackComponent";
+import { useContext, useEffect, useState } from "react";
+import { fetching } from "./FavoriteTrackComponent";
+import type { SpotifyTracksResponse } from "@/types/SpotifyTypes/TrackFavoriteType/type";
+import { GlobalContext } from "@/Context";
 
 export const FavoriteTrackComponent = () => {
   const [getData, setData] = useState<SpotifyTracksResponse>({
@@ -19,7 +21,7 @@ export const FavoriteTrackComponent = () => {
   const [getOffset, setOffset] = useState(0);
   const [getFetching, setFetching] = useState(false);
   const [isLastPage, setIsLastPage] = useState(false);
-
+  const dataContext = useContext(GlobalContext);
   useEffect(() => {
     if (getFetching && !isLastPage) {
       fetching(getOffset)
@@ -46,7 +48,6 @@ export const FavoriteTrackComponent = () => {
     const myDiv = document.getElementById("FavoriteContent");
     setFetching(true);
     if (myDiv) {
-      console.log("getData2");
       myDiv.addEventListener("scroll", scrollHandler);
       return () => {
         myDiv.removeEventListener("scroll", scrollHandler);
@@ -76,7 +77,14 @@ export const FavoriteTrackComponent = () => {
 
         return (
           <div key={index} className={style.Playlist__Track}>
-            <div className={style.TrackIndex}>{index + 1}</div>
+            <div
+              className={style.TrackIndex}
+              onClick={() => {
+                dataContext?.setStatePlaying((prevState) => !prevState);
+              }}
+            >
+              {index + 1}
+            </div>
             <div className={style.TrackImage}>
               {albumImageUrl && (
                 <Image

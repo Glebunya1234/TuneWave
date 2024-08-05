@@ -1,6 +1,6 @@
 "use client";
 
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { CloseBarBtn } from "@/components/UI/Buttons/CloseSideBarBT/CloseBarBT";
 import style from "./Right-side-bar.module.scss";
 import { IoMdArrowDropleft } from "react-icons/io";
@@ -9,6 +9,9 @@ import { MdOutlineHideSource } from "react-icons/md";
 export const InfoSideBar = ({ children }: { children: React.ReactNode }) => {
   const [isRemove, setRemove] = useState(" ");
   const dataCont = useContext(GlobalContext);
+
+
+  // useEffect()
   const handleAction = () => {
     setRemove(style.InfoBar__remove);
     const timer2 = setTimeout(() => {
@@ -17,6 +20,7 @@ export const InfoSideBar = ({ children }: { children: React.ReactNode }) => {
     }, 500);
     return timer2;
   };
+
 
   return (
     <>
@@ -32,7 +36,7 @@ export const InfoSideBar = ({ children }: { children: React.ReactNode }) => {
             </CloseBarBtn>
           </aside>
 
-          {children}
+          <div className={style.InfoBar__Children}> {children}</div>
         </section>
       )}
     </>
