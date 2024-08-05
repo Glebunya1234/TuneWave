@@ -10,4 +10,6 @@ export type ContextType = {
     setHiddenLeftBar: TypeSetState<boolean>;
     isHiddenRightBar: boolean,
     setHiddenRightBar: TypeSetState<boolean>;
+    getStatePlaying: boolean,
+    setStatePlaying: TypeSetState<boolean>;
 };
