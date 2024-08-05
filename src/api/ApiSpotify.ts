@@ -150,9 +150,10 @@ export const _getSavedTrackUser = async (token: string | null, count: number): P
         },
     });
     const newData = await response.json();
-    console.log("newData", newData)
+
     return newData
 }
+
 
 
 
@@ -188,6 +189,32 @@ export const _getCurrentlyPlayingTrack = async (token?: string | null): Promise<
 
 }
 
+export const _getPlayTrack = async (uri: string) => {
+    const { access_token } = await test()
+    const response = await fetch('https://api.spotify.com/v1/me/player/play', {
+
+        method: 'PUT',
+        headers: {
+            'Authorization': `Bearer ${access_token}`,
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            context_uri: `${uri}`,
+            offset: {
+                position: 5,
+            },
+            position_ms: 0,
+        }),
+    });
+    if (!response.ok) {
+        const error = await response.json();
+        console.error('Error:', error);
+        return;
+    }
+
+    const data = await response.json();
+    console.log('Success:', data);
+}
 
 
 

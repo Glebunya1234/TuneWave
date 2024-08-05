@@ -20,12 +20,14 @@ interface Track {
   name: string;
   artists: Artist[];
   album: Album;
+  uri: string;
   duration_ms: number;
 }
 
 interface SavedTrack {
   added_at: string;
   track: Track;
+
 }
 
 export interface SpotifyTracksResponse {
