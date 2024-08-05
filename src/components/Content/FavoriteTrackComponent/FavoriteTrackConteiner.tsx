@@ -1,12 +1,14 @@
 "use client";
 import style from "./FavoriteTrackComponent.module.scss";
 import Image from "next/image";
-import { _getSavedTrackUser, _getToken } from "@/api/ApiSpotify";
+import { _getPlayTrack, _getSavedTrackUser, _getToken } from "@/api/ApiSpotify";
 import { formatDuration } from "@/utils/DurationFormatFunc";
 import { useContext, useEffect, useState } from "react";
 import { fetching } from "./FavoriteTrackComponent";
 import type { SpotifyTracksResponse } from "@/types/SpotifyTypes/TrackFavoriteType/type";
 import { GlobalContext } from "@/Context";
+import { FaPlay } from "react-icons/fa";
+import { BsFillPlayFill } from "react-icons/bs";
 
 export const FavoriteTrackComponent = () => {
   const [getData, setData] = useState<SpotifyTracksResponse>({
@@ -21,6 +23,9 @@ export const FavoriteTrackComponent = () => {
   const [getOffset, setOffset] = useState(0);
   const [getFetching, setFetching] = useState(false);
   const [isLastPage, setIsLastPage] = useState(false);
+  const [hoverStates, setHoverStates] = useState<{ [key: number]: boolean }>(
+    {}
+  );
   const dataContext = useContext(GlobalContext);
   useEffect(() => {
     if (getFetching && !isLastPage) {
@@ -33,6 +38,7 @@ export const FavoriteTrackComponent = () => {
             offset: response.offset,
             total: response.total,
           }));
+          console.log("newData", response.items);
           setOffset(getOffset + 20);
           if (response.items.length < 20) {
             setIsLastPage(true);
@@ -55,6 +61,14 @@ export const FavoriteTrackComponent = () => {
     }
   }, []);
 
+  const handleMouseEnter = (index: number) => {
+    setHoverStates((prev) => ({ ...prev, [index]: true }));
+  };
+
+  const handleMouseLeave = (index: number) => {
+    setHoverStates((prev) => ({ ...prev, [index]: false }));
+  };
+
   const scrollHandler = () => {
     const myDiv = document.getElementById("FavoriteContent");
     if (myDiv) {
@@ -65,6 +79,10 @@ export const FavoriteTrackComponent = () => {
         setFetching(true);
       }
     }
+  };
+  const Play = (uri: string) => {
+    _getPlayTrack(uri);
+    dataContext?.setStatePlaying((prevState) => !prevState);
   };
 
   return (
@@ -78,12 +96,19 @@ export const FavoriteTrackComponent = () => {
         return (
           <div key={index} className={style.Playlist__Track}>
             <div
+              key={index}
               className={style.TrackIndex}
+              onMouseEnter={() => handleMouseEnter(index)}
+              onMouseLeave={() => handleMouseLeave(index)}
               onClick={() => {
-                dataContext?.setStatePlaying((prevState) => !prevState);
+                Play(item.track.uri);
               }}
             >
-              {index + 1}
+              {hoverStates[index] ? (
+                <BsFillPlayFill className="pl-[3px] text-xl text-center" />
+              ) : (
+                index + 1
+              )}
             </div>
             <div className={style.TrackImage}>
               {albumImageUrl && (
@@ -91,7 +116,6 @@ export const FavoriteTrackComponent = () => {
                   src={albumImageUrl}
                   alt={item.track.album.name}
                   layout="fill"
-                  objectFit="cover"
                   className={style.AlbumImage}
                 />
               )}

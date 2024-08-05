@@ -15,6 +15,7 @@ type Track = {
   name: string;
   artists: Artist[];
   album: Album;
+  uri: string;
   duration_ms: number;
 };
 
