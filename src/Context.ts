@@ -12,4 +12,6 @@ export const GlobalContext = createContext<ContextType>({
     setHiddenLeftBar: () => { },
     isHiddenRightBar: true,
     setHiddenRightBar: () => { },
+    getStatePlaying: true,
+    setStatePlaying: () => { },
 });
