@@ -1,4 +1,4 @@
-
+"use server"
 import { createClient } from '@/utils/supabase/server';
 import fs from 'fs';
 import path from 'path';
@@ -85,52 +85,54 @@ export const _getToken = async (): Promise<string | null> => {
 };
 
 
+export const _getSavedTrackUser = async (token: string | null, count: number): Promise<any> => {
 
-export const _getSavedTrackUser = async (token: string | null): Promise<any> => {
 
-
-    const cachedData = readCache();
-    const cachedItems = cachedData ? cachedData.items : [];
-
-    const response = await fetch('https://api.spotify.com/v1/me/tracks', {
+    // const cachedData = readCache();
+    // const cachedItems = cachedData ? cachedData.items : [];
+    const response = await fetch(`https://api.spotify.com/v1/me/tracks?limit=20&offset=${count}`, {
         method: 'GET',
         headers: {
             'Authorization': `Bearer ${token}`,
         },
     });
+    if (!response) {
+        console.log("pizda")
+    }
 
     const newData = await response.json();
-    const newItems = newData.items;
+    return newData
+    // const newItems = newData
 
 
-    const compareTracks = (a: any, b: any) => a.id === b.id;
-    const isSameTracks = (arr1: any[], arr2: any[]) => arr1.length === arr2.length && arr1.every(track1 => arr2.some(track2 => compareTracks(track1, track2)));
+    // const compareTracks = (a: any, b: any) => a.id === b.id;
+    // const isSameTracks = (arr1: any[], arr2: any[]) => arr1.length === arr2.length && arr1.every(track1 => arr2.some(track2 => compareTracks(track1, track2)));
 
 
-    if (cachedItems === undefined && newItems === undefined) {
-        console.log("oba")
-        return [];
-    }
+    // if (cachedItems === undefined && newItems === undefined) {
+    //     console.log("oba")
+    //     return [];
+    // }
 
-    if (cachedItems === undefined && newItems !== undefined) {
-        console.log("только cachedItems")
-        writeCache(newItems);
-        return newItems;
-    }
+    // if (cachedItems === undefined && newItems !== undefined) {
+    //     console.log("только cachedItems")
+    //     writeCache(newItems);
+    //     return newItems;
+    // }
 
-    if (cachedItems !== undefined && newItems === undefined) {
-        return cachedItems;
-    }
+    // if (cachedItems !== undefined && newItems === undefined) {
+    //     return cachedItems;
+    // }
 
-    if (cachedItems !== undefined && newItems !== undefined) {
-        console.log("оба целые")
-        if (!isSameTracks(cachedItems, newItems)) {
-            writeCache(newItems);
-            return newItems;
-        } else {
-            return newItems;
-        }
-    }
+    // if (cachedItems !== undefined && newItems !== undefined) {
+    //     console.log("оба целые")
+    //     if (!isSameTracks(cachedItems, newItems)) {
+    //         writeCache(newItems);
+    //         return newItems;
+    //     } else {
+    //         return cachedItems;
+    //     }
+    // }
 };
 
 
