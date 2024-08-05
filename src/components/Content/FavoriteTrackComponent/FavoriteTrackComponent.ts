@@ -45,6 +45,14 @@ export const fetching = async (count: number): Promise<any> => {
     return data;
   } catch (error) {
     console.error("Error fetching data:", error);
-    return;
+    return {
+      href: "",
+      items: [],
+      limit: 0,
+      next: null,
+      offset: 0,
+      previous: null,
+      total: 0,
+    };
   }
 };

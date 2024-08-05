@@ -1,6 +1,12 @@
 import { NextResponse } from 'next/server'
-// The client you created from the Server-Side Auth instructions
+
 import { createClient } from '@/utils/supabase/server'
+
+import path from 'path';
+import { writeCache } from '../../../../cache/controller';
+
+const cacheFilePath = path.join('/cache', 'spotify-access-tokens.json');
+const cacheFilePath2 = path.join('/cache', 'spotify-refresh-tokens.json');
 
 export async function GET(request: Request) {
   const { searchParams, origin } = new URL(request.url)
@@ -9,13 +15,19 @@ export async function GET(request: Request) {
 
   if (code) {
     const supabase = createClient()
-    const { error } = await supabase.auth.exchangeCodeForSession(code)
+    const { data: { session }, error } = await supabase.auth.exchangeCodeForSession(code)
+    if (session?.provider_refresh_token && session?.provider_token) {
+      writeCache(session.provider_token, cacheFilePath)
+      writeCache(session.provider_refresh_token, cacheFilePath2)
+    }
     if (!error) {
       const forwardedHost = request.headers.get('x-forwarded-host') // original origin before load balancer
       const isLocalEnv = process.env.NODE_ENV === 'development'
       if (isLocalEnv) {
 
         // we can be sure that there is no load balancer in between, so no need to watch for X-Forwarded-Host
+
+
         return NextResponse.redirect(`${origin}${next}`)
       } else if (forwardedHost) {
         return NextResponse.redirect(`https://${forwardedHost}${next}`)

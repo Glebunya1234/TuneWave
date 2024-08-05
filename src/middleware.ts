@@ -10,9 +10,11 @@ export async function middleware(request: NextRequest) {
   const data = await IsAuthorized()
 
   const { supabase, response } = createClient(request);
+
   const {
     data: { user },
   } = await supabase.auth.getUser();
+
 
   if (!user) {
 

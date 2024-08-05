@@ -15,6 +15,8 @@ export const Context = ({ children }: { children: React.ReactNode }) => {
     useState<ContextType["isHiddenLeftBar"]>(true);
   const [isHiddenRightBar, setHiddenRightBar] =
     useState<ContextType["isHiddenRightBar"]>(true);
+  const [getStatePlaying, setStatePlaying] =
+    useState<ContextType["getStatePlaying"]>(true);
 
   const valueHover = {
     getTemporaryText,
@@ -25,6 +27,8 @@ export const Context = ({ children }: { children: React.ReactNode }) => {
     setHiddenLeftBar,
     isHiddenRightBar,
     setHiddenRightBar,
+    getStatePlaying,
+    setStatePlaying,
   };
   // getDefaultText: "",
   // setDefaultText: () => { },

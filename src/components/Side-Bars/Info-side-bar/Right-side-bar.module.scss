@@ -52,6 +52,12 @@
      @media (max-width: 750px) {
          display: none;
      }
+     .InfoBar__Children{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 100%;
+     }
  }
 
  .InfoBar__remove {
