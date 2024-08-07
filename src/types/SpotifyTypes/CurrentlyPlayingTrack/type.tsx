@@ -26,7 +26,7 @@ interface ExternalUrls {
   spotify: string;
 }
 
-interface Artist {
+export interface Artist {
   external_urls: ExternalUrls;
   href: string;
   id: string;
@@ -35,7 +35,7 @@ interface Artist {
   uri: string;
 }
 
-interface Album {
+export interface Album {
   album_type: string;
   artists: Artist[];
   available_markets: any[];
@@ -51,7 +51,7 @@ interface Album {
   uri: string;
 }
 
-interface TrackItem {
+export interface TrackItem {
   album: Album;
   artists: Artist[];
   available_markets: any[];

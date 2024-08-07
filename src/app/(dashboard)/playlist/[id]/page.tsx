@@ -5,7 +5,7 @@ import { _getSavedTrackUser, _getToken } from "@/api/ApiSpotify";
 import { PanelTarget } from "@/components/UI/Target/PanelTarget";
 import { FavoriteTrackComponent } from "@/components/Content/FavoriteTrackComponent/FavoriteTrackConteiner";
 
-const playlistPage = async () => {
+const playlistPage = async ({ params }: { params: { id: string } }) => {
   return (
     <div className={style.Playlist}>
       <PanelTarget side="Top" />
@@ -22,6 +22,7 @@ const playlistPage = async () => {
           </div>
           <h1>Playlist Name</h1>
         </section>
+        
       </aside>
       <div className={style.dash}></div>
       <div className={style.squarDash}></div>

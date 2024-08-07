@@ -30,8 +30,10 @@ export const MarqueeContainer = () => {
   useEffect(() => {
     const segments = pathname.split("/").filter(Boolean);
 
-    const result = segments[0] || "";
+    const result = segments[0] || "tunewave";
+    console.log(result);
 
+    dataContext?.setTemporaryText(result);
     dataContext?.setDefaultText(result);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);

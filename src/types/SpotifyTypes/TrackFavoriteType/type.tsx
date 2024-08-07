@@ -1,4 +1,6 @@
 type Artist = {
+  href: string;
+  id: string;
   name: string;
 };
 
@@ -13,6 +15,7 @@ type Album = {
 };
 
 type Track = {
+  id: string;
   name: string;
   artists: Artist[];
   album: Album;

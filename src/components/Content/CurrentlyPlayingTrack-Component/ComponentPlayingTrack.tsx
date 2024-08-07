@@ -33,7 +33,7 @@ export const ComponentPlayingTrack = () => {
       <span className={style.Preview__Span}>
         <h1>{playingTrack?.item?.name || "Tunewave"}</h1>
         <p>
-          {playingTrack?.item.artists.map(artist => artist.name).join(', ') ||
+          {playingTrack?.item.artists.map((artist) => artist.name).join(", ") ||
             "By Glebunya"}
         </p>
       </span>

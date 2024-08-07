@@ -3,9 +3,8 @@ import style from "./artist.module.scss";
 import Image from "next/image";
 import { _getSavedTrackUser, _getToken } from "@/api/ApiSpotify";
 import { PanelTarget } from "@/components/UI/Target/PanelTarget";
-import { FavoriteTrackComponent } from "@/components/Content/FavoriteTrackComponent/FavoriteTrackConteiner";
 
-const artistPage = async () => {
+const artistPage = async ({ params }: { params: { id: string } }) => {
   return (
     <div className={style.Artist}>
       <PanelTarget side="Top" />
@@ -22,7 +21,6 @@ const artistPage = async () => {
           </div>
           <h1>Artist Name</h1>
         </section>
-        <FavoriteTrackComponent />
       </aside>
       <div className={style.dash}></div>
       <div className={style.squarDash}></div>
