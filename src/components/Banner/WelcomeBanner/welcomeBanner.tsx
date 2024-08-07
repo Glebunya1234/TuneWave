@@ -26,7 +26,7 @@ export const WeclomeBanner = () => {
           <p>
             TuneWave is an innovative web application that gives users the
             ability to explore and enjoy music using the data and functionality
-            of the Spotify API.
+            of the Spotify API (Premium required).
           </p>
           <h2>
             <PanelTarget side="Bottom" />

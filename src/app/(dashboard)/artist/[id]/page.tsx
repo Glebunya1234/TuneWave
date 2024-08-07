@@ -1,15 +1,15 @@
 "use server";
-import style from "./tracks.module.scss";
+import style from "./artist.module.scss";
 import Image from "next/image";
 import { _getSavedTrackUser, _getToken } from "@/api/ApiSpotify";
 import { PanelTarget } from "@/components/UI/Target/PanelTarget";
 import { FavoriteTrackComponent } from "@/components/Content/FavoriteTrackComponent/FavoriteTrackConteiner";
 
-const CollectionTracks = async () => {
+const artistPage = async () => {
   return (
-    <div className={style.Tracks}>
+    <div className={style.Artist}>
       <PanelTarget side="Top" />
-      <aside className={style.Tracks__Content} id="FavoriteContent">
+      <aside className={style.Artist__Content} id="ArtistPage">
         <section className={style.Content__Preview}>
           <div className={style.Preview__image}>
             <Image
@@ -17,10 +17,10 @@ const CollectionTracks = async () => {
               layout="fill"
               objectFit="cover"
               className={style.mark}
-              alt="alt"
+              alt="ArtistImage"
             />
           </div>
-          <h1>Favorite tracks</h1>
+          <h1>Artist Name</h1>
         </section>
         <FavoriteTrackComponent />
       </aside>
@@ -31,4 +31,4 @@ const CollectionTracks = async () => {
   );
 };
 
-export default CollectionTracks;
+export default artistPage;

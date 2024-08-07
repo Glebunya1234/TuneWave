@@ -3,43 +3,43 @@
 import { _getSavedTrackUser, _getToken } from "@/api/ApiSpotify";
 import React from "react";
 
-interface Artist {
-  name: string;
-}
+// interface Artist {
+//   name: string;
+// }
 
-interface AlbumImage {
-  url: string;
-}
+// interface AlbumImage {
+//   url: string;
+// }
 
-interface Album {
-  images: AlbumImage[];
-  name: string;
-}
+// interface Album {
+//   images: AlbumImage[];
+//   name: string;
+// }
 
-interface Track {
-  name: string;
-  artists: Artist[];
-  album: Album;
-  uri: string;
-  duration_ms: number;
-}
+// interface Track {
+//   name: string;
+//   artists: Artist[];
+//   album: Album;
+//   uri: string;
+//   duration_ms: number;
+// }
 
-interface SavedTrack {
-  added_at: string;
-  track: Track;
+// interface SavedTrack {
+//   added_at: string;
+//   track: Track;
 
-}
+// }
 
-export interface SpotifyTracksResponse {
-  href: string;
-  items: SavedTrack[];
-  limit: number;
-  next: string | null;
-  offset: number;
-  previous: string | null;
-  total: number;
-}
-
+// export interface SpotifyTracksResponse {
+//   href: string;
+//   items: SavedTrack[];
+//   limit: number;
+//   next: string | null;
+//   offset: number;
+//   previous: string | null;
+//   total: number;
+// }
+import type { SpotifyTracksResponse } from "@/types/SpotifyTypes/TrackFavoriteType/type";
 export const fetching = async (count: number): Promise<any> => {
   try {
     const token = await _getToken();

@@ -7,10 +7,12 @@ import { useContext, useEffect, useState } from "react";
 import { fetching } from "./FavoriteTrackComponent";
 import type { SpotifyTracksResponse } from "@/types/SpotifyTypes/TrackFavoriteType/type";
 import { GlobalContext } from "@/Context";
-import { FaPlay } from "react-icons/fa";
 import { BsFillPlayFill } from "react-icons/bs";
+import { IoTimerSharp } from "react-icons/io5";
+import { useRouter } from "next/navigation";
 
 export const FavoriteTrackComponent = () => {
+  const router = useRouter();
   const [getData, setData] = useState<SpotifyTracksResponse>({
     href: "",
     items: [],
@@ -69,6 +71,15 @@ export const FavoriteTrackComponent = () => {
     setHoverStates((prev) => ({ ...prev, [index]: false }));
   };
 
+  const handleClickAlbum = (id: string) => {
+    router.push(`/album/${id}`);
+  };
+  const handleClickTrack = (id: string) => {
+    router.push(`/album/${id}`);
+  };
+  const handleClickArtist = (id: string) => {
+    router.push(`/artist/${id}`);
+  };
   const scrollHandler = () => {
     const myDiv = document.getElementById("FavoriteContent");
     if (myDiv) {
@@ -86,7 +97,18 @@ export const FavoriteTrackComponent = () => {
   };
 
   return (
-    <section className={style.Content__playlist}>
+    <section className={`${style.Content__playlist}`}>
+      <aside
+        className={`${style.Playlist__Track} border-[#c1c0c5]  border-b-[1px]`}
+      >
+        <span className={style.TrackIndex}>#</span>
+        <span></span>
+        <span className={style.TrackInfo}>Name</span>
+        <span className={style.TrackAlbum}>Album</span>
+        <span>
+          <IoTimerSharp className="mr-[11px]" />
+        </span>
+      </aside>
       {getData?.items.map((item, index) => {
         const albumImageUrl =
           item.track.album.images.length > 0
@@ -96,8 +118,8 @@ export const FavoriteTrackComponent = () => {
         return (
           <div key={index} className={style.Playlist__Track}>
             <div
-              key={index}
               className={style.TrackIndex}
+              key={index}
               onMouseEnter={() => handleMouseEnter(index)}
               onMouseLeave={() => handleMouseLeave(index)}
               onClick={() => {
@@ -126,7 +148,14 @@ export const FavoriteTrackComponent = () => {
                 {item.track.artists.map((artist) => artist.name).join(", ")}
               </div>
             </div>
-            <div className={style.TrackAlbum}>{item.track.album.name}</div>
+            <div
+              onClick={() => {
+                handleClickAlbum(item.track.album.id);
+              }}
+              className={style.TrackAlbum}
+            >
+              {item.track.album.name}
+            </div>
             <div className={style.TrackDuration}>
               {formatDuration(item.track.duration_ms)}
             </div>
