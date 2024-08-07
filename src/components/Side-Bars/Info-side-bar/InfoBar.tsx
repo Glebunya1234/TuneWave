@@ -3,7 +3,7 @@ import { _getCurrentlyPlayingTrack } from "@/api/ApiSpotify";
 import { InfoSideBar } from "./Right-side-bar";
 import { ComponentPlayingTrack } from "@/components/Content/CurrentlyPlayingTrack-Component/ComponentPlayingTrack";
 import type { CurrentlyPlayingTrack } from "@/types/SpotifyTypes/CurrentlyPlayingTrack/type";
-export const InfoBar = async () => {
+export const InfoBar = () => {
   // const callback = async (): Promise<CurrentlyPlayingTrack> => {
   //   return
   // };

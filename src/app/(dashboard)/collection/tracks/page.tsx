@@ -5,7 +5,7 @@ import { _getSavedTrackUser, _getToken } from "@/api/ApiSpotify";
 import { PanelTarget } from "@/components/UI/Target/PanelTarget";
 import { FavoriteTrackComponent } from "@/components/Content/FavoriteTrackComponent/FavoriteTrackConteiner";
 
-const CollectionTracks = async () => {
+const CollectionTracks = async ({ params }: { params: { id: string } }) => {
   return (
     <div className={style.Tracks}>
       <PanelTarget side="Top" />

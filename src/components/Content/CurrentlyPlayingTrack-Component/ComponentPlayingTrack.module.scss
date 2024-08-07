@@ -16,12 +16,16 @@ $font-family-versus: 'Versus', sans-serif;
     flex-direction: column;
 
 
-
-
     .Preview__image {
         width: 100%;
         height: 220px;
         position: relative;
+
+
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
 
         .image {
             padding: 10px;

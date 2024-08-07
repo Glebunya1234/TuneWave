@@ -1,0 +1,61 @@
+@import url('https://fonts-online.ru/path-to-fonts/versus.css');
+$font-family-versus: 'Versus', sans-serif;
+
+.AlbumInformation {
+    width: 100%;
+
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: min-content;
+
+    .Playlist__Track {
+        display: grid;
+        grid-template-columns: 20px 2fr auto;
+        grid-template-rows: min-content;
+        align-items: center;
+        margin-bottom: 10px;
+        box-sizing: border-box;
+
+
+
+        &:hover {
+            background-color: rgba(160, 160, 160, 0.144);
+        }
+
+        div {
+            font-size: 12px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .TrackIndex {
+            width: 100%;
+            text-align: center;
+        }
+ 
+
+        .TrackInfo {
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+
+
+
+            .TrackArtist {
+                font-size: 10px;
+                display: flex;
+
+                p {
+                    margin-right: 5px;
+                }
+            }
+        }
+
+        .TrackDuration {
+            padding-right: 10px;
+        }
+
+
+    }
+}

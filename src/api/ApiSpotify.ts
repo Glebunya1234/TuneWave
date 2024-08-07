@@ -3,6 +3,8 @@ import { createClient } from '@/utils/supabase/server';
 import fs from 'fs';
 import path from 'path';
 import { cacheFilePathAccess, cacheFilePathRefresh, readCache } from '../../cache/controller';
+import { CurrentlyAlbum } from '@/types/SpotifyTypes/CurrentlyAlbum/type';
+import { CurrentlyTrack } from '@/types/SpotifyTypes/CurrentlyTrack/type';
 
 // const cacheDir = path.resolve('./cache');
 // const cacheFilePath = path.join(cacheDir, 'spotify-tracks.json');
@@ -162,7 +164,7 @@ export const _getSavedTrackUser = async (token: string | null, count: number): P
 
 
 export const _getCurrentlyPlayingTrack = async (token?: string | null): Promise<any> => {
-    const url = "https://api.spotify.com/v1/me/player/currently-playing "
+    const url = "https://api.spotify.com/v1/me/player/currently-playing"
     const { access_token } = await test()
     const response = await fetch(url, {
         method: 'GET',
@@ -216,5 +218,40 @@ export const _getPlayTrack = async (uri: string) => {
     console.log('Success:', data);
 }
 
+export const _getAlbum = async (id: string): Promise<CurrentlyAlbum> => {
 
+    const url = `https://api.spotify.com/v1/albums/${id}`
+    const { access_token } = await test()
+    const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${access_token}`,
+        },
+    });
+    if (!response) {
+        console.warn("AlbumErrorrrr")
+
+    }
+
+    const Data = await response.json();
+    return Data
+}
+export const _getTrack = async (id: string): Promise<CurrentlyTrack> => {
+
+    const url = ` https://api.spotify.com/v1/tracks/${id}`
+    const { access_token } = await test()
+    const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${access_token}`,
+        },
+    });
+    if (!response) {
+        console.warn("AlbumErrorrrr")
+
+    }
+
+    const Data = await response.json();
+    return Data
+}
 

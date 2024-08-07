@@ -2,7 +2,7 @@
 import { createClient } from "@/utils/supabase/server";
 import { Provider } from "@supabase/supabase-js";
 import { redirect } from "next/navigation";
-import { getURL } from "@/utils/helpers";
+import { getURL } from "@/utils/helper/helpers";
 import { cookies } from "next/headers";
 
 // export const oAuthSignIn = async (provider: Provider) => {

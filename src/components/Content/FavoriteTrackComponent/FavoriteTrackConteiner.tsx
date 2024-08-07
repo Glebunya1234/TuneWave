@@ -1,15 +1,16 @@
 "use client";
 import style from "./FavoriteTrackComponent.module.scss";
 import Image from "next/image";
+import type { SpotifyTracksResponse } from "@/types/SpotifyTypes/TrackFavoriteType/type";
 import { _getPlayTrack, _getSavedTrackUser, _getToken } from "@/api/ApiSpotify";
 import { formatDuration } from "@/utils/DurationFormatFunc";
 import { useContext, useEffect, useState } from "react";
 import { fetching } from "./FavoriteTrackComponent";
-import type { SpotifyTracksResponse } from "@/types/SpotifyTypes/TrackFavoriteType/type";
 import { GlobalContext } from "@/Context";
 import { BsFillPlayFill } from "react-icons/bs";
 import { IoTimerSharp } from "react-icons/io5";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export const FavoriteTrackComponent = () => {
   const router = useRouter();
@@ -71,15 +72,6 @@ export const FavoriteTrackComponent = () => {
     setHoverStates((prev) => ({ ...prev, [index]: false }));
   };
 
-  const handleClickAlbum = (id: string) => {
-    router.push(`/album/${id}`);
-  };
-  const handleClickTrack = (id: string) => {
-    router.push(`/album/${id}`);
-  };
-  const handleClickArtist = (id: string) => {
-    router.push(`/artist/${id}`);
-  };
   const scrollHandler = () => {
     const myDiv = document.getElementById("FavoriteContent");
     if (myDiv) {
@@ -143,19 +135,25 @@ export const FavoriteTrackComponent = () => {
               )}
             </div>
             <div className={style.TrackInfo}>
-              <div className={style.TrackName}>{item.track.name}</div>
+              <div className={style.TrackName}>
+                <Link href={`/track/${item.track.id}`}>
+                  <p>{item.track.name}</p>
+                </Link>
+              </div>
               <div className={style.TrackArtist}>
-                {item.track.artists.map((artist) => artist.name).join(", ")}
+                {item.track.artists.map((artist, index) => (
+                  <Link key={index} href={`/artist/${artist.id}`}>
+                    <p key={artist.name}>{artist.name}</p>
+                  </Link>
+                ))}
               </div>
             </div>
-            <div
-              onClick={() => {
-                handleClickAlbum(item.track.album.id);
-              }}
+            <Link
+              href={`/album/${item.track.album.id}`}
               className={style.TrackAlbum}
             >
-              {item.track.album.name}
-            </div>
+              <p>{item.track.album.name}</p>
+            </Link>
             <div className={style.TrackDuration}>
               {formatDuration(item.track.duration_ms)}
             </div>
