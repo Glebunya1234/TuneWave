@@ -46,17 +46,17 @@ export const MediaLibraryBar = ({
             <BtnRouting
               helpHolder={holder.Home}
               text="Home"
-              path={"../../../profile"}
+              path={"/home"}
             />
             <BtnRouting
               helpHolder={holder.Search}
               text="Search"
-              path={"../../../profile"}
+              path={"/home"}
             />
             <BtnRouting
               helpHolder={holder.Settings}
               text="Settings"
-              path={"../../../settings"}
+              path={"/settings"}
             />
           </nav>
           {children}

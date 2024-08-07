@@ -43,7 +43,7 @@ export default function Home() {
                 alt="Arrow3"
               />
             </div>
-            <Dddassaa/>
+
             <nav className={style.Home__Nav}>
               <SignInBanner />
             </nav>

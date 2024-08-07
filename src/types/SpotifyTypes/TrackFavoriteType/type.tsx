@@ -9,6 +9,7 @@ type AlbumImage = {
 type Album = {
   images: AlbumImage[];
   name: string;
+  id: string;
 };
 
 type Track = {

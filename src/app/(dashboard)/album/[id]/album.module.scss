@@ -1,7 +1,7 @@
 @import url('https://fonts-online.ru/path-to-fonts/versus.css');
 $font-family-versus: 'Versus', sans-serif;
 
-.Tracks {
+.Album {
     width: 100%;
     height: 100%;
     margin-top: 10px;
@@ -13,13 +13,12 @@ $font-family-versus: 'Versus', sans-serif;
     overflow: hidden;
     transition: all .2s ease-in-out;
 
-
     .mark {
         z-index: 2;
         clip-path: circle(45% at 50% 50%);
     }
 
-    .Tracks__Content {
+    .Album__Content {
         width: 100%;
         height: 100%;
         display: flex;
@@ -92,82 +91,7 @@ $font-family-versus: 'Versus', sans-serif;
 
         }
 
-        .Content__playlist {
-            width: 100%;
-            height: 100%;
-            display: grid;
-            grid-template-columns: 1fr;
 
-
-            .Playlist__Track {
-                display: grid;
-                grid-template-columns: 20px 50px 2fr 2fr auto;
-                align-items: center;
-                margin-bottom: 10px;
-                box-sizing: border-box;
-
-                @media (max-width:820px) {
-                    grid-template-columns: 20px 50px 2fr auto auto;
-                }
-
-                &:hover {
-                    background-color: rgba(160, 160, 160, 0.144);
-                }
-
-                div {
-                    font-size: 12px;
-                    white-space: nowrap;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                }
-
-                .TrackIndex {
-                    width: 100%;
-                    text-align: center;
-                }
-
-                .TrackImage {
-                    position: relative;
-                    width: 100%;
-                    height: 100px;
-                    max-width: 40px;
-                    max-height: 40px;
-                    overflow: hidden;
-
-                }
-
-                .AlbumImage {
-                    object-fit: cover;
-                    width: 100%;
-                    height: auto;
-
-                }
-
-                .TrackInfo {
-                    display: flex;
-                    flex-direction: column;
-                    overflow: hidden;
-
-
-
-                    .TrackArtist {
-                        font-size: 10px;
-                    }
-                }
-
-                .TrackDuration {
-                    padding-right: 10px;
-                }
-
-                .TrackAlbum {
-                    padding-left: 10px;
-
-                    @media (max-width:820px) {
-                        display: none;
-                    }
-                }
-            }
-        }
     }
 
     .dash {

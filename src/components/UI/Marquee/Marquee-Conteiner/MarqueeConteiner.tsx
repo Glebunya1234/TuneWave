@@ -28,7 +28,11 @@ export const MarqueeContainer = () => {
     return () => clearTimeout(timer2);
   }, []);
   useEffect(() => {
-    dataContext?.setDefaultText(pathname?.split("/").pop() || "");
+    const segments = pathname.split("/").filter(Boolean);
+
+    const result = segments[0] || "";
+
+    dataContext?.setDefaultText(result);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
   return (
