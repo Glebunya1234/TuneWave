@@ -4,8 +4,9 @@ import Image from "next/image";
 import { _getSavedTrackUser, _getToken } from "@/api/ApiSpotify";
 import { PanelTarget } from "@/components/UI/Target/PanelTarget";
 import { FavoriteTrackComponent } from "@/components/Content/FavoriteTrackComponent/FavoriteTrackConteiner";
+import { Suspense } from "react";
 
-const CollectionTracks = async ({ params }: { params: { id: string } }) => {
+const CollectionTracks = async () => {
   return (
     <div className={style.Tracks}>
       <PanelTarget side="Top" />
@@ -22,6 +23,7 @@ const CollectionTracks = async ({ params }: { params: { id: string } }) => {
           </div>
           <h1>Favorite tracks</h1>
         </section>
+
         <FavoriteTrackComponent />
       </aside>
       <div className={style.dash}></div>

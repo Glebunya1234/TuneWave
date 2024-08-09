@@ -10,10 +10,12 @@ export type CurrentlyTrack = {
   album: Album;
   href: string;
   id: string;
-
+  duration_ms: number;
   name: string;
   release_date: string;
-
+  restrictions:{
+    reason: "string"
+  }
   type: string;
   uri: string;
 };

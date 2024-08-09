@@ -11,7 +11,7 @@ $font-family-versus: 'Versus', sans-serif;
     justify-content: start;
     background-color: #00000091;
     overflow: hidden;
-    transition: all .2s ease-in-out;
+
 
     p {
         &:hover {
@@ -42,12 +42,12 @@ $font-family-versus: 'Versus', sans-serif;
             display: flex;
             flex-direction: row;
             align-items: end;
-            margin-bottom: 100px;
+            margin-bottom: 20px;
 
 
             .Preview__image {
                 width: max-content;
-                height: 100%;
+
                 margin-right: 10px;
 
                 .Images {
@@ -102,12 +102,15 @@ $font-family-versus: 'Versus', sans-serif;
                     text-transform: uppercase;
                 }
 
-                .Info__Track{
+                .Info__Track {
                     width: 100%;
                     height: 10px;
                     font-size: 11px;
                     display: flex;
+                    flex-wrap: wrap;
                     text-transform: uppercase;
+                    text-wrap: nowrap;
+                    margin-bottom: 10px;
 
                     a {
                         margin-right: 5px;
