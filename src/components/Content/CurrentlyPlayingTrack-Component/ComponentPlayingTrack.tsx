@@ -13,8 +13,8 @@ export const ComponentPlayingTrack = () => {
   useEffect(() => {
     const fetchTrack = async () => {
       const track = await _getCurrentlyPlayingTrack();
+
       setPlayingTrack(track);
-      console.log("playingTrack", track);
     };
 
     fetchTrack();

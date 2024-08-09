@@ -5,6 +5,7 @@ import path from 'path';
 import { cacheFilePathAccess, cacheFilePathRefresh, readCache } from '../../cache/controller';
 import { CurrentlyAlbum } from '@/types/SpotifyTypes/CurrentlyAlbum/type';
 import { CurrentlyTrack } from '@/types/SpotifyTypes/CurrentlyTrack/type';
+import { TrackArtist } from '@/types/SpotifyTypes/TrackArtist/type';
 
 // const cacheDir = path.resolve('./cache');
 // const cacheFilePath = path.join(cacheDir, 'spotify-tracks.json');
@@ -150,6 +151,10 @@ export const _getSavedTrackUser = async (token: string | null, count: number): P
             // 'Authorization': `Bearer ${_refreshToken(readCache(cacheFilePathRefresh))}`,
             'Authorization': `Bearer ${access_token}`,
         },
+
+        next: {
+            revalidate: 200
+        },
     });
     const newData = await response.json();
 
@@ -165,13 +170,16 @@ export const _getSavedTrackUser = async (token: string | null, count: number): P
 
 export const _getCurrentlyPlayingTrack = async (token?: string | null): Promise<any> => {
     const url = "https://api.spotify.com/v1/me/player/currently-playing"
+
     const { access_token } = await test()
     const response = await fetch(url, {
+
         method: 'GET',
         headers: {
             'Authorization': `Bearer ${access_token}`,
         },
     });
+
     if (!response) {
         console.warn("Errorrrr")
         // const newToken = _getToken(true)
@@ -187,11 +195,14 @@ export const _getCurrentlyPlayingTrack = async (token?: string | null): Promise<
     }
 
     const Data = await response.json();
+
+
+
     return Data
 
 }
 
-export const _getPlayTrack = async (uri: string) => {
+export const _setPlayTrack = async (uri: string) => {
     const { access_token } = await test()
     const response = await fetch('https://api.spotify.com/v1/me/player/play', {
 
@@ -236,10 +247,11 @@ export const _getAlbum = async (id: string): Promise<CurrentlyAlbum> => {
     const Data = await response.json();
     return Data
 }
-export const _getTrack = async (id: string): Promise<CurrentlyTrack> => {
+export const _getTrack = async (id: string): Promise<{ track: CurrentlyTrack, isSaved: Array<boolean>; }> => {
 
-    const url = ` https://api.spotify.com/v1/tracks/${id}`
     const { access_token } = await test()
+    const url = ` https://api.spotify.com/v1/tracks/${id}`
+    const url2 = `https://api.spotify.com/v1/me/tracks/contains?ids=${id}`
     const response = await fetch(url, {
         method: 'GET',
         headers: {
@@ -250,8 +262,77 @@ export const _getTrack = async (id: string): Promise<CurrentlyTrack> => {
         console.warn("AlbumErrorrrr")
 
     }
-
+    const IsSavedResponse = await fetch(url2, {
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${access_token}`,
+        },
+    });
     const Data = await response.json();
-    return Data
+    const isSaved = await IsSavedResponse.json();
+    return { track: Data, isSaved: isSaved }
+}
+export const _getArtist = async (ids: string[]): Promise<TrackArtist[]> => {
+
+    const idsString = ids.join(',');
+    const encodedIds = encodeURIComponent(idsString);
+    const url = ` https://api.spotify.com/v1/artists?ids=${encodedIds}`
+    const { access_token } = await test()
+    const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${access_token}`,
+        },
+    });
+    if (!response) {
+        console.warn("artistsTrackErrorrrr")
+
+    }
+    const Data = await response.json();
+
+    return Data.artists
 }
 
+export const UnSaveTrack = async (ids: string) => {
+    const { access_token } = await test()
+    const response = await fetch(`https://api.spotify.com/v1/me/tracks?ids=${ids}`, {
+
+        method: 'Delete',
+        headers: {
+            'Authorization': `Bearer ${access_token}`,
+            'Content-Type': 'application/json',
+        },
+
+    });
+    if (!response.ok) {
+        const error = await response.json();
+        console.error('Error:', error);
+        return;
+    }
+
+    const data = await response.json();
+    console.log('Delete:', data);
+    return data;
+}
+export const SaveTrack = async (ids: string) => {
+    const { access_token } = await test()
+    const response = await fetch(`https://api.spotify.com/v1/me/tracks?ids=${ids}`, {
+
+        method: 'PUT',
+        headers: {
+            'Authorization': `Bearer ${access_token}`,
+            'Content-Type': 'application/json',
+        },
+
+
+    });
+    if (!response.ok) {
+        const error = await response.json();
+        console.error('Error:', error);
+        return;
+    }
+
+    const data = await response.json();
+    return data;
+
+}

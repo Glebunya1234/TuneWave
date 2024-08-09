@@ -19,7 +19,7 @@
 
      aside {
          width: 100%;
-         padding: 1rem;
+         padding: 20px;
 
          padding-left: 0;
          display: flex;
@@ -52,11 +52,12 @@
      @media (max-width: 750px) {
          display: none;
      }
-     .InfoBar__Children{
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        width: 100%;
+
+     .InfoBar__Children {
+         display: flex;
+         flex-direction: column;
+         justify-content: center;
+         width: 100%;
      }
  }
 

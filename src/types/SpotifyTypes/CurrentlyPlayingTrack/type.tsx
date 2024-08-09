@@ -73,6 +73,7 @@ export interface TrackItem {
 
 export interface CurrentlyPlayingTrack {
   timestamp: number;
+
   context: {
     external_urls: ExternalUrls;
     href: string;

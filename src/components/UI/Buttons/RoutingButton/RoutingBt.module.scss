@@ -1,6 +1,6 @@
 @import url("https://fonts-online.ru/path-to-fonts/versus.css");
-
 $font-family-versus: "Versus", sans-serif;
+
 
 
 .RoutingBTN {
@@ -53,6 +53,7 @@ $font-family-versus: "Versus", sans-serif;
       animation: slideOpasity .2s linear;
       opacity: 0;
 
+
     }
 
     @keyframes slideOpasity {
@@ -70,10 +71,43 @@ $font-family-versus: "Versus", sans-serif;
         clip-path: polygon(100% 0, 100% 0, 100% 100%, 100% 100%);
       }
     }
+
+    @keyframes slideOpasity2 {
+      0% {
+        opacity: 1;
+        clip-path: polygon(0 0, 25% 0, 25% 100%, 0 100%);
+      }
+
+      50% {
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+      }
+
+      100% {
+        opacity: 1;
+        clip-path: polygon(100% 0, 100% 0, 100% 100%, 100% 100%);
+      }
+    }
   }
+
+
+
 
   &:active {
     background-color: #00dc00;
+
+    &:before {
+      content: '';
+      position: absolute;
+      width: 115%;
+      height: 60px;
+      top: -10px;
+      left: -10%;
+      background: url('/btnX.png') center no-repeat;
+      animation: slideOpasity2 .2s linear;
+      z-index: 10;
+      opacity: 0;
+
+    }
   }
 
 
