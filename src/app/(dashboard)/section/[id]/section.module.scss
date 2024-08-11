@@ -1,7 +1,7 @@
 @import url('https://fonts-online.ru/path-to-fonts/versus.css');
 $font-family-versus: 'Versus', sans-serif;
 
-.Playlist {
+.Section {
     width: 100%;
     height: 100%;
     margin-top: 10px;
@@ -13,12 +13,22 @@ $font-family-versus: 'Versus', sans-serif;
     overflow: hidden;
     transition: all .2s ease-in-out;
 
+    p {
+        &:hover {
+            text-decoration: underline;
+
+
+        }
+
+
+    }
+
     .mark {
         z-index: 2;
         clip-path: circle(45% at 50% 50%);
     }
 
-    .Playlist__Content {
+    .Section__Content {
         width: 100%;
         height: 100%;
         display: flex;
@@ -41,6 +51,7 @@ $font-family-versus: 'Versus', sans-serif;
 
             .Preview__image {
                 width: max-content;
+                height: 100%;
                 margin-right: 10px;
 
                 .Images {
@@ -83,20 +94,19 @@ $font-family-versus: 'Versus', sans-serif;
                 justify-content: end;
                 flex-direction: column;
 
-                .Info__PlaylistName {
+                .Info__SectionName {
                     font-family: $font-family-versus;
                     text-transform: uppercase;
-
                 }
 
-                .Info__PlaylistType {
+                .Info__SectionType {
                     width: 100px;
                     font-size: 13px;
                     margin-bottom: 8px;
                     text-transform: uppercase;
                 }
 
-                .Info__Playlist {
+                .Info__Artist {
                     width: 100%;
                     height: 10px;
                     font-size: 11px;

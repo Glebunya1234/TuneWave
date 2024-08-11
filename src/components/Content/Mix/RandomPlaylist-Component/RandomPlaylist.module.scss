@@ -33,19 +33,7 @@ $font-family-versus: 'Versus', sans-serif;
 
     .TrackIndex {
         width: 100%;
-        height: 100%;
         text-align: center;
-        z-index: 1;
-
-        p {
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        * {
-            pointer-events: none;
-            z-index: 0;
-        }
     }
 
     .TrackImage {

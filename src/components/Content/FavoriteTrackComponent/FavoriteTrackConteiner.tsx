@@ -11,6 +11,7 @@ import { BsFillPlayFill } from "react-icons/bs";
 import { IoTimerSharp } from "react-icons/io5";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { PlayTrackBtn } from "@/components/UI/Buttons/PlayTrackBtn/PlayTrackBtn";
 
 export const FavoriteTrackComponent = () => {
   const router = useRouter();
@@ -67,14 +68,6 @@ export const FavoriteTrackComponent = () => {
     }
   }, []);
 
-  const handleMouseEnter = (index: number) => {
-    setHoverStates((prev) => ({ ...prev, [index]: true }));
-  };
-
-  const handleMouseLeave = (index: number) => {
-    setHoverStates((prev) => ({ ...prev, [index]: false }));
-  };
-
   const scrollHandler = () => {
     const myDiv = document.getElementById("FavoriteContent");
     if (myDiv) {
@@ -85,10 +78,6 @@ export const FavoriteTrackComponent = () => {
         setFetching(true);
       }
     }
-  };
-  const Play = (uri: string) => {
-    _setPlayTrack(uri);
-    dataContext?.setStatePlaying((prevState) => !prevState);
   };
 
   return (
@@ -113,21 +102,17 @@ export const FavoriteTrackComponent = () => {
 
           return (
             <div key={index} className={style.Playlist__Track}>
-              <div
-                className={style.TrackIndex}
-                key={index}
-                onMouseEnter={() => handleMouseEnter(index)}
-                onMouseLeave={() => handleMouseLeave(index)}
-                onClick={() => {
-                  Play(item.track.uri);
+              <PlayTrackBtn
+                id={item.track.uri}
+                onHover={{
+                  isTrue: true,
+                  content: (
+                    <BsFillPlayFill className="pl-[3px] text-xl text-center" />
+                  ),
                 }}
-              >
-                {hoverStates[index] ? (
-                  <BsFillPlayFill className="pl-[3px] text-xl text-center" />
-                ) : (
-                  index + 1
-                )}
-              </div>
+                text={index + 1}
+                className={style.TrackIndex}
+              />
               <div className={style.TrackImage}>
                 {albumImageUrl && (
                   <Image

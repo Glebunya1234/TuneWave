@@ -6,6 +6,7 @@ import { cacheFilePathAccess, cacheFilePathRefresh, readCache } from '../../cach
 import { CurrentlyAlbum } from '@/types/SpotifyTypes/CurrentlyAlbum/type';
 import { CurrentlyTrack } from '@/types/SpotifyTypes/CurrentlyTrack/type';
 import { TrackArtist } from '@/types/SpotifyTypes/TrackArtist/type';
+import { RecommendationsType } from '@/types/SpotifyTypes/RecommendationsType/type';
 
 // const cacheDir = path.resolve('./cache');
 // const cacheFilePath = path.join(cacheDir, 'spotify-tracks.json');
@@ -311,10 +312,8 @@ interface Artist {
     genres: string[];
 }
 
-interface TopArtistsResponse {
-    items: Artist[];
-}
-export const getRecommendations = async () => {
+
+export const getRecommendations = async (): Promise<RecommendationsType> => {
     const topArtists = await _getTopArtists();
     const seedArtists: string[] = topArtists.length > 0
         ? topArtists.map(artist => artist.id).filter(id => id !== undefined)
@@ -350,5 +349,8 @@ export const getRecommendations = async () => {
 
         },
     });
-    console.log(await response.json())
+
+    const data = await response.json()
+    console.log(data);
+    return data
 }

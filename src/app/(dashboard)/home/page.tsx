@@ -9,7 +9,7 @@ import { getRecommendations } from "@/api/ApiSpotify";
 import { ForUserMix } from "@/components/Content/Mix/For-user-Mix/ForUserMix";
 
 const Profile = async () => {
-  // await getRecommendations();
+  // const UserAllRecs = await getRecommendations();
   return (
     <main className={style.profile}>
       <section className={style.profile__Dashboard}>
@@ -19,8 +19,6 @@ const Profile = async () => {
           <div className={style.squarDash}></div>
           <aside className={style.Content__Conteiner}>
             <FavoriteBanner />
-            <ForUserMix />
-            <ForUserMix />
             <ForUserMix />
           </aside>
         </aside>
