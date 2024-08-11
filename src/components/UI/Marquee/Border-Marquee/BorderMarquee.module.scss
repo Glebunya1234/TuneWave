@@ -17,7 +17,7 @@ $heightMarq: 16px;
   display: flex;
   align-content: center;
   justify-content: center;
-  overflow: hidden;
+
 
   &:hover {
     .marq {
@@ -33,7 +33,6 @@ $heightMarq: 16px;
     display: flex;
     align-content: center;
     justify-content: center;
-
     margin: $heightMarq + 5px;
   }
 }
@@ -71,4 +70,22 @@ $heightMarq: 16px;
   @extend .marq;
   top: calc(100% - $heightMarq);
   transform: rotate(180deg);
+}
+
+.marq_Top_Square {
+  @extend .marq_Top;
+  top: calc(-10% + $heightMarq );
+
+}
+
+.marq_Left_Square {
+  @extend .marq_Left;
+  left: calc(-50% + $heightMarq - 8px);
+  top: calc(50%);
+}
+
+.marq_Right_Square {
+  @extend .marq_Right;
+  left: calc(50% - $heightMarq + 8px);
+  top: calc(50%  - $heightMarq + 5px);
 }
