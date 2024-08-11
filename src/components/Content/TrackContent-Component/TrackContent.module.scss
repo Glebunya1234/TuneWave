@@ -111,10 +111,31 @@ $font-family-versus: "Versus", sans-serif;
                 overflow: hidden;
                 transition: all .5s ease-in-out;
 
-                p {
-                    margin-left: 10px;
+                h3 {
                     width: 100%;
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-between;
+
+
+                    div {
+                        @extend h3;
+                        width: min-content;
+                        margin-right: 10px;
+
+                        &:hover {
+                            p {
+                                text-decoration: none;
+                            }
+                        }
+                    }
+
+                    p {
+                        margin-left: 10px;
+
+                    }
                 }
+
 
                 &:hover {
                     background-color: rgba(160, 160, 160, 0.144);

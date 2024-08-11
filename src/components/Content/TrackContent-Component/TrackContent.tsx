@@ -53,7 +53,12 @@ export const TrackComponent = async ({
                   alt={artists.id}
                   className={style.mark}
                 ></Image>
-                <p> {artists.name}</p>
+                <h3>
+                  <p> {artists.name}</p>
+                  <div>
+                    <p>Folowers:</p> <p> {artists.followers.total}</p>
+                  </div>
+                </h3>
               </Link>
             );
           })}
