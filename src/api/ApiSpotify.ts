@@ -51,21 +51,7 @@ const _refreshToken = async (refreshToken: string): Promise<string | null> => {
         console.log("_refreshToken", result)
         return result
 
-        // const response = await fetch('https://accounts.spotify.com/api/token', {
-        //     method: 'POST',
-        //     headers: {
-        //         'Content-Type': 'application/x-www-form-urlencoded',
-        //         'Authorization': `Basic ${Buffer.from(`${client_id}:${client_secret}`).toString('base64')}`
-        //     },
-        //     body: new URLSearchParams({
-        //         grant_type: 'refresh_token',
-        //         refresh_token: refreshToken
-        //     })
-        // });
 
-        // const data = await response.json();
-
-        // return data.access_token || null;
     } catch (error) {
         console.error('Ошибка обновления токена:', error);
         return null;
@@ -91,19 +77,7 @@ export const _getToken = async (isRefresh?: boolean): Promise<string | null> => 
             return newToken
         }
 
-        // if (token && refreshToken) {
 
-        //     const newToken = await _refreshToken(refreshToken);
-        //     if (newToken) {
-        //         // Обновляем токен в Supabase
-        //         await supabase.auth.updateUser({
-        //             data: {
-        //                 provider_token: newToken
-        //             }
-        //         });
-        //         return newToken;
-        //     }
-        // }
 
         return token || null;
     } catch (error) {
@@ -130,19 +104,6 @@ const test = async () => {
 }
 
 export const _getSavedTrackUser = async (token: string | null, count: number): Promise<any> => {
-
-
-    // const cachedData = readCache();
-    // const cachedItems = cachedData ? cachedData.items : [];
-    // const response = await fetch(`https://api.spotify.com/v1/me/tracks?limit=20&offset=${count}`, {
-    //     method: 'GET',
-    //     headers: {
-    //         'Authorization': `Bearer ${readCache(cacheFilePathAccess)}`,
-    //     },
-    // });
-    // if (response) {
-
-    // const newToken = _getToken(true)
     const { access_token } = await test()
     console.log(await test())
     const response = await fetch(`https://api.spotify.com/v1/me/tracks?limit=20&offset=${count}`, {
@@ -182,16 +143,7 @@ export const _getCurrentlyPlayingTrack = async (token?: string | null): Promise<
 
     if (!response) {
         console.warn("Errorrrr")
-        // const newToken = _getToken(true)
-        // const response = await fetch(url, {
-        //     method: 'GET',
-        //     headers: {
-        //         'Authorization': `Bearer ${newToken}`,
-        //     },
 
-        // });
-        // const Data = await response.json();
-        // return Data
     }
 
     const Data = await response.json();
@@ -335,4 +287,68 @@ export const SaveTrack = async (ids: string) => {
     const data = await response.json();
     return data;
 
+}
+
+export const _getTopArtists = async (): Promise<Artist[]> => {
+    // const url = "https://api.spotify.com/v1/recommendations/available-genre-seeds"
+    const url = "https://api.spotify.com/v1/me/top/artists"
+    const { access_token } = await test()
+    const getTopsUser = await fetch(url, {
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${access_token}`,
+        },
+    });
+    if (!getTopsUser.ok) {
+        throw new Error('Ошибка получения топ артистов');
+    }
+    const getTopsUserResult = await getTopsUser.json()
+    return getTopsUserResult.items;
+
+}
+interface Artist {
+    id: string;
+    genres: string[];
+}
+
+interface TopArtistsResponse {
+    items: Artist[];
+}
+export const getRecommendations = async () => {
+    const topArtists = await _getTopArtists();
+    const seedArtists: string[] = topArtists.length > 0
+        ? topArtists.map(artist => artist.id).filter(id => id !== undefined)
+        : [];
+
+    const seedGenres: string[] = topArtists.length > 0
+        ? topArtists.flatMap(artist => artist.genres).filter(genre => genre !== undefined)
+        : [];
+
+
+    const selectedSeedArtists = seedArtists.slice(0, 3);
+    const selectedSeedGenres = seedGenres.slice(0, 2);
+    if (selectedSeedArtists.length === 0 && selectedSeedGenres.length === 0) {
+        throw new Error('Не удалось получить достаточное количество данных для seed параметров');
+    }
+
+
+    const ArtistIDString = selectedSeedArtists.join(',');
+    // const encodedArtist = encodeURIComponent(ArtistIDString);
+    const GangreString = selectedSeedGenres.join(',');
+    const encodedArtist = ArtistIDString.replace(/ /g, '+').replace(/,/g, '%2C');
+    const encodedGangre = GangreString.replace(/ /g, '+').replace(/,/g, '%2C');
+
+
+
+    const url = `https://api.spotify.com/v1/recommendations?limit=10&seed_artists=${encodedArtist}&seed_genres=${encodedGangre}`;
+
+    const { access_token } = await test()
+    const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${access_token}`,
+
+        },
+    });
+    console.log(await response.json())
 }

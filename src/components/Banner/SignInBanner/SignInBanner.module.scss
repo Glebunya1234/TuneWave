@@ -73,24 +73,24 @@
     @keyframes AnimHover {
         0% {
 
-            background: url('../../../../public/border1.png') center no-repeat;
+            background: url('/border1.png') center no-repeat;
             background-size: 90%;
 
         }
 
         45% {
-            background: url('../../../../public/border1.png') center no-repeat;
+            background: url('/border1.png') center no-repeat;
             background-size: 90%;
         }
 
         55% {
 
-            background: url('../../../../public/border2.png') center no-repeat;
+            background: url('/border2.png') center no-repeat;
             background-size: 85%;
         }
 
         100% {
-            background: url('../../../../public/border2.png') center no-repeat;
+            background: url('/border2.png') center no-repeat;
             background-size: 85%;
 
         }

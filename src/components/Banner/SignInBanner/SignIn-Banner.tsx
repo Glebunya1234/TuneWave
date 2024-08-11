@@ -16,7 +16,7 @@ export const SignInBanner = () => {
   return (
     isVisible && (
       <nav className={style.SignInBanner}>
-        <BorderMarquee text="SingIn">
+        <BorderMarquee shape="rectangle" text="SingIn">
           <SpotifyAuthButton />
         </BorderMarquee>
       </nav>
