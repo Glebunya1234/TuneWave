@@ -1,17 +1,17 @@
 "use client";
 import style from "./FavoriteTrackComponent.module.scss";
-import Image from "next/image";
-import type { SpotifyTracksResponse } from "@/types/SpotifyTypes/TrackFavoriteType/type";
+import Image from "next/legacy/image";
+import Link from "next/link";
 import { _setPlayTrack, _getSavedTrackUser, _getToken } from "@/api/ApiSpotify";
 import { formatDuration } from "@/utils/DurationFormatFunc";
 import { Suspense, useContext, useEffect, useState } from "react";
-import { fetching } from "./FavoriteTrackComponent";
 import { GlobalContext } from "@/Context";
 import { BsFillPlayFill } from "react-icons/bs";
 import { IoTimerSharp } from "react-icons/io5";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
 import { PlayTrackBtn } from "@/components/UI/Buttons/PlayTrackBtn/PlayTrackBtn";
+import type { SpotifyTracksResponse } from "@/types/SpotifyTypes/TrackFavoriteType/type";
+import { SaveTrackBtn } from "@/components/UI/Buttons/SaveTrackToLibBtn/SaveTrack";
 
 export const FavoriteTrackComponent = () => {
   const router = useRouter();
@@ -143,6 +143,9 @@ export const FavoriteTrackComponent = () => {
               >
                 <p>{item.track.album.name}</p>
               </Link>
+              <div className={style.TrackDuration}>
+                <SaveTrackBtn id={item.track.id} isSave={item.track.isSaved} />
+              </div>
               <div className={style.TrackDuration}>
                 {formatDuration(item.track.duration_ms)}
               </div>

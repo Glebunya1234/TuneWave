@@ -7,6 +7,8 @@ import { CurrentlyAlbum } from '@/types/SpotifyTypes/CurrentlyAlbum/type';
 import { CurrentlyTrack } from '@/types/SpotifyTypes/CurrentlyTrack/type';
 import { TrackArtist } from '@/types/SpotifyTypes/TrackArtist/type';
 import { RecommendationsType } from '@/types/SpotifyTypes/RecommendationsType/type';
+import { TrackItem } from '@/types/SpotifyTypes/CurrentlyPlayingTrack/type';
+import { SavedTrack, SpotifyTracksResponse } from '@/types/SpotifyTypes/TrackFavoriteType/type';
 
 // const cacheDir = path.resolve('./cache');
 // const cacheFilePath = path.join(cacheDir, 'spotify-tracks.json');
@@ -104,7 +106,7 @@ const test = async () => {
     return response.json()
 }
 
-export const _getSavedTrackUser = async (token: string | null, count: number): Promise<any> => {
+export const _getSavedTrackUser = async (token: string | null, count: number): Promise<SpotifyTracksResponse> => {
     const { access_token } = await test()
     console.log(await test())
     const response = await fetch(`https://api.spotify.com/v1/me/tracks?limit=20&offset=${count}`, {
@@ -118,16 +120,21 @@ export const _getSavedTrackUser = async (token: string | null, count: number): P
             revalidate: 200
         },
     });
-    const newData = await response.json();
+    const newData: SpotifyTracksResponse = await response.json();
+    const trackIds = newData.items.map(track => track.track.id);
+    const isSavedArray = await _checkIfTracksAreSaved(trackIds);
 
-    return newData
+    const tracksWithSavedInfo: SavedTrack[] = newData.items.map((item, index) => ({
+        ...item,
+        track: {
+            ...item.track,
+            isSaved: isSavedArray[index],
+        }
+    }));
+
+    // Возвращаем новый объект данных с обновленной информацией о треках
+    return { ...newData, items: tracksWithSavedInfo };
 }
-
-
-
-
-
-
 
 
 export const _getCurrentlyPlayingTrack = async (token?: string | null): Promise<any> => {
@@ -200,6 +207,7 @@ export const _getAlbum = async (id: string): Promise<CurrentlyAlbum> => {
     const Data = await response.json();
     return Data
 }
+
 export const _getTrack = async (id: string): Promise<{ track: CurrentlyTrack, isSaved: Array<boolean>; }> => {
 
     const { access_token } = await test()
@@ -225,7 +233,24 @@ export const _getTrack = async (id: string): Promise<{ track: CurrentlyTrack, is
     const isSaved = await IsSavedResponse.json();
     return { track: Data, isSaved: isSaved }
 }
-export const _getArtist = async (ids: string[]): Promise<TrackArtist[]> => {
+export const _getOneArtist = async (ids: string): Promise<TrackArtist> => {
+    const url = ` https://api.spotify.com/v1/artists?ids=${ids}`
+    const { access_token } = await test()
+    const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${access_token}`,
+        },
+    });
+    if (!response) {
+        console.warn("artistsTrackErrorrrr")
+
+    }
+    const Data = await response.json();
+
+    return Data.artists[0]
+}
+export const _getArtists = async (ids: string[]): Promise<TrackArtist[]> => {
 
     const idsString = ids.join(',');
     const encodedIds = encodeURIComponent(idsString);
@@ -246,7 +271,7 @@ export const _getArtist = async (ids: string[]): Promise<TrackArtist[]> => {
     return Data.artists
 }
 
-export const UnSaveTrack = async (ids: string) => {
+export const _UnSaveTrack = async (ids: string) => {
     const { access_token } = await test()
     const response = await fetch(`https://api.spotify.com/v1/me/tracks?ids=${ids}`, {
 
@@ -267,7 +292,7 @@ export const UnSaveTrack = async (ids: string) => {
     console.log('Delete:', data);
     return data;
 }
-export const SaveTrack = async (ids: string) => {
+export const _SaveTrack = async (ids: string) => {
     const { access_token } = await test()
     const response = await fetch(`https://api.spotify.com/v1/me/tracks?ids=${ids}`, {
 
@@ -290,9 +315,9 @@ export const SaveTrack = async (ids: string) => {
 
 }
 
-export const _getTopArtists = async (): Promise<Artist[]> => {
+export const _getTopArtists = async (): Promise<TrackArtist[]> => {
     // const url = "https://api.spotify.com/v1/recommendations/available-genre-seeds"
-    const url = "https://api.spotify.com/v1/me/top/artists"
+    const url = "https://api.spotify.com/v1/me/top/artists?limit=5"
     const { access_token } = await test()
     const getTopsUser = await fetch(url, {
         method: 'GET',
@@ -307,13 +332,10 @@ export const _getTopArtists = async (): Promise<Artist[]> => {
     return getTopsUserResult.items;
 
 }
-interface Artist {
-    id: string;
-    genres: string[];
-}
 
 
-export const getRecommendations = async (): Promise<RecommendationsType> => {
+
+export const _getRecommendations = async (): Promise<RecommendationsType> => {
     const topArtists = await _getTopArtists();
     const seedArtists: string[] = topArtists.length > 0
         ? topArtists.map(artist => artist.id).filter(id => id !== undefined)
@@ -332,7 +354,6 @@ export const getRecommendations = async (): Promise<RecommendationsType> => {
 
 
     const ArtistIDString = selectedSeedArtists.join(',');
-    // const encodedArtist = encodeURIComponent(ArtistIDString);
     const GangreString = selectedSeedGenres.join(',');
     const encodedArtist = ArtistIDString.replace(/ /g, '+').replace(/,/g, '%2C');
     const encodedGangre = GangreString.replace(/ /g, '+').replace(/,/g, '%2C');
@@ -351,6 +372,55 @@ export const getRecommendations = async (): Promise<RecommendationsType> => {
     });
 
     const data = await response.json()
-    console.log(data);
+
     return data
 }
+
+
+
+export const _getSimilarPlaylist = async (id: string): Promise<RecommendationsType> => {
+    const url = `https://api.spotify.com/v1/recommendations?limit=10&seed_artists=${id}`;
+    const { access_token } = await test();
+    const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${access_token}`,
+        },
+    });
+
+    if (!response.ok) {
+        throw new Error('Failed to fetch recommendations');
+    }
+
+    const data: RecommendationsType = await response.json();
+
+    const trackIds = data.tracks.map(track => track.id);
+    const isSavedArray = await _checkIfTracksAreSaved(trackIds);
+
+    const tracksWithSavedInfo: TrackItem[] = data.tracks.map((track, index) => ({
+        ...track,
+        isSaved: isSavedArray[index],
+    }));
+
+    return { ...data, tracks: tracksWithSavedInfo };
+};
+
+
+
+const _checkIfTracksAreSaved = async (trackIds: string[]): Promise<boolean[]> => {
+    const { access_token } = await test();
+    const idsString = trackIds.join(',');
+
+    const response = await fetch(`https://api.spotify.com/v1/me/tracks/contains?ids=${idsString}`, {
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${access_token}`,
+        },
+    });
+
+    if (!response.ok) {
+        throw new Error('Failed to check if tracks are saved');
+    }
+
+    return await response.json();
+};
