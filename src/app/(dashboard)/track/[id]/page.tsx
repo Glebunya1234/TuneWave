@@ -2,7 +2,7 @@
 import style from "./tracks.module.scss";
 import Image from "next/image";
 import {
-  _getArtist,
+  _getArtists,
   _getSavedTrackUser,
   _getToken,
   _getTrack,
@@ -16,7 +16,7 @@ import { TrackArtist } from "@/types/SpotifyTypes/TrackArtist/type";
 const Track = async ({ params }: { params: { id: string } }) => {
   const { track, isSaved } = await _getTrack(params.id);
 
-  const dataArtist: TrackArtist[] = await _getArtist(
+  const dataArtist: TrackArtist[] = await _getArtists(
     track?.artists?.map((artist) => {
       return artist.id;
     })

@@ -1,31 +1,8 @@
-type Artist = {
-  href: string;
-  id: string;
-  name: string;
-};
-
-type AlbumImage = {
-  url: string;
-};
-
-type Album = {
-  images: AlbumImage[];
-  name: string;
-  id: string;
-};
-
-type Track = {
-  id: string;
-  name: string;
-  artists: Artist[];
-  album: Album;
-  uri: string;
-  duration_ms: number;
-};
+import { TrackItem } from "../CurrentlyPlayingTrack/type";
 
 export type SavedTrack = {
   added_at: string;
-  track: Track;
+  track: TrackItem;
 };
 
 export type SpotifyTracksResponse = {

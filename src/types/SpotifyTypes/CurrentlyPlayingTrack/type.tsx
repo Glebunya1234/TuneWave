@@ -69,6 +69,7 @@ export interface TrackItem {
   track_number: number;
   type: string;
   uri: string;
+  isSaved: boolean;
 }
 
 export interface CurrentlyPlayingTrack {

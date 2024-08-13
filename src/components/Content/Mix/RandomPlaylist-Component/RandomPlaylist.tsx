@@ -1,6 +1,6 @@
 "use server";
 import style from "@components/Content/FavoriteTrackComponent/FavoriteTrackComponent.module.scss";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import { _setPlayTrack, _getSavedTrackUser, _getToken } from "@/api/ApiSpotify";
 import { formatDuration } from "@/utils/DurationFormatFunc";
 import { Suspense } from "react";
@@ -10,33 +10,14 @@ import { RecommendationsType } from "@/types/SpotifyTypes/RecommendationsType/ty
 import Link from "next/link";
 import { PlayTrackBtn } from "@/components/UI/Buttons/PlayTrackBtn/PlayTrackBtn";
 import { BsFillPlayFill } from "react-icons/bs";
+import { FiSave } from "react-icons/fi";
+import { SaveTrackBtn } from "@/components/UI/Buttons/SaveTrackToLibBtn/SaveTrack";
 
 export const RandomPlaylistComponent = async ({
   data,
 }: {
   data?: RecommendationsType;
 }) => {
-  //   const [hoverStates, setHoverStates] = useState<{ [key: number]: boolean }>(
-  //     {}
-  //   );
-  //   useEffect(() => {
-  //     console.log(data);
-  //   }, []);
-  //   const dataContext = useContext(GlobalContext);
-
-  //   const handleMouseEnter = (index: number) => {
-  //     setHoverStates((prev) => ({ ...prev, [index]: true }));
-  //   };
-
-  //   const handleMouseLeave = (index: number) => {
-  //     setHoverStates((prev) => ({ ...prev, [index]: false }));
-  //   };
-
-  //   const Play = (uri: string) => {
-  //     _setPlayTrack(uri);
-  //     dataContext?.setStatePlaying((prevState) => !prevState);
-  //   };
-
   return (
     <Suspense fallback={<h2>🌀 Loading...</h2>}>
       <section className={`${style.Content__playlist}`}>
@@ -47,6 +28,7 @@ export const RandomPlaylistComponent = async ({
           <span></span>
           <span className={style.TrackInfo}>Name</span>
           <span className={style.TrackAlbum}>Album</span>
+          <span></span>
           <span>
             <IoTimerSharp className="mr-[11px]" />
           </span>
@@ -98,6 +80,10 @@ export const RandomPlaylistComponent = async ({
               >
                 <p>{item.album.name}</p>
               </Link>
+
+              <div className={style.TrackDuration}>
+                <SaveTrackBtn id={item.id} isSave={item.isSaved} />
+              </div>
               <div className={style.TrackDuration}>
                 {formatDuration(item.duration_ms)}
               </div>
