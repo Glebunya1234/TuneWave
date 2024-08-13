@@ -15,12 +15,13 @@ export const ForUserMix = async () => {
     >
       <BorderMarquee shape="square" text={`Random#${index + 1}`}>
         <aside className={style.Item__Conteiner}>
-          <Image
+          {/* <Image
             src="/FavoriteTrack.png"
             layout="fill"
             objectFit="cover"
             alt={`Image for Mix user #${index + 1}`}
-          />
+          /> */}
+          <h1 className={style.RandomTextImage}>#{index + 1}</h1>
           <span>Random list#{index + 1}</span>
         </aside>
       </BorderMarquee>

@@ -2,12 +2,11 @@
 import style from "./profile.module.scss";
 import React from "react";
 import { PanelTarget } from "@/components/UI/Target/PanelTarget";
-import { createClient } from "@/utils/supabase/server";
-import { redirect } from "next/navigation";
 import { FavoriteBanner } from "@/components/Banner/FavoriteBanner/FavoriteBanner";
-import { _getTopArtists, getRecommendations } from "@/api/ApiSpotify";
+import { _getTopArtists } from "@/api/ApiSpotify";
 import { ForUserMix } from "@/components/Content/Mix/For-user-Mix/ForUserMix";
 import { TopArtistMix } from "@/components/Content/Mix/TopArtistMix/TopArtistMix";
+import { TopGangreMix } from "@/components/Content/Mix/TopGangreMix/TopGangreMix";
 
 const Profile = async () => {
   // const UserAllRecs = await getRecommendations();
@@ -21,8 +20,9 @@ const Profile = async () => {
           <div className={style.squarDash}></div>
           <aside className={style.Content__Conteiner}>
             <FavoriteBanner />
-            <ForUserMix />
             <TopArtistMix />
+            <TopGangreMix />
+            <ForUserMix />
           </aside>
         </aside>
         <PanelTarget side="Bottom" />
