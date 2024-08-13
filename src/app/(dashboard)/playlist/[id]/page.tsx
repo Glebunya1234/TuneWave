@@ -9,21 +9,28 @@ import {
   _getSimilarPlaylist,
 } from "@/api/ApiSpotify";
 import { PanelTarget } from "@/components/UI/Target/PanelTarget";
-import { FavoriteTrackComponent } from "@/components/Content/FavoriteTrackComponent/FavoriteTrackConteiner";
-import Link from "next/link";
 import { RandomPlaylistComponent } from "@/components/Content/Mix/RandomPlaylist-Component/RandomPlaylist";
 import { TrackArtist } from "@/types/SpotifyTypes/TrackArtist/type";
 
 const playlistPage = async ({ params }: { params: { id: string } }) => {
   let UserAllRecs;
   let NamePlayList: string | TrackArtist;
+  let Src = "/FavoriteTrack.png";
   if (params.id.includes("randomlist")) {
     NamePlayList = "random playlist";
     UserAllRecs = await _getRecommendations();
+  } else if (params.id.includes("genre")) {
+    const parts = params.id.split("%2B");
+    const genre = parts[1];
+    Src = "/DiscLogo2.png";
+
+    NamePlayList = genre.replace(/%20/g, " ");
+    UserAllRecs = await _getSimilarPlaylist(genre.replace(/%20/g, "+"), true);
   } else {
-    NamePlayList = (await _getOneArtist(params.id)).name;
+    const artist = await _getOneArtist(params.id);
+    NamePlayList = "Similar to: " + artist.name;
     UserAllRecs = await _getSimilarPlaylist(params.id);
-    console.log(UserAllRecs);
+    Src = artist?.images[0]?.url || "/FavoriteTrack.png";
   }
 
   return (
@@ -34,7 +41,7 @@ const playlistPage = async ({ params }: { params: { id: string } }) => {
           <div className={style.Preview__image}>
             <div className={style.Images}>
               <Image
-                src={"/FavoriteTrack.png"}
+                src={Src}
                 layout="fill"
                 objectFit="cover"
                 className={style.mark}
@@ -44,9 +51,7 @@ const playlistPage = async ({ params }: { params: { id: string } }) => {
           </div>
           <div className={style.Preview__Info}>
             <h3 className={style.Info__PlaylistType}>Playlist</h3>
-            <h1 className={style.Info__PlaylistName}>
-              Similar to: {NamePlayList}
-            </h1>
+            <h1 className={style.Info__PlaylistName}>{NamePlayList}</h1>
           </div>
         </section>
         <RandomPlaylistComponent data={UserAllRecs} />

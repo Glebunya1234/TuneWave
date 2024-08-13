@@ -315,9 +315,10 @@ export const _SaveTrack = async (ids: string) => {
 
 }
 
+
 export const _getTopArtists = async (): Promise<TrackArtist[]> => {
     // const url = "https://api.spotify.com/v1/recommendations/available-genre-seeds"
-    const url = "https://api.spotify.com/v1/me/top/artists?limit=5"
+    const url = "https://api.spotify.com/v1/me/top/artists?limit=10"
     const { access_token } = await test()
     const getTopsUser = await fetch(url, {
         method: 'GET',
@@ -329,6 +330,7 @@ export const _getTopArtists = async (): Promise<TrackArtist[]> => {
         throw new Error('Ошибка получения топ артистов');
     }
     const getTopsUserResult = await getTopsUser.json()
+
     return getTopsUserResult.items;
 
 }
@@ -371,15 +373,63 @@ export const _getRecommendations = async (): Promise<RecommendationsType> => {
         },
     });
 
-    const data = await response.json()
+    const data: RecommendationsType = await response.json();
 
-    return data
+    const trackIds = data.tracks.map(track => track.id);
+    const isSavedArray = await _checkIfTracksAreSaved(trackIds);
+
+    const tracksWithSavedInfo: TrackItem[] = data.tracks.map((track, index) => ({
+        ...track,
+        isSaved: isSavedArray[index],
+    }));
+
+    return { ...data, tracks: tracksWithSavedInfo };
+}
+export const _getGengreRecommendations = async (): Promise<RecommendationsType> => {
+    const topArtists = await _getTopArtists();
+
+
+    const seedGenres: string[] = topArtists.length > 0
+        ? topArtists.flatMap(artist => artist.genres).filter(genre => genre !== undefined)
+        : [];
+
+
+    const selectedSeedGenres = seedGenres.slice(0, 5);
+    if (selectedSeedGenres.length === 0) {
+        throw new Error('Не удалось получить достаточное количество данных для seed параметров');
+    }
+
+    const GangreString = selectedSeedGenres.join(',');
+    const encodedGangre = GangreString.replace(/ /g, '+').replace(/,/g, '%2C');
+    const url = `https://api.spotify.com/v1/recommendations?limit=10&seed_genres=${encodedGangre}`;
+    const { access_token } = await test()
+    const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${access_token}`,
+
+        },
+    });
+
+    const data: RecommendationsType = await response.json()
+    const trackIds = data.tracks.map(track => track.id);
+    const isSavedArray = await _checkIfTracksAreSaved(trackIds);
+
+    const tracksWithSavedInfo: TrackItem[] = data.tracks.map((track, index) => ({
+        ...track,
+        isSaved: isSavedArray[index],
+    }));
+
+    return { ...data, tracks: tracksWithSavedInfo };
 }
 
 
 
-export const _getSimilarPlaylist = async (id: string): Promise<RecommendationsType> => {
-    const url = `https://api.spotify.com/v1/recommendations?limit=10&seed_artists=${id}`;
+export const _getSimilarPlaylist = async (id: string, onlyGenre?: boolean): Promise<RecommendationsType> => {
+    let url = `https://api.spotify.com/v1/recommendations?limit=10&seed_artists=${id}`;
+
+    onlyGenre ? url = `https://api.spotify.com/v1/recommendations?limit=10&seed_genres=${id}` : url = `https://api.spotify.com/v1/recommendations?limit=10&seed_artists=${id}`
+    console.log(url)
     const { access_token } = await test();
     const response = await fetch(url, {
         method: 'GET',
@@ -419,8 +469,10 @@ const _checkIfTracksAreSaved = async (trackIds: string[]): Promise<boolean[]> =>
     });
 
     if (!response.ok) {
+        console.log('Failed to check if tracks are saved')
+        return [false]
         throw new Error('Failed to check if tracks are saved');
     }
-
-    return await response.json();
+    const data = await response.json()
+    return data
 };

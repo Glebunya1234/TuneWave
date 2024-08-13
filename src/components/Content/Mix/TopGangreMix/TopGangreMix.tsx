@@ -6,30 +6,38 @@ import style from "../For-user-Mix/ForUserMix.module.scss";
 import { BorderMarquee } from "@/components/UI/Marquee/Border-Marquee/BorderMarquee";
 import { _getTopArtists } from "@/api/ApiSpotify";
 
-export const TopArtistMix = async () => {
+export const TopGangreMix = async () => {
   const topArtist = await _getTopArtists();
-  const items = topArtist.slice(0, 5).map((data, index) => (
+
+  const uniqueGenres = new Set(
+    topArtist
+      .filter((data) => data.genres[0] !== undefined)
+      .slice(0, 5)
+      .map((data) => data.genres[0])
+  );
+
+  const items = Array.from(uniqueGenres).map((data, index) => (
     <Link
-      href={`/playlist/${data.id}`}
+      href={`/playlist/genre+${data}`}
       className={style.ForUserMix__Item}
       key={index}
     >
-      <BorderMarquee shape="square" text={`${data.name}`}>
+      <BorderMarquee shape="square" text={`${data}`}>
         <aside className={style.Item__Conteiner}>
           <Image
-            src={data.images[0].url || "/FavoriteTrack.png"}
+            src="/DiscLogo.png"
             layout="fill"
             objectFit="cover"
             alt={`Image for Mix user #${index + 1}`}
           />
-          <span>{data.name}</span>
+          <span>{data}</span>
         </aside>
       </BorderMarquee>
     </Link>
   ));
   return (
     <section className={style.ForUserMix}>
-      <span className={style.ForUserMix__Span}>Similar to:</span>
+      <span className={style.ForUserMix__Span}>Similar to your genres:</span>
       <nav className={style.ForUserMix__Conteiner}>{items}</nav>
     </section>
   );
