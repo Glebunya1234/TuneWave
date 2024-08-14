@@ -1,12 +1,10 @@
 "use server";
 
-import { BackgroundMarquee } from "@/components/UI/Marquee/Background-Marquee/BGmarquee";
 import style from "./ForUserMix.module.scss";
-import { BorderMarquee } from "@/components/UI/Marquee/Border-Marquee/BorderMarquee";
-import Image from "next/image";
 import Link from "next/link";
+import { BorderMarquee } from "@/components/UI/Marquee/Border-Marquee/BorderMarquee";
 
-export const ForUserMix = async () => {
+export const RandomMix = async () => {
   const items = Array.from({ length: 5 }, (_, index) => (
     <Link
       href={`/playlist/randomlist${index + 1}`}
@@ -15,12 +13,6 @@ export const ForUserMix = async () => {
     >
       <BorderMarquee shape="square" text={`Random#${index + 1}`}>
         <aside className={style.Item__Conteiner}>
-          {/* <Image
-            src="/FavoriteTrack.png"
-            layout="fill"
-            objectFit="cover"
-            alt={`Image for Mix user #${index + 1}`}
-          /> */}
           <h1 className={style.RandomTextImage}>#{index + 1}</h1>
           <span>Random list#{index + 1}</span>
         </aside>

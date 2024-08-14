@@ -19,3 +19,15 @@ export type TrackArtist = {
   type: "string";
   uri: "string";
 };
+
+export type FollowedArtist = {
+  href: "string";
+  limit: number;
+  next: "string";
+  cursors: {
+    after: "string";
+    before: "string";
+  };
+  total: number;
+  items: TrackArtist[];
+};

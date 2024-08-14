@@ -33,7 +33,7 @@ export const MediaLibraryBar = ({
     <>
       {dataCont.isHiddenLeftBar && (
         <section className={`${style.MediaLibrary} ${isRemove}`}>
-          <aside>
+          <aside className={`${style.MediaLibrary__HideWindow} `}>
             <span>
               <p>Hide window</p> <IoMdArrowDropright />
             </span>
@@ -43,11 +43,7 @@ export const MediaLibraryBar = ({
             </CloseBarBtn>
           </aside>
           <nav className={style.MediaLibrary__Navigation}>
-            <BtnRouting
-              helpHolder={holder.Home}
-              text="Home"
-              path={"/home"}
-            />
+            <BtnRouting helpHolder={holder.Home} text="Home" path={"/home"} />
             <BtnRouting
               helpHolder={holder.Search}
               text="Search"

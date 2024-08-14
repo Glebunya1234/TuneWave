@@ -18,7 +18,7 @@ export const TopGangreMix = async () => {
 
   const items = Array.from(uniqueGenres).map((data, index) => (
     <Link
-      href={`/playlist/genre+${data}`}
+      href={`/playlist/genre?genre=${data}`}
       className={style.ForUserMix__Item}
       key={index}
     >

@@ -5,10 +5,11 @@ import path from 'path';
 import { cacheFilePathAccess, cacheFilePathRefresh, readCache } from '../../cache/controller';
 import { CurrentlyAlbum } from '@/types/SpotifyTypes/CurrentlyAlbum/type';
 import { CurrentlyTrack } from '@/types/SpotifyTypes/CurrentlyTrack/type';
-import { TrackArtist } from '@/types/SpotifyTypes/TrackArtist/type';
+import { FollowedArtist, TrackArtist } from '@/types/SpotifyTypes/TrackArtist/type';
 import { RecommendationsType } from '@/types/SpotifyTypes/RecommendationsType/type';
 import { TrackItem } from '@/types/SpotifyTypes/CurrentlyPlayingTrack/type';
 import { SavedTrack, SpotifyTracksResponse } from '@/types/SpotifyTypes/TrackFavoriteType/type';
+import { CurrentlyPlaylist } from '@/types/SpotifyTypes/CurrentlyPlaylist/type';
 
 // const cacheDir = path.resolve('./cache');
 // const cacheFilePath = path.join(cacheDir, 'spotify-tracks.json');
@@ -117,7 +118,7 @@ export const _getSavedTrackUser = async (token: string | null, count: number): P
         },
 
         next: {
-            revalidate: 200
+            revalidate: 1000
         },
     });
     const newData: SpotifyTracksResponse = await response.json();
@@ -131,11 +132,24 @@ export const _getSavedTrackUser = async (token: string | null, count: number): P
             isSaved: isSavedArray[index],
         }
     }));
-
-    // Возвращаем новый объект данных с обновленной информацией о треках
     return { ...newData, items: tracksWithSavedInfo };
 }
 
+export const _getCurrentUserPlaylists = async (limit: number = 10): Promise<CurrentlyPlaylist> => {
+    const { access_token } = await test()
+    const url = `https://api.spotify.com/v1/me/playlists?limit=${limit}`
+    const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${access_token}`,
+        },
+
+
+    });
+    const Data = await response.json();
+    console.log('Data', Data)
+    return Data;
+}
 
 export const _getCurrentlyPlayingTrack = async (token?: string | null): Promise<any> => {
     const url = "https://api.spotify.com/v1/me/player/currently-playing"
@@ -315,7 +329,6 @@ export const _SaveTrack = async (ids: string) => {
 
 }
 
-
 export const _getTopArtists = async (): Promise<TrackArtist[]> => {
     // const url = "https://api.spotify.com/v1/recommendations/available-genre-seeds"
     const url = "https://api.spotify.com/v1/me/top/artists?limit=10"
@@ -335,7 +348,23 @@ export const _getTopArtists = async (): Promise<TrackArtist[]> => {
 
 }
 
+export const _getFollowedArtists = async (): Promise<FollowedArtist> => {
+    const url = "https://api.spotify.com/v1/me/following?type=artist&limit=10"
+    const { access_token } = await test()
+    const getFollowedUser = await fetch(url, {
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${access_token}`,
+        },
+    });
+    if (!getFollowedUser.ok) {
+        throw new Error('Ошибка получения топ артистов');
+    }
+    const getTopsUserResult = await getFollowedUser.json()
 
+    return getTopsUserResult.artists;
+
+}
 
 export const _getRecommendations = async (): Promise<RecommendationsType> => {
     const topArtists = await _getTopArtists();

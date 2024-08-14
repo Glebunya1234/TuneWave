@@ -1,4 +1,4 @@
-"use server";
+"use client";
 import style from "@components/Content/FavoriteTrackComponent/FavoriteTrackComponent.module.scss";
 import Image from "next/legacy/image";
 import { _setPlayTrack, _getSavedTrackUser, _getToken } from "@/api/ApiSpotify";
@@ -13,7 +13,7 @@ import { BsFillPlayFill } from "react-icons/bs";
 import { FiSave } from "react-icons/fi";
 import { SaveTrackBtn } from "@/components/UI/Buttons/SaveTrackToLibBtn/SaveTrack";
 
-export const RandomPlaylistComponent = async ({
+export const RandomPlaylistComponent = ({
   data,
 }: {
   data?: RecommendationsType;

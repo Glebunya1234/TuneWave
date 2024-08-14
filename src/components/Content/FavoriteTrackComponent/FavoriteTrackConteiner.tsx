@@ -13,24 +13,29 @@ import { PlayTrackBtn } from "@/components/UI/Buttons/PlayTrackBtn/PlayTrackBtn"
 import type { SpotifyTracksResponse } from "@/types/SpotifyTypes/TrackFavoriteType/type";
 import { SaveTrackBtn } from "@/components/UI/Buttons/SaveTrackToLibBtn/SaveTrack";
 
-export const FavoriteTrackComponent = () => {
+export const FavoriteTrackComponent = ({
+  startData,
+  Offset,
+}: {
+  Offset: number;
+  startData: SpotifyTracksResponse;
+}) => {
   const router = useRouter();
-  const [getData, setData] = useState<SpotifyTracksResponse>({
-    href: "",
-    items: [],
-    limit: 0,
-    next: null,
-    offset: 0,
-    previous: null,
-    total: 0,
-  });
-  const [getOffset, setOffset] = useState(0);
+  const [getData, setData] = useState<SpotifyTracksResponse>(
+    startData || {
+      href: "",
+      items: [],
+      limit: 0,
+      next: null,
+      offset: 0,
+      previous: null,
+      total: 0,
+    }
+  );
+  const [getOffset, setOffset] = useState(Offset || 0);
   const [getFetching, setFetching] = useState(false);
   const [isLastPage, setIsLastPage] = useState(false);
-  const [hoverStates, setHoverStates] = useState<{ [key: number]: boolean }>(
-    {}
-  );
-  const dataContext = useContext(GlobalContext);
+
   useEffect(() => {
     const usEF = async () => {
       if (getFetching && !isLastPage) {
@@ -43,7 +48,6 @@ export const FavoriteTrackComponent = () => {
               offset: response.offset,
               total: response.total,
             }));
-            console.log("newData", response.items);
             setOffset(getOffset + 20);
             if (response.items.length < 20) {
               setIsLastPage(true);
