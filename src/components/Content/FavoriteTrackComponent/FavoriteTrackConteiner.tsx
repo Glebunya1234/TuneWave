@@ -2,68 +2,66 @@
 import style from "./FavoriteTrackComponent.module.scss";
 import Image from "next/legacy/image";
 import Link from "next/link";
-import { _setPlayTrack, _getSavedTrackUser, _getToken } from "@/api/ApiSpotify";
+import useSWR, { useSWRConfig } from "swr";
+import { _getSavedTrackUser } from "@/api/ApiSpotify";
 import { formatDuration } from "@/utils/DurationFormatFunc";
-import { Suspense, useContext, useEffect, useState } from "react";
-import { GlobalContext } from "@/Context";
-import { BsFillPlayFill } from "react-icons/bs";
+import { Suspense, useEffect, useState } from "react";
 import { IoTimerSharp } from "react-icons/io5";
-import { useRouter } from "next/navigation";
 import { PlayTrackBtn } from "@/components/UI/Buttons/PlayTrackBtn/PlayTrackBtn";
 import type { SpotifyTracksResponse } from "@/types/SpotifyTypes/TrackFavoriteType/type";
 import { SaveTrackBtn } from "@/components/UI/Buttons/SaveTrackToLibBtn/SaveTrack";
+import { BsFillPlayFill } from "react-icons/bs";
 
-export const FavoriteTrackComponent = ({
-  startData,
-  Offset,
-}: {
-  Offset: number;
-  startData: SpotifyTracksResponse;
-}) => {
-  const router = useRouter();
-  const [getData, setData] = useState<SpotifyTracksResponse>(
-    startData || {
-      href: "",
-      items: [],
-      limit: 0,
-      next: null,
-      offset: 0,
-      previous: null,
-      total: 0,
+const fetcher = (offset: number) => _getSavedTrackUser(offset);
+
+export const FavoriteTrackComponent = () => {
+  const [offset, setOffset] = useState(0);
+  const [fetching, setFetching] = useState(false);
+
+  const { data, mutate } = useSWR<SpotifyTracksResponse>(
+    `https://api.spotify.com/v1/me/tracks`,
+    () => fetcher(offset),
+    {
+      keepPreviousData: true,
+      revalidateOnFocus: true,
+      dedupingInterval: 60000,
     }
   );
-  const [getOffset, setOffset] = useState(Offset || 0);
-  const [getFetching, setFetching] = useState(false);
-  const [isLastPage, setIsLastPage] = useState(false);
 
   useEffect(() => {
-    const usEF = async () => {
-      if (getFetching && !isLastPage) {
-        await _getSavedTrackUser("token", getOffset)
-          .then((response) => {
-            setData((prevData) => ({
-              ...prevData,
-              items: [...prevData.items, ...response.items],
-              next: response.next,
-              offset: response.offset,
-              total: response.total,
-            }));
-            setOffset(getOffset + 20);
-            if (response.items.length < 20) {
-              setIsLastPage(true);
-            }
-          })
-          .finally(() => {
-            setFetching(false);
-          });
-      }
-    };
-    usEF();
-  }, [getFetching, getOffset, isLastPage]);
+    if (data?.next !== null && fetching) {
+      setOffset((prevOffset) => {
+        const newOffset = prevOffset + 20;
+        mutate(async (currentData) => {
+          const newData = await fetcher(newOffset);
+          setFetching(false);
+          return {
+            ...currentData,
+            items: [...(currentData?.items || []), ...newData.items],
+            href: newData.href,
+            limit: newData.limit,
+            next: newData.next,
+            offset: newData.offset,
+            previous: newData.previous,
+            total: newData.total,
+          } as SpotifyTracksResponse;
+        }, false);
+
+        return newOffset;
+      });
+    }
+  }, [fetching, mutate]);
 
   useEffect(() => {
     const myDiv = document.getElementById("FavoriteContent");
-    setFetching(true);
+    const scrollHandler = () => {
+      if (myDiv) {
+        if (myDiv.scrollHeight - (myDiv.scrollTop + myDiv.clientHeight) < 300) {
+          setFetching(true);
+        }
+      }
+    };
+
     if (myDiv) {
       myDiv.addEventListener("scroll", scrollHandler);
       return () => {
@@ -72,21 +70,9 @@ export const FavoriteTrackComponent = ({
     }
   }, []);
 
-  const scrollHandler = () => {
-    const myDiv = document.getElementById("FavoriteContent");
-    if (myDiv) {
-      if (
-        myDiv.scrollHeight - (myDiv.scrollTop + myDiv.clientHeight) < 300 &&
-        !isLastPage
-      ) {
-        setFetching(true);
-      }
-    }
-  };
-
   return (
     <Suspense fallback={<h2>🌀 Loading...</h2>}>
-      <section className={`${style.Content__playlist}`}>
+      <section className={`${style.Content__playlist}`} id="FavoriteContent">
         <aside
           className={`${style.Playlist__Track} border-[#c1c0c5]  border-b-[1px]`}
         >
@@ -98,7 +84,7 @@ export const FavoriteTrackComponent = ({
             <IoTimerSharp className="mr-[11px]" />
           </span>
         </aside>
-        {getData?.items.map((item, index) => {
+        {data?.items?.map((item, index) => {
           const albumImageUrl =
             item.track.album.images.length > 0
               ? item.track.album.images[0].url
