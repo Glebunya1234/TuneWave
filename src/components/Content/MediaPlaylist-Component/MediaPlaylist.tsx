@@ -2,26 +2,26 @@
 "use client";
 import style from "./MediaPlaylist.module.scss";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import useSWR from "swr";
 import { useRouter } from "next/navigation";
-import { TbRotate2 } from "react-icons/tb";
+import { TbRotate2, TbRotateClockwise } from "react-icons/tb";
 import { VscLibrary } from "react-icons/vsc";
 import { CurrentlyPlaylist } from "@/types/SpotifyTypes/CurrentlyPlaylist/type";
 import { _getCurrentUserPlaylists } from "@/api/ApiSpotify";
-
+const fetcher = () => _getCurrentUserPlaylists();
 export const MediaPlaylist = () => {
-  const [getPlaylist, setPlaylist] = useState<CurrentlyPlaylist>();
-  const [updateState, setUpdateState] = useState(false);
-
   const router = useRouter();
 
-  useEffect(() => {
-    const fetch = async () => {
-      setPlaylist(await _getCurrentUserPlaylists());
-      setUpdateState(false);
-    };
-    fetch();
-  }, [, updateState]);
+  const { data, isLoading, mutate } = useSWR<CurrentlyPlaylist>(
+    `https://api.spotify.com/v1/me/playlists`,
+    fetcher,
+    {
+      keepPreviousData: true,
+      revalidateOnFocus: false,
+      dedupingInterval: 60000,
+    }
+  );
+
   return (
     <section className={style.MediaPlaylist}>
       <nav className={style.MediaPlaylist__Nav}>
@@ -29,7 +29,12 @@ export const MediaPlaylist = () => {
           <VscLibrary />
           <p>Media library</p>
         </span>
-        <button className={style.Nav__Button}>
+        <button
+          onClick={async () => {
+            await mutate();
+          }}
+          className={style.Nav__Button}
+        >
           <TbRotate2 />
         </button>
       </nav>
@@ -45,12 +50,17 @@ export const MediaPlaylist = () => {
             <h1>Favorite Tracks</h1>
           </div>
         </button>
-        {getPlaylist?.items?.map((item, index) => (
+        {isLoading && (
+          <div className="w-full h-full flex justify-center items-center">
+            <TbRotateClockwise className="animate-spin text-xl" />
+          </div>
+        )}
+        {data?.items?.map((item, index) => (
           <button
             key={index}
             className={style.Content__items}
             onClick={() => {
-              router.push(`/artist/${item.id}`);
+              router.push(`/playlist/${item.id}`);
             }}
           >
             <div className={style.item__img}>

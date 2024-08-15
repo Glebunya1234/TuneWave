@@ -13,7 +13,7 @@ import { ListenToThisCmp } from "@/components/Content/Mix/ListenToThis-Component
 const Profile = async () => {
   // const UserAllRecs = await getRecommendations();
   // console.log(await _getTopArtists());
-  
+
   return (
     <main className={style.profile}>
       <section className={style.profile__Dashboard}>
@@ -25,9 +25,11 @@ const Profile = async () => {
             <FavoriteBanner />
             <RandomMix />
             <TopArtistMix />
-            <ListenToThisCmp />
-            <FollowedArtist />
-            <TopGangreMix />
+            {/* <FollowedArtist /> */}
+            {/* <ListenToThisCmp /> */}
+            {/* <TopGangreMix /> */}
+            {/*
+             */}
           </aside>
         </aside>
         <PanelTarget side="Bottom" />

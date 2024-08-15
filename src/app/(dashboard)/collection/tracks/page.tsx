@@ -8,7 +8,7 @@ import { GetDataProfileUser } from "@/providers/SupaBase-methods/user-action";
 import Link from "next/link";
 
 const CollectionTracks = async () => {
-  const data = await _getSavedTrackUser("token", 0);
+  // const data = await _getSavedTrackUser("token", 0);
   const userData = await GetDataProfileUser();
   return (
     <div className={style.Tracks}>
@@ -40,12 +40,13 @@ const CollectionTracks = async () => {
                 <p> {userData.user?.user_metadata?.full_name}</p>
               </Link>
               <span className="mr-[5px]">•</span>
-              <span className="mr-[5px]">{data.total} tracks</span>
+              {/* <span className="mr-[5px]">{data.total} tracks</span> */}
             </span>
           </div>
         </section>
 
-        <FavoriteTrackComponent startData={data} Offset={20} />
+        {/* <FavoriteTrackComponent startData={data} Offset={20} /> */}
+        <FavoriteTrackComponent />
       </aside>
       <div className={style.dash}></div>
       <div className={style.squarDash}></div>

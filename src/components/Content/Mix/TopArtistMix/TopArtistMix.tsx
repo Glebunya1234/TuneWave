@@ -1,14 +1,23 @@
-"use server";
+"use client";
 
 import Link from "next/link";
 import Image from "next/image";
 import style from "../For-user-Mix/ForUserMix.module.scss";
 import { BorderMarquee } from "@/components/UI/Marquee/Border-Marquee/BorderMarquee";
 import { _getTopArtists } from "@/api/ApiSpotify";
+import useSWR from "swr";
+import { TrackArtist } from "@/types/SpotifyTypes/TrackArtist/type";
 
-export const TopArtistMix = async () => {
-  const topArtist = await _getTopArtists();
-  const items = topArtist.slice(0, 5).map((data, index) => (
+export const TopArtistMix = () => {
+  const { data: topArtist } = useSWR<TrackArtist[]>(
+    `getTopArtists`,
+    async () => await _getTopArtists(),
+    {
+      revalidateOnFocus: false,
+      dedupingInterval: 60000,
+    }
+  );
+  const items = topArtist?.slice(0, 5).map((data, index) => (
     <Link
       href={`/playlist/${data.id}`}
       className={style.ForUserMix__Item}

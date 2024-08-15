@@ -10,7 +10,7 @@ export const InfoBar = () => {
 
   return (
     <InfoSideBar>
-      <ComponentPlayingTrack />
+      {/* <ComponentPlayingTrack /> */}<p></p>
     </InfoSideBar>
   );
 };
