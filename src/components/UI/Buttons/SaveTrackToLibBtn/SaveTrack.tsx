@@ -6,7 +6,8 @@ import {
   _SaveTrack,
   _UnSaveTrack,
 } from "@/api/ApiSpotify";
-import { useEffect, useState } from "react";
+import { useSWRConfig } from "swr";
+import { useState } from "react";
 import { TbMusicCheck, TbMusicPlus } from "react-icons/tb";
 export const SaveTrackBtn = ({
   id,
@@ -19,13 +20,17 @@ export const SaveTrackBtn = ({
   isSave?: boolean;
   className?: string;
 }) => {
+  const { mutate } = useSWRConfig();
   const [state, setState] = useState(isSave);
- 
+
   const OnClick = async (id: string) => {
     if (!state) {
       console.log("save");
       setState((prevState) => !prevState);
-      await _SaveTrack(id);
+
+      mutate(`https://api.spotify.com/v1/me/tracks`, async () => {
+        await _SaveTrack(id);
+      });
     } else {
       console.log("delete");
       setState((prevState) => !prevState);

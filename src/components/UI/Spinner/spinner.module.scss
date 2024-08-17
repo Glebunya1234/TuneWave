@@ -1,0 +1,201 @@
+@import url("https://fonts-online.ru/path-to-fonts/versus.css");
+$font-family-versus: "Versus", sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=Covered+By+Your+Grace&display=swap');
+$font-family-covered: "Covered By Your Grace", cursive;
+@import url('https://fonts.googleapis.com/css2?family=Single+Day&display=swap');
+$font-family-SingleDay: "Single Day", sans-serif;
+;
+
+.spinner {
+    font-family: $font-family-versus;
+    width: 100%;
+    height: 40px;
+    overflow: hidden;
+    color: white;
+    text-align: center;
+    display: flex;
+    padding-top: 10px;
+    font-size: 20px;
+    justify-content: center;
+    flex-direction: row;
+
+
+
+    .Section1 {
+        position: relative;
+        margin-right: 17px;
+
+        p {
+            z-index: 10;
+            position: absolute;
+            animation: Animation1 2s infinite cubic-bezier(1, 0, 1, 1)
+        }
+
+    }
+
+
+
+    .Section2 {
+        margin-right: 20px;
+        position: relative;
+
+        p {
+
+            position: absolute;
+            animation: Animation2 2s infinite cubic-bezier(1, 0, 1, 1)
+        }
+
+    }
+
+
+
+    @keyframes Animation1 {
+        0% {
+            top: 0px;
+        }
+
+        25% {
+            top: 0px;
+            font-size: 20px;
+            font-family: $font-family-versus;
+        }
+
+
+        26% {
+            top: -10px;
+            font-size: 32px;
+            font-family: $font-family-SingleDay;
+        }
+
+        45% {
+            color: white;
+            top: -10px;
+            font-size: 32px;
+            font-family: $font-family-SingleDay;
+        }
+
+
+        46% {
+            color: #29e229;
+            top: -10px;
+            font-size: 34px;
+            font-family: $font-family-covered;
+        }
+
+        64% {
+            color: #29e229;
+            top: -10px;
+            font-size: 34px;
+            font-family: $font-family-covered;
+        }
+
+        65% {
+            color: white;
+            top: 0px;
+            font-size: 20px;
+            font-family: $font-family-versus;
+        }
+
+        88% {
+            top: 0px;
+        }
+
+        93% {
+            top: -15px;
+            opacity: 1;
+        }
+
+        94% {
+            opacity: 0;
+            top: 15px;
+        }
+
+        95% {
+            opacity: 1;
+            top: 15px;
+        }
+
+        100% {
+            top: 0px;
+        }
+    }
+
+
+
+    @keyframes Animation2 {
+        0% {
+            top: 0px;
+        }
+
+
+        25% {
+
+            top: 0px;
+            font-size: 20px;
+            font-family: $font-family-versus;
+        }
+
+
+        26% {
+
+            top: -10px;
+            font-family: $font-family-covered;
+            font-size: 32px;
+        }
+
+        45% {
+            top: -10px;
+            font-family: $font-family-covered;
+            font-size: 32px;
+            color: white;
+        }
+
+
+        46% {
+            color: #29e229;
+            top: -10px;
+            font-size: 34px;
+            font-family: $font-family-SingleDay;
+        }
+
+        64% {
+            color: #29e229;
+            top: -10px;
+            font-size: 34px;
+            font-family: $font-family-SingleDay;
+        }
+
+        65% {
+            color: white;
+            top: 0px;
+            font-size: 20px;
+            font-family: $font-family-versus;
+        }
+
+        88% {
+            top: 0px;
+
+        }
+
+        93% {
+            top: 15px;
+            opacity: 1;
+        }
+
+        94% {
+            opacity: 0;
+            top: -15px;
+        }
+
+        95% {
+            opacity: 1;
+            top: -15px;
+        }
+
+        100% {
+            top: 0px;
+        }
+    }
+
+
+}

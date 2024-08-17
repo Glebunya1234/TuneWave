@@ -38,6 +38,7 @@ export const PlayTrackBtn = ({
       });
     }
   };
+  
   return (
     <button
       className={className}

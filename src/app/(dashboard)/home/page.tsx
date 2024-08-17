@@ -27,7 +27,7 @@ const Profile = async () => {
             <TopArtistMix />
             {/* <FollowedArtist /> */}
             {/* <ListenToThisCmp /> */}
-            {/* <TopGangreMix /> */}
+            <TopGangreMix />
             {/*
              */}
           </aside>

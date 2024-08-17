@@ -1,5 +1,5 @@
 "use client";
-import { GlobalContext} from "@/Context";
+import { GlobalContext } from "@/Context";
 import { usePathname } from "next/navigation";
 import { useContext, useEffect } from "react";
 
@@ -15,6 +15,5 @@ export const MarqueeUpdater = () => {
     UF();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
-  // useEffect(() => {}, [dataContext?.getDefaultText]);
   return <></>;
 };

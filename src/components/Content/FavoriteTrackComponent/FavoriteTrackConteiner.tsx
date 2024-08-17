@@ -23,7 +23,7 @@ export const FavoriteTrackComponent = () => {
     () => fetcher(offset),
     {
       keepPreviousData: true,
-      revalidateOnFocus: true,
+      revalidateOnFocus: false,
       dedupingInterval: 60000,
     }
   );

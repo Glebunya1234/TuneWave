@@ -8,6 +8,7 @@ import { TbRotate2, TbRotateClockwise } from "react-icons/tb";
 import { VscLibrary } from "react-icons/vsc";
 import { CurrentlyPlaylist } from "@/types/SpotifyTypes/CurrentlyPlaylist/type";
 import { _getCurrentUserPlaylists } from "@/api/ApiSpotify";
+import { Spinner } from "@/components/UI/Spinner/spinner";
 const fetcher = () => _getCurrentUserPlaylists();
 export const MediaPlaylist = () => {
   const router = useRouter();
@@ -52,7 +53,8 @@ export const MediaPlaylist = () => {
         </button>
         {isLoading && (
           <div className="w-full h-full flex justify-center items-center">
-            <TbRotateClockwise className="animate-spin text-xl" />
+            <TbRotateClockwise className="animate-spin text-white text-xl" />
+            {/* <Spinner /> */}
           </div>
         )}
         {data?.items?.map((item, index) => (
@@ -60,7 +62,7 @@ export const MediaPlaylist = () => {
             key={index}
             className={style.Content__items}
             onClick={() => {
-              router.push(`/playlist/${item.id}`);
+              router.push(`/playlist/list${item.id}?id=${item.id}`);
             }}
           >
             <div className={style.item__img}>

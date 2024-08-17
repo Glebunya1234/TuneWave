@@ -43,7 +43,7 @@ import type { SpotifyTracksResponse } from "@/types/SpotifyTypes/TrackFavoriteTy
 export const fetching = async (count: number): Promise<any> => {
   try {
     const token = await _getToken();
-    const data: SpotifyTracksResponse = await _getSavedTrackUser(token, count);
+    const data: SpotifyTracksResponse = await _getSavedTrackUser(count);
     return data;
   } catch (error) {
     console.error("Error fetching data:", error);
