@@ -5,8 +5,6 @@ import { PanelTarget } from "@/components/UI/Target/PanelTarget";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 import { FavoriteBanner } from "@/components/Banner/FavoriteBanner/FavoriteBanner";
-import { getRecommendations } from "@/api/ApiSpotify";
-import { ForUserMix } from "@/components/Content/Mix/For-user-Mix/ForUserMix";
 import Image from "next/image";
 import Link from "next/link";
 

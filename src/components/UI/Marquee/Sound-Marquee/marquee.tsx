@@ -23,7 +23,7 @@ const Marquee: React.FC<MarqueeProps> = ({ text }) => {
 
   const createTextArray = () => {
     const textWithSeparator = `${text} / `;
-    const numDuplicates = Math.ceil(containerWidth / (text.length));
+    const numDuplicates = Math.ceil(containerWidth / text.length);
     return Array(numDuplicates).fill(textWithSeparator).join("");
   };
 
@@ -40,10 +40,3 @@ const Marquee: React.FC<MarqueeProps> = ({ text }) => {
 };
 
 export default Marquee;
-
-
-  {/* {createTextArray().split('|').map((textPart, index) => (
-            <p key={index} className={style.marqueeText}>
-              {textPart}
-            </p>
-          ))} */}

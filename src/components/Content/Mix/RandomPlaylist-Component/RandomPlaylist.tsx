@@ -12,12 +12,10 @@ import { PlayTrackBtn } from "@/components/UI/Buttons/PlayTrackBtn/PlayTrackBtn"
 import { BsFillPlayFill } from "react-icons/bs";
 import { FiSave } from "react-icons/fi";
 import { SaveTrackBtn } from "@/components/UI/Buttons/SaveTrackToLibBtn/SaveTrack";
+import { CurrentlyPlaylistTracksItem } from "@/types/SpotifyTypes/CurrentlyPlaylist/type";
+import { TrackItem } from "@/types/SpotifyTypes/CurrentlyPlayingTrack/type";
 
-export const RandomPlaylistComponent = ({
-  data,
-}: {
-  data?: RecommendationsType;
-}) => {
+export const RandomPlaylistComponent = ({ data }: { data?: TrackItem[] }) => {
   return (
     <Suspense fallback={<h2>🌀 Loading...</h2>}>
       <section className={`${style.Content__playlist}`}>
@@ -33,7 +31,7 @@ export const RandomPlaylistComponent = ({
             <IoTimerSharp className="mr-[11px]" />
           </span>
         </aside>
-        {data?.tracks.map((item, index) => {
+        {data?.map((item, index) => {
           const albumImageUrl =
             item.album.images.length > 0 ? item.album.images[0].url : "";
 

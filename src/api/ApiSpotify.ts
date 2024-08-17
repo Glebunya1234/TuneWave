@@ -9,7 +9,7 @@ import { FollowedArtist, TrackArtist } from '@/types/SpotifyTypes/TrackArtist/ty
 import { RecommendationsType } from '@/types/SpotifyTypes/RecommendationsType/type';
 import { TrackItem } from '@/types/SpotifyTypes/CurrentlyPlayingTrack/type';
 import { SavedTrack, SpotifyTracksResponse } from '@/types/SpotifyTypes/TrackFavoriteType/type';
-import { CurrentlyPlaylist } from '@/types/SpotifyTypes/CurrentlyPlaylist/type';
+import { CurrentlyPlaylist, CurrentlyPlaylistTracksItem, ItemPlaylist, Playlist } from '@/types/SpotifyTypes/CurrentlyPlaylist/type';
 
 // const cacheDir = path.resolve('./cache');
 // const cacheFilePath = path.join(cacheDir, 'spotify-tracks.json');
@@ -52,7 +52,6 @@ const _refreshToken = async (refreshToken: string): Promise<string | null> => {
             }),
         })
         const result = await response.json();
-        console.log("_refreshToken", result)
         return result
 
 
@@ -77,7 +76,6 @@ export const _getToken = async (isRefresh?: boolean): Promise<string | null> => 
         if (isRefresh) {
 
             const newToken = await _refreshToken(readCache(cacheFilePathRefresh));
-            console.log("_refreshToken", newToken)
             return newToken
         }
 
@@ -117,9 +115,6 @@ export const _getSavedTrackUser = async (count: number): Promise<SpotifyTracksRe
             'Authorization': `Bearer ${access_token}`,
         },
 
-        next: {
-            revalidate: 1000
-        },
     });
     const newData: SpotifyTracksResponse = await response.json();
 
@@ -147,9 +142,37 @@ export const _getCurrentUserPlaylists = async (limit: number = 10): Promise<Curr
 
 
     });
-    const Data = await response.json();
+    const Data: CurrentlyPlaylist = await response.json();
+
 
     return Data;
+}
+
+export const _getItemsCurrentPlaylist = async (url: string): Promise<CurrentlyPlaylistTracksItem> => {
+    const { access_token } = await test()
+    const response2 = await fetch(url, {
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${access_token}`,
+        },
+
+
+    });
+    const Data2: CurrentlyPlaylistTracksItem = await response2.json();
+
+    const trackIds = Data2?.items?.map(track => track.track.id);
+    const isSavedArray = await _checkIfTracksAreSaved(trackIds);
+
+
+    const tracksWithSavedInfo: ItemPlaylist[] = Data2.items.map((item, index) => ({
+        ...item,
+        track: {
+            ...item.track,
+            isSaved: isSavedArray[index],
+        }
+    }));
+
+    return { ...Data2, items: tracksWithSavedInfo }
 }
 
 export const _getCurrentlyPlayingTrack = async (token?: string | null): Promise<any> => {
@@ -201,7 +224,6 @@ export const _setPlayTrack = async (uri: string) => {
     }
 
     const data = await response.json();
-    console.log('Success:', data);
 }
 
 export const _getAlbum = async (id: string): Promise<CurrentlyAlbum> => {
@@ -461,13 +483,10 @@ export const _getGengreRecommendations = async (): Promise<RecommendationsType> 
     return { ...data, tracks: tracksWithSavedInfo };
 }
 
-
-
 export const _getSimilarPlaylist = async (id: string, onlyGenre?: boolean): Promise<RecommendationsType> => {
     let url = `https://api.spotify.com/v1/recommendations?limit=10&seed_artists=${id}`;
 
     onlyGenre ? url = `https://api.spotify.com/v1/recommendations?limit=10&seed_genres=${id}` : url = `https://api.spotify.com/v1/recommendations?limit=10&seed_artists=${id}`
-    console.log(url)
     const { access_token } = await test();
     const response = await fetch(url, {
         method: 'GET',
@@ -493,6 +512,19 @@ export const _getSimilarPlaylist = async (id: string, onlyGenre?: boolean): Prom
     return { ...data, tracks: tracksWithSavedInfo };
 };
 
+export const _getPlaylist = async (id: string): Promise<Playlist> => {
+    const { access_token } = await test()
+    const response3 = await fetch(`https://api.spotify.com/v1/playlists/${id}`, {
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${access_token}`,
+        },
+
+
+    });
+    const data = await response3.json();
+    return data
+}
 
 
 const _checkIfTracksAreSaved = async (trackIds: string[]): Promise<boolean[]> => {
@@ -509,7 +541,7 @@ const _checkIfTracksAreSaved = async (trackIds: string[]): Promise<boolean[]> =>
     if (!response.ok) {
         console.log('Failed to check if tracks are saved')
         return [false]
-        throw new Error('Failed to check if tracks are saved');
+
     }
     const data = await response.json()
     return data
