@@ -9,20 +9,20 @@ import { VscLibrary } from "react-icons/vsc";
 import { CurrentlyPlaylist } from "@/types/SpotifyTypes/CurrentlyPlaylist/type";
 import { Spinner } from "@/components/UI/Spinner/spinner";
 import { _getCurrentUserPlaylists } from "@/api/SP-Playlists/API-SP-Playlists";
-const fetcher = () => _getCurrentUserPlaylists();
+export const fetcherGetCurrentUserPlaylist = () => _getCurrentUserPlaylists();
 export const MediaPlaylist = () => {
   const router = useRouter();
 
   const { data, isLoading, mutate } = useSWR<CurrentlyPlaylist>(
     `https://api.spotify.com/v1/me/playlists`,
-    fetcher,
+    fetcherGetCurrentUserPlaylist,
     {
       keepPreviousData: true,
       revalidateOnFocus: false,
       dedupingInterval: 60000,
     }
   );
-
+  const divs = Array.from({ length: 5 });
   return (
     <section className={style.MediaPlaylist}>
       <nav className={style.MediaPlaylist__Nav}>
@@ -51,12 +51,21 @@ export const MediaPlaylist = () => {
             <h1>Favorite Tracks</h1>
           </div>
         </button>
-        {isLoading && (
-          <div className="w-full h-full flex justify-center items-center">
-            <TbRotateClockwise className="animate-spin text-white text-xl" />
-            {/* <Spinner /> */}
-          </div>
-        )}
+        {isLoading &&
+          divs.map((_, index) => (
+            <div key={index} className={style.Content__items}>
+              <div className="animate-pulse min-w-[40px] h-[40px] ml-[2px]">
+                <div className=" w-full h-full  bg-[#4e4e4e] "></div>
+              </div>
+
+              <div className="space-y-3 w-full  pl-2 animate-pulse">
+                <div className="grid grid-cols-3 gap-4">
+                  <div className="h-2  bg-[#4e4e4e] rounded col-span-2"></div>
+                </div>
+                <div className="h-2  bg-[#4e4e4e]  rounded"></div>
+              </div>
+            </div>
+          ))}
         {data?.items?.map((item, index) => (
           <button
             key={index}

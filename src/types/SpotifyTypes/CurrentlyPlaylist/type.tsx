@@ -1,5 +1,6 @@
 import { TrackItem } from "../CurrentlyPlayingTrack/type";
 import { CurrentlyTrack } from "../CurrentlyTrack/type";
+import { CurrentlyUserType } from "../CurrentlyUser/type";
 
 export type CurrentlyPlaylist = {
   href: string;
@@ -9,38 +10,6 @@ export type CurrentlyPlaylist = {
   previous: string;
   total: number;
   items: SimplifiedPlaylistObject[];
-};
-
-export type Playlist = {
-  description?: "string";
-  followers?: {
-    href: string;
-    total: 0;
-  };
-  href?: string;
-  id?: string;
-  images: [
-    {
-      url: string;
-    }
-  ];
-  name: string;
-  owner?: {
-    external_urls: {
-      spotify: string;
-    };
-    followers: {
-      href: string;
-      total: number;
-    };
-    href: string;
-    id: string;
-    type: string;
-    uri: string;
-    display_name: string;
-  };
-  public?: boolean;
-  type: string;
 };
 
 export type SimplifiedPlaylistObject = {
@@ -76,6 +45,27 @@ export type SimplifiedPlaylistObject = {
   };
   type: string;
   uri: string;
+};
+export type Playlist = {
+  description?: string;
+  followers?: {
+    href: string;
+    total: number;
+  };
+  href?: string;
+  id?: string;
+  images: [
+    {
+      url: string;
+    }
+  ];
+  name: string;
+  owner?: {
+    id: string;
+  };
+  UserFullInfo?: CurrentlyUserType;
+  public?: boolean;
+  type: string;
 };
 
 export type ItemPlaylist = {

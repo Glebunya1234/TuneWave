@@ -9,7 +9,7 @@ import { TrackArtist } from "@/types/SpotifyTypes/TrackArtist/type";
 import { _getTopArtists } from "@/api/SP-Artists/API-SP-Artists";
 
 export const TopArtistMix = () => {
-  const { data: topArtist } = useSWR<TrackArtist[]>(
+  const { data: topArtist, isLoading } = useSWR<TrackArtist[]>(
     `getTopArtists`,
     async () => await _getTopArtists(),
     {
@@ -17,6 +17,7 @@ export const TopArtistMix = () => {
       dedupingInterval: 60000,
     }
   );
+  const divs = Array.from({ length: 5 });
   const items = topArtist?.slice(0, 5).map((data, index) => (
     <Link
       href={`/playlist/${data.id}`}
@@ -39,7 +40,18 @@ export const TopArtistMix = () => {
   return (
     <section className={style.ForUserMix}>
       <span className={style.ForUserMix__Span}>Similar to:</span>
-      <nav className={style.ForUserMix__Conteiner}>{items}</nav>
+
+      <nav className={style.ForUserMix__Conteiner}>
+        {isLoading
+          ? divs.map((_, id) => (
+              <div key={id} className={style.ForUserMix__Item}>
+                <div className="w-full h-full p-4 animate-pulse bg-[#00000094]">
+                  <div className="w-full h-full bg-[#4e4e4e91]"></div>
+                </div>
+              </div>
+            ))
+          : items}
+      </nav>
     </section>
   );
 };
