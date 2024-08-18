@@ -4,7 +4,7 @@ import Image from "next/image";
 import useSWR from "swr/immutable";
 import { PanelTarget } from "@/components/UI/Target/PanelTarget";
 
-import { PlaylistComponent } from "@/components/Content/Mix/RandomPlaylist-Component/RandomPlaylist";
+import { PlaylistComponent } from "@/components/DataLists/PlayLists-Component/RandomPlaylist";
 import { useParams, useSearchParams } from "next/navigation";
 import { RecommendationsType } from "@/types/SpotifyTypes/RecommendationsType/type";
 import { Spinner } from "@/components/UI/Spinner/spinner";

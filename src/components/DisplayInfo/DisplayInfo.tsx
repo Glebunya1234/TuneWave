@@ -70,7 +70,7 @@ export const DisplayInfo = ({
             )}
             {Owner !== undefined ? (
               <>
-                <img
+                <Image
                   src={
                     Owner.UserFullInfo?.images[0]?.url !== undefined
                       ? Owner.UserFullInfo.images[0].url

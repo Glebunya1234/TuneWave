@@ -1,13 +1,12 @@
-/* eslint-disable @next/next/no-img-element */
 "use client";
 import style from "./MediaPlaylist.module.scss";
 import Image from "next/image";
 import useSWR from "swr";
 import { useRouter } from "next/navigation";
-import { TbRotate2, TbRotateClockwise } from "react-icons/tb";
+import { TbRotate2 } from "react-icons/tb";
 import { VscLibrary } from "react-icons/vsc";
 import { CurrentlyPlaylist } from "@/types/SpotifyTypes/CurrentlyPlaylist/type";
-import { Spinner } from "@/components/UI/Spinner/spinner";
+
 import { _getCurrentUserPlaylists } from "@/api/SP-Playlists/API-SP-Playlists";
 export const fetcherGetCurrentUserPlaylist = () => _getCurrentUserPlaylists();
 export const MediaPlaylist = () => {
@@ -66,6 +65,7 @@ export const MediaPlaylist = () => {
               </div>
             </div>
           ))}
+
         {data?.items?.map((item, index) => (
           <button
             key={index}
@@ -75,9 +75,11 @@ export const MediaPlaylist = () => {
             }}
           >
             <div className={style.item__img}>
-              <img
+              <Image
                 src={item.images[0]?.url || "/FavoriteTrack.png"}
-                className={style.img}
+                // className={style.img}
+                layout="fill"
+                objectFit="cover"
                 alt="alt"
               />
             </div>
