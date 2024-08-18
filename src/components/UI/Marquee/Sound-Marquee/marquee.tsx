@@ -1,5 +1,5 @@
-import React, { useRef, useEffect, useState } from "react";
 import style from "./marquee.module.scss";
+import React, { useRef, useEffect, useState } from "react";
 
 interface MarqueeProps {
   text: string;

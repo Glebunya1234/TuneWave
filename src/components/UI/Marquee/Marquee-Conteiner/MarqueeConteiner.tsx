@@ -1,11 +1,11 @@
 "use client";
 
-import "@devnomic/marquee/dist/index.css";
 import style from "./MarqueeConteiner.module.scss";
 import { useState, useEffect, useContext } from "react";
 import { usePathname } from "next/navigation";
 import { GlobalContext } from "@/Context";
 import { BackgroundMarquee } from "../Background-Marquee/BGmarquee";
+import "@devnomic/marquee/dist/index.css";
 
 export const MarqueeContainer = () => {
   const dataContext = useContext(GlobalContext);

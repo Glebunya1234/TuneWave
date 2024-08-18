@@ -1,14 +1,12 @@
 "use server";
-import { GetDataProfileUser } from "@/providers/SupaBase-methods/user-action";
- 
+
 import style from "./headerUser.module.scss";
 import Image from "next/image";
 import { FaCircle } from "react-icons/fa";
-import { getUserSpotifyData } from "@/providers/SupaBase-methods/data-users";
+import { GetDataProfileUser } from "@/providers/SupaBase-methods/user-action";
+
 export const UserDataHeader = async () => {
   const userData = await GetDataProfileUser();
-  // const lib = await getUserSpotifyData();
-  // console.log("lib", lib);
 
   return userData !== null || undefined ? (
     <nav className={style.UserDataHeader}>

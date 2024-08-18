@@ -1,8 +1,8 @@
 "use client";
-import { useContext, useState } from "react";
+import style from "./RoutingBt.module.scss";
 import { GlobalContext } from "@/Context";
 import { useRouter } from "next/navigation";
-import style from "./RoutingBt.module.scss";
+import { useContext, useState } from "react";
 
 interface IMarqueeProps {
   text: string;

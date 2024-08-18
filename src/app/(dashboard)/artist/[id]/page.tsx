@@ -1,7 +1,6 @@
 "use server";
 import style from "./artist.module.scss";
 import Image from "next/image";
-import { _getSavedTrackUser, _getToken } from "@/api/ApiSpotify";
 import { PanelTarget } from "@/components/UI/Target/PanelTarget";
 
 const artistPage = async ({ params }: { params: { id: string } }) => {

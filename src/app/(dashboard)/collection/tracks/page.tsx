@@ -1,7 +1,6 @@
 "use server";
 import style from "./tracks.module.scss";
 import Image from "next/image";
-import { _getSavedTrackUser, _getToken } from "@/api/ApiSpotify";
 import { PanelTarget } from "@/components/UI/Target/PanelTarget";
 import { FavoriteTrackComponent } from "@/components/Content/FavoriteTrackComponent/FavoriteTrackConteiner";
 import { GetDataProfileUser } from "@/providers/SupaBase-methods/user-action";

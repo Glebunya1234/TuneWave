@@ -1,7 +1,7 @@
 "use client";
+
 import { useState } from "react";
 import { GlobalContext } from "@/Context";
-
 import { usePathname } from "next/navigation";
 import { ContextType } from "@/types/TypeContext/type";
 export const Context = ({ children }: { children: React.ReactNode }) => {
@@ -30,8 +30,7 @@ export const Context = ({ children }: { children: React.ReactNode }) => {
     getStatePlaying,
     setStatePlaying,
   };
-  // getDefaultText: "",
-  // setDefaultText: () => { },
+
   return (
     <GlobalContext.Provider value={valueHover}>
       {children}

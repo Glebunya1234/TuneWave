@@ -1,17 +1,14 @@
 "use server";
 import style from "./tracks.module.scss";
 import Image from "next/image";
-import {
-  _getArtists,
-  _getSavedTrackUser,
-  _getToken,
-  _getTrack,
-} from "@/api/ApiSpotify";
+
 import { PanelTarget } from "@/components/UI/Target/PanelTarget";
 import Link from "next/link";
 import { formatDuration } from "@/utils/DurationFormatFunc";
 import { TrackComponent } from "@/components/Content/TrackContent-Component/TrackContent";
 import { TrackArtist } from "@/types/SpotifyTypes/TrackArtist/type";
+import { _getArtists } from "@/api/SP-Artists/API-SP-Artists";
+import { _getTrack } from "@/api/SP-Tracks/API-SP-Tracks";
 
 const Track = async ({ params }: { params: { id: string } }) => {
   const { track, isSaved } = await _getTrack(params.id);

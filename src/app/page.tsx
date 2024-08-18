@@ -1,14 +1,13 @@
 import style from "./page.module.scss";
-import { PanelTarget } from "@/components/UI/Target/PanelTarget";
-import { MarqueeContainer } from "@/components/UI/Marquee/Marquee-Conteiner/MarqueeConteiner";
-import { WeclomeBanner } from "@/components/Banner/WelcomeBanner/welcomeBanner";
 import Image from "next/image";
 import src1 from "../../public/pngegg2.png";
 import src2 from "../../public/arrow2.png";
 import src3 from "../../public/pngegg3.png";
+import { MarqueeContainer } from "@/components/UI/Marquee/Marquee-Conteiner/MarqueeConteiner";
+import { WeclomeBanner } from "@/components/Banner/WelcomeBanner/welcomeBanner";
+import { PanelTarget } from "@/components/UI/Target/PanelTarget";
 import { SignInBanner } from "@/components/Banner/SignInBanner/SignIn-Banner";
 import { Context } from "@/components/Context-component/Context";
-import { Dddassaa } from "@/components/UI/Target/ddd";
 
 export default function Home() {
   return (

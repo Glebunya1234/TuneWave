@@ -14,7 +14,6 @@ export const Dashboard = async ({
   children: React.ReactNode;
 }) => {
   await IsAuthorized();
-  // redirect("/?messange=You must log in")
   return (
     <main className={`${style.dashboard}`}>
       <Context>
@@ -33,5 +32,5 @@ export const Dashboard = async ({
         </section>
       </Context>
     </main>
-  );  
+  );
 };

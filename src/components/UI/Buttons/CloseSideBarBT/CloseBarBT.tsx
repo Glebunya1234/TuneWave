@@ -1,4 +1,3 @@
-import { MdOutlineCircle, MdOutlineHideSource } from "react-icons/md";
 import style from "./CloseBarBT.module.scss";
 
 interface IMarqueeProps {

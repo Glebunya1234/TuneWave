@@ -3,16 +3,15 @@ import style from "./target.module.scss";
 type Angle = {
   angle: "LeftUp" | "LeftDown" | "RightUp" | "RightDown";
 };
-export const Target: React.FC<Angle> = ({angle}) => {
-  
+export const Target: React.FC<Angle> = ({ angle }) => {
   const svgStyle: React.CSSProperties = {
     shapeRendering: "geometricPrecision",
     textRendering: "geometricPrecision",
-    //  imageRendering: "optimizeQuality",
+
     fillRule: "evenodd",
     clipRule: "evenodd",
   };
-  const className = style[angle] || ''; 
+  const className = style[angle] || "";
 
   return (
     <span className={className}>

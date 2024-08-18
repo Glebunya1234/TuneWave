@@ -1,12 +1,12 @@
 "use server";
+
 import style from "./TrackContent.module.scss";
 import Image from "next/image";
-import { CurrentlyTrack } from "@/types/SpotifyTypes/CurrentlyTrack/type";
-import { TrackArtist } from "@/types/SpotifyTypes/TrackArtist/type";
-
 import Link from "next/link";
 import { PlayTrackBtn } from "@/components/UI/Buttons/PlayTrackBtn/PlayTrackBtn";
 import { SaveTrackBtn } from "@/components/UI/Buttons/SaveTrackToLibBtn/SaveTrack";
+import { CurrentlyTrack } from "@/types/SpotifyTypes/CurrentlyTrack/type";
+import { TrackArtist } from "@/types/SpotifyTypes/TrackArtist/type";
 export const TrackComponent = async ({
   data,
   isSaved,

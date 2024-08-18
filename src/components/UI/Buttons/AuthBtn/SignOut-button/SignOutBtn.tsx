@@ -1,6 +1,6 @@
 "use client";
-// import { supabase } from "@/providers/supabaseCient";
-import React, { useEffect } from "react";
+
+import React from "react";
 
 import { SignOut } from "@/providers/SupaBase-methods/user-action";
 
@@ -10,6 +10,8 @@ export const SingOutBTN = () => {
       onClick={async () => {
         await SignOut();
       }}
-    >Quit</button>
+    >
+      Quit
+    </button>
   );
 };

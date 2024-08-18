@@ -2,7 +2,6 @@
 
 import style from "./AlbumInformation.module.scss";
 
-import { _getAlbum } from "@/api/ApiSpotify";
 import { CurrentlyAlbum } from "@/types/SpotifyTypes/CurrentlyAlbum/type";
 import { formatDuration } from "@/utils/DurationFormatFunc";
 import Link from "next/link";
