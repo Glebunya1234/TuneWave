@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import style from "../For-user-Mix/ForUserMix.module.scss";
 import { BorderMarquee } from "@/components/UI/Marquee/Border-Marquee/BorderMarquee";
-import { _getTopArtists } from "@/api/ApiSpotify";
+import { _getTopArtists } from "@/api/SP-Artists/API-SP-Artists";
 
 export const TopGangreMix = async () => {
   const topArtist = await _getTopArtists();

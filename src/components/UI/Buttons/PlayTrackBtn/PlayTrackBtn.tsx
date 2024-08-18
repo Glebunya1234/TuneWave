@@ -1,19 +1,25 @@
 "use client";
-import { _getCurrentlyPlayingTrack, _setPlayTrack } from "@/api/ApiSpotify";
+import {
+  _setPlayTrack,
+  _getCurrentlyPlayingTrack,
+} from "@/api/SP-Player/API-SP-Player";
 import { GlobalContext } from "@/Context";
 import { useContext, useState } from "react";
 import { BsFillPlayFill } from "react-icons/bs";
+
+type PlayTrackBtnType = {
+  id: string;
+  text: any;
+  onHover: { isTrue: boolean; content?: any };
+  className: string;
+};
+
 export const PlayTrackBtn = ({
   id,
   className,
   text,
   onHover,
-}: {
-  id: string;
-  text: any;
-  onHover: { isTrue: boolean; content?: any };
-  className: string;
-}) => {
+}: PlayTrackBtnType) => {
   const dataContext = useContext(GlobalContext);
   const [hoverStates, setHoverStates] = useState(false);
 
@@ -38,7 +44,7 @@ export const PlayTrackBtn = ({
       });
     }
   };
-  
+
   return (
     <button
       className={className}

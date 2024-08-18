@@ -1,25 +1,22 @@
 "use client";
-import {
-  _getCurrentlyPlayingTrack,
-  _getTrack,
-  _setPlayTrack,
-  _SaveTrack,
-  _UnSaveTrack,
-} from "@/api/ApiSpotify";
+
 import { useSWRConfig } from "swr";
 import { useState } from "react";
 import { TbMusicCheck, TbMusicPlus } from "react-icons/tb";
+import { _SaveTrack, _UnSaveTrack } from "@/api/SP-Player/API-SP-Player";
+
+type SaveTrackBtnType = {
+  id: string;
+  text?: any;
+  isSave?: boolean;
+  className?: string;
+};
 export const SaveTrackBtn = ({
   id,
   className,
   text,
   isSave,
-}: {
-  id: string;
-  text?: any;
-  isSave?: boolean;
-  className?: string;
-}) => {
+}: SaveTrackBtnType) => {
   const { mutate } = useSWRConfig();
   const [state, setState] = useState(isSave);
 

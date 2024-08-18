@@ -1,7 +1,8 @@
 "use client";
-import { GlobalContext } from "@/Context";
+
 import style from "./SignInBtn.module.scss";
-import { useContext, useEffect } from "react";
+import { GlobalContext } from "@/Context";
+import { useContext } from "react";
 import { oAuthSignIn } from "@/providers/SupaBase-methods/user-action";
 
 const SpotifyAuthButton: React.FC = () => {

@@ -1,9 +1,9 @@
 "use client";
 
-import React, { FC } from "react";
-
 import style from "./BorderMarquee.module.scss";
 import Marquee from "../Sound-Marquee/marquee";
+import React, { FC } from "react";
+
 type props = {
   children: React.ReactNode;
   text: string;

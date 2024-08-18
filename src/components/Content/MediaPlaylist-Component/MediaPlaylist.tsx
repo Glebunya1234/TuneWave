@@ -7,8 +7,8 @@ import { useRouter } from "next/navigation";
 import { TbRotate2, TbRotateClockwise } from "react-icons/tb";
 import { VscLibrary } from "react-icons/vsc";
 import { CurrentlyPlaylist } from "@/types/SpotifyTypes/CurrentlyPlaylist/type";
-import { _getCurrentUserPlaylists } from "@/api/ApiSpotify";
 import { Spinner } from "@/components/UI/Spinner/spinner";
+import { _getCurrentUserPlaylists } from "@/api/SP-Playlists/API-SP-Playlists";
 const fetcher = () => _getCurrentUserPlaylists();
 export const MediaPlaylist = () => {
   const router = useRouter();

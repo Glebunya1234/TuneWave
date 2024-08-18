@@ -1,10 +1,10 @@
 "use server";
 import style from "./album.module.scss";
 import Image from "next/image";
-import { _getAlbum, _getSavedTrackUser, _getToken } from "@/api/ApiSpotify";
 import { PanelTarget } from "@/components/UI/Target/PanelTarget";
 import { AlbumInformation } from "@/components/Content/AlbumInformation-Component/AlbumInformation";
 import Link from "next/link";
+import { _getAlbum } from "@/api/SP-Albums/API-SP-Albums";
 
 const albumPage = async ({ params }: { params: { id: string } }) => {
   const data = await _getAlbum(params.id);

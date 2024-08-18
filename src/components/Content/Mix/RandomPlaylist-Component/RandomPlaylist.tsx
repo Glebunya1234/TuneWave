@@ -1,21 +1,16 @@
 "use client";
 import style from "@components/Content/FavoriteTrackComponent/FavoriteTrackComponent.module.scss";
 import Image from "next/legacy/image";
-import { _setPlayTrack, _getSavedTrackUser, _getToken } from "@/api/ApiSpotify";
+import Link from "next/link";
 import { formatDuration } from "@/utils/DurationFormatFunc";
 import { Suspense } from "react";
-
 import { IoTimerSharp } from "react-icons/io5";
-import { RecommendationsType } from "@/types/SpotifyTypes/RecommendationsType/type";
-import Link from "next/link";
 import { PlayTrackBtn } from "@/components/UI/Buttons/PlayTrackBtn/PlayTrackBtn";
 import { BsFillPlayFill } from "react-icons/bs";
-import { FiSave } from "react-icons/fi";
 import { SaveTrackBtn } from "@/components/UI/Buttons/SaveTrackToLibBtn/SaveTrack";
-import { CurrentlyPlaylistTracksItem } from "@/types/SpotifyTypes/CurrentlyPlaylist/type";
 import { TrackItem } from "@/types/SpotifyTypes/CurrentlyPlayingTrack/type";
 
-export const RandomPlaylistComponent = ({ data }: { data?: TrackItem[] }) => {
+export const PlaylistComponent = ({ data }: { data?: TrackItem[] }) => {
   return (
     <Suspense fallback={<h2>🌀 Loading...</h2>}>
       <section className={`${style.Content__playlist}`}>

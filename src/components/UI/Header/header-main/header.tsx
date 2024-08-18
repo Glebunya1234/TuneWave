@@ -1,7 +1,6 @@
-import { CloseBarBtn } from "../../Buttons/CloseSideBarBT/CloseBarBT";
+import style from "./header.module.scss";
 import { PanelBurger } from "../../Panel_HideShow-Burger/Panel_Burger";
 import { UserDataHeader } from "../header-user-data/headerUser";
-import style from "./header.module.scss";
 export const Header = () => {
   return (
     <header className={style.header}>

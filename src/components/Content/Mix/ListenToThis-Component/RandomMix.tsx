@@ -3,8 +3,8 @@
 import style from "../For-user-Mix/ForUserMix.module.scss";
 import Link from "next/link";
 import { BorderMarquee } from "@/components/UI/Marquee/Border-Marquee/BorderMarquee";
-import { _getRecommendations } from "@/api/ApiSpotify";
 import Image from "next/image";
+import { _getRecommendations } from "@/api/SP-Playlists/API-SP-MixPlaylist";
 
 export const ListenToThisCmp = async () => {
   const data = await _getRecommendations();

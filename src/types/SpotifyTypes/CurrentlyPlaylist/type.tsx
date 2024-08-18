@@ -12,20 +12,20 @@ export type CurrentlyPlaylist = {
 };
 
 export type Playlist = {
-  description: "string";
-  followers: {
+  description?: "string";
+  followers?: {
     href: string;
     total: 0;
   };
-  href: string;
-  id: string;
+  href?: string;
+  id?: string;
   images: [
     {
       url: string;
     }
   ];
   name: string;
-  owner: {
+  owner?: {
     external_urls: {
       spotify: string;
     };
@@ -39,7 +39,8 @@ export type Playlist = {
     uri: string;
     display_name: string;
   };
-  public: boolean;
+  public?: boolean;
+  type: string;
 };
 
 export type SimplifiedPlaylistObject = {

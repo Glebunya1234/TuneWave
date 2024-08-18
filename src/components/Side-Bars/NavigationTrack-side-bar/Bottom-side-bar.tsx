@@ -1,6 +1,6 @@
 "use client";
-import React, { useEffect, useState, useRef } from "react";
 import style from "./Bottom-side-bar.module.scss";
+import React from "react";
 import Marquee from "@/components/UI/Marquee/Sound-Marquee/marquee";
 
 export const NavigationBar = () => {

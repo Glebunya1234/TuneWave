@@ -1,10 +1,10 @@
 
-import { Marquee } from "@devnomic/marquee";
-import "@devnomic/marquee/dist/index.css";
 import style from "./BGmarquee.module.scss";
-import type { MarqueeProps } from "@/types/TypeSetSstateForUseState/type";
+import { Marquee } from "@devnomic/marquee";
 import { BorderText } from "../../Fonts/Border-svg-versus";
 import { FillText } from "../../Fonts/Fill-svg-versus";
+import type { MarqueeProps } from "@/types/TypeSetSstateForUseState/type";
+import "@devnomic/marquee/dist/index.css";
 
 
 

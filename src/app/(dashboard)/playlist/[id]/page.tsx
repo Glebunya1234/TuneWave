@@ -2,24 +2,19 @@
 import style from "./playlist.module.scss";
 import Image from "next/image";
 import useSWR from "swr/immutable";
-import {
-  _getOneArtist,
-  _getSavedTrackUser,
-  _getToken,
-  _getRecommendations,
-  _getSimilarPlaylist,
-  _getItemsCurrentPlaylist,
-  _getPlaylist,
-} from "@/api/ApiSpotify";
 import { PanelTarget } from "@/components/UI/Target/PanelTarget";
 
-import { RandomPlaylistComponent } from "@/components/Content/Mix/RandomPlaylist-Component/RandomPlaylist";
+import { PlaylistComponent } from "@/components/Content/Mix/RandomPlaylist-Component/RandomPlaylist";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
 import { RecommendationsType } from "@/types/SpotifyTypes/RecommendationsType/type";
-import { TrackArtist } from "@/types/SpotifyTypes/TrackArtist/type";
 import { Spinner } from "@/components/UI/Spinner/spinner";
 import { CurrentlyPlaylistTracksItem } from "@/types/SpotifyTypes/CurrentlyPlaylist/type";
+import { DisplayInfo } from "@/components/DisplayInfo/DisplayInfo";
+import {
+  _getRecommendations,
+  _getSimilarPlaylist,
+} from "@/api/SP-Playlists/API-SP-MixPlaylist";
+import { _getItemsCurrentPlaylist } from "@/api/SP-Playlists/API-SP-Playlists";
 
 const fetcher = async (
   id: string,
@@ -29,10 +24,15 @@ const fetcher = async (
   if (id.includes("randomlist")) {
     return await _getRecommendations();
   } else if (id.includes("genre")) {
-    return await _getSimilarPlaylist(genre!.replace(/%20/g, "+"), true);
+    return await _getSimilarPlaylist(
+      genre!.replace(/%20/g, "+"),
+      true,
+      genre!.replace(/%20/g, " ")
+    );
   } else if (id.includes("list")) {
     return await _getItemsCurrentPlaylist(
-      `https://api.spotify.com/v1/playlists/${list}/tracks`
+      `https://api.spotify.com/v1/playlists/${list}/tracks`,
+      list!
     );
   } else {
     return await _getSimilarPlaylist(id);
@@ -44,43 +44,37 @@ const PlaylistPage = () => {
   const params = useParams<{ id: string }>();
   const genre = searchParams.get("genre") || "";
   const list = searchParams.get("id") || "";
-  const {
-    data: data,
-    error: error,
-    isValidating,
-  } = useSWR<RecommendationsType | CurrentlyPlaylistTracksItem>(
-    `playlist/${params.id}`,
-    () => fetcher(params.id, genre, list),
-    {
-      revalidateOnFocus: false,
-      dedupingInterval: 60000,
-    }
-  );
+  const { data: data, isValidating } = useSWR<
+    RecommendationsType | CurrentlyPlaylistTracksItem
+  >(`playlist/${params.id}`, () => fetcher(params.id, genre, list), {
+    revalidateOnFocus: false,
+    dedupingInterval: 60000,
+  });
 
-  const [namePlaylist, setNamePlaylist] = useState("");
-  const [src, setSrc] = useState("/FavoriteTrack.png");
+  // const [namePlaylist, setNamePlaylist] = useState("");
+  // const [src, setSrc] = useState("/FavoriteTrack.png");
 
-  useEffect(() => {
-    const fetchData = async () => {
-      if (params.id.includes("randomlist")) {
-        setNamePlaylist("random playlist");
-        setSrc("/DiscLogo2.png");
-      } else if (params.id.includes("genre")) {
-        setNamePlaylist(genre.replace(/%20/g, " "));
-        setSrc("/DiscLogo2.png");
-      } else if (params.id.includes("list")) {
-        const InfoPlaylist = await _getPlaylist(list);
-        setNamePlaylist(InfoPlaylist.name);
-        setSrc(InfoPlaylist.images[0].url);
-      } else {
-        const dataArtist = await _getOneArtist(params.id);
-        setNamePlaylist("Similar to: " + dataArtist?.name);
-        setSrc(dataArtist?.images[0]?.url || "/FavoriteTrack.png");
-      }
-    };
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     if (params.id.includes("randomlist")) {
+  //       setNamePlaylist("random playlist");
+  //       setSrc("/DiscLogo2.png");
+  //     } else if (params.id.includes("genre")) {
+  //       setNamePlaylist(genre.replace(/%20/g, " "));
+  //       setSrc("/DiscLogo2.png");
+  //     } else if (params.id.includes("list")) {
+  //       // const InfoPlaylist = await _getPlaylist(list);
+  //       // setNamePlaylist(InfoPlaylist.name);
+  //       // setSrc(InfoPlaylist.images[0].url);
+  //     } else {
+  //       // const dataArtist = await _getOneArtist(params.id);
+  //       // setNamePlaylist("Similar to: " + dataArtist?.name);
+  //       // setSrc(dataArtist?.images[0]?.url || "/FavoriteTrack.png");
+  //     }
+  //   };
 
-    fetchData();
-  }, [params.id, searchParams]);
+  //   fetchData();
+  // }, [params.id, searchParams]);
 
   const isTypeRecommendation = (data: any): data is RecommendationsType => {
     return (data as RecommendationsType).tracks !== undefined;
@@ -95,7 +89,42 @@ const PlaylistPage = () => {
   return (
     <div className={style.Playlist}>
       <PanelTarget side="Top" />
-      <aside className={style.Playlist__Content} id="PlaylistPage">
+      <>
+        {isValidating && (
+          <div className="w-full h-full flex justify-center items-center">
+            <Spinner />
+          </div>
+        )}
+        {data !== undefined ? (
+          <DisplayInfo
+            idForScroll={"PlaylistPage"}
+            ImageSrc={
+              data?.infoPlaylist?.images[0].url === undefined
+                ? "/FavoriteTrack.png"
+                : data?.infoPlaylist.images[0].url
+            }
+            Type={data?.infoPlaylist?.type! || ""}
+            Name={
+              data?.infoPlaylist?.name === undefined
+                ? ""
+                : data?.infoPlaylist.name
+            }
+          >
+            <PlaylistComponent
+              data={
+                isTypeRecommendation(data)
+                  ? data.tracks
+                  : isCurrentlyPlaylistTracksItem(data)
+                  ? data.items.map((it) => it.track)
+                  : []
+              }
+            />
+          </DisplayInfo>
+        ) : (
+          <></>
+        )}
+      </>
+      {/* <aside className={style.Playlist__Content} id="PlaylistPage">
         <section className={style.Content__Preview}>
           <div className={style.Preview__image}>
             <div className={style.Images}>
@@ -115,25 +144,10 @@ const PlaylistPage = () => {
         </section>
         {isValidating && (
           <div className="w-full h-full flex justify-center items-center">
-            {/* <TbRotateClockwise className="animate-spin text-white text-xl" /> */}
             <Spinner />
           </div>
         )}
-
-        {data !== undefined ? (
-          <RandomPlaylistComponent
-            data={
-              isTypeRecommendation(data)
-                ? data.tracks
-                : isCurrentlyPlaylistTracksItem(data)
-                ? data.items.map((it) => it.track)
-                : []
-            }
-          />
-        ) : (
-          <></>
-        )}
-      </aside>
+      </aside> */}
       <div className={style.dash}></div>
       <div className={style.squarDash}></div>
       <PanelTarget side="Bottom" />

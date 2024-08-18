@@ -3,8 +3,8 @@ import Image from "next/image";
 import style from "./ComponentPlayingTrack.module.scss";
 import type { CurrentlyPlayingTrack } from "@/types/SpotifyTypes/CurrentlyPlayingTrack/type";
 import { useContext, useEffect, useState } from "react";
-import { _getCurrentlyPlayingTrack } from "@/api/ApiSpotify";
 import { GlobalContext } from "@/Context";
+import { _getCurrentlyPlayingTrack } from "@/api/SP-Player/API-SP-Player";
 
 export const ComponentPlayingTrack = () => {
   const [playingTrack, setPlayingTrack] = useState<CurrentlyPlayingTrack>();
