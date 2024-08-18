@@ -5,7 +5,7 @@ import useSWR from "swr/immutable";
 import { PanelTarget } from "@/components/UI/Target/PanelTarget";
 
 import { PlaylistComponent } from "@/components/Content/Mix/RandomPlaylist-Component/RandomPlaylist";
-import { useParams, useRouter, useSearchParams } from "next/navigation";
+import { useParams, useSearchParams } from "next/navigation";
 import { RecommendationsType } from "@/types/SpotifyTypes/RecommendationsType/type";
 import { Spinner } from "@/components/UI/Spinner/spinner";
 import { CurrentlyPlaylistTracksItem } from "@/types/SpotifyTypes/CurrentlyPlaylist/type";
@@ -51,31 +51,6 @@ const PlaylistPage = () => {
     dedupingInterval: 60000,
   });
 
-  // const [namePlaylist, setNamePlaylist] = useState("");
-  // const [src, setSrc] = useState("/FavoriteTrack.png");
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     if (params.id.includes("randomlist")) {
-  //       setNamePlaylist("random playlist");
-  //       setSrc("/DiscLogo2.png");
-  //     } else if (params.id.includes("genre")) {
-  //       setNamePlaylist(genre.replace(/%20/g, " "));
-  //       setSrc("/DiscLogo2.png");
-  //     } else if (params.id.includes("list")) {
-  //       // const InfoPlaylist = await _getPlaylist(list);
-  //       // setNamePlaylist(InfoPlaylist.name);
-  //       // setSrc(InfoPlaylist.images[0].url);
-  //     } else {
-  //       // const dataArtist = await _getOneArtist(params.id);
-  //       // setNamePlaylist("Similar to: " + dataArtist?.name);
-  //       // setSrc(dataArtist?.images[0]?.url || "/FavoriteTrack.png");
-  //     }
-  //   };
-
-  //   fetchData();
-  // }, [params.id, searchParams]);
-
   const isTypeRecommendation = (data: any): data is RecommendationsType => {
     return (data as RecommendationsType).tracks !== undefined;
   };
@@ -104,6 +79,25 @@ const PlaylistPage = () => {
                 : data?.infoPlaylist.images[0].url
             }
             Type={data?.infoPlaylist?.type! || ""}
+            Owner={
+              isCurrentlyPlaylistTracksItem(data)
+                ? data.infoPlaylist
+                : isTypeRecommendation(data)
+                ? data.infoPlaylist
+                : undefined
+            }
+            FollowersTotal={
+              isCurrentlyPlaylistTracksItem(data)
+                ? data.infoPlaylist.followers?.total
+                : undefined
+            }
+            Total={
+              isCurrentlyPlaylistTracksItem(data)
+                ? data.total
+                : isTypeRecommendation(data)
+                ? data.tracks.length
+                : undefined
+            }
             Name={
               data?.infoPlaylist?.name === undefined
                 ? ""
@@ -124,30 +118,7 @@ const PlaylistPage = () => {
           <></>
         )}
       </>
-      {/* <aside className={style.Playlist__Content} id="PlaylistPage">
-        <section className={style.Content__Preview}>
-          <div className={style.Preview__image}>
-            <div className={style.Images}>
-              <Image
-                src={src}
-                layout="fill"
-                objectFit="cover"
-                className={style.mark}
-                alt="PlaylistImage"
-              />
-            </div>
-          </div>
-          <div className={style.Preview__Info}>
-            <h3 className={style.Info__PlaylistType}>Playlist</h3>
-            <h1 className={style.Info__PlaylistName}>{namePlaylist}</h1>
-          </div>
-        </section>
-        {isValidating && (
-          <div className="w-full h-full flex justify-center items-center">
-            <Spinner />
-          </div>
-        )}
-      </aside> */}
+
       <div className={style.dash}></div>
       <div className={style.squarDash}></div>
       <PanelTarget side="Bottom" />

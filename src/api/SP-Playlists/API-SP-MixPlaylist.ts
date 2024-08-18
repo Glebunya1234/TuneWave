@@ -140,6 +140,7 @@ export const _getSimilarPlaylist = async (id: string, onlyGenre?: boolean, ganre
         }
     } else {
         infoPlaylist = {
+
             name: `ganreName`,
             type: "Playlist",
             images: [
