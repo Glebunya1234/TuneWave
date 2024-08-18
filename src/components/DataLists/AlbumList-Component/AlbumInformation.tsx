@@ -1,10 +1,10 @@
 "use server";
 
 import style from "./AlbumInformation.module.scss";
+import Link from "next/link";
 
 import { CurrentlyAlbum } from "@/types/SpotifyTypes/CurrentlyAlbum/type";
 import { formatDuration } from "@/utils/DurationFormatFunc";
-import Link from "next/link";
 import { IoTimerSharp } from "react-icons/io5";
 
 export const AlbumInformation = async ({ data }: { data: CurrentlyAlbum }) => {
@@ -23,19 +23,7 @@ export const AlbumInformation = async ({ data }: { data: CurrentlyAlbum }) => {
         data.tracks.items.map((item, index) => {
           return (
             <div key={index} className={style.Playlist__Track}>
-              <div
-                className={style.TrackIndex}
-                key={index}
-                //   onMouseEnter={() => handleMouseEnter(index)}
-                //   onMouseLeave={() => handleMouseLeave(index)}
-                //   onClick={() => {
-                //     Play(item.track.uri);
-                //   }}
-              >
-                {/* {hoverStates[index] ? (
-                <BsFillPlayFill className="pl-[3px] text-xl text-center" />
-                ) : ( */}
-                {/* )} */}
+              <div className={style.TrackIndex} key={index}>
                 {index + 1}
               </div>
 

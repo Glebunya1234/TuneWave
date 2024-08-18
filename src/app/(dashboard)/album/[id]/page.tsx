@@ -1,6 +1,6 @@
 "use server";
 import style from "./album.module.scss";
-import { AlbumInformation } from "@/components/Content/AlbumInformation-Component/AlbumInformation";
+import { AlbumInformation } from "@/components/DataLists/AlbumList-Component/AlbumInformation";
 import { PanelTarget } from "@/components/UI/Target/PanelTarget";
 import { _getAlbum } from "@/api/SP-Albums/API-SP-Albums";
 import { DisplayInfo } from "@/components/DisplayInfo/DisplayInfo";
@@ -16,6 +16,7 @@ const albumPage = async ({ params }: { params: { id: string } }) => {
         ImageSrc={`${data.images[0].url || "/FavoriteTrack.png"}`}
         Type={data.album_type}
         Name={data.name}
+        Total={data.tracks.items.length}
         Artists={data.artists}
         release_date={data.release_date}
       >

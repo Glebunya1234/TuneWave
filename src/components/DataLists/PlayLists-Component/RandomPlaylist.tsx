@@ -1,5 +1,5 @@
 "use client";
-import style from "@components/Content/FavoriteTrackComponent/FavoriteTrackComponent.module.scss";
+import style from "../FavoriteTracksList-Component/FavoriteTrackComponent.module.scss";
 import Image from "next/legacy/image";
 import Link from "next/link";
 import { formatDuration } from "@/utils/DurationFormatFunc";

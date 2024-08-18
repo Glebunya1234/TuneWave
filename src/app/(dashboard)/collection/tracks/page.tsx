@@ -2,7 +2,7 @@
 import style from "./tracks.module.scss";
 import Image from "next/image";
 import { PanelTarget } from "@/components/UI/Target/PanelTarget";
-import { FavoriteTrackComponent } from "@/components/Content/FavoriteTrackComponent/FavoriteTrackConteiner";
+import { FavoriteTrackComponent } from "@/components/DataLists/FavoriteTracksList-Component/FavoriteTrackConteiner";
 import { GetDataProfileUser } from "@/providers/SupaBase-methods/user-action";
 import Link from "next/link";
 

@@ -3,13 +3,13 @@ import style from "./FavoriteTrackComponent.module.scss";
 import Image from "next/legacy/image";
 import Link from "next/link";
 import useSWR, { useSWRConfig } from "swr";
-import { formatDuration } from "@/utils/DurationFormatFunc";
 import { Suspense, useEffect, useState } from "react";
 import { IoTimerSharp } from "react-icons/io5";
-import { PlayTrackBtn } from "@/components/UI/Buttons/PlayTrackBtn/PlayTrackBtn";
-import type { SpotifyTracksResponse } from "@/types/SpotifyTypes/TrackFavoriteType/type";
-import { SaveTrackBtn } from "@/components/UI/Buttons/SaveTrackToLibBtn/SaveTrack";
 import { BsFillPlayFill } from "react-icons/bs";
+import { PlayTrackBtn } from "@/components/UI/Buttons/PlayTrackBtn/PlayTrackBtn";
+import { SaveTrackBtn } from "@/components/UI/Buttons/SaveTrackToLibBtn/SaveTrack";
+import type { SpotifyTracksResponse } from "@/types/SpotifyTypes/TrackFavoriteType/type";
+import { formatDuration } from "@/utils/DurationFormatFunc";
 import { _getSavedTrackUser } from "@/api/SP-Tracks/API-SP-Tracks";
 
 const fetcher = (offset: number) => _getSavedTrackUser(offset);

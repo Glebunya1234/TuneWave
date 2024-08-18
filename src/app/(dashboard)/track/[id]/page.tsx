@@ -1,7 +1,7 @@
 "use server";
 import style from "./tracks.module.scss";
 import { PanelTarget } from "@/components/UI/Target/PanelTarget";
-import { TrackComponent } from "@/components/Content/TrackContent-Component/TrackContent";
+import { TrackComponent } from "@/components/DataLists/CurrentlyTrackLists-Component/TrackContent";
 import { DisplayInfo } from "@/components/DisplayInfo/DisplayInfo";
 import { _getArtists } from "@/api/SP-Artists/API-SP-Artists";
 import { _getTrack } from "@/api/SP-Tracks/API-SP-Tracks";
