@@ -16,8 +16,8 @@ import {
 import { _getItemsCurrentPlaylist } from "@/api/SP-Playlists/API-SP-Playlists";
 import { fetcher } from "@/utils/helper/Fetchers/PlayList-Fetcher";
 import {
-  isCurrentlyPlaylistTracksItem,
-  isTypeRecommendation,
+  _isCurrentlyPlaylistTracksItem,
+  _isTypeRecommendation,
 } from "@/utils/TypeOfCustom/TypeOfCustom";
 
 const PlaylistPage = () => {
@@ -26,7 +26,7 @@ const PlaylistPage = () => {
   const genre = searchParams.get("genre") || "";
   const list = searchParams.get("id") || "";
 
-  const { data: data, isValidating } = useSWR<
+  const { data: data, isLoading } = useSWR<
     RecommendationsType | CurrentlyPlaylistTracksItem
   >(`playlist/${params.id}`, () => fetcher(params.id, genre, list, 0), {
     revalidateOnFocus: false,
@@ -37,7 +37,7 @@ const PlaylistPage = () => {
     <div className={style.Playlist}>
       <PanelTarget side="Top" />
       <>
-        {isValidating && (
+        {isLoading && (
           <div className="w-full h-full flex justify-center items-center">
             <Spinner />
           </div>
@@ -52,21 +52,21 @@ const PlaylistPage = () => {
             }
             Type={data?.infoPlaylist?.type! || ""}
             Owner={
-              isCurrentlyPlaylistTracksItem(data)
+              _isCurrentlyPlaylistTracksItem(data)
                 ? data.infoPlaylist
-                : isTypeRecommendation(data)
+                : _isTypeRecommendation(data)
                 ? data.infoPlaylist
                 : undefined
             }
             FollowersTotal={
-              isCurrentlyPlaylistTracksItem(data)
+              _isCurrentlyPlaylistTracksItem(data)
                 ? data.infoPlaylist.followers?.total
                 : undefined
             }
             Total={
-              isCurrentlyPlaylistTracksItem(data)
+              _isCurrentlyPlaylistTracksItem(data)
                 ? data.total
-                : isTypeRecommendation(data)
+                : _isTypeRecommendation(data)
                 ? data.tracks.length
                 : undefined
             }
@@ -77,14 +77,14 @@ const PlaylistPage = () => {
             }
           >
             <PlaylistComponent
-              Offset={isCurrentlyPlaylistTracksItem(data) ? data.offset : 0}
-              PrivatePlaylist={isCurrentlyPlaylistTracksItem(data)}
+              Offset={_isCurrentlyPlaylistTracksItem(data) ? data.offset : 0}
+              PrivatePlaylist={_isCurrentlyPlaylistTracksItem(data)}
               SrcKey={`playlist/${params.id}`}
               Params={{ id: params.id, list: list, genre: genre }}
               data={
-                isTypeRecommendation(data)
+                _isTypeRecommendation(data)
                   ? data.tracks
-                  : isCurrentlyPlaylistTracksItem(data)
+                  : _isCurrentlyPlaylistTracksItem(data)
                   ? data.items.map((it) => it.track)
                   : []
               }

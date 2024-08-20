@@ -10,7 +10,7 @@ export const TopGangreMix = async () => {
   const topArtist = await _getTopArtists();
 
   const uniqueGenres = new Set(
-    topArtist
+    topArtist.items
       .filter((data) => data.genres[0] !== undefined)
       .slice(0, 6)
       .map((data) => data.genres[0])
@@ -37,7 +37,12 @@ export const TopGangreMix = async () => {
   ));
   return (
     <section className={style.ForUserMix}>
-      <span className={style.ForUserMix__Span}>Similar to your genres:</span>
+      <div className={style.ForUserMix_Div}>
+        <span className={style.Div__Span}>Similar to your genres:</span>
+        <Link href={`/section/TopGenre`} className={style.Div__link}>
+          Show all
+        </Link>
+      </div>
       <nav className={style.ForUserMix__Conteiner}>{items}</nav>
     </section>
   );

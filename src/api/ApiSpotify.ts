@@ -5,7 +5,6 @@ import path from 'path';
 import { cacheFilePathAccess, cacheFilePathRefresh, readCache } from '../../cache/controller';
 import { CurrentlyAlbum } from '@/types/SpotifyTypes/CurrentlyAlbum/type';
 import { CurrentlyTrack } from '@/types/SpotifyTypes/CurrentlyTrack/type';
-import { FollowedArtist, TrackArtist } from '@/types/SpotifyTypes/TrackArtist/type';
 import { RecommendationsType } from '@/types/SpotifyTypes/RecommendationsType/type';
 import { TrackItem } from '@/types/SpotifyTypes/CurrentlyPlayingTrack/type';
 import { SavedTrack, SpotifyTracksResponse } from '@/types/SpotifyTypes/TrackFavoriteType/type';

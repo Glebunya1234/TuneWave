@@ -11,7 +11,7 @@ import { SaveTrackBtn } from "@/components/UI/Buttons/SaveTrackToLibBtn/SaveTrac
 import { TrackItem } from "@/types/SpotifyTypes/CurrentlyPlayingTrack/type";
 import { fetcher } from "@/utils/helper/Fetchers/PlayList-Fetcher";
 import { formatDuration } from "@/utils/DurationFormatFunc";
-import { isCurrentlyPlaylistTracksItem } from "@/utils/TypeOfCustom/TypeOfCustom";
+import { _isCurrentlyPlaylistTracksItem } from "@/utils/TypeOfCustom/TypeOfCustom";
 
 export const PlaylistComponent = ({
   data,
@@ -41,7 +41,7 @@ export const PlaylistComponent = ({
           newOffset
         );
 
-        if (isCurrentlyPlaylistTracksItem(newData)) {
+        if (_isCurrentlyPlaylistTracksItem(newData)) {
           mutate(
             SrcKey,
             (currentData: any) => ({

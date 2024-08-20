@@ -6,14 +6,14 @@ import { test } from "../SP-Tokens/API-SP-Tokens";
 import { _checkIfTracksAreSaved } from "../SP-Tracks/API-SP-Tracks";
 import { _getOneArtist, _getTopArtists } from "../SP-Artists/API-SP-Artists";
 
-export const _getRecommendations = async (): Promise<RecommendationsType> => {
+export const _getRecommendations = async (id?: string): Promise<RecommendationsType> => {
     const topArtists = await _getTopArtists();
-    const seedArtists: string[] = topArtists.length > 0
-        ? topArtists.map(artist => artist.id).filter(id => id !== undefined)
+    const seedArtists: string[] = topArtists.items.length > 0
+        ? topArtists.items.map(artist => artist.id).filter(id => id !== undefined)
         : [];
 
-    const seedGenres: string[] = topArtists.length > 0
-        ? topArtists.flatMap(artist => artist.genres).filter(genre => genre !== undefined)
+    const seedGenres: string[] = topArtists.items.length > 0
+        ? topArtists.items.flatMap(artist => artist.genres).filter(genre => genre !== undefined)
         : [];
 
 
@@ -68,8 +68,8 @@ export const _getGengreRecommendations = async (): Promise<RecommendationsType> 
     const topArtists = await _getTopArtists();
 
 
-    const seedGenres: string[] = topArtists.length > 0
-        ? topArtists.flatMap(artist => artist.genres).filter(genre => genre !== undefined)
+    const seedGenres: string[] = topArtists.items.length > 0
+        ? topArtists.items.flatMap(artist => artist.genres).filter(genre => genre !== undefined)
         : [];
 
 

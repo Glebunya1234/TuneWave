@@ -20,7 +20,7 @@ export type TrackArtist = {
   uri: "string";
 };
 
-export type FollowedArtist = {
+export type FollowedArtistType = {
   href: "string";
   limit: number;
   next: "string";
