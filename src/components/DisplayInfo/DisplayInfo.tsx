@@ -7,7 +7,7 @@ import { Playlist } from "@/types/SpotifyTypes/CurrentlyPlaylist/type";
 import { formatDuration } from "@/utils/DurationFormatFunc";
 
 type InfoType = {
-  children: ReactElement;
+  children: React.ReactNode;
   idForScroll: string;
   ImageSrc: string;
   Type: string;

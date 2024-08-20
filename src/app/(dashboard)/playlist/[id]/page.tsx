@@ -4,7 +4,7 @@ import Image from "next/image";
 import useSWR from "swr/immutable";
 import { PanelTarget } from "@/components/UI/Target/PanelTarget";
 
-import { PlaylistComponent } from "@/components/DataLists/PlayLists-Component/RandomPlaylist";
+import { PlaylistComponent } from "@/components/DataLists/PlayLists-Component/PlayListComponent";
 import { useParams, useSearchParams } from "next/navigation";
 import { RecommendationsType } from "@/types/SpotifyTypes/RecommendationsType/type";
 import { Spinner } from "@/components/UI/Spinner/spinner";
@@ -15,51 +15,24 @@ import {
   _getSimilarPlaylist,
 } from "@/api/SP-Playlists/API-SP-MixPlaylist";
 import { _getItemsCurrentPlaylist } from "@/api/SP-Playlists/API-SP-Playlists";
-
-const fetcher = async (
-  id: string,
-  genre: string | null,
-  list: string | null
-) => {
-  if (id.includes("randomlist")) {
-    return await _getRecommendations();
-  } else if (id.includes("genre")) {
-    return await _getSimilarPlaylist(
-      genre!.replace(/%20/g, "+"),
-      true,
-      genre!.replace(/%20/g, " ")
-    );
-  } else if (id.includes("list")) {
-    return await _getItemsCurrentPlaylist(
-      `https://api.spotify.com/v1/playlists/${list}/tracks`,
-      list!
-    );
-  } else {
-    return await _getSimilarPlaylist(id);
-  }
-};
+import { fetcher } from "@/utils/helper/Fetchers/PlayList-Fetcher";
+import {
+  isCurrentlyPlaylistTracksItem,
+  isTypeRecommendation,
+} from "@/utils/TypeOfCustom/TypeOfCustom";
 
 const PlaylistPage = () => {
   const searchParams = useSearchParams();
   const params = useParams<{ id: string }>();
   const genre = searchParams.get("genre") || "";
   const list = searchParams.get("id") || "";
+
   const { data: data, isValidating } = useSWR<
     RecommendationsType | CurrentlyPlaylistTracksItem
-  >(`playlist/${params.id}`, () => fetcher(params.id, genre, list), {
+  >(`playlist/${params.id}`, () => fetcher(params.id, genre, list, 0), {
     revalidateOnFocus: false,
     dedupingInterval: 60000,
   });
-
-  const isTypeRecommendation = (data: any): data is RecommendationsType => {
-    return (data as RecommendationsType).tracks !== undefined;
-  };
-
-  const isCurrentlyPlaylistTracksItem = (
-    data: any
-  ): data is CurrentlyPlaylistTracksItem => {
-    return (data as CurrentlyPlaylistTracksItem).items !== undefined;
-  };
 
   return (
     <div className={style.Playlist}>
@@ -105,6 +78,10 @@ const PlaylistPage = () => {
             }
           >
             <PlaylistComponent
+              Offset={isCurrentlyPlaylistTracksItem(data) ? data.offset : 0}
+              PrivatePlaylist={isCurrentlyPlaylistTracksItem(data)}
+              SrcKey={`playlist/${params.id}`}
+              Params={{ id: params.id, list: list, genre: genre }}
               data={
                 isTypeRecommendation(data)
                   ? data.tracks
