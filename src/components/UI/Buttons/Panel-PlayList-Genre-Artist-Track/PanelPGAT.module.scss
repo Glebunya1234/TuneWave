@@ -1,0 +1,139 @@
+@import url('https://fonts-online.ru/path-to-fonts/versus.css');
+$font-family-versus: 'Versus', sans-serif;
+
+.ForUserMix__Item {
+    width: 170px;
+    height: 170px;
+    transition: all .2s ease-in-out;
+    margin: 0 auto;
+
+
+
+    &:hover {
+        position: relative;
+        transform: scale(1.05);
+
+        &::before {
+            position: absolute;
+            animation: AnimHoverDefault .2s linear;
+            content: "";
+            width: 220px;
+            height: 220px;
+            z-index: 0;
+
+
+
+        }
+    }
+
+    .Item__Conteiner {
+        width: 100%;
+        height: 100%;
+        position: relative;
+
+        .RandomTextImage {
+            font-family: $font-family-versus;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 50px;
+
+            @media (max-width:1500px) {
+                font-size: 40px;
+            }
+
+            @media (max-width:850px) {
+                font-size: 30px;
+            }
+        }
+
+        &::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('/SpanPattern.png') bottom no-repeat;
+            background-size: 100%, 100%;
+            z-index: 1;
+        }
+
+        span {
+            top: 110px;
+            left: 5px;
+            color: black;
+            position: absolute;
+            z-index: 20;
+            font-size: 10px;
+            text-transform: uppercase;
+            font-family: $font-family-versus ;
+        }
+    }
+}
+
+
+
+@mixin animHoverCommon($top, $left, $bgImage) {
+    top: $top;
+    left: $left;
+    background: url($bgImage) center no-repeat;
+    background-size: 90% 100%;
+    z-index: 1;
+}
+
+@keyframes AnimHoverDefault {
+    0% {
+        @include animHoverCommon(-20px, -25px, '/border1.png');
+    }
+
+    45% {
+        @include animHoverCommon(-20px, -25px, '/border1.png');
+    }
+
+    55% {
+        @include animHoverCommon(-28px, -24px, '/border2.png');
+    }
+
+    100% {
+        @include animHoverCommon(-28px, -24px, '/border2.png');
+    }
+}
+
+@keyframes AnimHoverMedium {
+    0% {
+        @include animHoverCommon(-16.47px, -20px, '/border1.png');
+    }
+
+    45% {
+        @include animHoverCommon(-16.47px, -20px, '/border1.png');
+    }
+
+    55% {
+        @include animHoverCommon(-23.06px, -19.76px, '/border2.png');
+    }
+
+    100% {
+        @include animHoverCommon(-23.06px, -19.76px, '/border2.png');
+    }
+}
+
+@keyframes AnimHoverSmall {
+    0% {
+        @include animHoverCommon(-12.12px, -17.65px, '/border1.png');
+    }
+
+    45% {
+        @include animHoverCommon(-12.12px, -17.65px, '/border1.png');
+    }
+
+    55% {
+        @include animHoverCommon(-19.76px, -16.94px, '/border2.png');
+    }
+
+    100% {
+        @include animHoverCommon(-19.76px, -16.94px, '/border2.png');
+    }
+}

@@ -21,7 +21,9 @@ export const RandomMix = async () => {
   ));
   return (
     <section className={style.ForUserMix}>
-      <span className={style.ForUserMix__Span}>Try your luck</span>
+      <div className={style.ForUserMix_Div}>
+        <span className={style.Div__Span}>Try your luck</span>
+      </div>
       <nav className={style.ForUserMix__Conteiner}>{items}</nav>
     </section>
   );

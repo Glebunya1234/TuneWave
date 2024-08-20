@@ -8,11 +8,25 @@ $font-family-versus: 'Versus', sans-serif;
     border-color: white;
     margin-bottom: 10px;
 
-    .ForUserMix__Span {
+    .ForUserMix_Div {
         color: white;
         text-transform: uppercase;
         font-family: $font-family-versus ;
-        margin-left: 15px;
+        margin: 0 15px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        align-content: center;
+
+        .Div__link {
+            &:hover {
+                text-decoration: underline;
+            }
+
+            color: rgb(133, 133, 133);
+            font-size: x-small;
+        }
     }
 
 

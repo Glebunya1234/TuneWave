@@ -5,12 +5,15 @@ import Link from "next/link";
 import Image from "next/image";
 import useSWR from "swr";
 import { BorderMarquee } from "@/components/UI/Marquee/Border-Marquee/BorderMarquee";
-import { TrackArtist } from "@/types/SpotifyTypes/TrackArtist/type";
+import {
+  FollowedArtistType,
+  TrackArtist,
+} from "@/types/SpotifyTypes/TrackArtist/type";
 import { _getTopArtists } from "@/api/SP-Artists/API-SP-Artists";
 
 export const TopArtistMix = () => {
-  const { data: topArtist, isLoading } = useSWR<TrackArtist[]>(
-    `getTopArtists`,
+  const { data: topArtist, isLoading } = useSWR<FollowedArtistType>(
+    `TopArtists`,
     async () => await _getTopArtists(),
     {
       revalidateOnFocus: false,
@@ -18,7 +21,7 @@ export const TopArtistMix = () => {
     }
   );
   const divs = Array.from({ length: 6 });
-  const items = topArtist?.slice(0, 6).map((data, index) => (
+  const items = topArtist?.items?.slice(0, 6).map((data, index) => (
     <Link
       href={`/playlist/${data.id}`}
       className={style.ForUserMix__Item}
@@ -39,7 +42,12 @@ export const TopArtistMix = () => {
   ));
   return (
     <section className={style.ForUserMix}>
-      <span className={style.ForUserMix__Span}>Similar to:</span>
+      <div className={style.ForUserMix_Div}>
+        <span className={style.Div__Span}>Similar to:</span>
+        <Link href={`/section/TopArtists`} className={style.Div__link}>
+          Show all
+        </Link>
+      </div>
 
       <nav className={style.ForUserMix__Conteiner}>
         {isLoading
