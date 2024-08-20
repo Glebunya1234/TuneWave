@@ -1,5 +1,6 @@
 "use server";
 import style from "./tracks.module.scss";
+import { cache } from "react";
 import { PanelTarget } from "@/components/UI/Target/PanelTarget";
 import { TrackComponent } from "@/components/DataLists/CurrentlyTrackLists-Component/TrackContent";
 import { DisplayInfo } from "@/components/DisplayInfo/DisplayInfo";
@@ -8,32 +9,29 @@ import { _getTrack } from "@/api/SP-Tracks/API-SP-Tracks";
 import { TrackArtist } from "@/types/SpotifyTypes/TrackArtist/type";
 
 const Track = async ({ params }: { params: { id: string } }) => {
-  const { track, isSaved } = await _getTrack(params.id);
-
-  const dataArtist: TrackArtist[] = await _getArtists(
-    track?.artists?.map((artist) => {
-      return artist.id;
-    })
-  );
+  const Data = await getData(params.id);
 
   return (
     <div className={style.Tracks}>
       <PanelTarget side="Top" />
-
       <DisplayInfo
         idForScroll={"pageTrack"}
         ImageSrc={`${
-          track.album?.images[0].url !== undefined
-            ? track.album.images[0].url
+          Data.track.album?.images[0].url !== undefined
+            ? Data.track.album.images[0].url
             : "/FavoriteTrack.png"
         }`}
-        Type={track.type}
-        Name={track.name}
-        Artists={track.artists}
-        release_date={track.album.release_date}
-        duration_ms={track.duration_ms}
+        Type={Data.track.type}
+        Name={Data.track.name}
+        Artists={Data.track.artists}
+        release_date={Data.track.album.release_date}
+        duration_ms={Data.track.duration_ms}
       >
-        <TrackComponent data={track} isSaved={isSaved[0]} artist={dataArtist} />
+        <TrackComponent
+          data={Data.track}
+          isSaved={Data.isSaved[0]}
+          artist={Data.dataArtist}
+        />
       </DisplayInfo>
 
       <div className={style.dash}></div>
@@ -42,5 +40,15 @@ const Track = async ({ params }: { params: { id: string } }) => {
     </div>
   );
 };
+// ===========================================================
+const getData = cache(async (id: string) => {
+  const { track, isSaved } = await _getTrack(id);
 
+  const dataArtist: TrackArtist[] = await _getArtists(
+    track?.artists?.map((artist) => {
+      return artist.id;
+    })
+  );
+  return { track, isSaved, dataArtist };
+});
 export default Track;

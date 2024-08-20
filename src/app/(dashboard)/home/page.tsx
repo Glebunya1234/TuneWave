@@ -10,9 +10,6 @@ import { RandomMix } from "@/components/Content/Mix/For-user-Mix/RandomMix";
 import { ListenToThisCmp } from "@/components/Content/Mix/ListenToThis-Component/RandomMix";
 
 const Profile = async () => {
-  // const UserAllRecs = await getRecommendations();
-  // console.log(await _getTopArtists());
-
   return (
     <main className={style.profile}>
       <section className={style.profile__Dashboard}>
@@ -26,9 +23,7 @@ const Profile = async () => {
             <TopArtistMix />
             {/* <FollowedArtist /> */}
             {/* <ListenToThisCmp /> */}
-            <TopGangreMix />
-            {/*
-             */}
+            {/* <TopGangreMix /> */}
           </aside>
         </aside>
         <PanelTarget side="Bottom" />
