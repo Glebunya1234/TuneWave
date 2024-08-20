@@ -1,15 +1,14 @@
 "use client";
 import style from "./playlist.module.scss";
-import Image from "next/image";
 import useSWR from "swr/immutable";
-import { PanelTarget } from "@/components/UI/Target/PanelTarget";
-
-import { PlaylistComponent } from "@/components/DataLists/PlayLists-Component/PlayListComponent";
 import { useParams, useSearchParams } from "next/navigation";
-import { RecommendationsType } from "@/types/SpotifyTypes/RecommendationsType/type";
+
+import { PanelTarget } from "@/components/UI/Target/PanelTarget";
+import { PlaylistComponent } from "@/components/DataLists/PlayLists-Component/PlayListComponent";
 import { Spinner } from "@/components/UI/Spinner/spinner";
-import { CurrentlyPlaylistTracksItem } from "@/types/SpotifyTypes/CurrentlyPlaylist/type";
+import { RecommendationsType } from "@/types/SpotifyTypes/RecommendationsType/type";
 import { DisplayInfo } from "@/components/DisplayInfo/DisplayInfo";
+import { CurrentlyPlaylistTracksItem } from "@/types/SpotifyTypes/CurrentlyPlaylist/type";
 import {
   _getRecommendations,
   _getSimilarPlaylist,
@@ -48,7 +47,7 @@ const PlaylistPage = () => {
             idForScroll={"PlaylistPage"}
             ImageSrc={
               data?.infoPlaylist?.images[0].url === undefined
-                ? "/FavoriteTrack.png"
+                ? "/RandomPL.png"
                 : data?.infoPlaylist.images[0].url
             }
             Type={data?.infoPlaylist?.type! || ""}

@@ -8,7 +8,7 @@ import { _getRecommendations } from "@/api/SP-Playlists/API-SP-MixPlaylist";
 
 export const ListenToThisCmp = async () => {
   const data = await _getRecommendations();
-  const items = data.tracks?.slice(0, 5).map((data, index) => (
+  const items = data.tracks?.slice(0, 6).map((data, index) => (
     <Link
       href={`/track/${data.id}`}
       className={style.ForUserMix__Item}

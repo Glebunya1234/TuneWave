@@ -17,8 +17,8 @@ export const TopArtistMix = () => {
       dedupingInterval: 60000,
     }
   );
-  const divs = Array.from({ length: 5 });
-  const items = topArtist?.slice(0, 5).map((data, index) => (
+  const divs = Array.from({ length: 6 });
+  const items = topArtist?.slice(0, 6).map((data, index) => (
     <Link
       href={`/playlist/${data.id}`}
       className={style.ForUserMix__Item}

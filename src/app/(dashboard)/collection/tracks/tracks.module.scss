@@ -128,10 +128,17 @@ $font-family-versus: 'Versus', sans-serif;
 
             }
 
+            @media (max-width:1200px) {
+                margin-bottom: 70px;
+            }
+
+            @media (max-width:870px) {
+                margin-bottom: 50px;
+            }
 
         }
 
-      
+
     }
 
     .dash {

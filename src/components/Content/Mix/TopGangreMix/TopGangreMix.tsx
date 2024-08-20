@@ -12,7 +12,7 @@ export const TopGangreMix = async () => {
   const uniqueGenres = new Set(
     topArtist
       .filter((data) => data.genres[0] !== undefined)
-      .slice(0, 5)
+      .slice(0, 6)
       .map((data) => data.genres[0])
   );
 
