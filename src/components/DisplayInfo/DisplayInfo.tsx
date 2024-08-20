@@ -1,7 +1,6 @@
 import style from "./DisplayInfo.module.scss";
 import Image from "next/image";
 import Link from "next/link";
-import { ReactElement } from "react";
 import { Artist } from "@/types/SpotifyTypes/CurrentlyPlayingTrack/type";
 import { Playlist } from "@/types/SpotifyTypes/CurrentlyPlaylist/type";
 import { formatDuration } from "@/utils/DurationFormatFunc";

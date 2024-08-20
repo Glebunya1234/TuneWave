@@ -48,17 +48,17 @@ export const _getItemsCurrentPlaylist = async (url: string, id: string): Promise
     const Data2: CurrentlyPlaylistTracksItem = await response2.json();
 
     const trackIds = Data2?.items?.map(track => track.track.id);
-    // const isSavedArray = await _checkIfTracksAreSaved(trackIds);
+    const isSavedArray = await _checkIfTracksAreSaved(trackIds);
     const InfoList = await _getPlaylist(id)
     const OwnerFullInfo = await GetUserById(InfoList.owner?.id || "")
-    // const tracksWithSavedInfo: ItemPlaylist[] = Data2.items.map((item, index) => ({
-    //     ...item,
-    //     track: {
-    //         ...item.track,
-    //         isSaved: isSavedArray[index],
-    //     }
-    // }));
+    const tracksWithSavedInfo: ItemPlaylist[] = Data2.items.map((item, index) => ({
+        ...item,
+        track: {
+            ...item.track,
+            isSaved: isSavedArray[index],
+        }
+    }));
 
-    // return { ...Data2, infoPlaylist: { ...InfoList, UserFullInfo: OwnerFullInfo }, items: tracksWithSavedInfo }
-    return { ...Data2, infoPlaylist: { ...InfoList, UserFullInfo: OwnerFullInfo } }
+    return { ...Data2, infoPlaylist: { ...InfoList, UserFullInfo: OwnerFullInfo }, items: tracksWithSavedInfo }
+    // return { ...Data2, infoPlaylist: { ...InfoList, UserFullInfo: OwnerFullInfo } }
 }

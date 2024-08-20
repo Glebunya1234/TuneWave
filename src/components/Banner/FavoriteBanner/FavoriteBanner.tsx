@@ -5,7 +5,6 @@ import useSWR from "swr";
 import { useRouter } from "next/navigation";
 import { CurrentlyPlaylist } from "@/types/SpotifyTypes/CurrentlyPlaylist/type";
 import { fetcherGetCurrentUserPlaylist } from "@/components/Content/MediaPlaylist-Component/MediaPlaylist";
-/* eslint-disable @next/next/no-img-element */
 
 export const FavoriteBanner = () => {
   const router = useRouter();
@@ -74,9 +73,10 @@ export const FavoriteBanner = () => {
                 }
               >
                 <div className={style.item__img}>
-                  <img
+                  <Image
                     src={item.images[0]?.url || "/FavoriteTrack.png"}
-                    className={style.img}
+                    layout="fill"
+                    objectFit="cover"
                     alt="alt"
                   />
                 </div>

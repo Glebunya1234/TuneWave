@@ -21,9 +21,9 @@ const Profile = async () => {
             <FavoriteBanner />
             <RandomMix />
             <TopArtistMix />
-            {/* <FollowedArtist /> */}
-            {/* <ListenToThisCmp /> */}
-            {/* <TopGangreMix /> */}
+            <FollowedArtist />
+            <ListenToThisCmp />
+            <TopGangreMix />
           </aside>
         </aside>
         <PanelTarget side="Bottom" />

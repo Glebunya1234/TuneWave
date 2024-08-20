@@ -6,6 +6,9 @@ import Link from "next/link";
 import { CurrentlyAlbum } from "@/types/SpotifyTypes/CurrentlyAlbum/type";
 import { formatDuration } from "@/utils/DurationFormatFunc";
 import { IoTimerSharp } from "react-icons/io5";
+import { PlayTrackBtn } from "@/components/UI/Buttons/PlayTrackBtn/PlayTrackBtn";
+import { BsFillPlayFill } from "react-icons/bs";
+import { SaveTrackBtn } from "@/components/UI/Buttons/SaveTrackToLibBtn/SaveTrack";
 
 export const AlbumInformation = async ({ data }: { data: CurrentlyAlbum }) => {
   return (
@@ -23,9 +26,18 @@ export const AlbumInformation = async ({ data }: { data: CurrentlyAlbum }) => {
         data.tracks.items.map((item, index) => {
           return (
             <div key={index} className={style.Playlist__Track}>
-              <div className={style.TrackIndex} key={index}>
-                {index + 1}
-              </div>
+              <PlayTrackBtn
+                key={index}
+                id={item.id}
+                text={index + 1}
+                onHover={{
+                  isTrue: true,
+                  content: (
+                    <BsFillPlayFill className="pl-[3px] text-xl text-center" />
+                  ),
+                }}
+                className={style.TrackIndex}
+              />
 
               <div className={style.TrackInfo}>
                 <div className={style.TrackName}>
@@ -41,7 +53,9 @@ export const AlbumInformation = async ({ data }: { data: CurrentlyAlbum }) => {
                   ))}
                 </div>
               </div>
-
+              <div className={style.TrackDuration}>
+                <SaveTrackBtn id={item.id} isSave={item.isSaved} />
+              </div>
               <div className={style.TrackDuration}>
                 {formatDuration(item.duration_ms)}
               </div>

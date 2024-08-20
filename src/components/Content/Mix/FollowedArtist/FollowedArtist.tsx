@@ -8,7 +8,7 @@ import { _getFollowedArtists } from "@/api/SP-Artists/API-SP-Artists";
 
 export const FollowedArtist = async () => {
   const followedArtist = await _getFollowedArtists();
-  const items = followedArtist.items?.slice(0, 5).map((data, index) => (
+  const items = followedArtist.items?.slice(0, 6).map((data, index) => (
     <Link
       href={`/artist/${data.id}`}
       className={style.ForUserMix__Item}

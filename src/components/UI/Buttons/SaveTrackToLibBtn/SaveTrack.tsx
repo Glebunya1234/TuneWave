@@ -36,7 +36,7 @@ export const SaveTrackBtn = ({
   };
   return (
     <button className={className} onClick={async () => await OnClick(id)}>
-      <p>{state ? <TbMusicCheck /> : <TbMusicPlus />}</p>
+      <p>{state ? <TbMusicCheck className="text-[#886b98]"/> : <TbMusicPlus />}</p>
     </button>
   );
 };

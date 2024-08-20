@@ -5,7 +5,7 @@ import Link from "next/link";
 import { BorderMarquee } from "@/components/UI/Marquee/Border-Marquee/BorderMarquee";
 
 export const RandomMix = async () => {
-  const items = Array.from({ length: 5 }, (_, index) => (
+  const items = Array.from({ length: 6 }, (_, index) => (
     <Link
       href={`/playlist/randomlist${index + 1}`}
       className={style.ForUserMix__Item}

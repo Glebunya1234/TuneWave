@@ -2,22 +2,16 @@
 import style from "../FavoriteTracksList-Component/FavoriteTrackComponent.module.scss";
 import Image from "next/legacy/image";
 import Link from "next/link";
-import { formatDuration } from "@/utils/DurationFormatFunc";
+import { useSWRConfig } from "swr";
 import { Suspense, useEffect, useState } from "react";
 import { IoTimerSharp } from "react-icons/io5";
-import { PlayTrackBtn } from "@/components/UI/Buttons/PlayTrackBtn/PlayTrackBtn";
 import { BsFillPlayFill } from "react-icons/bs";
+import { PlayTrackBtn } from "@/components/UI/Buttons/PlayTrackBtn/PlayTrackBtn";
 import { SaveTrackBtn } from "@/components/UI/Buttons/SaveTrackToLibBtn/SaveTrack";
 import { TrackItem } from "@/types/SpotifyTypes/CurrentlyPlayingTrack/type";
-import useSWRInfinite from "swr/infinite";
-import { useSWRConfig } from "swr";
 import { fetcher } from "@/utils/helper/Fetchers/PlayList-Fetcher";
-import {
-  isCurrentlyPlaylistTracksItem,
-  isTypeRecommendation,
-} from "@/utils/TypeOfCustom/TypeOfCustom";
-import { CurrentlyPlaylistTracksItem } from "@/types/SpotifyTypes/CurrentlyPlaylist/type";
-import next from "next";
+import { formatDuration } from "@/utils/DurationFormatFunc";
+import { isCurrentlyPlaylistTracksItem } from "@/utils/TypeOfCustom/TypeOfCustom";
 
 export const PlaylistComponent = ({
   data,
@@ -46,7 +40,7 @@ export const PlaylistComponent = ({
           Params.list,
           newOffset
         );
-        console.log("Я сработал", hasMore);
+
         if (isCurrentlyPlaylistTracksItem(newData)) {
           mutate(
             SrcKey,
@@ -62,7 +56,6 @@ export const PlaylistComponent = ({
           setHasMore(newData.next);
         }
 
-        console.log("newData", newData);
         setFetching(false);
       }
     };

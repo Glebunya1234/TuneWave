@@ -58,7 +58,7 @@ export const _getRecommendations = async (): Promise<RecommendationsType> => {
     return {
         ...data, infoPlaylist: {
             name: "Random playlist", images: [{
-                url: "/FavoriteTrack.png"
+                url: "/RandomPL.png"
             }],
             type: "Playlist",
         }, tracks: tracksWithSavedInfo
