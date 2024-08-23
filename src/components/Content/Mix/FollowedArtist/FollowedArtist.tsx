@@ -11,7 +11,7 @@ import useSWR from "swr";
 
 export const FollowedArtist = () => {
   const { data, isLoading } = useSWR<FollowedArtistType>(
-    `FollowArtists`,
+    `FollowedArtists`,
     async () => await _getFollowedArtists(),
     {
       revalidateOnFocus: false,
@@ -42,7 +42,7 @@ export const FollowedArtist = () => {
     <section className={style.ForUserMix}>
       <div className={style.ForUserMix_Div}>
         <span className={style.Div__Span}>Followed artists:</span>
-        <Link href={`/section/FollowArtists`} className={style.Div__link}>
+        <Link href={`/section/FollowedArtists`} className={style.Div__link}>
           Show all
         </Link>
       </div>

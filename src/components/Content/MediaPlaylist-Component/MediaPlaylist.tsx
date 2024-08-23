@@ -8,12 +8,12 @@ import { VscLibrary } from "react-icons/vsc";
 import { CurrentlyPlaylist } from "@/types/SpotifyTypes/CurrentlyPlaylist/type";
 
 import { _getCurrentUserPlaylists } from "@/api/SP-Playlists/API-SP-Playlists";
-export const fetcherGetCurrentUserPlaylist = () => _getCurrentUserPlaylists();
+export const fetcherGetCurrentUserPlaylist = () => _getCurrentUserPlaylists(50);
 export const MediaPlaylist = () => {
   const router = useRouter();
 
   const { data, isLoading, mutate } = useSWR<CurrentlyPlaylist>(
-    `https://api.spotify.com/v1/me/playlists`,
+    `FollowedPlaylists`,
     fetcherGetCurrentUserPlaylist,
     {
       keepPreviousData: true,
@@ -27,8 +27,15 @@ export const MediaPlaylist = () => {
       <nav className={style.MediaPlaylist__Nav}>
         <span className={style.Nav__Span}>
           <VscLibrary />
-          <p>Media library</p>
+          <p
+            onClick={() => {
+              router.push("/section/FollowedPlaylists");
+            }}
+          >
+            Media library
+          </p>
         </span>
+
         <button
           onClick={async () => {
             await mutate();
@@ -66,7 +73,7 @@ export const MediaPlaylist = () => {
             </div>
           ))}
 
-        {data?.items?.map((item, index) => (
+        {data?.items?.slice(0, 15).map((item, index) => (
           <button
             key={index}
             className={style.Content__items}

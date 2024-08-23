@@ -27,6 +27,11 @@
             p {
                 font-size: small;
                 margin-left: 5px;
+
+                &:hover {
+                    cursor: pointer;
+                    text-decoration: underline;
+                }
             }
         }
 

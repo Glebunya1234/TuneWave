@@ -26,7 +26,14 @@ export const _getOneArtist = async (ids: string): Promise<TrackArtist | undefine
 }
 export const _getArtists = async (ids: string[]): Promise<TrackArtist[]> => {
 
-    const idsString = ids.join(',');
+    let idsString;
+
+    if (ids === undefined) {
+        idsString = ids
+    }
+    else {
+        idsString = ids.join(',');
+    }
     const encodedIds = encodeURIComponent(idsString);
     const url = ` https://api.spotify.com/v1/artists?ids=${encodedIds}`
     const { access_token } = await test()
