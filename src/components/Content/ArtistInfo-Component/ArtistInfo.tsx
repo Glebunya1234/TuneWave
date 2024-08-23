@@ -15,10 +15,13 @@ import {
 } from "@/api/SP-Artists/API-SP-Artists";
 import { CurrentlyPlaylistTracksItem } from "@/types/SpotifyTypes/CurrentlyAlbum/type";
 import { PlaylistComponent } from "@/components/DataLists/PlayLists-Component/PlayListComponent";
+import { useState } from "react";
 export const fetcherGetCurrentUserPlaylist = () => _getCurrentUserPlaylists(50);
 
 export const ArtistInfo = ({ id }: { id: string }) => {
   const router = useRouter();
+  const [state, setState] = useState(false);
+
   const { data: TopTracks, isLoading: LoadingTopTracks } = useSWR<TrackItem[]>(
     `artistTopTracks/${id}`,
     async () => await _getArtistsTopTracks(id),
@@ -49,15 +52,38 @@ export const ArtistInfo = ({ id }: { id: string }) => {
   //       dedupingInterval: 60000,
   //     }
   //   );
+
+  const handleClick = () => {
+    if (state) {
+      document.documentElement.style.setProperty("--HiddenList", "250px");
+    } else document.documentElement.style.setProperty("--HiddenList", "500px");
+    setState((prevState) => !prevState);
+  };
+
   const divs = Array.from({ length: 5 });
   return (
-    <section className={style.MediaPlaylist}>
-      <PlaylistComponent
-        Offset={0}
-        SWRKey={`artistTopTracks/${id}`}
-        Params={{ id: id, list: "", genre: "" }}
-        data={TopTracks}
-      />
+    <section className={style.ArtistInfo}>
+      <nav
+        className={`${style.TrackComponent__NavPanel} border-[#c1c0c5]  border-b-[1px]`}
+      >
+        popular tracks
+      </nav>
+      <section className={style.ArtistInfo__TopTracks}>
+        <PlaylistComponent
+          HiddenHeader={true}
+          Offset={0}
+          SWRKey={`artistTopTracks/${id}`}
+          Params={{ id: id, list: "", genre: "" }}
+          data={TopTracks}
+        />
+      </section>
+      <button
+        onClick={() => {
+          handleClick();
+        }}
+      >
+        Еще...
+      </button>
     </section>
   );
 };

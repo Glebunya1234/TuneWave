@@ -19,7 +19,7 @@ const Profile = async () => {
           <div className={style.squarDash}></div>
           <aside className={style.Content__Conteiner}>
             <FavoriteBanner />
-            <RandomMix />
+            {/* <RandomMix /> */}
             {/* <TopArtistMix /> */}
             {/* <FollowedArtist /> */}
             {/* <ListenToThisCmp /> */}
