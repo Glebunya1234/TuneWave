@@ -19,8 +19,10 @@ export const PlaylistComponent = ({
   Params,
   PrivatePlaylist,
   Offset,
+  HiddenHeader = false,
 }: {
   Offset?: number;
+  HiddenHeader?: boolean;
   PrivatePlaylist?: boolean;
   Params: { id: string; genre: string; list: string };
   data?: TrackItem[];
@@ -85,18 +87,22 @@ export const PlaylistComponent = ({
   return (
     <Suspense fallback={<h2>🌀 Loading...</h2>}>
       <section className={`${style.Content__playlist}`} id="PlaylistPage">
-        <aside
-          className={`${style.Playlist__Track} border-[#c1c0c5]  border-b-[1px]`}
-        >
-          <span className={style.TrackIndex}>#</span>
-          <span></span>
-          <span className={style.TrackInfo}>Name</span>
-          <span className={style.TrackAlbum}>Album</span>
-          <span></span>
-          <span>
-            <IoTimerSharp className="mr-[11px]" />
-          </span>
-        </aside>
+        {!HiddenHeader ? (
+          <aside
+            className={`${style.Playlist__Track} border-[#c1c0c5]  border-b-[1px]`}
+          >
+            <span className={style.TrackIndex}>#</span>
+            <span></span>
+            <span className={style.TrackInfo}>Name</span>
+            <span className={style.TrackAlbum}>Album</span>
+            <span></span>
+            <span>
+              <IoTimerSharp className="mr-[11px]" />
+            </span>
+          </aside>
+        ) : (
+          <></>
+        )}
         {data?.map((item, index) => {
           const albumImageUrl =
             item?.album?.images?.length > 0 ? item.album.images[0].url : "";
