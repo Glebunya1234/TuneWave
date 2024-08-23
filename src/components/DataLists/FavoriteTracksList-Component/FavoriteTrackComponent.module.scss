@@ -1,6 +1,10 @@
 @import url('https://fonts-online.ru/path-to-fonts/versus.css');
 $font-family-versus: 'Versus', sans-serif;
 
+.Content__playlist {
+    width: 100%;
+}
+
 .Playlist__Track {
     display: grid;
     grid-template-columns: 20px 50px 2fr 2fr auto auto;

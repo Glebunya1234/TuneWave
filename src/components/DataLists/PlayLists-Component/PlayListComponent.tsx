@@ -15,7 +15,7 @@ import { _isCurrentlyPlaylistTracksItem } from "@/utils/TypeOfCustom/TypeOfCusto
 
 export const PlaylistComponent = ({
   data,
-  SrcKey,
+  SWRKey,
   Params,
   PrivatePlaylist,
   Offset,
@@ -24,7 +24,7 @@ export const PlaylistComponent = ({
   PrivatePlaylist?: boolean;
   Params: { id: string; genre: string; list: string };
   data?: TrackItem[];
-  SrcKey?: any;
+  SWRKey?: any;
 }) => {
   const { mutate } = useSWRConfig();
   const [offset, setOffset] = useState(Offset || 0);
@@ -43,7 +43,7 @@ export const PlaylistComponent = ({
 
         if (_isCurrentlyPlaylistTracksItem(newData)) {
           mutate(
-            SrcKey,
+            SWRKey,
             (currentData: any) => ({
               ...currentData,
               items: [...(currentData?.items || []), ...newData.items],

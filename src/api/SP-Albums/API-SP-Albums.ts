@@ -26,13 +26,12 @@ export const _getAlbum = async (id: string): Promise<CurrentlyAlbum> => {
     const trackIds = Data?.tracks.items?.map(track => track.id);
     const isSavedArray = await _checkIfTracksAreSaved(trackIds);
 
-    // Преобразуем TrackItem, добавляя поле isSaved
     const tracksWithSavedInfo: TrackItem[] = Data.tracks.items.map((item, index) => ({
         ...item,
         isSaved: isSavedArray[index],
     }));
 
     return { ...Data, tracks: { items: tracksWithSavedInfo } };
-    // return Data
+
 }
 

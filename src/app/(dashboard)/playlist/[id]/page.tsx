@@ -63,6 +63,7 @@ const PlaylistPage = () => {
                 ? data.infoPlaylist.followers?.total
                 : undefined
             }
+            FollowersText="Saves"
             Total={
               _isCurrentlyPlaylistTracksItem(data)
                 ? data.total
@@ -79,7 +80,7 @@ const PlaylistPage = () => {
             <PlaylistComponent
               Offset={_isCurrentlyPlaylistTracksItem(data) ? data.offset : 0}
               PrivatePlaylist={_isCurrentlyPlaylistTracksItem(data)}
-              SrcKey={`playlist/${params.id}`}
+              SWRKey={`playlist/${params.id}`}
               Params={{ id: params.id, list: list, genre: genre }}
               data={
                 _isTypeRecommendation(data)

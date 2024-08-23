@@ -1,27 +1,3 @@
-// type Images = {
-//   url: string;
-// };
-// type Album = {
-//   images: Images[];
-//   name: string;
-//   release_date: string;
-// };
-// type Artist = {
-//   href: string;
-//   name: string;
-// };
-
-// type Track = {
-//   album: Album;
-//   artist: Artist[];
-//   href: string;
-//   name: string;
-// };
-
-// export type CurrentlyPlayingTrack = {
-//   timestamp: number;
-//   item: Track;
-// };
 interface ExternalUrls {
   spotify: string;
 }
@@ -31,7 +7,7 @@ export interface Artist {
   href: string;
   id: string;
   name: string;
-  type: "artist";
+  type: string;
   uri: string;
 }
 
@@ -84,3 +60,29 @@ export interface CurrentlyPlayingTrack {
   progress_ms: number;
   item: TrackItem;
 }
+
+export type ItemsForArtistAlbums = {
+  album_type: string;
+  total_tracks: number;
+  external_urls: {
+    spotify: string;
+  };
+  href: string;
+  id: string;
+  images: [
+    {
+      url: string;
+    }
+  ];
+  name: string;
+  release_date: string;
+  release_date_precision: string;
+  type: string;
+  uri: string;
+  artists: Artist[];
+  album_group: string;
+  isSaved: boolean;
+  tracks: {
+    items: TrackItem[];
+  };
+};

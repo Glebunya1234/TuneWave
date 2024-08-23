@@ -1,32 +1,32 @@
 export type TrackArtist = {
   external_urls: {
-    spotify: "string";
+    spotify: string;
   };
   followers: {
-    href: "string";
+    href: string;
     total: number;
   };
   genres: Array<string>;
-  href: "string";
-  id: "string";
+  href: string;
+  id: string;
   images: [
     {
-      url: "string";
+      url: string;
     }
   ];
-  name: "string";
+  name: string;
   popularity: number;
-  type: "string";
-  uri: "string";
+  type: string;
+  uri: string;
 };
 
 export type FollowedArtistType = {
-  href: "string";
+  href: string;
   limit: number;
-  next: "string";
+  next: string;
   cursors: {
-    after: "string";
-    before: "string";
+    after: string;
+    before: string;
   };
   total: number;
   items: TrackArtist[];

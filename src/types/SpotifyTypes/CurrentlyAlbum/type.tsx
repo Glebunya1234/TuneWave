@@ -1,4 +1,9 @@
-import { Artist, TrackItem } from "../CurrentlyPlayingTrack/type";
+import {
+  Artist,
+  ItemsForArtistAlbums,
+  TrackItem,
+} from "../CurrentlyPlayingTrack/type";
+import { SpotifyTracksResponse } from "../TrackFavoriteType/type";
 
 type tracks = {
   items: TrackItem[];
@@ -15,4 +20,11 @@ export type CurrentlyAlbum = {
   tracks: tracks;
   type: string;
   uri: string;
+};
+
+export type CurrentlyPlaylistTracksItem = Omit<
+  SpotifyTracksResponse,
+  "items"
+> & {
+  items: ItemsForArtistAlbums[];
 };
