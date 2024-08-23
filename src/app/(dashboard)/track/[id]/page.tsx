@@ -24,7 +24,7 @@ const Track = async ({ params }: { params: { id: string } }) => {
         Type={Data.track.type}
         Name={Data.track.name}
         Artists={Data.track.artists}
-        release_date={Data.track.album.release_date}
+        release_date={Data.track?.album?.release_date}
         duration_ms={Data.track.duration_ms}
       >
         <TrackComponent

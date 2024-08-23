@@ -35,7 +35,7 @@ export const TrackComponent = async ({
       </nav>
       <aside className={`${style.TrackComponent__Information}`}>
         <div className={style.Information__Conteiner}>
-          {artist.map((artists, index) => {
+          {artist?.map((artists, index) => {
             return (
               <Link
                 href={`/artist/${artists.id}`}
