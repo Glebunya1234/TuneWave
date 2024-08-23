@@ -17,6 +17,7 @@ type InfoType = {
   release_date?: string;
   Total?: number;
   FollowersTotal?: number;
+  FollowersText?: string;
 };
 export const DisplayInfo = ({
   children,
@@ -29,6 +30,7 @@ export const DisplayInfo = ({
   release_date,
   duration_ms,
   FollowersTotal,
+  FollowersText,
   Total,
 }: InfoType) => {
   return (
@@ -108,7 +110,9 @@ export const DisplayInfo = ({
             {FollowersTotal !== undefined ? (
               <>
                 <span className="mr-[5px]">•</span>
-                <span className="mr-[5px]">{FollowersTotal} Saves</span>
+                <span className="mr-[5px]">
+                  {FollowersTotal} {FollowersText}
+                </span>
               </>
             ) : (
               <></>

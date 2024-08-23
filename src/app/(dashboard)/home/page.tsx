@@ -20,10 +20,10 @@ const Profile = async () => {
           <aside className={style.Content__Conteiner}>
             <FavoriteBanner />
             <RandomMix />
-            <TopArtistMix />
-            <FollowedArtist />
-            <ListenToThisCmp />
-            <TopGangreMix />
+            {/* <TopArtistMix /> */}
+            {/* <FollowedArtist /> */}
+            {/* <ListenToThisCmp /> */}
+            {/* <TopGangreMix /> */}
           </aside>
         </aside>
         <PanelTarget side="Bottom" />

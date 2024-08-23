@@ -1,6 +1,6 @@
 import { Album, Artist, TrackItem } from "../CurrentlyPlayingTrack/type";
 
-type tracks = {
+export type tracks = {
   items: TrackItem[];
 };
 export type CurrentlyTrack = {
