@@ -20,7 +20,7 @@ const albumPage = async ({ params }: { params: { id: string } }) => {
         Artists={data.artists}
         release_date={data.release_date}
       >
-        <AlbumInformation data={data} />
+        <AlbumInformation data={data.tracks.items} />
       </DisplayInfo>
 
       <div className={style.dash}></div>

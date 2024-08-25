@@ -1,0 +1,102 @@
+.DiscographySingle {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    transition: 1s ease-in-out;
+    overflow-y: scroll;
+    padding: 10px 60px;
+    margin-bottom: 7px;
+    color: white;
+
+    p {
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    .DiscographySingle__Span {
+        width: 100%;
+        justify-content: space-between;
+        display: flex;
+        flex-direction: row;
+        margin-bottom: 40px;
+
+        .Span__View {
+            width: 50px;
+            display: flex;
+            justify-content: space-between;
+            flex-direction: row;
+        }
+    }
+
+    .Span__Link {
+        font-size: 26px;
+        text-transform: uppercase;
+        font-family: var(--font-family-versus);
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    .DiscographySingle__Content {
+        width: 100%;
+
+        .Content__items {
+            margin-bottom: 32px;
+
+            .items {
+                width: 100%;
+                display: flex;
+                margin-bottom: 20px;
+                flex-direction: row;
+
+                .Preview__image {
+                    width: 136px;
+                    margin-left: 20px;
+                    position: relative;
+                    aspect-ratio: 1 / 1;
+
+                    @media (max-width:1200px) {
+                        width: 120px;
+                        height: 120px;
+                    }
+
+                    @media (max-width:870px) {
+                        width: 100px;
+                        height: 100px;
+                    }
+
+                    @media (max-width:420px) {
+                        width: 80px;
+                        height: 80px;
+                    }
+                }
+
+                .items__info {
+                    width: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    margin-left: 20px;
+
+                    .info__Link {
+                        @extend .Span__Link;
+                        font-size: 32px;
+                    }
+
+                    aside {
+                        display: flex;
+                        flex-direction: row;
+                        text-wrap: nowrap;
+                        text-transform: capitalize;
+                        color: #b4b4b4;
+
+                    }
+                }
+            }
+
+        }
+    }
+}

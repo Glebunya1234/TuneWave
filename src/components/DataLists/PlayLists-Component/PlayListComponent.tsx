@@ -145,10 +145,10 @@ export const PlaylistComponent = ({
                 </div>
               </div>
               <Link
-                href={`/album/${item.album.id}`}
+                href={`/album/${item?.album?.id}`}
                 className={style.TrackAlbum}
               >
-                <p>{item.album.name}</p>
+                <p>{item?.album?.name}</p>
               </Link>
 
               <div className={style.TrackDuration}>

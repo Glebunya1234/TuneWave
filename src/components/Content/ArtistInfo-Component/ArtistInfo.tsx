@@ -2,7 +2,6 @@
 import style from "./ArtistInfo.module.scss";
 import useSWR from "swr";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { PlaylistComponent } from "@/components/DataLists/PlayLists-Component/PlayListComponent";
 import { PanelPGAT } from "@/components/UI/Buttons/Panel-PlayList-Genre-Artist-Track/PanelPGAT";
@@ -15,11 +14,11 @@ import {
   _getRelatedArtists,
 } from "@/api/SP-Artists/API-SP-Artists";
 import { Spinner } from "@/components/UI/Spinner/spinner";
+import { CurrentlyPlaylistTracksItem } from "@/types/SpotifyTypes/CurrentlyAlbum/type";
 
 export const fetcherGetCurrentUserPlaylist = () => _getCurrentUserPlaylists(50);
 
 export const ArtistInfo = ({ id }: { id: string }) => {
-  const router = useRouter();
   const [state, setState] = useState(false);
 
   const [stateDiscography, setStateDiscography] = useState<"single" | "album">(
@@ -35,7 +34,7 @@ export const ArtistInfo = ({ id }: { id: string }) => {
       dedupingInterval: 60000,
     }
   );
-  const { data: discography, isLoading } = useSWR(
+  const { data: discography, isLoading } = useSWR<CurrentlyPlaylistTracksItem>(
     `artistDiscography/${stateDiscography}/${id}`,
     async () => await _getArtistsAlbums(id, stateDiscography),
     {
@@ -138,8 +137,8 @@ export const ArtistInfo = ({ id }: { id: string }) => {
           <Link
             href={
               stateDiscography === "single"
-                ? `/section/single`
-                : `/section/album`
+                ? `/artist/${id}/single/`
+                : `/artist/${id}/album/`
             }
             className={style.Div__link}
           >
