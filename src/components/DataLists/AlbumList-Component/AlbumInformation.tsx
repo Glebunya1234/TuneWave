@@ -1,4 +1,4 @@
-"use server";
+"use client";
 
 import style from "./AlbumInformation.module.scss";
 import Link from "next/link";
@@ -9,8 +9,9 @@ import { IoTimerSharp } from "react-icons/io5";
 import { PlayTrackBtn } from "@/components/UI/Buttons/PlayTrackBtn/PlayTrackBtn";
 import { BsFillPlayFill } from "react-icons/bs";
 import { SaveTrackBtn } from "@/components/UI/Buttons/SaveTrackToLibBtn/SaveTrack";
+import { TrackItem } from "@/types/SpotifyTypes/CurrentlyPlayingTrack/type";
 
-export const AlbumInformation = async ({ data }: { data: CurrentlyAlbum }) => {
+export const AlbumInformation = ({ data }: { data: TrackItem[] }) => {
   return (
     <section className={style.AlbumInformation}>
       <aside
@@ -22,8 +23,8 @@ export const AlbumInformation = async ({ data }: { data: CurrentlyAlbum }) => {
           <IoTimerSharp className="mr-[11px]" />
         </span>
       </aside>
-      {data?.tracks?.items !== undefined ? (
-        data.tracks.items.map((item, index) => {
+      {data !== undefined ? (
+        data.map((item, index) => {
           return (
             <div key={index} className={style.Playlist__Track}>
               <PlayTrackBtn
