@@ -120,11 +120,29 @@ export const _getArtistsTopTracks = async (id: string): Promise<TrackItem[]> => 
 
     return tracksWithSavedInfo;
 }
-export const _getArtistsAlbums = async (id: string): Promise<CurrentlyPlaylistTracksItem> => {
-    // const url1 = `https://api.spotify.com/v1/artists/${id}/top-tracks`
-    // const url2 = `https://api.spotify.com/v1/me/tracks/contains?ids=${id}`
-    const url3 = `https://api.spotify.com/v1/artists/${id}/albums`
-    // const url4 = `https://api.spotify.com/v1/artists/${id}/related-artists`
+export const _getRelatedArtists = async (ids: string): Promise<TrackArtist[]> => {
+
+
+    const url = `https://api.spotify.com/v1/artists/${encodeURIComponent(ids)}/related-artists`
+    const { access_token } = await test()
+    const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${access_token}`,
+        },
+    });
+    if (!response) {
+        console.warn("artistsTrackErrorrrr")
+
+    }
+    const Data = await response.json();
+    return Data.artists
+}
+
+export const _getArtistsAlbums = async (id: string, include_groups: string): Promise<CurrentlyPlaylistTracksItem> => {
+
+    const url3 = `https://api.spotify.com/v1/artists/${id}/albums?include_groups=${include_groups}`
+
     const { access_token } = await test()
     const getArtistsAlbums = await fetch(url3, {
         method: 'GET',
@@ -154,14 +172,3 @@ export const _getArtistsAlbums = async (id: string): Promise<CurrentlyPlaylistTr
 
     return { ...getArtistsAlbumsResult, items: tracksWithSavedInfo }
 }
-
-// const getTopAlbums = await fetch(url1, {
-//     method: 'GET',
-//     headers: {
-//         'Authorization': `Bearer ${access_token}`,
-//     },
-// });
-// if (!getTopAlbums.ok) {
-//     throw new Error('Ошибка получения топ артистов');
-// }
-// const getTopAlbumsResult: CurrentlyPlaylistTracksItem = await getTopTrack.json()

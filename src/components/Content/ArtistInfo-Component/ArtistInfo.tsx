@@ -1,26 +1,30 @@
 "use client";
 import style from "./ArtistInfo.module.scss";
-import Image from "next/image";
 import useSWR from "swr";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { TbRotate2 } from "react-icons/tb";
-import { VscLibrary } from "react-icons/vsc";
-import { CurrentlyPlaylist } from "@/types/SpotifyTypes/CurrentlyPlaylist/type";
-
-import { _getCurrentUserPlaylists } from "@/api/SP-Playlists/API-SP-Playlists";
+import { useState } from "react";
+import { PlaylistComponent } from "@/components/DataLists/PlayLists-Component/PlayListComponent";
+import { PanelPGAT } from "@/components/UI/Buttons/Panel-PlayList-Genre-Artist-Track/PanelPGAT";
 import { TrackItem } from "@/types/SpotifyTypes/CurrentlyPlayingTrack/type";
+import { TrackArtist } from "@/types/SpotifyTypes/TrackArtist/type";
+import { _getCurrentUserPlaylists } from "@/api/SP-Playlists/API-SP-Playlists";
 import {
   _getArtistsAlbums,
   _getArtistsTopTracks,
+  _getRelatedArtists,
 } from "@/api/SP-Artists/API-SP-Artists";
-import { CurrentlyPlaylistTracksItem } from "@/types/SpotifyTypes/CurrentlyAlbum/type";
-import { PlaylistComponent } from "@/components/DataLists/PlayLists-Component/PlayListComponent";
-import { useState } from "react";
+import { Spinner } from "@/components/UI/Spinner/spinner";
+
 export const fetcherGetCurrentUserPlaylist = () => _getCurrentUserPlaylists(50);
 
 export const ArtistInfo = ({ id }: { id: string }) => {
   const router = useRouter();
   const [state, setState] = useState(false);
+
+  const [stateDiscography, setStateDiscography] = useState<"single" | "album">(
+    "single"
+  );
 
   const { data: TopTracks, isLoading: LoadingTopTracks } = useSWR<TrackItem[]>(
     `artistTopTracks/${id}`,
@@ -31,28 +35,25 @@ export const ArtistInfo = ({ id }: { id: string }) => {
       dedupingInterval: 60000,
     }
   );
-  // const { data: discography, isLoading: LoadingDiscography } =
-  //   useSWR<CurrentlyPlaylistTracksItem>(
-  //     `artistDiscography/${id}`,
-  //     async () => await _getArtistsAlbums(id),
-  //     {
-  //       keepPreviousData: true,
-  //       revalidateOnFocus: false,
-  //       dedupingInterval: 60000,
-  //     }
-  //   );
-  // console.log("discography", discography);
-  // const { data: RelatedArtists, isLoading: LoadingRelatedArtists } =
-  //   useSWR<CurrentlyPlaylist>(
-  //     `artistRelatedArtists/${id}`,
-  //     fetcherGetCurrentUserPlaylist,
-  //     {
-  //       keepPreviousData: true,
-  //       revalidateOnFocus: false,
-  //       dedupingInterval: 60000,
-  //     }
-  //   );
+  const { data: discography, isLoading } = useSWR(
+    `artistDiscography/${stateDiscography}/${id}`,
+    async () => await _getArtistsAlbums(id, stateDiscography),
+    {
+      keepPreviousData: true,
+      revalidateOnFocus: false,
+      dedupingInterval: 60000,
+    }
+  );
 
+  const { data: RelatedArtists, isLoading: LoadingRelatedArtists } = useSWR<
+    TrackArtist[]
+  >(`artistRelatedArtists/${id}`, async () => await _getRelatedArtists(id), {
+    keepPreviousData: true,
+    revalidateOnFocus: false,
+    dedupingInterval: 60000,
+  });
+
+  console.log("RelatedArtists", RelatedArtists);
   const handleClick = () => {
     if (state) {
       document.documentElement.style.setProperty("--HiddenList", "250px");
@@ -60,30 +61,123 @@ export const ArtistInfo = ({ id }: { id: string }) => {
     setState((prevState) => !prevState);
   };
 
-  const divs = Array.from({ length: 5 });
+  const items = discography?.items
+    ?.slice(0, 6)
+    .map((data, index) => (
+      <PanelPGAT
+        key={index}
+        Href={`/album/${data.id}`}
+        FirstText={data.name}
+        SecondText={data.name}
+        ImageSRC={data.images[0]?.url || "/FavoriteTrack.png"}
+      />
+    ));
+  const Relateditems = RelatedArtists?.slice(0, 6).map((data, index) => (
+    <PanelPGAT
+      key={index}
+      Href={`/artist/${data.id}`}
+      FirstText={data.name}
+      SecondText={data.name}
+      ImageSRC={data.images[0]?.url || "/FavoriteTrack.png"}
+    />
+  ));
+
   return (
     <section className={style.ArtistInfo}>
-      <nav
-        className={`${style.TrackComponent__NavPanel} border-[#c1c0c5]  border-b-[1px]`}
-      >
-        popular tracks
-      </nav>
-      <section className={style.ArtistInfo__TopTracks}>
-        <PlaylistComponent
-          HiddenHeader={true}
-          Offset={0}
-          SWRKey={`artistTopTracks/${id}`}
-          Params={{ id: id, list: "", genre: "" }}
-          data={TopTracks}
-        />
+      <section className={style.ArtistInfo__Sections}>
+        <span className={`${style.ArtistInfo__Span}`}>Popular tracks</span>
+
+        {LoadingTopTracks ? (
+          <div className="w-full h-full flex justify-center items-center">
+            <Spinner />
+          </div>
+        ) : (
+          <>
+            <div className={style.ArtistInfo__TopTracks}>
+              <PlaylistComponent
+                HiddenHeader={true}
+                Offset={0}
+                SWRKey={`artistTopTracks/${id}`}
+                Params={{ id: id, list: "", genre: "" }}
+                data={TopTracks}
+              />
+            </div>
+            <button
+              onClick={() => {
+                handleClick();
+              }}
+            >
+              Еще...
+            </button>
+          </>
+        )}
       </section>
-      <button
-        onClick={() => {
-          handleClick();
-        }}
-      >
-        Еще...
-      </button>
+      <section className={style.ArtistInfo__Sections}>
+        <span className={`${style.ArtistInfo__Span}  `}>
+          <div className={style.radioContainer}>
+            {["single", "album"].map((type) => (
+              <div key={type} className={style.radioWrapper}>
+                <input
+                  type="radio"
+                  id={type}
+                  name="discography"
+                  value={type}
+                  checked={stateDiscography === type}
+                  onChange={() =>
+                    setStateDiscography(type as "single" | "album")
+                  }
+                  className={style.radioInput}
+                />
+                <label htmlFor={type} className={style.radioLabel}>
+                  {type.charAt(0).toUpperCase() + type.slice(1)}
+                </label>
+              </div>
+            ))}
+          </div>
+
+          <Link
+            href={
+              stateDiscography === "single"
+                ? `/section/single`
+                : `/section/album`
+            }
+            className={style.Div__link}
+          >
+            Show all
+          </Link>
+        </span>
+
+        <nav className={style.ArtistInfo__Discography}>
+          {isLoading
+            ? Array.from({ length: 6 }).map((_, id) => (
+                <div key={id} className={style.Discography__Item}>
+                  <div className="w-full h-full p-4 animate-pulse bg-[#00000094]">
+                    <div className="w-full h-full bg-[#4e4e4e91]"></div>
+                  </div>
+                </div>
+              ))
+            : items}
+        </nav>
+      </section>
+      <section className={style.ArtistInfo__Sections}>
+        <span className={`${style.ArtistInfo__Span} `}>
+          <h1>Related Artists</h1>
+          <Link href={`/section/related`} className={style.Div__link}>
+            Show all
+          </Link>
+        </span>
+        <nav className={style.ArtistInfo__Discography}>
+          {LoadingRelatedArtists
+            ? Array.from({ length: 6 }).map((_, id) => (
+                <div key={id} className={style.Discography__Item}>
+                  <div className="w-full h-full p-4 animate-pulse bg-[#00000094]">
+                    <div className="w-full h-full bg-[#4e4e4e91]"></div>
+                  </div>
+                </div>
+              ))
+            : Relateditems}
+        </nav>
+      </section>
     </section>
   );
 };
