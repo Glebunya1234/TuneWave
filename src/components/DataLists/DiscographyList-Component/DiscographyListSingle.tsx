@@ -1,10 +1,10 @@
 "use client";
 
 import style from "./DiscographyListSingle.module.scss";
-import useSWR from "swr";
+import useSWR, { useSWRConfig } from "swr";
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaTh, FaThList } from "react-icons/fa";
 import { AlbumInformation } from "../AlbumList-Component/AlbumInformation";
 import { PanelPGAT } from "@/components/UI/Buttons/Panel-PlayList-Genre-Artist-Track/PanelPGAT";
@@ -13,9 +13,11 @@ import { _getArtistsAlbums } from "@/api/SP-Artists/API-SP-Artists";
 
 export const DiscographyListSingle = ({
   DataArtist,
+  idForScroll,
   id,
 }: {
   DataArtist: string;
+  idForScroll: string;
   id: string;
 }) => {
   const [viewState, setViewState] = useState<"list" | "grid">("list");
@@ -28,8 +30,58 @@ export const DiscographyListSingle = ({
       dedupingInterval: 60000,
     }
   );
+  const { mutate } = useSWRConfig();
+  const [offset, setOffset] = useState(0);
+  const [fetching, setFetching] = useState(false);
+  const [hasMore, setHasMore] = useState<string | null>("");
+  useEffect(() => {
+    const fetchMoreData = async () => {
+      if (fetching && hasMore !== null) {
+        const newOffset = offset + 20;
+        const newData = await _getArtistsAlbums(id, "single", newOffset);
+
+        mutate(
+          `artistDiscography/single/${id}`,
+          (currentData: any) => ({
+            ...currentData,
+            items: [...(currentData?.items || []), ...newData.items],
+            offset: newData.offset,
+            next: newData.next,
+          }),
+          false
+        );
+
+        setOffset(newOffset);
+        setHasMore(newData.next);
+      }
+
+      setFetching(false);
+    };
+
+    fetchMoreData();
+  }, [fetching]);
+
+  useEffect(() => {
+    const myDiv = document.getElementById(`${idForScroll}`);
+
+    const scrollHandler = () => {
+      if (myDiv) {
+        if (myDiv.scrollHeight - (myDiv.scrollTop + myDiv.clientHeight) < 500) {
+          setFetching(true);
+        }
+      }
+    };
+
+    if (myDiv) {
+      myDiv.addEventListener("scroll", scrollHandler);
+      return () => {
+        myDiv.removeEventListener("scroll", scrollHandler);
+      };
+    }
+  }, []);
+
   return (
-    <div className={style.DiscographySingle}>
+    <div className={style.DiscographySingle} id={idForScroll}>
       <span className={`${style.DiscographySingle__Span}`}>
         <Link href={`/artist/${id}`} className={style.Span__Link}>
           {DataArtist}
@@ -67,7 +119,10 @@ export const DiscographyListSingle = ({
         >
           {data?.items.map((it, inx) =>
             viewState === "list" ? (
-              <section key={inx} className={style.Content__items}>
+              <section
+                key={`${it.name}-${inx}`}
+                className={style.Content__items}
+              >
                 <div className={style.items}>
                   <div className={style.Preview__image}>
                     <Image
@@ -95,7 +150,7 @@ export const DiscographyListSingle = ({
               </section>
             ) : (
               <PanelPGAT
-                key={inx}
+                key={it.id}
                 Href={`/album/${it.id}`}
                 FirstText={it.name}
                 SecondText={it.name}

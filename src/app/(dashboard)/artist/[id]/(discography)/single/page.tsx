@@ -10,7 +10,7 @@ const DiscographySingle = async ({ params }: { params: { id: string } }) => {
   return (
     <div className={style.Single}>
       <PanelTarget side="Top" />
-      <DiscographyListSingle DataArtist={artist.name} id={params.id} />
+      <DiscographyListSingle DataArtist={artist.name} idForScroll={`DiscographyListPage`} id={params.id} />
       <div className={style.dash}></div>
       <div className={style.squarDash}></div>
       <PanelTarget side="Bottom" />

@@ -139,9 +139,9 @@ export const _getRelatedArtists = async (ids: string): Promise<TrackArtist[]> =>
     return Data.artists
 }
 
-export const _getArtistsAlbums = async (id: string, include_groups: string): Promise<CurrentlyPlaylistTracksItem> => {
+export const _getArtistsAlbums = async (id: string, include_groups: string, offset: number = 0): Promise<CurrentlyPlaylistTracksItem> => {
 
-    const url3 = `https://api.spotify.com/v1/artists/${id}/albums?include_groups=${include_groups}`
+    const url3 = `https://api.spotify.com/v1/artists/${id}/albums?include_groups=${include_groups}&offset=${offset}`
 
     const { access_token } = await test()
     const getArtistsAlbums = await fetch(url3, {
