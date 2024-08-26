@@ -1,91 +1,86 @@
-@import url("https://fonts-online.ru/path-to-fonts/versus.css");
+ $heightMarq: 16px;
 
-$font-family-versus: "Versus", sans-serif;
+ .BorderMarquee {
+   position: relative;
+   width: 100%;
+   height: 100%;
+   overflow: hidden;
 
+   background: #00000094;
+   color: black;
 
-$heightMarq: 16px;
-
-.BorderMarquee {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-
-  background: #00000094;
-  color: black;
-
-  display: flex;
-  align-content: center;
-  justify-content: center;
+   display: flex;
+   align-content: center;
+   justify-content: center;
 
 
-  &:hover {
-    .marq {
-      opacity: 1;
-    }
-  }
+   &:hover {
+     .marq {
+       opacity: 1;
+     }
+   }
 
-  .BorderMarquee__Conteiner {
+   .BorderMarquee__Conteiner {
 
-    overflow: hidden;
-    width: 100%;
+     overflow: hidden;
+     width: 100%;
 
-    display: flex;
-    align-content: center;
-    justify-content: center;
-    margin: $heightMarq + 5px;
-  }
-}
+     display: flex;
+     align-content: center;
+     justify-content: center;
+     margin: $heightMarq + 5px;
+   }
+ }
 
-.marq {
-  position: absolute;
-  width: 100%;
-  height: $heightMarq;
-  overflow: hidden;
-  font-size: x-small;
-  display: inline-block;
-  opacity: 0;
+ .marq {
+   position: absolute;
+   width: 100%;
+   height: $heightMarq;
+   overflow: hidden;
+   font-size: x-small;
+   display: inline-block;
+   opacity: 0;
 
-}
+ }
 
-.marq_Top {
-  @extend .marq;
-  top: calc(-10% + $heightMarq - 3px);
-  transform: rotate(0deg);
-}
+ .marq_Top {
+   @extend .marq;
+   top: calc(-10% + $heightMarq - 3px);
+   transform: rotate(0deg);
+ }
 
-.marq_Left {
-  @extend .marq;
-  left: calc(-50% + $heightMarq - 8px);
-  transform: rotate(-90deg);
-}
+ .marq_Left {
+   @extend .marq;
+   left: calc(-50% + $heightMarq - 8px);
+   transform: rotate(-90deg);
+ }
 
-.marq_Right {
-  @extend .marq;
-  left: calc(50% - $heightMarq + 8px);
-  transform: rotate(90deg);
-}
+ .marq_Right {
+   @extend .marq;
+   left: calc(50% - $heightMarq + 8px);
+   transform: rotate(90deg);
+ }
 
-.marq_Bottom {
-  @extend .marq;
-  top: calc(100% - $heightMarq);
-  transform: rotate(180deg);
-}
+ .marq_Bottom {
+   @extend .marq;
+   top: calc(100% - $heightMarq);
+   transform: rotate(180deg);
+ }
 
-.marq_Top_Square {
-  @extend .marq_Top;
-  top: calc(-10% + $heightMarq );
+ .marq_Top_Square {
+   @extend .marq_Top;
+   top: calc(-10% + $heightMarq );
 
-}
+ }
 
-.marq_Left_Square {
-  @extend .marq_Left;
-  left: calc(-50% + $heightMarq - 8px);
-  top: calc(50%);
-}
+ .marq_Left_Square {
+   @extend .marq_Left;
+   left: calc(-50% + $heightMarq - 8px);
+   top: calc(50%);
+ }
 
-.marq_Right_Square {
-  @extend .marq_Right;
-  left: calc(50% - $heightMarq + 8px);
-  top: calc(50%  - $heightMarq + 5px);
-}
+ .marq_Right_Square {
+   @extend .marq_Right;
+   left: calc(50% - $heightMarq + 8px);
+   top: calc(50% - $heightMarq + 5px);
+ }

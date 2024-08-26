@@ -1,209 +1,208 @@
-@import url("https://fonts-online.ru/path-to-fonts/versus.css");
-$font-family-versus: "Versus", sans-serif;
+ .mark {
+     clip-path: circle(50% at 50% 50%);
+     aspect-ratio: 1/1;
+ }
 
-.mark {
-    clip-path: circle(50% at 50% 50%);
-}
-
-.TrackComponent {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
+ .TrackComponent {
+     width: 100%;
+     display: flex;
+     flex-direction: column;
 
 
-    .TrackComponent__NavPanel {
-        border-top-width: 1px;
-        border-color: white;
-        width: 100%;
-        display: flex;
-        align-items: center;
-        height: 100px;
+     .TrackComponent__NavPanel {
+         border-top-width: 1px;
+         border-color: white;
+         width: 100%;
+         display: flex;
+         align-items: center;
+         height: 100px;
 
 
 
-        .NavPanel__PlayTrackBtn {
-            position: relative;
-            font-size: 25px;
-            width: min-content;
-            height: 37px;
-            text-wrap: nowrap;
-            padding-left: 5px;
-            padding-right: 5px;
-            margin-right: 15px;
-            text-transform: uppercase;
-            color: black;
-            background-color: white;
-            transition: all .1s ease-in-out;
-            font-family: $font-family-versus;
-            z-index: 1;
-            border-radius: 5px;
+         .NavPanel__PlayTrackBtn {
+             position: relative;
+             font-size: 25px;
+             width: min-content;
+             height: 37px;
+             text-wrap: nowrap;
+             padding-left: 5px;
+             padding-right: 5px;
+             margin-right: 15px;
+             text-transform: uppercase;
+             color: black;
+             background-color: white;
+             transition: all .1s ease-in-out;
+             font-family: var(--font-family-versus);
+             z-index: 1;
+             border-radius: 5px;
 
-            p {
-                text-decoration: none;
-            }
+             p {
+                 text-decoration: none;
+             }
 
-            &:hover {
-                color: black;
-                background-color: white;
-                transform: scale(1.1);
-                position: relative;
+             &:hover {
+                 color: black;
+                 background-color: white;
+                 transform: scale(1.1);
+                 position: relative;
 
-                p {
-                    text-decoration: none;
-                }
+                 p {
+                     text-decoration: none;
+                 }
 
-                &::after {
-                    content: '';
-                    width: 100%;
-                    height: 100%;
-                    position: absolute;
-                    left: 0;
-                    top: 2px;
-                    animation: Hover .5s steps(1, end) infinite;
-                    transform: scale(.9);
-                }
-
-
-            }
-
-            &:active {
-                background-color: rgb(0, 220, 0);
-            }
-
-        }
-
-        .NavPanel__SaveTrackBtn {
-            @extend .NavPanel__PlayTrackBtn;
-
-            &:hover {
-                &::after {
-                    animation: none;
-                }
-            }
-
-        }
-    }
-
-    .TrackComponent__Information {
-        margin-top: 10px;
-        width: 100%;
-        display: flex;
-
-        span {
-            max-width: 350px;
-            margin-right: 20%;
-        }
-
-        .Information__Conteiner {
-
-            width: 100%;
-            display: flex;
-            flex-direction: column;
+                 &::after {
+                     content: '';
+                     width: 100%;
+                     height: 100%;
+                     position: absolute;
+                     left: 0;
+                     top: 2px;
+                     animation: Hover .5s steps(1, end) infinite;
+                     transform: scale(.9);
+                 }
 
 
-            .Information__Artist {
-                padding: 10px;
-                width: 100%;
-                position: relative;
-                display: flex;
-                align-items: center;
-                margin-bottom: 10px;
-                overflow: hidden;
-                transition: all .5s ease-in-out;
+             }
 
-                h3 {
-                    width: 100%;
-                    display: flex;
-                    flex-direction: row;
-                    justify-content: space-between;
+             &:active {
+                 background-color: rgb(0, 220, 0);
+             }
 
+         }
 
-                    div {
-                        @extend h3;
-                        width: min-content;
-                        margin-right: 10px;
+         .NavPanel__SaveTrackBtn {
+             @extend .NavPanel__PlayTrackBtn;
 
-                        &:hover {
-                            p {
-                                text-decoration: none;
-                            }
-                        }
-                        @media (max-width:1000px) {
-                            display: none;
-                        }
-                    }
+             &:hover {
+                 &::after {
+                     animation: none;
+                 }
+             }
 
-                    p {
-                        margin-left: 10px;
+         }
+     }
 
-                    }
-                }
+     .TrackComponent__Information {
+         margin-top: 10px;
+         width: 100%;
+         display: flex;
+
+         span {
+             max-width: 350px;
+             margin-right: 20%;
+         }
+
+         .Information__Conteiner {
+
+             width: 100%;
+             display: flex;
+             flex-direction: column;
 
 
-                &:hover {
-                    background-color: rgba(160, 160, 160, 0.144);
+             .Information__Artist {
+                 padding: 10px;
+                 width: 100%;
+                 position: relative;
+                 display: flex;
+                 align-items: center;
+                 margin-bottom: 10px;
+                 overflow: hidden;
+                 transition: all .5s ease-in-out;
 
-                    &:after {
-                        content: "";
-                        position: absolute;
-                        width: 105%;
-                        height: 100%;
-                        left: 0px;
-                        background-color: #ffffff;
-                        clip-path: polygon(95% 0, 100% 0%, 100% 100%, 95% 100%);
-                        opacity: 1;
-                        // animation: hover2 .15s linear;
-                    }
+                 h3 {
+                     width: 100%;
+                     display: flex;
+                     flex-direction: row;
+                     justify-content: space-between;
 
-                    @keyframes hover2 {
-                        0% {
-                            opacity: 1;
-                            clip-path: polygon(0 0, 1% 0, 1% 100%, 0 100%);
-                        }
 
-                        50% {
-                            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-                        }
+                     div {
+                         @extend h3;
+                         width: min-content;
+                         margin-right: 10px;
 
-                        100% {
-                            opacity: 1;
-                            clip-path: polygon(95% 0, 100% 0%, 100% 100%, 95% 100%);
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
+                         &:hover {
+                             p {
+                                 text-decoration: none;
+                             }
+                         }
 
-@keyframes Hover {
-    0% {
-        background: url('/Hover1.png') center center no-repeat;
-    }
+                         @media (max-width:1000px) {
+                             display: none;
+                         }
+                     }
 
-    35% {
+                     p {
+                         margin-left: 10px;
 
-        background: url('/Hover2.png') center center no-repeat;
-    }
+                     }
+                 }
 
-    65% {
-        background: url('/Hover3.png') center center no-repeat;
 
-    }
-}
+                 &:hover {
+                     background-color: rgba(160, 160, 160, 0.144);
 
-@keyframes slideOpasity {
-    0% {
-        opacity: 1;
-        clip-path: polygon(0 0, 25% 0, 25% 100%, 0 100%);
-    }
+                     &:after {
+                         content: "";
+                         position: absolute;
+                         width: 105%;
+                         height: 100%;
+                         left: 0px;
+                         background-color: #ffffff;
+                         clip-path: polygon(95% 0, 100% 0%, 100% 100%, 95% 100%);
+                         opacity: 1;
 
-    50% {
-        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-    }
+                     }
 
-    100% {
-        opacity: 1;
-        clip-path: polygon(100% 0, 100% 0, 100% 100%, 100% 100%);
-    }
-}
+                     @keyframes hover2 {
+                         0% {
+                             opacity: 1;
+                             clip-path: polygon(0 0, 1% 0, 1% 100%, 0 100%);
+                         }
+
+                         50% {
+                             clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+                         }
+
+                         100% {
+                             opacity: 1;
+                             clip-path: polygon(95% 0, 100% 0%, 100% 100%, 95% 100%);
+                         }
+                     }
+                 }
+             }
+         }
+     }
+ }
+
+ @keyframes Hover {
+     0% {
+         background: url('/Hover1.png') center center no-repeat;
+     }
+
+     35% {
+
+         background: url('/Hover2.png') center center no-repeat;
+     }
+
+     65% {
+         background: url('/Hover3.png') center center no-repeat;
+
+     }
+ }
+
+ @keyframes slideOpasity {
+     0% {
+         opacity: 1;
+         clip-path: polygon(0 0, 25% 0, 25% 100%, 0 100%);
+     }
+
+     50% {
+         clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+     }
+
+     100% {
+         opacity: 1;
+         clip-path: polygon(100% 0, 100% 0, 100% 100%, 100% 100%);
+     }
+ }

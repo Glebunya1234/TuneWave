@@ -15,6 +15,7 @@ import {
 } from "@/api/SP-Artists/API-SP-Artists";
 import { Spinner } from "@/components/UI/Spinner/spinner";
 import { CurrentlyPlaylistTracksItem } from "@/types/SpotifyTypes/CurrentlyAlbum/type";
+import { PanelSkeleton } from "@/components/UI/Skeleton/Panel-Skeleton/PanelSkeleton";
 
 export const fetcherGetCurrentUserPlaylist = () => _getCurrentUserPlaylists(50);
 
@@ -146,15 +147,11 @@ export const ArtistInfo = ({ id }: { id: string }) => {
         </span>
 
         <nav className={style.ArtistInfo__Discography}>
-          {isLoading
-            ? Array.from({ length: 6 }).map((_, id) => (
-                <div key={id} className={style.Discography__Item}>
-                  <div className="w-full h-full p-4 animate-pulse bg-[#00000094]">
-                    <div className="w-full h-full bg-[#4e4e4e91]"></div>
-                  </div>
-                </div>
-              ))
-            : items}
+          {isLoading ? (
+            <PanelSkeleton className={style.Discography__Item} />
+          ) : (
+            items
+          )}
         </nav>
       </section>
       <section className={style.ArtistInfo__Sections}>
@@ -165,15 +162,11 @@ export const ArtistInfo = ({ id }: { id: string }) => {
           </Link>
         </span>
         <nav className={style.ArtistInfo__Discography}>
-          {LoadingRelatedArtists
-            ? Array.from({ length: 6 }).map((_, id) => (
-                <div key={id} className={style.Discography__Item}>
-                  <div className="w-full h-full p-4 animate-pulse bg-[#00000094]">
-                    <div className="w-full h-full bg-[#4e4e4e91]"></div>
-                  </div>
-                </div>
-              ))
-            : Relateditems}
+          {LoadingRelatedArtists ? (
+            <PanelSkeleton className={style.Discography__Item} />
+          ) : (
+            Relateditems
+          )}
         </nav>
       </section>
     </section>

@@ -1,41 +1,38 @@
-@import url('https://fonts-online.ru/path-to-fonts/versus.css');
-$font-family-versus: 'Versus', sans-serif;
+ .Tracks {
+     width: 100%;
+     height: 100%;
+     margin-top: 10px;
+     position: relative;
+     display: flex;
+     flex-direction: column;
+     justify-content: start;
+     background-color: #00000091;
+     overflow: hidden;
 
-.Tracks {
-    width: 100%;
-    height: 100%;
-    margin-top: 10px;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: start;
-    background-color: #00000091;
-    overflow: hidden;
-
-    p {
-        &:hover {
-            text-decoration: underline;
-        }
-    }
+     p {
+         &:hover {
+             text-decoration: underline;
+         }
+     }
 
 
 
 
 
-    .dash {
-        position: absolute;
-        top: 50px;
-        left: 10px;
-        width: 22px;
-        height: 70px;
-        background: repeating-linear-gradient(315deg, #b9becc, #b9becc 1.5px, transparent 0px, transparent 5px);
-    }
+     .dash {
+         position: absolute;
+         top: 50px;
+         left: 10px;
+         width: 22px;
+         height: 70px;
+         background: repeating-linear-gradient(315deg, #b9becc, #b9becc 1.5px, transparent 0px, transparent 5px);
+     }
 
-    .squarDash {
-        @extend .dash;
-        top: 130px;
-        width: 22px;
-        height: 22px;
-        background: repeating-linear-gradient(45deg, #b9becc, #b9becc 1.5px, transparent 0px, transparent 5px);
-    }
-}
+     .squarDash {
+         @extend .dash;
+         top: 130px;
+         width: 22px;
+         height: 22px;
+         background: repeating-linear-gradient(45deg, #b9becc, #b9becc 1.5px, transparent 0px, transparent 5px);
+     }
+ }

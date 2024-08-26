@@ -1,168 +1,167 @@
-@import url('https://fonts-online.ru/path-to-fonts/versus.css');
-@import '/src/app/globals.css';
-$font-family-versus: 'Versus', sans-serif;
-
-.MediaLibrary {
-    width: 350px;
-    max-width: 250px;
-    height: 100%;
-    margin: 10px;
-    margin-top: 5px;
-    margin-bottom: 0;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    animation: AnimationRender .4s linear;
-    background-color: #00000091;
+ @import '/src/app/globals.css';
 
 
-    .MediaLibrary__HideWindow {
-        width: 100%;
+ .MediaLibrary {
+     width: 350px;
+     max-width: 250px;
+     height: 100%;
+     margin: 10px;
+     margin-top: 5px;
+     margin-bottom: 0;
+     overflow: hidden;
+     display: flex;
+     flex-direction: column;
+     align-items: center;
 
-        padding: 20px;
-        padding-right: 0;
-
-        display: flex;
-
-        span {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-wrap: nowrap;
-            padding-left: 5px;
-            padding-top: 2px;
-            padding-bottom: 2px;
-            padding-right: 5px;
-            border-radius: 5px;
-            width: 100%;
-            height: 100%;
-            background-color: white;
-            color: #000000;
-            font-size: 12px;
-
-            p {
-                margin-right: .2rem;
-            }
-        }
-    }
-
-    @media (max-width: 750px) {
-        display: none;
-    }
-}
-
-.MediaLibrary__Navigation {
-
-    display: flex;
-    flex-direction: column;
-    margin-top: 10%;
-    margin-bottom: 10%;
-}
-
-.MediaLibrary__remove {
-
-    animation: AnimationRemove .4s linear;
-    transition: all 5s;
-}
+     animation: AnimationRender .4s linear;
+     background-color: #00000091;
 
 
-@keyframes AnimationRender {
-    0% {
-        filter: invert(0);
+     .MediaLibrary__HideWindow {
+         width: 100%;
+
+         padding: 20px;
+         padding-right: 0;
+
+         display: flex;
+
+         span {
+             display: flex;
+             justify-content: center;
+             align-items: center;
+             text-wrap: nowrap;
+             padding-left: 5px;
+             padding-top: 2px;
+             padding-bottom: 2px;
+             padding-right: 5px;
+             border-radius: 5px;
+             width: 100%;
+             height: 100%;
+             background-color: white;
+             color: #000000;
+             font-size: 12px;
+
+             p {
+                 margin-right: .2rem;
+             }
+         }
+     }
+
+     @media (max-width: 750px) {
+         display: none;
+     }
+ }
+
+ .MediaLibrary__Navigation {
+
+     display: flex;
+     flex-direction: column;
+     margin-top: 10%;
+     margin-bottom: 10%;
+ }
+
+ .MediaLibrary__remove {
+
+     animation: AnimationRemove .4s linear;
+     transition: all 5s;
+ }
 
 
-        background:
-            linear-gradient(to bottom, #65171a85, #77000485, #65171a85),
-            //  url('https://img.freepik.com/free-vector/realistic-vhs-effect-background_23-2150087301.jpg?t=st=1721898377~exp=1721901977~hmac=b319cc324f97931e5fb11cb92695243ea8c2c47f6512989fc48ea28a39edc566&w=1380') center center;
-            url('https://i.pinimg.com/564x/c6/7f/37/c67f37d8d59604de9bdadca798f28de9.jpg') center center;
-    }
-
-    40% {
-        filter: invert(0);
-
-        background:
-            linear-gradient(to bottom, #a8000685, #ff000885, #a8000685),
-            //  url('https://img.freepik.com/free-vector/realistic-vhs-effect-background_23-2150087301.jpg?t=st=1721898377~exp=1721901977~hmac=b319cc324f97931e5fb11cb92695243ea8c2c47f6512989fc48ea28a39edc566&w=1380') center center;
-            url('https://i.pinimg.com/564x/c6/7f/37/c67f37d8d59604de9bdadca798f28de9.jpg') center center;
-    }
+ @keyframes AnimationRender {
+     0% {
+         filter: invert(0);
 
 
-    50% {
+         background:
+             linear-gradient(to bottom, #65171a85, #77000485, #65171a85),
+             //  url('https://img.freepik.com/free-vector/realistic-vhs-effect-background_23-2150087301.jpg?t=st=1721898377~exp=1721901977~hmac=b319cc324f97931e5fb11cb92695243ea8c2c47f6512989fc48ea28a39edc566&w=1380') center center;
+             url('https://i.pinimg.com/564x/c6/7f/37/c67f37d8d59604de9bdadca798f28de9.jpg') center center;
+     }
 
-        filter: invert(1);
-        background:
-            //  url('https://img.freepik.com/free-vector/realistic-vhs-effect-background_23-2150087295.jpg?t=st=1721898400~exp=1721902000~hmac=b53270f79df6572f039a5af7704a1d8d460af5891b9707ea4d82331ab51fe493&w=1380') center center;
-            url('https://i.pinimg.com/736x/de/68/50/de6850ef94520619dcdfa818198563ce.jpg') center center;
-    }
+     40% {
+         filter: invert(0);
 
-    60% {
-        filter: invert(0);
-        background:
-            linear-gradient(to bottom, #a8000685, #ff000885, #a8000685),
-            //  url('https://img.freepik.com/free-vector/realistic-vhs-effect-background_23-2150087286.jpg?t=st=1721898414~exp=1721902014~hmac=1802dddec792d7e3fad93956b0064ff2162c778b0161394ec23a761b09ca4c98&w=1380') center center;
-            url('https://i.pinimg.com/564x/c4/8a/0e/c48a0e72f8a4c7d31b84e625c18f5bc2.jpg') center center;
-
-    }
+         background:
+             linear-gradient(to bottom, #a8000685, #ff000885, #a8000685),
+             //  url('https://img.freepik.com/free-vector/realistic-vhs-effect-background_23-2150087301.jpg?t=st=1721898377~exp=1721901977~hmac=b319cc324f97931e5fb11cb92695243ea8c2c47f6512989fc48ea28a39edc566&w=1380') center center;
+             url('https://i.pinimg.com/564x/c6/7f/37/c67f37d8d59604de9bdadca798f28de9.jpg') center center;
+     }
 
 
-    100% {
+     50% {
 
-        filter: invert(0);
-        background:
-            linear-gradient(to bottom, #65171a85, #77000485, #65171a85),
-            url('https://i.pinimg.com/564x/78/95/8a/78958ac17e291a5b0400a9b335eead6b.jpg') center center;
+         filter: invert(1);
+         background:
+             //  url('https://img.freepik.com/free-vector/realistic-vhs-effect-background_23-2150087295.jpg?t=st=1721898400~exp=1721902000~hmac=b53270f79df6572f039a5af7704a1d8d460af5891b9707ea4d82331ab51fe493&w=1380') center center;
+             url('https://i.pinimg.com/736x/de/68/50/de6850ef94520619dcdfa818198563ce.jpg') center center;
+     }
 
-    }
-}
+     60% {
+         filter: invert(0);
+         background:
+             linear-gradient(to bottom, #a8000685, #ff000885, #a8000685),
+             //  url('https://img.freepik.com/free-vector/realistic-vhs-effect-background_23-2150087286.jpg?t=st=1721898414~exp=1721902014~hmac=1802dddec792d7e3fad93956b0064ff2162c778b0161394ec23a761b09ca4c98&w=1380') center center;
+             url('https://i.pinimg.com/564x/c4/8a/0e/c48a0e72f8a4c7d31b84e625c18f5bc2.jpg') center center;
 
-
-@keyframes AnimationRemove {
-    0% {
-        filter: invert(0);
-
-
-        background:
-            linear-gradient(to bottom, #65171a85, #77000485, #65171a85),
-            //  url('https://img.freepik.com/free-vector/realistic-vhs-effect-background_23-2150087301.jpg?t=st=1721898377~exp=1721901977~hmac=b319cc324f97931e5fb11cb92695243ea8c2c47f6512989fc48ea28a39edc566&w=1380') center center;
-            url('https://i.pinimg.com/564x/c6/7f/37/c67f37d8d59604de9bdadca798f28de9.jpg') center center;
-    }
-
-    40% {
-        filter: invert(0);
-
-        background:
-            linear-gradient(to bottom, #a8000685, #ff000885, #a8000685),
-            //  url('https://img.freepik.com/free-vector/realistic-vhs-effect-background_23-2150087301.jpg?t=st=1721898377~exp=1721901977~hmac=b319cc324f97931e5fb11cb92695243ea8c2c47f6512989fc48ea28a39edc566&w=1380') center center;
-            url('https://i.pinimg.com/564x/c6/7f/37/c67f37d8d59604de9bdadca798f28de9.jpg') center center;
-    }
+     }
 
 
-    50% {
+     100% {
 
-        filter: invert(1);
-        background:
-            //  url('https://img.freepik.com/free-vector/realistic-vhs-effect-background_23-2150087295.jpg?t=st=1721898400~exp=1721902000~hmac=b53270f79df6572f039a5af7704a1d8d460af5891b9707ea4d82331ab51fe493&w=1380') center center;
-            url('https://i.pinimg.com/736x/de/68/50/de6850ef94520619dcdfa818198563ce.jpg') center center;
-    }
+         filter: invert(0);
+         background:
+             linear-gradient(to bottom, #65171a85, #77000485, #65171a85),
+             url('https://i.pinimg.com/564x/78/95/8a/78958ac17e291a5b0400a9b335eead6b.jpg') center center;
 
-    60% {
-        filter: invert(0);
-        background:
-            linear-gradient(to bottom, #a8000685, #ff000885, #a8000685),
-            //  url('https://img.freepik.com/free-vector/realistic-vhs-effect-background_23-2150087286.jpg?t=st=1721898414~exp=1721902014~hmac=1802dddec792d7e3fad93956b0064ff2162c778b0161394ec23a761b09ca4c98&w=1380') center center;
-            url('https://i.pinimg.com/564x/c4/8a/0e/c48a0e72f8a4c7d31b84e625c18f5bc2.jpg') center center;
-
-    }
+     }
+ }
 
 
-    100% {
+ @keyframes AnimationRemove {
+     0% {
+         filter: invert(0);
 
-        filter: invert(0);
-        background:
-            linear-gradient(to bottom, #65171a85, #77000485, #65171a85),
-            url('https://i.pinimg.com/564x/78/95/8a/78958ac17e291a5b0400a9b335eead6b.jpg') center center;
 
-    }
-}
+         background:
+             linear-gradient(to bottom, #65171a85, #77000485, #65171a85),
+             //  url('https://img.freepik.com/free-vector/realistic-vhs-effect-background_23-2150087301.jpg?t=st=1721898377~exp=1721901977~hmac=b319cc324f97931e5fb11cb92695243ea8c2c47f6512989fc48ea28a39edc566&w=1380') center center;
+             url('https://i.pinimg.com/564x/c6/7f/37/c67f37d8d59604de9bdadca798f28de9.jpg') center center;
+     }
+
+     40% {
+         filter: invert(0);
+
+         background:
+             linear-gradient(to bottom, #a8000685, #ff000885, #a8000685),
+             //  url('https://img.freepik.com/free-vector/realistic-vhs-effect-background_23-2150087301.jpg?t=st=1721898377~exp=1721901977~hmac=b319cc324f97931e5fb11cb92695243ea8c2c47f6512989fc48ea28a39edc566&w=1380') center center;
+             url('https://i.pinimg.com/564x/c6/7f/37/c67f37d8d59604de9bdadca798f28de9.jpg') center center;
+     }
+
+
+     50% {
+
+         filter: invert(1);
+         background:
+             //  url('https://img.freepik.com/free-vector/realistic-vhs-effect-background_23-2150087295.jpg?t=st=1721898400~exp=1721902000~hmac=b53270f79df6572f039a5af7704a1d8d460af5891b9707ea4d82331ab51fe493&w=1380') center center;
+             url('https://i.pinimg.com/736x/de/68/50/de6850ef94520619dcdfa818198563ce.jpg') center center;
+     }
+
+     60% {
+         filter: invert(0);
+         background:
+             linear-gradient(to bottom, #a8000685, #ff000885, #a8000685),
+             //  url('https://img.freepik.com/free-vector/realistic-vhs-effect-background_23-2150087286.jpg?t=st=1721898414~exp=1721902014~hmac=1802dddec792d7e3fad93956b0064ff2162c778b0161394ec23a761b09ca4c98&w=1380') center center;
+             url('https://i.pinimg.com/564x/c4/8a/0e/c48a0e72f8a4c7d31b84e625c18f5bc2.jpg') center center;
+
+     }
+
+
+     100% {
+
+         filter: invert(0);
+         background:
+             linear-gradient(to bottom, #65171a85, #77000485, #65171a85),
+             url('https://i.pinimg.com/564x/78/95/8a/78958ac17e291a5b0400a9b335eead6b.jpg') center center;
+
+     }
+ }

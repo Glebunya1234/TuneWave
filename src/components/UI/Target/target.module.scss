@@ -1,61 +1,58 @@
-@import url('https://fonts-online.ru/path-to-fonts/versus.css');
-$font-family-versus: 'Versus', sans-serif;
+ .Target {
+     width: 100%;
+     height: min-content;
+     display: flex;
+     align-items: start;
+     justify-content: space-between;
+ }
 
-.Target {
-    width: 100%;
-    height: min-content;
-    display: flex;
-    align-items: start;
-    justify-content: space-between;
-}
+ .Border {
+     position: relative;
+     margin: 10px;
+     max-width: 20px;
 
-.Border {
-    position: relative;
-    margin: 10px;
-    max-width: 20px;
+     &::after {
+         content: '';
+         position: absolute;
+         top: 0;
+         left: 0;
+         width: 100%;
+         height: 100%;
+         scale: (2);
+         border: 1px solid #c1c0c5;
+     }
+ }
 
-    &::after {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%; // здесь указываете длину верхней границы
-        scale: (2);
-        border: 1px solid #c1c0c5;
-    }
-}
+ .RightDown {
+     @extend .Border;
 
-.RightDown {
-    @extend .Border;
+     &::after {
 
-    &::after {
-        // clip-path: polygon(0 20%, 20% 20%, 20% 0, 80% 0, 80% 20%, 100% 20%, 100% 80%, 80% 80%, 80% 100%, 20% 100%, 20% 80%, 0 80%);
-        clip-path: polygon(0 25%, 25% 25%, 25% 0, 75% 0, 75% 25%, 55% 38%, 47% 51%, 25% 75%, 0 75%);
-    }
-}
+         clip-path: polygon(0 25%, 25% 25%, 25% 0, 75% 0, 75% 25%, 55% 38%, 47% 51%, 25% 75%, 0 75%);
+     }
+ }
 
-.RightUp {
-    @extend .Border;
+ .RightUp {
+     @extend .Border;
 
-    &::after {
-        clip-path: polygon(0 25%, 25% 25%, 26% 47%, 53% 75%, 75% 75%, 75% 100%, 25% 100%, 25% 75%, 0 75%);
-    }
-}
+     &::after {
+         clip-path: polygon(0 25%, 25% 25%, 26% 47%, 53% 75%, 75% 75%, 75% 100%, 25% 100%, 25% 75%, 0 75%);
+     }
+ }
 
-.LeftDown {
-    @extend .Border;
+ .LeftDown {
+     @extend .Border;
 
-    &::after {
-        clip-path: polygon(53% 28%, 25% 25%, 25% 0, 75% 0, 75% 25%, 100% 25%, 100% 75%, 75% 75%, 75% 53%);
-    }
-}
+     &::after {
+         clip-path: polygon(53% 28%, 25% 25%, 25% 0, 75% 0, 75% 25%, 100% 25%, 100% 75%, 75% 75%, 75% 53%);
+     }
+ }
 
-.LeftUp {
-    @extend .Border;
+ .LeftUp {
+     @extend .Border;
 
-    &::after {
-        clip-path: polygon(76% 44%, 75% 25%, 100% 25%, 100% 75%, 75% 75%, 75% 100%, 25% 100%, 25% 75%, 53% 69%);
-    }
+     &::after {
+         clip-path: polygon(76% 44%, 75% 25%, 100% 25%, 100% 75%, 75% 75%, 75% 100%, 25% 100%, 25% 75%, 53% 69%);
+     }
 
-}
+ }
