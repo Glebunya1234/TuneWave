@@ -52,7 +52,6 @@ export const ArtistInfo = ({ id }: { id: string }) => {
     dedupingInterval: 60000,
   });
 
-  console.log("RelatedArtists", RelatedArtists);
   const handleClick = () => {
     if (state) {
       document.documentElement.style.setProperty("--HiddenList", "250px");
