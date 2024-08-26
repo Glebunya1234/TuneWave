@@ -14,16 +14,18 @@ import { _getArtistsAlbums } from "@/api/SP-Artists/API-SP-Artists";
 export const DiscographyListSingle = ({
   DataArtist,
   idForScroll,
+  include_groups,
   id,
 }: {
+  include_groups: string;
   DataArtist: string;
   idForScroll: string;
   id: string;
 }) => {
   const [viewState, setViewState] = useState<"list" | "grid">("list");
   const { data, isLoading } = useSWR<CurrentlyPlaylistTracksItem>(
-    `artistDiscography/single/${id}`,
-    async () => await _getArtistsAlbums(id, "single"),
+    `artistDiscography/${include_groups}/${id}`,
+    async () => await _getArtistsAlbums(id, include_groups),
     {
       keepPreviousData: true,
       revalidateOnFocus: false,
@@ -38,10 +40,10 @@ export const DiscographyListSingle = ({
     const fetchMoreData = async () => {
       if (fetching && hasMore !== null) {
         const newOffset = offset + 20;
-        const newData = await _getArtistsAlbums(id, "single", newOffset);
+        const newData = await _getArtistsAlbums(id, include_groups, newOffset);
 
         mutate(
-          `artistDiscography/single/${id}`,
+          `artistDiscography/${include_groups}/${id}`,
           (currentData: any) => ({
             ...currentData,
             items: [...(currentData?.items || []), ...newData.items],
