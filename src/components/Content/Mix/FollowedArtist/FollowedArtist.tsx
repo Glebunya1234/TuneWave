@@ -9,6 +9,7 @@ import { _getFollowedArtists } from "@/api/SP-Artists/API-SP-Artists";
 import { FollowedArtistType } from "@/types/SpotifyTypes/TrackArtist/type";
 import useSWR from "swr";
 import { PanelSkeleton } from "@/components/UI/Skeleton/Panel-Skeleton/PanelSkeleton";
+import { PanelPGAT } from "@/components/UI/Buttons/Panel-PlayList-Genre-Artist-Track/PanelPGAT";
 
 export const FollowedArtist = () => {
   const { data, isLoading } = useSWR<FollowedArtistType>(
@@ -19,26 +20,18 @@ export const FollowedArtist = () => {
       dedupingInterval: 60000,
     }
   );
-  const divs = Array.from({ length: 6 });
-  const items = data?.items?.slice(0, 6).map((data, index) => (
-    <Link
-      href={`/artist/${data.id}`}
-      className={style.ForUserMix__Item}
-      key={index}
-    >
-      <BorderMarquee shape="square" text={`${data.name}`}>
-        <aside className={style.Item__Conteiner}>
-          <Image
-            src={data.images[0].url || "/FavoriteTrack.png"}
-            layout="fill"
-            objectFit="cover"
-            alt={`Image for Mix user #${index + 1}`}
-          />
-          <span>{data.name}</span>
-        </aside>
-      </BorderMarquee>
-    </Link>
-  ));
+
+  const items = data?.items
+    ?.slice(0, 6)
+    .map((data, index) => (
+      <PanelPGAT
+        key={index}
+        Href={`/artist/${data.id}`}
+        FirstText={data.name}
+        SecondText={data.name}
+        ImageSRC={data.images[0].url || "/FavoriteTrack.png"}
+      />
+    ));
   return (
     <section className={style.ForUserMix}>
       <div className={style.ForUserMix_Div}>

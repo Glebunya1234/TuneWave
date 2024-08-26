@@ -5,6 +5,7 @@ import Image from "next/image";
 import style from "../For-user-Mix/ForUserMix.module.scss";
 import { BorderMarquee } from "@/components/UI/Marquee/Border-Marquee/BorderMarquee";
 import { _getTopArtists } from "@/api/SP-Artists/API-SP-Artists";
+import { PanelPGAT } from "@/components/UI/Buttons/Panel-PlayList-Genre-Artist-Track/PanelPGAT";
 
 export const TopGangreMix = async () => {
   const topArtist = await _getTopArtists();
@@ -17,23 +18,13 @@ export const TopGangreMix = async () => {
   );
 
   const items = Array.from(uniqueGenres).map((data, index) => (
-    <Link
-      href={`/playlist/genre?genre=${data}`}
-      className={style.ForUserMix__Item}
+    <PanelPGAT
       key={index}
-    >
-      <BorderMarquee shape="square" text={`${data}`}>
-        <aside className={style.Item__Conteiner}>
-          <Image
-            src="/DiscLogo.png"
-            layout="fill"
-            objectFit="cover"
-            alt={`Image for Mix user #${index + 1}`}
-          />
-          <span>{data}</span>
-        </aside>
-      </BorderMarquee>
-    </Link>
+      Href={`/playlist/genre?genre=${data}`}
+      FirstText={data}
+      SecondText={`${data}`}
+      ImageSRC={"/DiscLogo.png"}
+    />
   ));
   return (
     <section className={style.ForUserMix}>

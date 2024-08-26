@@ -85,7 +85,7 @@ const Section = ({ params }: { params: { id: string } }) => {
                 Href={`/playlist/genre?genre=${genre}`}
                 FirstText={genre}
                 SecondText={genre}
-                ImageSRC="/RandomPL.png"
+                ImageSRC="/DiscLogo.png"
               />
             ))
           : null;
