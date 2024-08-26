@@ -1,7 +1,7 @@
 "use server";
 
 import style from "../Discography.module.scss";
-import { DiscographyListSingle } from "@/components/DataLists/DiscographyList-Component/DiscographyListSingle";
+import { DiscographyList } from "@/components/DataLists/DiscographyList-Component/DiscographyList";
 import { PanelTarget } from "@/components/UI/Target/PanelTarget";
 import { getDataCacheArtist } from "@/utils/helper/CacheHelper/cacheHLP";
 
@@ -10,7 +10,7 @@ const DiscographySingle = async ({ params }: { params: { id: string } }) => {
   return (
     <div className={style.Discography}>
       <PanelTarget side="Top" />
-      <DiscographyListSingle
+      <DiscographyList
         DataArtist={artist.name}
         idForScroll={`DiscographyListSinglePage`}
         id={params.id}

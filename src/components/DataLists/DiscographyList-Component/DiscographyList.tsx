@@ -1,18 +1,17 @@
 "use client";
 
-import style from "./DiscographyListSingle.module.scss";
+import style from "./DiscographyList.module.scss";
 import useSWR, { useSWRConfig } from "swr";
 import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { FaTh, FaThList } from "react-icons/fa";
 import { AlbumInformation } from "../AlbumList-Component/AlbumInformation";
-import { PanelPGAT } from "@/components/UI/Buttons/Panel-PlayList-Genre-Artist-Track/PanelPGAT";
-import { CurrentlyPlaylistTracksItem } from "@/types/SpotifyTypes/CurrentlyAlbum/type";
-import { _getArtistsAlbums } from "@/api/SP-Artists/API-SP-Artists";
 import { GridPanelPGAT } from "@/components/UI/Buttons/Panel-PlayList-Genre-Artist-Track/GridPanelPGAT";
+import { _getArtistsAlbums } from "@/api/SP-Artists/API-SP-Artists";
+import { CurrentlyPlaylistTracksItem } from "@/types/SpotifyTypes/CurrentlyAlbum/type";
 
-export const DiscographyListSingle = ({
+export const DiscographyList = ({
   DataArtist,
   idForScroll,
   include_groups,

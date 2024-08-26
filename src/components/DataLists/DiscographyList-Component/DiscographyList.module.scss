@@ -71,6 +71,11 @@
         font-size: 26px;
         text-transform: uppercase;
         font-family: var(--font-family-versus);
+        text-overflow: ellipsis;
+        overflow: hidden;
+
+        text-overflow: ellipsis;
+
 
         &:hover {
             text-decoration: underline;
@@ -126,23 +131,27 @@
 
                 .Preview__image {
                     width: 136px;
+                    min-width: 136px;
                     margin-left: 20px;
                     position: relative;
                     aspect-ratio: 1 / 1;
 
                     @media (max-width:1200px) {
-                        width: 120px;
-                        height: 120px;
+                        width: 100px;
+                        min-width: 100px;
+                        aspect-ratio: 1 / 1;
                     }
 
                     @media (max-width:870px) {
-                        width: 100px;
-                        height: 100px;
+                        width: 70px;
+                        min-width: 70px;
+                        aspect-ratio: 1 / 1;
                     }
 
                     @media (max-width:420px) {
-                        width: 80px;
-                        height: 80px;
+                        width: 50px;
+                        min-width: 50px;
+                        aspect-ratio: 1 / 1;
                     }
                 }
 
@@ -152,9 +161,25 @@
                     flex-direction: column;
                     margin-left: 20px;
 
+
                     .info__Link {
                         @extend .Span__Link;
                         font-size: 32px;
+
+                        @media (max-width:1200px) {
+                            font-size: 16px;
+
+                        }
+
+                        @media (max-width:870px) {
+                            font-size: 12px;
+
+                        }
+
+                        @media (max-width:420px) {
+                            font-size: 12px;
+
+                        }
                     }
 
                     aside {
@@ -163,7 +188,22 @@
                         text-wrap: nowrap;
                         text-transform: capitalize;
                         color: #b4b4b4;
+                        font-size: 16px;
 
+                        @media (max-width:1200px) {
+                            font-size: 12px;
+
+                        }
+
+                        @media (max-width:870px) {
+                            font-size: 10px;
+
+                        }
+
+                        @media (max-width:420px) {
+                            font-size: 8px;
+
+                        }
                     }
                 }
             }
