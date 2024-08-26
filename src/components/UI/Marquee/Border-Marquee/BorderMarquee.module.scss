@@ -41,6 +41,10 @@
    display: inline-block;
    opacity: 0;
 
+
+   @media (max-width: 850px) {
+     font-size: 8px;
+   }
  }
 
  .marq_Top {
@@ -71,6 +75,9 @@
    @extend .marq_Top;
    top: calc(-10% + $heightMarq );
 
+   @media (max-width: 850px) {
+     top: calc(-10% + 12px);
+   }
  }
 
  .marq_Left_Square {
