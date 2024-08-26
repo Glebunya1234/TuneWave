@@ -8,6 +8,7 @@ import { VscLibrary } from "react-icons/vsc";
 import { CurrentlyPlaylist } from "@/types/SpotifyTypes/CurrentlyPlaylist/type";
 
 import { _getCurrentUserPlaylists } from "@/api/SP-Playlists/API-SP-Playlists";
+import { ButtonSkeleton } from "@/components/UI/Skeleton/Button-Skeleton/ButtonSkeleton";
 export const fetcherGetCurrentUserPlaylist = () => _getCurrentUserPlaylists(50);
 export const MediaPlaylist = () => {
   const router = useRouter();
@@ -21,7 +22,7 @@ export const MediaPlaylist = () => {
       dedupingInterval: 60000,
     }
   );
-  const divs = Array.from({ length: 5 });
+
   return (
     <section className={style.MediaPlaylist}>
       <nav className={style.MediaPlaylist__Nav}>
@@ -57,21 +58,9 @@ export const MediaPlaylist = () => {
             <h1>Favorite Tracks</h1>
           </div>
         </button>
-        {isLoading &&
-          divs.map((_, index) => (
-            <div key={index} className={style.Content__items}>
-              <div className="animate-pulse min-w-[40px] h-[40px] ml-[2px]">
-                <div className=" w-full h-full  bg-[#4e4e4e] "></div>
-              </div>
-
-              <div className="space-y-3 w-full  pl-2 animate-pulse">
-                <div className="grid grid-cols-3 gap-4">
-                  <div className="h-2  bg-[#4e4e4e] rounded col-span-2"></div>
-                </div>
-                <div className="h-2  bg-[#4e4e4e]  rounded"></div>
-              </div>
-            </div>
-          ))}
+        {isLoading && (
+          <ButtonSkeleton className={style.Content__items} arrayLength={8} />
+        )}
 
         {data?.items?.slice(0, 15).map((item, index) => (
           <button
@@ -84,7 +73,6 @@ export const MediaPlaylist = () => {
             <div className={style.item__img}>
               <Image
                 src={item.images[0]?.url || "/FavoriteTrack.png"}
-                // className={style.img}
                 layout="fill"
                 objectFit="cover"
                 alt="alt"

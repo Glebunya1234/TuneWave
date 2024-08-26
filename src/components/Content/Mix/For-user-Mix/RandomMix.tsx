@@ -3,6 +3,7 @@
 import style from "./ForUserMix.module.scss";
 import Link from "next/link";
 import { BorderMarquee } from "@/components/UI/Marquee/Border-Marquee/BorderMarquee";
+import { PanelPGAT } from "@/components/UI/Buttons/Panel-PlayList-Genre-Artist-Track/PanelPGAT";
 
 export const RandomMix = async () => {
   const items = Array.from({ length: 6 }, (_, index) => (
