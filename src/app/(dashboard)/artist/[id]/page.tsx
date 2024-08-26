@@ -6,9 +6,10 @@ import { DisplayInfo } from "@/components/DisplayInfo/DisplayInfo";
 import { _getArtists } from "@/api/SP-Artists/API-SP-Artists";
 import { TrackArtist } from "@/types/SpotifyTypes/TrackArtist/type";
 import { ArtistInfo } from "@/components/Content/ArtistInfo-Component/ArtistInfo";
+import { getDataCacheArtist } from "@/utils/helper/CacheHelper/cacheHLP";
 
 const artistPage = async ({ params }: { params: { id: string } }) => {
-  const data = await getData(params.id);
+  const data = await getDataCacheArtist(params.id);
   return (
     <div className={style.Artist}>
       <PanelTarget side="Top" />
@@ -28,9 +29,5 @@ const artistPage = async ({ params }: { params: { id: string } }) => {
     </div>
   );
 };
-// ===========================================================
-const getData = cache(async (id: string) => {
-  const Artist: TrackArtist[] = await _getArtists(id);
-  return Artist[0];
-});
+
 export default artistPage;

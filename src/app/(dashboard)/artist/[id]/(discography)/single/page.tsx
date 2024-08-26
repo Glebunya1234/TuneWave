@@ -3,13 +3,14 @@
 import { DiscographyListSingle } from "@/components/DataLists/DiscographyList-Component/DiscographyListSingle";
 import style from "./single.module.scss";
 import { PanelTarget } from "@/components/UI/Target/PanelTarget";
+import { getDataCacheArtist } from "@/utils/helper/CacheHelper/cacheHLP";
 
 const DiscographySingle = async ({ params }: { params: { id: string } }) => {
-  console.log("params", params);
+  const artist = await getDataCacheArtist(params.id);
   return (
     <div className={style.Single}>
       <PanelTarget side="Top" />
-      <DiscographyListSingle id={params.id} />
+      <DiscographyListSingle DataArtist={artist.name} id={params.id} />
       <div className={style.dash}></div>
       <div className={style.squarDash}></div>
       <PanelTarget side="Bottom" />
