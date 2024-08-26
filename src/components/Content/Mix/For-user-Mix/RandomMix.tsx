@@ -15,7 +15,7 @@ export const RandomMix = async () => {
       <BorderMarquee shape="square" text={`Random#${index + 1}`}>
         <aside className={style.Item__Conteiner}>
           <h1 className={style.RandomTextImage}>#{index + 1}</h1>
-          <span>Random list#{index + 1}</span>
+          <span className={style.Item__Span}>Random list#{index + 1}</span>
         </aside>
       </BorderMarquee>
     </Link>

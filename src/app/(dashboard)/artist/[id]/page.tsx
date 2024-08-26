@@ -1,11 +1,9 @@
 "use server";
 import style from "./artist.module.scss";
-import { cache } from "react";
 import { PanelTarget } from "@/components/UI/Target/PanelTarget";
 import { DisplayInfo } from "@/components/DisplayInfo/DisplayInfo";
+import { ArtistInfoConteiner } from "@/components/Content/ArtistInfo-Component/ArtistInfoConteiner";
 import { _getArtists } from "@/api/SP-Artists/API-SP-Artists";
-import { TrackArtist } from "@/types/SpotifyTypes/TrackArtist/type";
-import { ArtistInfo } from "@/components/Content/ArtistInfo-Component/ArtistInfo";
 import { getDataCacheArtist } from "@/utils/helper/CacheHelper/cacheHLP";
 
 const artistPage = async ({ params }: { params: { id: string } }) => {
@@ -21,7 +19,7 @@ const artistPage = async ({ params }: { params: { id: string } }) => {
         FollowersTotal={data.followers.total}
         FollowersText="followers   •"
       >
-        <ArtistInfo id={params.id} />
+        <ArtistInfoConteiner id={params.id} />
       </DisplayInfo>
       <div className={style.dash}></div>
       <div className={style.squarDash}></div>

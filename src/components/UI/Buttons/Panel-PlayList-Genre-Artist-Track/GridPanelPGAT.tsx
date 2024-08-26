@@ -1,5 +1,5 @@
 import Link from "next/link";
-import style from "./PanelPGAT.module.scss";
+import style from "./GridPanelPGAT.module.scss";
 import { BorderMarquee } from "../../Marquee/Border-Marquee/BorderMarquee";
 import Image from "next/image";
 type PGAT = {
@@ -9,7 +9,12 @@ type PGAT = {
   ImageSRC: string;
 };
 
-export const PanelPGAT = ({ Href, FirstText, SecondText, ImageSRC }: PGAT) => {
+export const GridPanelPGAT = ({
+  Href,
+  FirstText,
+  SecondText,
+  ImageSRC,
+}: PGAT) => {
   return (
     <Link href={Href} className={style.ForUserMix__Item}>
       <BorderMarquee shape="square" text={`${SecondText}`}>

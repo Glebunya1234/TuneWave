@@ -10,6 +10,7 @@ import { AlbumInformation } from "../AlbumList-Component/AlbumInformation";
 import { PanelPGAT } from "@/components/UI/Buttons/Panel-PlayList-Genre-Artist-Track/PanelPGAT";
 import { CurrentlyPlaylistTracksItem } from "@/types/SpotifyTypes/CurrentlyAlbum/type";
 import { _getArtistsAlbums } from "@/api/SP-Artists/API-SP-Artists";
+import { GridPanelPGAT } from "@/components/UI/Buttons/Panel-PlayList-Genre-Artist-Track/GridPanelPGAT";
 
 export const DiscographyListSingle = ({
   DataArtist,
@@ -151,7 +152,7 @@ export const DiscographyListSingle = ({
                 <AlbumInformation data={it.tracks.items} />
               </section>
             ) : (
-              <PanelPGAT
+              <GridPanelPGAT
                 key={it.id}
                 Href={`/album/${it.id}`}
                 FirstText={it.name}
