@@ -26,9 +26,11 @@ export const AlbumInformation = ({ data }: { data: TrackItem[] }) => {
       {data !== undefined ? (
         data.map((item, index) => {
           return (
-            <div key={index} className={style.Playlist__Track}>
+            <div
+              key={`${item.id} - ${index}`}
+              className={style.Playlist__Track}
+            >
               <PlayTrackBtn
-                key={index}
                 id={item.id}
                 text={index + 1}
                 onHover={{
@@ -47,9 +49,12 @@ export const AlbumInformation = ({ data }: { data: TrackItem[] }) => {
                   </Link>
                 </div>
                 <div className={style.TrackArtist}>
-                  {item.artists.map((artist) => (
-                    <Link key={index} href={`/artist/${artist.id}`}>
-                      <p key={artist.name}>{artist.name}</p>
+                  {item.artists.map((artist, id) => (
+                    <Link
+                      key={`${artist.id} - ${id}`}
+                      href={`/artist/${artist.id}`}
+                    >
+                      <p>{artist.name}</p>
                     </Link>
                   ))}
                 </div>
