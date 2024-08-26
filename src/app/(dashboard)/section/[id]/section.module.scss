@@ -1,83 +1,80 @@
-@import url('https://fonts-online.ru/path-to-fonts/versus.css');
-$font-family-versus: 'Versus', sans-serif;
-
-.Section {
-    max-width: 1900px;
-    width: 100%;
-    height: 100%;
-    margin-top: 10px;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: start;
-    background-color: #00000091;
-    overflow: hidden;
-    transition: all .2s ease-in-out;
+ .Section {
+     max-width: 1900px;
+     width: 100%;
+     height: 100%;
+     margin-top: 10px;
+     position: relative;
+     display: flex;
+     flex-direction: column;
+     justify-content: start;
+     background-color: #00000091;
+     overflow: hidden;
+     transition: all .2s ease-in-out;
 
 
-    .mark {
-        z-index: 2;
-        clip-path: circle(45% at 50% 50%);
-    }
+     .mark {
+         z-index: 2;
+         clip-path: circle(45% at 50% 50%);
+     }
 
-    .ForUserMix_Div {
-        color: white;
-        text-transform: uppercase;
-        font-family: $font-family-versus ;
-        margin: 10px 60px;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        align-content: center;
-    }
+     .ForUserMix_Div {
+         color: white;
+         text-transform: uppercase;
+         font-family: var(--font-family-versus);
+         margin: 10px 60px;
+         display: flex;
+         flex-direction: row;
+         justify-content: space-between;
+         align-items: center;
+         align-content: center;
+     }
 
-    .Section__Content {
+     .Section__Content {
 
-        width: 100%;
-        height: 100%;
-        display: grid;
-        grid-template-columns: repeat(6, 1fr);
-        gap: 20px;
-        padding: 10px 60px;
-        grid-auto-rows: max-content;
-        color: white;
-        overflow-y: scroll;
+         width: 100%;
+         height: 100%;
+         display: grid;
+         grid-template-columns: repeat(6, 1fr);
+         gap: 20px;
+         padding: 10px 60px;
+         grid-auto-rows: max-content;
+         color: white;
+         overflow-y: scroll;
 
-        @media (max-width: 1750px) {
-            grid-template-columns: repeat(5, 1fr);
-        }
+         @media (max-width: 1750px) {
+             grid-template-columns: repeat(5, 1fr);
+         }
 
-        @media (max-width: 1500px) {
-            grid-template-columns: repeat(4, 1fr);
-        }
+         @media (max-width: 1500px) {
+             grid-template-columns: repeat(4, 1fr);
+         }
 
-        @media (max-width: 1350px) {
-            grid-template-columns: repeat(3, 1fr);
-        }
+         @media (max-width: 1350px) {
+             grid-template-columns: repeat(3, 1fr);
+         }
 
-        @media (max-width: 1070px) {
-            grid-template-columns: repeat(2, 1fr);
-        }
+         @media (max-width: 1070px) {
+             grid-template-columns: repeat(2, 1fr);
+         }
 
 
 
-    }
+     }
 
-    .dash {
-        position: absolute;
-        top: 50px;
-        left: 10px;
-        width: 22px;
-        height: 70px;
-        background: repeating-linear-gradient(315deg, #b9becc, #b9becc 1.5px, transparent 0px, transparent 5px);
-    }
+     .dash {
+         position: absolute;
+         top: 50px;
+         left: 10px;
+         width: 22px;
+         height: 70px;
+         background: repeating-linear-gradient(315deg, #b9becc, #b9becc 1.5px, transparent 0px, transparent 5px);
+     }
 
-    .squarDash {
-        @extend .dash;
-        top: 130px;
-        width: 22px;
-        height: 22px;
-        background: repeating-linear-gradient(45deg, #b9becc, #b9becc 1.5px, transparent 0px, transparent 5px);
-    }
-}
+     .squarDash {
+         @extend .dash;
+         top: 130px;
+         width: 22px;
+         height: 22px;
+         background: repeating-linear-gradient(45deg, #b9becc, #b9becc 1.5px, transparent 0px, transparent 5px);
+     }
+ }

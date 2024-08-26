@@ -10,6 +10,7 @@ import {
   TrackArtist,
 } from "@/types/SpotifyTypes/TrackArtist/type";
 import { _getTopArtists } from "@/api/SP-Artists/API-SP-Artists";
+import { PanelSkeleton } from "@/components/UI/Skeleton/Panel-Skeleton/PanelSkeleton";
 
 export const TopArtistMix = () => {
   const { data: topArtist, isLoading } = useSWR<FollowedArtistType>(
@@ -50,15 +51,11 @@ export const TopArtistMix = () => {
       </div>
 
       <nav className={style.ForUserMix__Conteiner}>
-        {isLoading
-          ? divs.map((_, id) => (
-              <div key={id} className={style.ForUserMix__Item}>
-                <div className="w-full h-full p-4 animate-pulse bg-[#00000094]">
-                  <div className="w-full h-full bg-[#4e4e4e91]"></div>
-                </div>
-              </div>
-            ))
-          : items}
+        {isLoading ? (
+          <PanelSkeleton className={style.ForUserMix__Item} />
+        ) : (
+          items
+        )}
       </nav>
     </section>
   );

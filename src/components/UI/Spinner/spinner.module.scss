@@ -1,13 +1,6 @@
-@import url("https://fonts-online.ru/path-to-fonts/versus.css");
-$font-family-versus: "Versus", sans-serif;
-@import url('https://fonts.googleapis.com/css2?family=Covered+By+Your+Grace&display=swap');
-$font-family-covered: "Covered By Your Grace", cursive;
-@import url('https://fonts.googleapis.com/css2?family=Single+Day&display=swap');
-$font-family-SingleDay: "Single Day", sans-serif;
-;
-
 .spinner {
-    font-family: $font-family-versus;
+    font-family: var(--font-family-versus);
+
     width: 100%;
     height: 40px;
     overflow: hidden;
@@ -57,21 +50,21 @@ $font-family-SingleDay: "Single Day", sans-serif;
         25% {
             top: 0px;
             font-size: 20px;
-            font-family: $font-family-versus;
+            font-family: var(--font-family-versus);
         }
 
 
         26% {
             top: -10px;
             font-size: 32px;
-            font-family: $font-family-SingleDay;
+            font-family: var(--font-family-SingleDay);
         }
 
         45% {
             color: white;
             top: -10px;
             font-size: 32px;
-            font-family: $font-family-SingleDay;
+            font-family: var(--font-family-SingleDay);
         }
 
 
@@ -79,21 +72,21 @@ $font-family-SingleDay: "Single Day", sans-serif;
             color: #29e229;
             top: -10px;
             font-size: 34px;
-            font-family: $font-family-covered;
+            font-family: var(--font-family-covered);
         }
 
         64% {
             color: #29e229;
             top: -10px;
             font-size: 34px;
-            font-family: $font-family-covered;
+            font-family: var(--font-family-covered);
         }
 
         65% {
             color: white;
             top: 0px;
             font-size: 20px;
-            font-family: $font-family-versus;
+            font-family: var(--font-family-versus);
         }
 
         88% {
@@ -132,20 +125,20 @@ $font-family-SingleDay: "Single Day", sans-serif;
 
             top: 0px;
             font-size: 20px;
-            font-family: $font-family-versus;
+            font-family: var(--font-family-versus);
         }
 
 
         26% {
 
             top: -10px;
-            font-family: $font-family-covered;
+            font-family: var(--font-family-covered);
             font-size: 32px;
         }
 
         45% {
             top: -10px;
-            font-family: $font-family-covered;
+            font-family: var(--font-family-covered);
             font-size: 32px;
             color: white;
         }
@@ -155,21 +148,21 @@ $font-family-SingleDay: "Single Day", sans-serif;
             color: #29e229;
             top: -10px;
             font-size: 34px;
-            font-family: $font-family-SingleDay;
+            font-family: var(--font-family-SingleDay);
         }
 
         64% {
             color: #29e229;
             top: -10px;
             font-size: 34px;
-            font-family: $font-family-SingleDay;
+            font-family: var(--font-family-SingleDay);
         }
 
         65% {
             color: white;
             top: 0px;
             font-size: 20px;
-            font-family: $font-family-versus;
+            font-family: var(--font-family-versus);
         }
 
         88% {

@@ -19,11 +19,11 @@ const Profile = async () => {
           <div className={style.squarDash}></div>
           <aside className={style.Content__Conteiner}>
             <FavoriteBanner />
-            {/* <RandomMix /> */}
-            {/* <TopArtistMix /> */}
-            {/* <FollowedArtist /> */}
-            {/* <ListenToThisCmp /> */}
-            {/* <TopGangreMix /> */}
+            <RandomMix />
+            <TopArtistMix />
+            <FollowedArtist />
+            <ListenToThisCmp />
+            <TopGangreMix />
           </aside>
         </aside>
         <PanelTarget side="Bottom" />

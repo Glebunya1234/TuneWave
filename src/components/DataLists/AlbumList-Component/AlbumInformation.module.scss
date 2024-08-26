@@ -1,73 +1,70 @@
-@import url('https://fonts-online.ru/path-to-fonts/versus.css');
-$font-family-versus: 'Versus', sans-serif;
+ .AlbumInformation {
+     width: 100%;
+     display: grid;
+     grid-template-columns: 1fr;
+     grid-template-rows: min-content;
 
-.AlbumInformation {
-    width: 100%;
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: min-content;
-
-    .Playlist__Track {
-        display: grid;
-        grid-template-columns: 20px 2fr auto auto;
-        grid-template-rows: min-content;
-        align-items: center;
-        margin-bottom: 10px;
-        box-sizing: border-box;
+     .Playlist__Track {
+         display: grid;
+         grid-template-columns: 20px 2fr auto auto;
+         grid-template-rows: min-content;
+         align-items: center;
+         margin-bottom: 10px;
+         box-sizing: border-box;
 
 
 
-        &:hover {
-            background-color: rgba(160, 160, 160, 0.144);
-        }
+         &:hover {
+             background-color: rgba(160, 160, 160, 0.144);
+         }
 
-        div {
-            font-size: 12px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
+         div {
+             font-size: 12px;
+             white-space: nowrap;
+             overflow: hidden;
+             text-overflow: ellipsis;
+         }
 
-        .TrackIndex {
-            width: 100%;
-            height: 100%;
-            padding-right: 3px;
-            text-align: center;
-            z-index: 1;
+         .TrackIndex {
+             width: 100%;
+             height: 100%;
+             padding-right: 3px;
+             text-align: center;
+             z-index: 1;
 
-            p {
-                pointer-events: none;
-                z-index: 0;
-            }
+             p {
+                 pointer-events: none;
+                 z-index: 0;
+             }
 
-            * {
-                pointer-events: none;
-                z-index: 0;
-            }
-        }
-
-
-        .TrackInfo {
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
+             * {
+                 pointer-events: none;
+                 z-index: 0;
+             }
+         }
 
 
-
-            .TrackArtist {
-                font-size: 10px;
-                display: flex;
-
-                p {
-                    margin-right: 5px;
-                }
-            }
-        }
-
-        .TrackDuration {
-            padding-right: 10px;
-        }
+         .TrackInfo {
+             display: flex;
+             flex-direction: column;
+             overflow: hidden;
 
 
-    }
-}
+
+             .TrackArtist {
+                 font-size: 10px;
+                 display: flex;
+
+                 p {
+                     margin-right: 5px;
+                 }
+             }
+         }
+
+         .TrackDuration {
+             padding-right: 10px;
+         }
+
+
+     }
+ }
