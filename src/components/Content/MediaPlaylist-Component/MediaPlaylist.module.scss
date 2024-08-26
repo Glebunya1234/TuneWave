@@ -68,8 +68,15 @@
             padding-left: 5px;
             background: rgba(0, 0, 0, 0.5803921569);
 
+
+
+
             &:hover {
                 background: rgba(255, 255, 255, 0.58);
+
+                &:active {
+                    background: #00dc00;
+                }
 
                 .items__Info {
                     color: black;
