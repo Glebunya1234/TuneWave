@@ -14,6 +14,7 @@ import {
   _isTypeRecommendation,
 } from "@/utils/TypeOfCustom/TypeOfCustom";
 import { Spinner } from "@/components/UI/Spinner/spinner";
+import { GridPanelPGAT } from "@/components/UI/Buttons/Panel-PlayList-Genre-Artist-Track/GridPanelPGAT";
 
 const Section = ({ params }: { params: { id: string } }) => {
   const { data, isLoading } = useSWR<
@@ -80,7 +81,7 @@ const Section = ({ params }: { params: { id: string } }) => {
                   .map((it) => it.genres[0])
               )
             ).map((genre, index) => (
-              <PanelPGAT
+              <GridPanelPGAT
                 key={index}
                 Href={`/playlist/genre?genre=${genre}`}
                 FirstText={genre}
@@ -94,7 +95,7 @@ const Section = ({ params }: { params: { id: string } }) => {
       case "FollowedArtists":
         return _isFollowedArtist(data)
           ? data.items.map((it, id) => (
-              <PanelPGAT
+              <GridPanelPGAT
                 key={id}
                 Href={
                   params.id === "TopArtists"

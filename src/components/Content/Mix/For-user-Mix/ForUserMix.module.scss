@@ -74,6 +74,10 @@
              }
 
              .Item__Conteiner {
+                 position: relative;
+                 width: 100%;
+                 height: 100%;
+
                  .RandomTextImage {
                      font-family: var(--font-family-versus);
                      width: 100%;
@@ -84,22 +88,17 @@
                      font-size: 50px;
 
                      @media (max-width:1500px) {
-
-
                          font-size: 40px;
-
                      }
 
                      @media (max-width:850px) {
-
-
                          font-size: 30px;
 
 
                      }
                  }
 
-                 position: relative;
+
 
                  &::after {
                      content: "";
@@ -114,10 +113,8 @@
                  }
 
 
-                 width: 100%;
-                 height: 100%;
 
-                 span {
+                 .Item__Span {
                      top: 110px;
                      left: 5px;
                      color: black;

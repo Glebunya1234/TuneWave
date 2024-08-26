@@ -1,69 +1,72 @@
- .SpotifyAuthPanel {
-   width: 270px;
+@import url('https://fonts-online.ru/path-to-fonts/versus.css');
+$font-family-versus: 'Versus', sans-serif;
 
-   height: 140px;
-   overflow: hidden;
+.SpotifyAuthPanel {
+  width: 270px;
 
-   white-space: nowrap;
+  height: 140px;
+  overflow: hidden;
 
- }
+  white-space: nowrap;
 
-
-
- .SpotifyAuthButton__Button {
-   text-wrap: nowrap;
-   padding-left: 5px;
-   padding-right: 5px;
-   font-family: var(--font-family-versus);
-   font-size: 10px;
-   text-transform: uppercase;
-   transition: all .1s ease-in-out;
-   color: white;
-   width: 100%;
-   margin-bottom: 8px;
-   position: relative;
-   z-index: 1;
+}
 
 
 
-
-
-
-   &:hover {
-     color: black;
-     background-color: white;
-     scale: 1.2;
-
-
-     &:after {
-       content: '';
-       position: absolute;
-
-       width: 100%;
-       height: 100%;
-       top: 1px;
-       left: 1px;
-
-
-       border-width: 1px;
-       border-top: 0px;
-       border-left: 0px;
-       border-color: #8e56ad;
-
-
-
-       z-index: -1;
-     }
-
-
-   }
-
-   &:active {
-     background-color: #00dc00;
-   }
+.SpotifyAuthButton__Button {
+  text-wrap: nowrap;
+  padding-left: 5px;
+  padding-right: 5px;
+  font-family: $font-family-versus;
+  font-size: 10px;
+  text-transform: uppercase;
+  transition: all .1s ease-in-out;
+  color: white;
+  width: 100%;
+  margin-bottom: 8px;
+  position: relative;
+  z-index: 1;
 
 
 
 
 
- }
+
+  &:hover {
+    color: black;
+    background-color: white;
+    scale: 1.2;
+
+
+    &:after {
+      content: '';
+      position: absolute;
+
+      width: 100%;
+      height: 100%;
+      top: 1px;
+      left: 1px;
+
+
+      border-width: 1px;
+      border-top: 0px;
+      border-left: 0px;
+      border-color: #8e56ad;
+
+
+
+      z-index: -1;
+    }
+
+
+  }
+
+  &:active {
+    background-color: #00dc00;
+  }
+
+
+
+
+
+}
