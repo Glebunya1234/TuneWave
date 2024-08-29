@@ -9,12 +9,14 @@ import {
   _getArtistsTopTracks,
   _getRelatedArtists,
 } from "@/api/SP-Artists/API-SP-Artists";
-
-export const fetcherGetCurrentUserPlaylist = () => _getCurrentUserPlaylists(50);
+import { FollowUnFollow } from "@/components/DataLists/ArtistData-Component/ArtistFollow-UnFollow-Conteiner/ArtistFollowUnfollow";
 
 export const ArtistInfoConteiner = ({ id }: { id: string }) => {
   return (
     <section className={style.ArtistInfo}>
+      <section className={style.ArtistInfo__Sections}>
+        <FollowUnFollow id={id} />
+      </section>
       <section className={style.ArtistInfo__Sections}>
         <ArtistTopTrack id={id} />
       </section>
