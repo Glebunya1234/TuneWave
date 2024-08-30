@@ -9,6 +9,7 @@ export interface Artist {
   name: string;
   type: string;
   uri: string;
+  isFollow: boolean;
 }
 
 export interface Album {

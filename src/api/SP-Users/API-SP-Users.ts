@@ -58,9 +58,18 @@ export const _UserFollowArtist = async (ids: string) => {
     return
 
 }
-export const _CheckIsFollowArtist = async (ids: string): Promise<boolean> => {
+export const _CheckIsFollowArtist = async (ids: string | string[]): Promise<boolean[]> => {
     const { access_token } = await test()
-    const response = await fetch(`https://api.spotify.com/v1/me/following/contains?type=artist&ids=${ids}`, {
+    let idsString;
+
+    if (typeof ids === 'string') {
+        idsString = ids
+    }
+    else {
+        idsString = ids.join(',');
+    }
+    const encodedIds = encodeURIComponent(idsString);
+    const response = await fetch(`https://api.spotify.com/v1/me/following/contains?type=artist&ids=${encodedIds}`, {
 
         method: 'GET',
         headers: {
@@ -72,11 +81,11 @@ export const _CheckIsFollowArtist = async (ids: string): Promise<boolean> => {
     if (!response.ok) {
         const error = await response.json();
         console.error('Error:', error);
-        return false;
+        return [false];
     }
 
     const data = await response.json();
-    console.error('Sacces', data[0]);
-    return data[0]
+    console.error('Sacces', data);
+    return data
 
 }

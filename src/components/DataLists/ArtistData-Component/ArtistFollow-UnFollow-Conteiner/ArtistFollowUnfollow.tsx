@@ -20,7 +20,7 @@ export const FollowUnFollow = ({ id }: { id: string }) => {
         <FollowBtn
           id={id}
           className={style.NavPanel__PlayTrackBtn}
-          isSave={data !== undefined ? data : false}
+          isSave={data !== undefined ? data[0] : false}
         />
       )}
     </nav>
