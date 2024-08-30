@@ -1,7 +1,9 @@
 "use server"
+import { CurrentlyPlayingTrack } from "@/types/SpotifyTypes/CurrentlyPlayingTrack/type";
 import { test } from "../SP-Tokens/API-SP-Tokens";
+import { _CheckIsFollowArtist } from "../SP-Users/API-SP-Users";
 
-export const _getCurrentlyPlayingTrack = async (token?: string | null): Promise<any> => {
+export const _getCurrentlyPlayingTrack = async (token?: string | null): Promise<CurrentlyPlayingTrack> => {
     const url = "https://api.spotify.com/v1/me/player/currently-playing"
 
     const { access_token } = await test()
@@ -17,8 +19,19 @@ export const _getCurrentlyPlayingTrack = async (token?: string | null): Promise<
         console.warn("Errorrrr")
 
     }
-    const Data = await response.json();
-    return Data
+    const Data: CurrentlyPlayingTrack = await response.json();
+    const checkedFollow = await _CheckIsFollowArtist(Data.item.artists.map(id => id.id))
+
+
+
+
+    const WithSavedInfo = Data.item.artists.map((artist, index) => ({
+        ...artist,
+        isFollow: checkedFollow[index],
+
+    }));
+
+    return { ...Data, item: { ...Data.item, artists: WithSavedInfo } }
 }
 
 export const _setPlayTrack = async (uri: string) => {
@@ -65,7 +78,7 @@ export const _UnSaveTrack = async (ids: string) => {
     }
 
     const data = await response.json();
-    console.log('Delete:', data);
+
     return data;
 }
 export const _SaveTrack = async (ids: string) => {
