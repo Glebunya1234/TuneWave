@@ -12,6 +12,7 @@
   --font-family-covered: "Covered By Your Grace", cursive;
   --font-family-SingleDay: "Single Day", sans-serif;
   --HiddenList: 245px;
+  --text-overflow: 0px;
 }
 
 body {
