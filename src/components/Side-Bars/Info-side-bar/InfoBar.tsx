@@ -5,7 +5,7 @@ import { ComponentPlayingTrack } from "@/components/Content/CurrentlyPlayingTrac
 export const InfoBar = () => {
   return (
     <InfoSideBar>
-      {/* <ComponentPlayingTrack /> */}
+      <ComponentPlayingTrack />
       <p></p>
     </InfoSideBar>
   );

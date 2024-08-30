@@ -5,6 +5,8 @@ import { Spinner } from "@/components/UI/Spinner/spinner";
 import { PlaylistComponent } from "../../PlayLists-Component/PlayListComponent";
 import { _getArtistsTopTracks } from "@/api/SP-Artists/API-SP-Artists";
 import { TrackItem } from "@/types/SpotifyTypes/CurrentlyPlayingTrack/type";
+import { ButtonSkeleton } from "@/components/UI/Skeleton/Button-Skeleton/ButtonSkeleton";
+import { TrackListSkeleton } from "@/components/UI/Skeleton/TrackList-Skeleton/TrackListSkeleton";
 
 export const ArtistTopTrack = ({ id }: { id: string }) => {
   const [state, setState] = useState(false);
@@ -25,12 +27,16 @@ export const ArtistTopTrack = ({ id }: { id: string }) => {
     setState((prevState) => !prevState);
   };
   return LoadingTopTracks ? (
-    <div className="w-full h-full flex justify-center items-center">
-      <Spinner />
-    </div>
+    <>
+      <span className={`${style.ArtistData__Span}`}>Popular tracks</span>
+      <div className={style.ArtistTopTrack}>
+        <TrackListSkeleton />
+      </div>
+    </>
   ) : (
     <>
       <span className={`${style.ArtistData__Span}`}>Popular tracks</span>
+
       <div className={style.ArtistTopTrack}>
         <PlaylistComponent
           HiddenHeader={true}
@@ -41,11 +47,12 @@ export const ArtistTopTrack = ({ id }: { id: string }) => {
         />
       </div>
       <button
+        className="hover:bg-[#a0a0a025] w-full text-center"
         onClick={() => {
           handleClick();
         }}
       >
-        Еще...
+        More...
       </button>
     </>
   );

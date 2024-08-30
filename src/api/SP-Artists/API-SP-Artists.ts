@@ -1,10 +1,11 @@
 "use server"
 import { TrackArtist, FollowedArtistType } from "@/types/SpotifyTypes/TrackArtist/type";
-import { test } from "../SP-Tokens/API-SP-Tokens";
+import { _refreshToken, test } from "../SP-Tokens/API-SP-Tokens";
 import { ItemsForArtistAlbums, TrackItem } from "@/types/SpotifyTypes/CurrentlyPlayingTrack/type";
 import { _checkIfTracksAreSaved } from "../SP-Tracks/API-SP-Tracks";
 import { CurrentlyPlaylistTracksItem } from "@/types/SpotifyTypes/CurrentlyAlbum/type";
 import { _getAlbum } from "../SP-Albums/API-SP-Albums";
+import { cacheFilePathRefresh, readCache } from "../../../cache/controller";
 
 export const _getOneArtist = async (ids: string): Promise<TrackArtist | undefined> => {
     try {
@@ -41,18 +42,21 @@ export const _getArtists = async (ids: string[] | string): Promise<TrackArtist[]
     const encodedIds = encodeURIComponent(idsString);
     const url = ` https://api.spotify.com/v1/artists?ids=${encodedIds}`
     const { access_token } = await test()
+    let refresh_token = readCache(cacheFilePathRefresh);
+    const sss = await _refreshToken(refresh_token)
+    console.log('sss', sss)
     const response = await fetch(url, {
         method: 'GET',
         headers: {
             'Authorization': `Bearer ${access_token}`,
         },
     });
-    if (!response) {
+    if (!response.ok) {
         console.warn("artistsTrackErrorrrr")
-
     }
     const Data = await response.json();
-
+    console.log('ids', ids)
+    console.log('Data', Data)
     return Data.artists
 }
 

@@ -49,7 +49,7 @@
             height: 100%;
             position: absolute;
             left: 0;
-            top: 2px;
+            top: 13px;
             animation: Hover .5s steps(1, end) infinite;
             transform: scale(.9);
         }
@@ -348,16 +348,16 @@
 
 @keyframes Hover {
     0% {
-        background: url('/Hover1.png') center center no-repeat;
+        background: url('/Hover1big.png') center center no-repeat;
     }
 
     35% {
 
-        background: url('/Hover2.png') center center no-repeat;
+        background: url('/Hover2big.png') center center no-repeat;
     }
 
     65% {
-        background: url('/Hover3.png') center center no-repeat;
+        background: url('/Hover3big.png') center center no-repeat;
 
     }
 }
