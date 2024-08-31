@@ -8,10 +8,14 @@ import { _getCurrentlyPlayingTrack } from "@/api/SP-Player/API-SP-Player";
 import { useRouter } from "next/navigation";
 import { FollowBtn } from "@/components/UI/Buttons/SaveArtistToLibBtn/FollowOrUnArtist";
 
+import { _CheckIsFollowArtist } from "@/api/SP-Users/API-SP-Users";
+import { useSWRConfig } from "swr";
+
 export const PlayingNowTrackArtistList = () => {
   const [playingTrack, setPlayingTrack] = useState<CurrentlyPlayingTrack>();
 
   const dataContext = useContext(GlobalContext);
+
   const router = useRouter();
 
   useEffect(() => {
@@ -19,7 +23,6 @@ export const PlayingNowTrackArtistList = () => {
       const track = await _getCurrentlyPlayingTrack();
       setPlayingTrack(track);
     };
-
     fetchTrack();
   }, [, dataContext.getStatePlaying]);
 

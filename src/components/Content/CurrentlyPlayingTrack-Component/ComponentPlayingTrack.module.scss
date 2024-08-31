@@ -68,7 +68,7 @@
     display: inline-block;
     position: relative;
     white-space: nowrap;
-    animation: marquee 30s linear infinite;
+    animation: marquee 15s linear infinite;
     transform: translateX(calc(-1 * var(--text-overflow, 0px)));
 
     &:hover {

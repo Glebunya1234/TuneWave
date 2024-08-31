@@ -5,6 +5,7 @@ import { RecommendationsType } from "@/types/SpotifyTypes/RecommendationsType/ty
 import { test } from "../SP-Tokens/API-SP-Tokens";
 import { _checkIfTracksAreSaved } from "../SP-Tracks/API-SP-Tracks";
 import { _getOneArtist, _getTopArtists } from "../SP-Artists/API-SP-Artists";
+import { fetchWithRetry } from "../ApiSpotify";
 
 export const _getRecommendations = async (id?: string): Promise<RecommendationsType> => {
     const topArtists = await _getTopArtists();
@@ -32,14 +33,8 @@ export const _getRecommendations = async (id?: string): Promise<RecommendationsT
 
 
     const url = `https://api.spotify.com/v1/recommendations?limit=10&seed_artists=${encodedArtist}&seed_genres=${encodedGangre}`;
-    const { access_token } = await test()
-    const response = await fetch(url, {
-        method: 'GET',
-        headers: {
-            'Authorization': `Bearer ${access_token}`,
+    const response = await fetchWithRetry(url);
 
-        },
-    });
     if (!response.ok) {
         const errorText = await response.text();
         throw new Error(`API Error: ${errorText}`);
@@ -81,14 +76,13 @@ export const _getGengreRecommendations = async (): Promise<RecommendationsType> 
     const GangreString = selectedSeedGenres.join(',');
     const encodedGangre = GangreString.replace(/ /g, '+').replace(/,/g, '%2C');
     const url = `https://api.spotify.com/v1/recommendations?limit=10&seed_genres=${encodedGangre}`;
-    const { access_token } = await test()
-    const response = await fetch(url, {
-        method: 'GET',
-        headers: {
-            'Authorization': `Bearer ${access_token}`,
+    const response = await fetchWithRetry(url);
 
-        },
-    });
+    if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(`API Error: ${errorText}`);
+    }
+
 
     const data: RecommendationsType = await response.json()
     const trackIds = data.tracks.map(track => track.id);
@@ -106,13 +100,13 @@ export const _getSimilarPlaylist = async (id: string, onlyGenre?: boolean, ganre
     let url = `https://api.spotify.com/v1/recommendations?limit=10&seed_artists=${id}`;
 
     onlyGenre ? url = `https://api.spotify.com/v1/recommendations?limit=10&seed_genres=${id}` : url = `https://api.spotify.com/v1/recommendations?limit=10&seed_artists=${id}`
-    const { access_token } = await test();
-    const response = await fetch(url, {
-        method: 'GET',
-        headers: {
-            'Authorization': `Bearer ${access_token}`,
-        },
-    });
+    const response = await fetchWithRetry(url);
+
+    if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(`API Error: ${errorText}`);
+    }
+
 
     if (!response.ok) {
         throw new Error('Failed to fetch recommendations');

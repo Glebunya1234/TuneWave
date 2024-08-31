@@ -13,10 +13,14 @@ const albumPage = async ({ params }: { params: { id: string } }) => {
       <PanelTarget side="Top" />
       <DisplayInfo
         idForScroll={"pageTrack"}
-        ImageSrc={`${data.images[0].url || "/FavoriteTrack.png"}`}
+        ImageSrc={`${
+          data?.images === undefined
+            ? "/FavoriteTrack.png"
+            : data?.images[0]?.url
+        }`}
         Type={data.album_type}
         Name={data.name}
-        Total={data.tracks.items.length}
+        Total={data.tracks?.items?.length}
         Artists={data.artists}
         release_date={data.release_date}
       >
