@@ -27,7 +27,7 @@ export const ArtistRelatedItemList = ({ id }: { id: string }) => {
     <>
       <span className={`${style.ArtistData__Span} `}>
         <h1>Related Artists</h1>
-        <Link href={`/section/related`} className={style.Div__link}>
+        <Link href={`/artist/${id}/related/`} className={style.Div__link}>
           Show all
         </Link>
       </span>
