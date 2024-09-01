@@ -71,6 +71,11 @@ const PlaylistPage = () => {
                 ? data.tracks.length
                 : undefined
             }
+            hrefSpotify={
+              _isCurrentlyPlaylistTracksItem(data)
+                ? data?.infoPlaylist?.external_urls?.spotify
+                : undefined
+            }
             Name={
               data?.infoPlaylist?.name === undefined
                 ? ""

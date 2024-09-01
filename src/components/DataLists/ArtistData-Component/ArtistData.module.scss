@@ -15,6 +15,10 @@
     font-size: 25px;
     width: min-content;
     height: 37px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
     text-wrap: nowrap;
     padding-left: 5px;
     padding-right: 5px;
@@ -61,6 +65,16 @@
         background-color: rgb(0, 220, 0);
     }
 
+}
+
+.OpenSpotifyBtn {
+    @extend .NavPanel__PlayTrackBtn;
+
+    &:hover {
+        &::after {
+            animation: none;
+        }
+    }
 }
 
 .ArtistData__Span {

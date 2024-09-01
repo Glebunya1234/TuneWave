@@ -35,6 +35,8 @@
              font-family: var(--font-family-versus);
              z-index: 1;
              border-radius: 5px;
+             display: flex;
+             align-items: center;
 
              p {
                  text-decoration: none;

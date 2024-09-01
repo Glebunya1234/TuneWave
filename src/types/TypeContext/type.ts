@@ -1,3 +1,4 @@
+import { CurrentlyPlayingTrack } from "../SpotifyTypes/CurrentlyPlayingTrack/type";
 import { TypeSetState } from "../TypeMarqueeProps/type";
 
 export type ContextType = {
@@ -10,6 +11,6 @@ export type ContextType = {
     setHiddenLeftBar: TypeSetState<boolean>;
     isHiddenRightBar: boolean,
     setHiddenRightBar: TypeSetState<boolean>;
-    getStatePlaying: boolean,
-    setStatePlaying: TypeSetState<boolean>;
+    getStatePlaying: any,
+    setStatePlaying: TypeSetState<any>;
 };
