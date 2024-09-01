@@ -1,15 +1,14 @@
 "use client";
 
 import style from "./PlayingNowTrackArtistList.module.scss";
-import type { CurrentlyPlayingTrack } from "@/types/SpotifyTypes/CurrentlyPlayingTrack/type";
-import { useContext, useEffect, useRef, useState } from "react";
-import { GlobalContext } from "@/Context";
-import { _getCurrentlyPlayingTrack } from "@/api/SP-Player/API-SP-Player";
 import { useRouter } from "next/navigation";
+import { useContext, useEffect, useState } from "react";
+import { GlobalContext } from "@/Context";
 import { FollowBtn } from "@/components/UI/Buttons/SaveArtistToLibBtn/FollowOrUnArtist";
-
+import { OpenInSpotify } from "@/components/UI/Buttons/OpenInSpotifyBtn/OpenInSpotify";
+import { _getCurrentlyPlayingTrack } from "@/api/SP-Player/API-SP-Player";
 import { _CheckIsFollowArtist } from "@/api/SP-Users/API-SP-Users";
-import { useSWRConfig } from "swr";
+import type { CurrentlyPlayingTrack } from "@/types/SpotifyTypes/CurrentlyPlayingTrack/type";
 
 export const PlayingNowTrackArtistList = () => {
   const [playingTrack, setPlayingTrack] = useState<CurrentlyPlayingTrack>();
@@ -53,6 +52,11 @@ export const PlayingNowTrackArtistList = () => {
           </nav>
         ))}
       </div>
+      <OpenInSpotify
+        href={`${playingTrack?.item.external_urls.spotify}`}
+        text="Open in Spotify"
+        className={style.OpenSpotifyBtn}
+      />
     </section>
   ) : (
     <></>

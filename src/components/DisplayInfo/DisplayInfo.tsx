@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Artist } from "@/types/SpotifyTypes/CurrentlyPlayingTrack/type";
 import { Playlist } from "@/types/SpotifyTypes/CurrentlyPlaylist/type";
 import { formatDuration } from "@/utils/DurationFormatFunc";
+import { OpenInSpotify } from "../UI/Buttons/OpenInSpotifyBtn/OpenInSpotify";
 
 type InfoType = {
   children: React.ReactNode;
@@ -18,6 +19,7 @@ type InfoType = {
   Total?: number;
   FollowersTotal?: number;
   FollowersText?: string;
+  hrefSpotify?: string;
 };
 export const DisplayInfo = ({
   children,
@@ -32,6 +34,7 @@ export const DisplayInfo = ({
   FollowersTotal,
   FollowersText,
   Total,
+  hrefSpotify,
 }: InfoType) => {
   return (
     <aside className={style.DisplayInfo__Content} id={`${idForScroll}`}>
@@ -51,35 +54,26 @@ export const DisplayInfo = ({
           <h3 className={style.Info__PlaylistType}>{Type}</h3>
           <h1 className={style.Info__PlaylistName}>{Name}</h1>
           <span className={style.Info__Track}>
-            {Artists !== undefined ? (
-              Artists.map((item, index) => {
-                return (
-                  <>
-                    <Link href={`/artist/${item.id}`} key={index}>
-                      <p> {item.name}</p>
-                    </Link>
-                    {Artists.length !== index + 1 ? (
-                      <span className="mr-[5px]">•</span>
-                    ) : (
-                      <></>
-                    )}
-                  </>
-                );
-              })
-            ) : (
-              <></>
-            )}
-            {Owner !== undefined ? (
+            {Artists?.map((item) => (
+              <>
+                <Link href={`/artist/${item.id}`}>
+                  <p>{item.name}</p>
+                </Link>
+                {item !== Artists[Artists.length - 1] && (
+                  <span className="mr-[5px]">•</span>
+                )}
+              </>
+            ))}
+
+            {Owner && (
               <>
                 <Image
                   src={
-                    Owner.UserFullInfo?.images[0]?.url !== undefined
-                      ? Owner.UserFullInfo.images[0].url
-                      : "/FavoriteTrack.png"
+                    Owner.UserFullInfo?.images[0]?.url || "/FavoriteTrack.png"
                   }
                   width={25}
                   height={25}
-                  alt="Arrow2"
+                  alt="User Image"
                   className={`${style.mask} ${style["mask-parallelogram"]}`}
                 />
                 <Link href={`/user/${Owner.owner?.id || "spotify"}`}>
@@ -88,42 +82,49 @@ export const DisplayInfo = ({
                   </p>
                 </Link>
               </>
-            ) : (
-              <></>
             )}
-            {release_date !== undefined ? (
+
+            {release_date && (
               <>
                 <span className="mr-[5px]">•</span>
                 <span className="mr-[5px]">{release_date}</span>
               </>
-            ) : (
-              <></>
             )}
-            {duration_ms !== undefined ? (
+
+            {duration_ms && (
               <>
                 <span className="mr-[5px]">•</span>
                 <span className="mr-[5px]">{formatDuration(duration_ms)}</span>
               </>
-            ) : (
-              <></>
             )}
-            {FollowersTotal !== undefined ? (
+
+            {FollowersTotal !== undefined && (
               <>
                 <span className="mr-[5px]">•</span>
                 <span className="mr-[5px]">
                   {FollowersTotal} {FollowersText}
                 </span>
               </>
-            ) : (
-              <></>
             )}
-            {Total !== undefined ? (
+
+            {Total !== undefined && (
               <>
                 <span className="mr-[5px]">•</span>
                 <span className="mr-[5px]">{Total} Tracks</span>
               </>
-            ) : (
-              <></>
+            )}
+
+            {hrefSpotify && (
+              <>
+                <span className="mr-[5px]">•</span>
+                <span className="mr-[5px]">
+                  <OpenInSpotify
+                    href={hrefSpotify}
+                    text="Open in Spotify"
+                    className="flex flex-row items-center gap-1"
+                  />
+                </span>
+              </>
             )}
           </span>
         </div>

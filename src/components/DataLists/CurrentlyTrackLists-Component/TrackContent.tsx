@@ -7,6 +7,7 @@ import { PlayTrackBtn } from "@/components/UI/Buttons/PlayTrackBtn/PlayTrackBtn"
 import { SaveTrackBtn } from "@/components/UI/Buttons/SaveTrackToLibBtn/SaveTrack";
 import { CurrentlyTrack } from "@/types/SpotifyTypes/CurrentlyTrack/type";
 import { TrackArtist } from "@/types/SpotifyTypes/TrackArtist/type";
+import { OpenInSpotify } from "@/components/UI/Buttons/OpenInSpotifyBtn/OpenInSpotify";
 export const TrackComponent = async ({
   data,
   isSaved,
@@ -30,6 +31,10 @@ export const TrackComponent = async ({
         <SaveTrackBtn
           id={data.id}
           isSave={isSaved}
+          className={style.NavPanel__SaveTrackBtn}
+        />
+        <OpenInSpotify
+          href={data.external_urls.spotify}
           className={style.NavPanel__SaveTrackBtn}
         />
       </nav>

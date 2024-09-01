@@ -5,6 +5,7 @@ import { CurrentlyUserType } from "../CurrentlyUser/type";
 export type CurrentlyPlaylist = {
   href: string;
   limit: number;
+
   next: string;
   offset: number;
   previous: string;
@@ -48,6 +49,9 @@ export type SimplifiedPlaylistObject = {
 };
 export type Playlist = {
   description?: string;
+  external_urls: {
+    spotify: string;
+  };
   followers?: {
     href: string;
     total: number;

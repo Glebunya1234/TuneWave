@@ -24,9 +24,9 @@ export const PlayTrackBtn = ({
   const [hoverStates, setHoverStates] = useState(false);
 
   const OnClick = async (id: string) => {
-    await _setPlayTrack(id);
     const track = await _getCurrentlyPlayingTrack();
     dataContext.setStatePlaying(track);
+    await _setPlayTrack(id);
   };
 
   const handleMouseEnter = (index?: boolean) => {

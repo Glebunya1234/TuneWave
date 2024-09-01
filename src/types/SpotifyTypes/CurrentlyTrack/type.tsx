@@ -6,6 +6,9 @@ export type tracks = {
 export type CurrentlyTrack = {
   album_type: string;
   total_tracks: string;
+  external_urls: {
+    spotify: string;
+  };
   artists: Artist[];
   album: Album;
   href: string;
@@ -13,9 +16,9 @@ export type CurrentlyTrack = {
   duration_ms: number;
   name: string;
   release_date: string;
-  restrictions:{
-    reason: "string"
-  }
+  restrictions: {
+    reason: "string";
+  };
   type: string;
   uri: string;
 };
