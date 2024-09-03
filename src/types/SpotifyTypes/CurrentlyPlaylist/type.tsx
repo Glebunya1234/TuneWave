@@ -69,6 +69,7 @@ export type Playlist = {
   };
   UserFullInfo?: CurrentlyUserType;
   public?: boolean;
+  isSave: boolean;
   type: string;
 };
 

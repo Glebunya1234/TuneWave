@@ -60,7 +60,11 @@ export const AlbumInformation = ({ data }: { data: TrackItem[] }) => {
                 </div>
               </div>
               <div className={style.TrackDuration}>
-                <SaveTrackBtn id={item.id} isSave={item.isSaved} />
+                <SaveTrackBtn
+                  id={item.id}
+                  isPage={true}
+                  isSave={item.isSaved}
+                />
               </div>
               <div className={style.TrackDuration}>
                 {formatDuration(item.duration_ms)}

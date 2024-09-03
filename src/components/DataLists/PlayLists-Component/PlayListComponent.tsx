@@ -152,7 +152,11 @@ export const PlaylistComponent = ({
               </Link>
 
               <div className={style.TrackDuration}>
-                <SaveTrackBtn id={item.id} isSave={item.isSaved} />
+                <SaveTrackBtn
+                  id={item.id}
+                  isSave={item.isSaved}
+                  isPage={true}
+                />
               </div>
               <div className={style.TrackDuration}>
                 {formatDuration(item.duration_ms)}
