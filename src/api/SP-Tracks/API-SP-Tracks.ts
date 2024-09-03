@@ -28,8 +28,6 @@ export const _getSavedTrackUser = async (count: number): Promise<SpotifyTracksRe
 }
 
 
-
-
 export const _checkIfTracksAreSaved = async (trackIds: string[]): Promise<boolean[]> => {
 
     const idsString = trackIds?.join(',');

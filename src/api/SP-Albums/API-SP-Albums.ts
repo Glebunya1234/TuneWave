@@ -14,19 +14,25 @@ export const _getAlbum = async (id: string): Promise<CurrentlyAlbum> => {
 
     if (!response) {
         console.warn("AlbumErrorrrr")
-
     }
 
     const Data: CurrentlyAlbum = await response.json();
-    const trackIds = Data?.tracks?.items?.map(track => track.id);
-    const isSavedArray = await _checkIfTracksAreSaved(trackIds);
+    const isSavedArray: boolean = await _checkIsAlbumAreSaved(id);
 
-    const tracksWithSavedInfo: TrackItem[] = Data?.tracks?.items?.map((item, index) => ({
-        ...item,
-        isSaved: isSavedArray[index],
-    }));
 
-    return { ...Data, tracks: { items: tracksWithSavedInfo } };
+
+    return { ...Data, isSave: isSavedArray };
 
 }
+export const _checkIsAlbumAreSaved = async (id: string): Promise<boolean> => {
+    const url = `https://api.spotify.com/v1/me/albums/contains?ids=${id}`
+    const response = await fetchWithRetry(url);
+    if (!response.ok) {
+        console.warn("AlbumError Check is save")
+        const result = await response.json();
+        console.log('result= ', result)
+    }
 
+    const Data = await response.json();
+    return Data[0]
+}

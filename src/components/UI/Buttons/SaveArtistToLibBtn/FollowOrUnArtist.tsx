@@ -25,7 +25,9 @@ export const FollowBtn = ({ id, className, isSave }: SaveTrackBtnType) => {
       });
     } else {
       setState((prevState) => !prevState);
-      await _UserUnFollowArtist(id);
+      mutate(`FollowedArtists`, async () => {
+        await _UserUnFollowArtist(id);
+      });
     }
   };
   return (

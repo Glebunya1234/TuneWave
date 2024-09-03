@@ -3,7 +3,7 @@ import { CurrentlyPlaylist, CurrentlyPlaylistTracksItem, ItemPlaylist, Playlist 
 import { test } from "../SP-Tokens/API-SP-Tokens";
 import { _checkIfTracksAreSaved } from "../SP-Tracks/API-SP-Tracks";
 import { GetUserById } from "../SP-Users/API-SP-Users";
-import { fetchWithRetry } from "../ApiSpotify";
+import { fetchWithRetry, fetchWithRetryForWriteMethods } from "../ApiSpotify";
 
 
 export const _getPlaylist = async (id: string): Promise<Playlist> => {
@@ -14,8 +14,10 @@ export const _getPlaylist = async (id: string): Promise<Playlist> => {
         console.warn("Errorrrr")
 
     }
-    const data = await response.json();
-    return data
+    const data: Playlist = await response.json();
+    const isSaved = await _checkIfCurrentUserFollowsPlaylist(id)
+
+    return { ...data, isSave: isSaved }
 }
 
 
@@ -26,6 +28,14 @@ export const _getCurrentUserPlaylists = async (limit: number = 10): Promise<Curr
 
     const Data: CurrentlyPlaylist = await response.json();
     return Data;
+}
+export const _checkIfCurrentUserFollowsPlaylist = async (id: string): Promise<boolean> => {
+
+    const url = `https://api.spotify.com/v1/playlists/${id}/followers/contains`
+    const response = await fetchWithRetry(url)
+
+    const Data = await response.json();
+    return Data[0]
 }
 
 export const _getItemsCurrentPlaylist = async (url: string, id: string): Promise<CurrentlyPlaylistTracksItem> => {
@@ -38,6 +48,7 @@ export const _getItemsCurrentPlaylist = async (url: string, id: string): Promise
     const trackIds = Data2?.items?.map(track => track.track.id);
     const isSavedArray = await _checkIfTracksAreSaved(trackIds);
     const InfoList = await _getPlaylist(id)
+
     const OwnerFullInfo = await GetUserById(InfoList.owner?.id || "")
     const tracksWithSavedInfo: ItemPlaylist[] = Data2.items.map((item, index) => ({
         ...item,
@@ -48,4 +59,43 @@ export const _getItemsCurrentPlaylist = async (url: string, id: string): Promise
     }));
 
     return { ...Data2, infoPlaylist: { ...InfoList, UserFullInfo: OwnerFullInfo }, items: tracksWithSavedInfo }
+}
+export const _UserFollowPlaylist = async (id: string) => {
+    const url = `https://api.spotify.com/v1/playlists/${id}/followers`
+    const options: RequestInit = {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    };
+    const response = await fetchWithRetryForWriteMethods(url, options);
+
+    if (!response.ok) {
+        const error = await response.json();
+        console.error('Error:', error);
+        return null
+    }
+
+
+    return null
+
+}
+export const _UserUnFollowPlaylist = async (id: string) => {
+
+    const url = `https://api.spotify.com/v1/playlists/${id}/followers`
+    const options: RequestInit = {
+        method: 'Delete',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    };
+    const response = await fetchWithRetryForWriteMethods(url, options);
+
+    if (!response.ok) {
+        const error = await response.json();
+        console.error('Error:', error);
+        return null
+    }
+
+    return null
 }

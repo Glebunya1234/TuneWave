@@ -51,9 +51,7 @@ export const _setPlayTrack = async (uri: string) => {
         console.error('Error:', error);
         return;
     }
-
-    const data = await response.json();
-    return
+    return null;
 }
 
 export const _UnSaveTrack = async (ids: string) => {
@@ -71,10 +69,7 @@ export const _UnSaveTrack = async (ids: string) => {
         console.error('Error:', error);
         return;
     }
-
-    const data = await response.json();
-
-    return data;
+    return null;
 }
 export const _SaveTrack = async (ids: string) => {
     const url = `https://api.spotify.com/v1/me/tracks?ids=${ids}`;

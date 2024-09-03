@@ -19,6 +19,8 @@ import {
   _isCurrentlyPlaylistTracksItem,
   _isTypeRecommendation,
 } from "@/utils/TypeOfCustom/TypeOfCustom";
+import { FollowOrUnPlaylist } from "@/components/UI/Buttons/SavePlaylistToLibBtn/FollowOrUnPlaylist";
+import { OpenInSpotify } from "@/components/UI/Buttons/OpenInSpotifyBtn/OpenInSpotify";
 
 const PlaylistPage = () => {
   const searchParams = useSearchParams();
@@ -82,6 +84,20 @@ const PlaylistPage = () => {
                 : data?.infoPlaylist.name
             }
           >
+            {_isCurrentlyPlaylistTracksItem(data) && (
+              <nav className={`${style.TrackComponent__NavPanel} `}>
+                <FollowOrUnPlaylist
+                  type="playlist"
+                  id={data?.infoPlaylist?.id!}
+                  className={style.NavPanel__PlayTrackBtn}
+                  isSave={data.infoPlaylist.isSave}
+                />
+                <OpenInSpotify
+                  className={style.NavPanel__SaveTrackBtn}
+                  href={data.infoPlaylist.external_urls.spotify}
+                />
+              </nav>
+            )}
             <PlaylistComponent
               Offset={_isCurrentlyPlaylistTracksItem(data) ? data.offset : 0}
               PrivatePlaylist={_isCurrentlyPlaylistTracksItem(data)}

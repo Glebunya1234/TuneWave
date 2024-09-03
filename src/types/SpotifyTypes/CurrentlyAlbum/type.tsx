@@ -10,6 +10,9 @@ type tracks = {
 };
 export type CurrentlyAlbum = {
   album_type: string;
+  external_urls: {
+    spotify: string;
+  };
   artists: Artist[];
   href: string;
   id: string;
@@ -19,6 +22,7 @@ export type CurrentlyAlbum = {
   release_date: string;
   tracks: tracks;
   type: string;
+  isSave: boolean;
   uri: string;
 };
 

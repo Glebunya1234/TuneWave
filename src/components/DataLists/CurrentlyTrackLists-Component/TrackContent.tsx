@@ -29,6 +29,7 @@ export const TrackComponent = async ({
           className={style.NavPanel__PlayTrackBtn}
         />
         <SaveTrackBtn
+          isPage={true}
           id={data.id}
           isSave={isSaved}
           className={style.NavPanel__SaveTrackBtn}
