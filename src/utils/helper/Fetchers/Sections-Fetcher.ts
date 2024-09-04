@@ -1,5 +1,6 @@
 "use server"
 
+import { _getSavedAlbums } from "@/api/SP-Albums/API-SP-Albums";
 import { _getFollowedArtists, _getTopArtists } from "@/api/SP-Artists/API-SP-Artists";
 import { _getRecommendations } from "@/api/SP-Playlists/API-SP-MixPlaylist";
 import { _getCurrentUserPlaylists } from "@/api/SP-Playlists/API-SP-Playlists";
@@ -14,6 +15,8 @@ export const SectionFetcher = async (
         return await _getTopArtists()
     } else if (id.includes("FollowedArtists")) {
         return await _getFollowedArtists();
+    } else if (id.includes("SavedAlbums")) {
+        return await _getSavedAlbums();
     } else if (id.includes("ListenToThis")) {
         return await _getRecommendations();
     } else if (id.includes("FollowedPlaylists")) {

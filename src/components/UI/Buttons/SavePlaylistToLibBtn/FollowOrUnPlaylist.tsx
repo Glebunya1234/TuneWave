@@ -9,6 +9,10 @@ import {
   _UserFollowPlaylist,
   _UserUnFollowPlaylist,
 } from "@/api/SP-Playlists/API-SP-Playlists";
+import {
+  _UserFollowAlbum,
+  _UserUnFollowAlbum,
+} from "@/api/SP-Albums/API-SP-Albums";
 
 type SaveTrackBtnType = {
   id: string;
@@ -33,7 +37,7 @@ export const FollowOrUnPlaylist = ({
         async () => {
           type === "playlist"
             ? await _UserFollowPlaylist(id)
-            : await _UserFollowPlaylist(id);
+            : await _UserFollowAlbum(id);
         }
       );
     } else {
@@ -43,7 +47,7 @@ export const FollowOrUnPlaylist = ({
         async () => {
           type === "playlist"
             ? await _UserUnFollowPlaylist(id)
-            : await _UserUnFollowPlaylist(id);
+            : await _UserUnFollowAlbum(id);
         }
       );
     }

@@ -1,3 +1,4 @@
+import { SavedAlbums } from "@/types/SpotifyTypes/CurrentlyAlbum/type";
 import { CurrentlyPlaylist, CurrentlyPlaylistTracksItem } from "@/types/SpotifyTypes/CurrentlyPlaylist/type";
 import { RecommendationsType } from "@/types/SpotifyTypes/RecommendationsType/type";
 import { FollowedArtistType, TrackArtist } from "@/types/SpotifyTypes/TrackArtist/type";
@@ -22,6 +23,11 @@ export const _isFollowedArtist = (
     data: any
 ): data is FollowedArtistType => {
     return (data as FollowedArtistType)?.items !== undefined;
+};
+export const _IsSavedAlbums = (
+    data: any
+): data is SavedAlbums => {
+    return (data as SavedAlbums) !== undefined;
 };
 export const _isTrackArtist = (
     data: any

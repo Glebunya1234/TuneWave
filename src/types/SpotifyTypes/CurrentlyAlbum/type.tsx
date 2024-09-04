@@ -1,8 +1,10 @@
 import {
+  Album,
   Artist,
   ItemsForArtistAlbums,
   TrackItem,
 } from "../CurrentlyPlayingTrack/type";
+import { FollowedArtistType } from "../TrackArtist/type";
 import { SpotifyTracksResponse } from "../TrackFavoriteType/type";
 
 type tracks = {
@@ -31,4 +33,24 @@ export type CurrentlyPlaylistTracksItem = Omit<
   "items"
 > & {
   items: ItemsForArtistAlbums[];
+};
+
+export type SavedAlbums = Omit<FollowedArtistType, "items"> & {
+  items: itemsSavedAlbums[];
+};
+
+export type AlbumWithTracks = Album & {
+  tracks: {
+    href: string;
+    limit: number;
+    next: string;
+    offset: number;
+    previous: string;
+    total: number;
+    items: TrackItem[];
+  };
+};
+export type itemsSavedAlbums = {
+  added_at: string;
+  album: AlbumWithTracks;
 };
