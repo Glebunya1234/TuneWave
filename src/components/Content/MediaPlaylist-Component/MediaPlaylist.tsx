@@ -9,6 +9,8 @@ import { CurrentlyPlaylist } from "@/types/SpotifyTypes/CurrentlyPlaylist/type";
 
 import { _getCurrentUserPlaylists } from "@/api/SP-Playlists/API-SP-Playlists";
 import { ButtonSkeleton } from "@/components/UI/Skeleton/Button-Skeleton/ButtonSkeleton";
+import { SavedAlbums } from "@/types/SpotifyTypes/CurrentlyAlbum/type";
+import { _getSavedAlbums } from "@/api/SP-Albums/API-SP-Albums";
 export const fetcherGetCurrentUserPlaylist = () => _getCurrentUserPlaylists(50);
 export const MediaPlaylist = () => {
   const router = useRouter();
@@ -22,7 +24,14 @@ export const MediaPlaylist = () => {
       dedupingInterval: 60000,
     }
   );
-
+  const { data: dataAlbum, isLoading: isLoadingAlbums } = useSWR<SavedAlbums>(
+    `FollowedAlbum`,
+    async () => await _getSavedAlbums(),
+    {
+      revalidateOnFocus: false,
+      dedupingInterval: 60000,
+    }
+  );
   return (
     <section className={style.MediaPlaylist}>
       <nav className={style.MediaPlaylist__Nav}>
@@ -81,9 +90,42 @@ export const MediaPlaylist = () => {
             <div className={style.items__Info}>
               <h1>{item.name}</h1>
               <div>
-                <span className="mr-[5px]">{item.type}</span>
+                <span className="mr-[5px] capitalize">{item.type}</span>
                 <span className="mr-[5px]">•</span>
                 {item.owner.display_name}
+              </div>
+            </div>
+          </button>
+        )) || <></>}
+        {isLoadingAlbums && (
+          <ButtonSkeleton className={style.Content__items} arrayLength={8} />
+        )}
+        {dataAlbum?.items?.slice(0, 15).map((it, ind) => (
+          <button
+            key={ind}
+            className={style.Content__items}
+            onClick={() => {
+              router.push(`/album/${it.album.id}`);
+            }}
+          >
+            <div className={style.item__img}>
+              <Image
+                src={
+                  it.album.images[0]?.url === undefined
+                    ? "/FavoriteTrack.png"
+                    : it.album.images[0]?.url
+                }
+                layout="fill"
+                objectFit="cover"
+                alt="alt"
+              />
+            </div>
+            <div className={style.items__Info}>
+              <h1>{it.album.name}</h1>
+              <div>
+                <span className="mr-[5px] capitalize">{it.album.type}</span>
+                <span className="mr-[5px]">•</span>
+                {it.album.artists[0].name}
               </div>
             </div>
           </button>

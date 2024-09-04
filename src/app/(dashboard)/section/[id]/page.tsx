@@ -11,14 +11,16 @@ import { CurrentlyPlaylist } from "@/types/SpotifyTypes/CurrentlyPlaylist/type";
 import {
   _isCurrentlyPlaylist,
   _isFollowedArtist,
+  _IsSavedAlbums,
   _isTypeRecommendation,
 } from "@/utils/TypeOfCustom/TypeOfCustom";
 import { Spinner } from "@/components/UI/Spinner/spinner";
 import { GridPanelPGAT } from "@/components/UI/Buttons/Panel-PlayList-Genre-Artist-Track/GridPanelPGAT";
+import { SavedAlbums } from "@/types/SpotifyTypes/CurrentlyAlbum/type";
 
 const Section = ({ params }: { params: { id: string } }) => {
   const { data, isLoading } = useSWR<
-    RecommendationsType | FollowedArtistType | CurrentlyPlaylist
+    RecommendationsType | FollowedArtistType | CurrentlyPlaylist | SavedAlbums
   >(`${params.id}`, async () => await SectionFetcher(params.id), {
     revalidateOnFocus: false,
     dedupingInterval: 60000,
@@ -30,6 +32,8 @@ const Section = ({ params }: { params: { id: string } }) => {
         return "Similar to:";
       case "FollowedArtists":
         return "Followed artists:";
+      case "FollowedAlbum":
+        return "Followed albums:";
       case "FollowedPlaylists":
         return "Followed playlists";
       case "TopGenre":
@@ -48,7 +52,7 @@ const Section = ({ params }: { params: { id: string } }) => {
       case "ListenToThis":
         return _isTypeRecommendation(data)
           ? data.tracks.map((it, id) => (
-              <PanelPGAT
+              <GridPanelPGAT
                 key={id}
                 Href={`/track/${it.id}`}
                 FirstText={it.name}
@@ -61,12 +65,28 @@ const Section = ({ params }: { params: { id: string } }) => {
       case "FollowedPlaylists":
         return _isCurrentlyPlaylist(data)
           ? data.items.map((it, id) => (
-              <PanelPGAT
+              <GridPanelPGAT
                 key={id}
                 Href={`/playlist/list${it.id}?id=${it.id}`}
                 FirstText={it.name}
                 SecondText={it.owner.display_name}
                 ImageSRC={it?.images[0]?.url || "/RandomPL.png"}
+              />
+            ))
+          : null;
+      case "FollowedAlbum":
+        return _IsSavedAlbums(data)
+          ? data.items.map((it, id) => (
+              <GridPanelPGAT
+                key={id}
+                Href={`/album/${it.album.id}`}
+                FirstText={it.album.name}
+                SecondText={it.album?.artists[0]?.name}
+                ImageSRC={
+                  it.album?.images[0]?.url === undefined
+                    ? "/FavoriteTrack.png"
+                    : it.album?.images[0]?.url
+                }
               />
             ))
           : null;
