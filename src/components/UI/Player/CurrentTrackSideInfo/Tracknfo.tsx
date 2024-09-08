@@ -9,13 +9,16 @@ import { _checkIfTracksAreSaved } from "@/api/SP-Tracks/API-SP-Tracks";
 import { GlobalContext } from "@/Context";
 export const CurrentTrackSideInfo = ({
   is_successTranfser,
+  isOpenSound,
 }: {
   is_successTranfser: boolean;
+  isOpenSound: boolean;
 }) => {
   const dataContext = useContext(GlobalContext);
   const [getCurrentTrack, setCurrentTrack] = useState<Spotify.Track>();
   const [IsPause, setIsPause] = useState<Spotify.Track>();
   const [IsSave, setIsSave] = useState<boolean>(false);
+  const [OpenSound, setIsOpenSound] = useState<boolean>(true);
   const router = useRouter();
   useEffect(() => {
     setIsPause(dataContext.getCurrentPlaying?.isPlay);
@@ -24,20 +27,14 @@ export const CurrentTrackSideInfo = ({
     setCurrentTrack(dataContext.getCurrentPlaying?.current_track);
   }, [dataContext.getCurrentPlaying?.current_track]);
   useEffect(() => {
+    setIsOpenSound(isOpenSound);
+  }, [isOpenSound]);
+  useEffect(() => {
     if (!is_successTranfser) return;
     const fetch = async () => {
       const result = await _checkIfTracksAreSaved(
         dataContext.getCurrentPlaying?.current_track?.id
       );
-      console.log(
-        "dataContext :>> ",
-        dataContext.getCurrentPlaying?.current_track?.id
-      );
-      console.log(
-        "dataContex2t :>> ",
-        dataContext.getCurrentPlaying?.current_track?.name
-      );
-      console.log("result :>> ", result);
       setIsSave(result[0]);
     };
 
@@ -45,7 +42,11 @@ export const CurrentTrackSideInfo = ({
   }, [dataContext.getCurrentPlaying?.current_track?.name]);
 
   return (
-    <aside className={style.CurrentTrackSideInfo}>
+    <aside
+      className={`${style.CurrentTrackSideInfo} ${
+        OpenSound ? style.CurrentTrackSideInfo__Single : ""
+      }`}
+    >
       <section className={style.CurrentTrackSideInfo__ImageConteiner}>
         <div
           className={style.Images}
@@ -60,7 +61,11 @@ export const CurrentTrackSideInfo = ({
           />
         </div>
       </section>
-      <section className={style.CurrentTrackSideInfo__Info}>
+      <section
+        className={`${style.CurrentTrackSideInfo__Info} ${
+          !is_successTranfser ? "max-750:mr-[10px]" : ""
+        }`}
+      >
         <h1
           onClick={() => {
             is_successTranfser
