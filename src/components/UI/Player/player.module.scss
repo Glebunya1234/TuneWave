@@ -10,18 +10,22 @@ $colorsHover: #00fd00;
     flex-direction: row;
     color: white;
     padding-top: 10px;
- 
+    position: relative;
+    z-index: 20;
 
     .SoundBar__ConteinerInfo {
         width: 100%;
         flex-grow: 1;
         height: 100%;
-        padding-left: 15px;
+
         flex-shrink: 1;
         min-width: 0;
 
         @media (max-width: 750px) {
-            display: none;
+            padding-left: 0px;
+            position: absolute;
+            top: -120px;
+            z-index: 10;
         }
     }
 
@@ -32,6 +36,7 @@ $colorsHover: #00fd00;
         flex-direction: column;
         flex-grow: 1;
         height: 100%;
+        z-index: 20;
 
         @media (max-width: 750px) {
             margin: 0px 20px;
@@ -51,11 +56,28 @@ $colorsHover: #00fd00;
         padding-right: 15px;
 
         @media (max-width: 750px) {
-            display: none;
+            position: absolute;
+            padding-right: 10px;
+            top: -115px;
+            z-index: 10;
+
+        }
+
+        @media (max-width: 475px) {
+            justify-content: start;
+            top: -195px;
+            padding-left: 10px;
+
         }
     }
 
 
+
+    .SoundBar__Conteiner__Hidden {
+        @media (max-width: 750px) {
+            display: none;
+        }
+    }
 
     .SoundBar__Nav {
         @extend .SoundBar;
@@ -71,7 +93,7 @@ $colorsHover: #00fd00;
     display: flex;
     align-items: center;
     justify-content: space-between;
-  
+
 
     span {
         font-family: var(--font-family-versus);
@@ -79,91 +101,98 @@ $colorsHover: #00fd00;
         color: #a4a4a4;
     }
 
-    .sliderWrapper {
-        position: relative;
+    .trackContainerSound__Items {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
         width: 100%;
-        margin: 0 10px;
-        margin-top: -2px;
-        margin-bottom: 8px;
 
-        input[type="range"] {
-            -webkit-appearance: none;
-            width: 100%;
-            height: 5px;
-            background: #24252d;
-            outline: none;
-
-            cursor: pointer;
+        .sliderWrapper {
             position: relative;
-            z-index: 1;
+            width: 100%;
+            margin: 0 10px;
+            margin-top: -2px;
+            margin-bottom: 8px;
 
-            &::-webkit-slider-runnable-track {
+            input[type="range"] {
+                -webkit-appearance: none;
+                width: 100%;
                 height: 5px;
                 background: #24252d;
-            }
+                outline: none;
 
-            &::-webkit-slider-thumb {
-                -webkit-appearance: none;
-                width: 5px;
-                height: 5px;
-                background: $colorsDefault;
                 cursor: pointer;
-                z-index: 10;
-                border-left-width: 1px;
-                border-color: black;
+                position: relative;
+                z-index: 1;
 
-
-            }
-
-            &::-moz-range-thumb {
-                width: 5px;
-                height: 5px;
-                background: $colorsDefault;
-                cursor: pointer;
-
-                z-index: 10;
-                border-left-width: 1px;
-                border-color: black;
-
-
-            }
-
-            &:hover {
-                &::-moz-range-thumb {
-
-                    transform: scale(1.8);
-                    background-color: $colorsHover;
-                    border-radius: 50%;
-                    z-index: 10;
+                &::-webkit-slider-runnable-track {
+                    height: 5px;
+                    background: #24252d;
                 }
 
                 &::-webkit-slider-thumb {
-
-                    transform: scale(1.8);
-                    border-radius: 50%;
-                    background-color: $colorsHover;
+                    -webkit-appearance: none;
+                    width: 5px;
+                    height: 5px;
+                    background: $colorsDefault;
+                    cursor: pointer;
                     z-index: 10;
+                    border-left-width: 1px;
+                    border-color: black;
+
+
+                }
+
+                &::-moz-range-thumb {
+                    width: 5px;
+                    height: 5px;
+                    background: $colorsDefault;
+                    cursor: pointer;
+
+                    z-index: 10;
+                    border-left-width: 1px;
+                    border-color: black;
+
+
+                }
+
+                &:hover {
+                    &::-moz-range-thumb {
+
+                        transform: scale(1.8);
+                        background-color: $colorsHover;
+                        border-radius: 50%;
+                        z-index: 10;
+                    }
+
+                    &::-webkit-slider-thumb {
+
+                        transform: scale(1.8);
+                        border-radius: 50%;
+                        background-color: $colorsHover;
+                        z-index: 10;
+                    }
                 }
             }
-        }
 
-        .progress {
-            position: absolute;
-            height: 5px;
-            pointer-events: none;
-            background-color: $colorsDefault;
-            top: 14px;
-            left: 0;
-            z-index: 3;
+            .progress {
+                position: absolute;
+                height: 5px;
+                pointer-events: none;
+                background-color: $colorsDefault;
+                top: 14px;
+                left: 0;
+                z-index: 3;
 
 
-            &:hover {
+                &:hover {
+                    background-color: $colorsHover;
+                }
+            }
+
+            input[type="range"]:hover+.progress {
                 background-color: $colorsHover;
             }
-        }
-
-        input[type="range"]:hover+.progress {
-            background-color: $colorsHover;
         }
     }
 }
@@ -171,14 +200,35 @@ $colorsHover: #00fd00;
 .trackContainerSound {
     @extend .trackContainer;
     justify-content: end;
+    padding-top: 5px;
     width: auto;
 
-    .sliderWrapper {
-        width: 120px;
+    .trackContainerSound__Items {
+
+        .sliderWrapper {
+            width: 120px;
+
+        }
+
+        @media (max-width: 750px) {
+            padding: 10px;
+
+            padding-right: 0;
+            margin: 0 10px;
+            background-color: #a0a0a025;
+
+            .sliderWrapper {
+                margin-top: 0;
+
+            }
+        }
     }
 
-    padding-top: 5px;
 
+    @media (max-width: 750px) {
+        padding: 10px 0px;
+        background-color: #000000ec;
+    }
 }
 
 .trackContainerDisabled {
@@ -291,5 +341,8 @@ $colorsHover: #00fd00;
         color: #00dc00;
     }
 
+    @media (max-width: 750px) {
+        display: none;
 
+    }
 }

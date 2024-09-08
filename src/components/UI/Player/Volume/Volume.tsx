@@ -16,7 +16,7 @@ export const SoundValue = ({
   is_successTranfser: boolean;
   player: Spotify.Player;
 }) => {
-  const [position, setPosition] = useState<number>(0);
+  const [position, setPosition] = useState<number>(0.2);
   const [Oldposition, setOldPosition] = useState<number>(0);
   const [XSound, setXSound] = useState<boolean>(false);
   const dataContext = useContext(GlobalContext);
@@ -57,34 +57,36 @@ export const SoundValue = ({
           : style.trackContainerSound
       }
     >
-      <button onClick={handleSoundClick}>
-        {XSound ? (
-          <PiSpeakerXFill className="text-lg" />
-        ) : position >= 0 && position <= 0.26 ? (
-          <PiSpeakerNoneFill className="text-lg" />
-        ) : position > 0.26 && position <= 0.66 ? (
-          <PiSpeakerLowFill className="text-lg" />
-        ) : (
-          <PiSpeakerHighFill className="text-lg" />
-        )}
-      </button>
+      <aside className={style.trackContainerSound__Items}>
+        <button onClick={handleSoundClick}>
+          {XSound ? (
+            <PiSpeakerXFill className="text-lg" />
+          ) : position >= 0 && position <= 0.26 ? (
+            <PiSpeakerNoneFill className="text-lg" />
+          ) : position > 0.26 && position <= 0.66 ? (
+            <PiSpeakerLowFill className="text-lg" />
+          ) : (
+            <PiSpeakerHighFill className="text-lg" />
+          )}
+        </button>
 
-      <div className={style.sliderWrapper}>
-        <input
-          id="position"
-          type="range"
-          min={0}
-          max={1}
-          step={0.01}
-          value={position}
-          onChange={handlePositionChange}
-          disabled={!is_successTranfser ? true : false}
-        />
-        <div
-          className={style.progress}
-          style={{ width: `${(position / 1) * 100}%` }}
-        ></div>
-      </div>
+        <div className={style.sliderWrapper}>
+          <input
+            id="position"
+            type="range"
+            min={0}
+            max={1}
+            step={0.01}
+            value={position}
+            onChange={handlePositionChange}
+            disabled={!is_successTranfser ? true : false}
+          />
+          <div
+            className={style.progress}
+            style={{ width: `${(position / 1) * 100}%` }}
+          ></div>
+        </div>
+      </aside>
     </div>
   );
 };

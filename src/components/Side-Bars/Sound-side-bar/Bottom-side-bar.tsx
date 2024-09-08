@@ -25,7 +25,7 @@ export const SoundBar = () => {
 
   return (
     <section className={style.NavigationBar}>
-      <div className={style.bbb}>
+      <div className={style.NavigationBar__MarqueeConteiner}>
         <Marquee
           text={
             getCurrentNameTrack === undefined ? "tunewave" : getCurrentNameTrack

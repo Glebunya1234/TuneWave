@@ -2,6 +2,18 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    padding-left: 15px;
+
+    @media (max-width: 750px) {
+        padding: 10px 0px;
+        padding-left: 10px;
+        margin: 0 10px;
+        justify-content: space-between;
+        background-color: #000000ec;
+        z-index: 10;
+    }
+
+
 
     .CurrentTrackSideInfo__ImageConteiner {
         width: max-content;
@@ -10,7 +22,12 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        margin-right: 2px;
+        padding-right: 2px;
+
+        @media (max-width: 750px) {
+            justify-content: flex-start;
+            background-color: #a0a0a025;
+        }
 
         .Images {
             position: relative;
@@ -25,7 +42,16 @@
                 width: 100%;
                 height: 100%;
                 background-color: #4ade80;
+
                 z-index: 1;
+            }
+
+            @media (max-width: 750px) {
+                margin: 6px;
+                margin-right: 0;
+                width: 40px;
+                height: 40px;
+
             }
         }
 
@@ -46,7 +72,7 @@
         flex-direction: column;
         align-items: center;
         overflow: hidden;
-        margin-left: 5px;
+        padding-left: 5px;
 
         display: flex;
         flex-direction: column;
@@ -84,18 +110,46 @@
             }
         }
 
+        @media (max-width: 750px) {
+            flex-grow: 1;
+            padding-top: 13px;
+            height: 52px;
+            background-color: #a0a0a025;
 
+        }
 
 
     }
 
     .CurrentTrackSideInfo__FollowBtn {
+
+        @media (max-width: 750px) {
+            justify-self: flex-end;
+            height: 52px;
+            padding-top: 15px;
+            background-color: #a0a0a025;
+            margin: 0;
+            padding-right: 10px;
+            margin-right: 10px;
+        }
+
         padding-top: 8px;
         margin: 0 20px 0px 8px;
     }
 }
 
 
+
+.CurrentTrackSideInfo__Single {
+
+    @media (max-width: 750px) {
+        max-width: clamp(16.25rem, -17.5rem + 108vw, 33.125rem);
+    }
+
+    @media (max-width: 475px) {
+        max-width: 100%;
+    }
+}
 
 
 
