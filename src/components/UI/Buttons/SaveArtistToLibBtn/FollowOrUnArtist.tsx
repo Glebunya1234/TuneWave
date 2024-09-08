@@ -1,7 +1,7 @@
 "use client";
 
 import { useSWRConfig } from "swr";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { _SaveTrack, _UnSaveTrack } from "@/api/SP-Player/API-SP-Player";
 import {
   _CheckIsFollowArtist,
@@ -17,6 +17,9 @@ type SaveTrackBtnType = {
 export const FollowBtn = ({ id, className, isSave }: SaveTrackBtnType) => {
   const { mutate } = useSWRConfig();
   const [state, setState] = useState(isSave);
+  useEffect(() => {
+    setState(isSave);
+  }, [isSave]);
   const OnClick = async (id: string) => {
     if (!state) {
       setState((prevState) => !prevState);

@@ -1,15 +1,14 @@
 "use client";
 import Image from "next/image";
 import style from "./ComponentPlayingTrack.module.scss";
-import type { CurrentlyPlayingTrack } from "@/types/SpotifyTypes/CurrentlyPlayingTrack/type";
+import { useRouter } from "next/navigation";
 import { useContext, useEffect, useRef, useState } from "react";
 import { GlobalContext } from "@/Context";
 import { _getCurrentlyPlayingTrack } from "@/api/SP-Player/API-SP-Player";
-import { useRouter } from "next/navigation";
+import { getArtistId } from "@/utils/CutedIdArtist";
 
 export const ComponentPlayingTrack = () => {
-  const [playingTrack, setPlayingTrack] = useState<CurrentlyPlayingTrack>();
-
+  const [getCurrentTrack, setCurrentTrack] = useState<Spotify.Track>();
   const [titleOverflow, setTitleOverflow] = useState<number>(0);
   const [artistsOverflow, setArtistsOverflow] = useState<number>(0);
   const containerRef = useRef<HTMLSpanElement>(null);
@@ -17,15 +16,11 @@ export const ComponentPlayingTrack = () => {
   const router = useRouter();
   const titleRef = useRef<HTMLHeadingElement>(null);
   const artistsRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
-    const fetchTrack = async () => {
-      const track = await _getCurrentlyPlayingTrack();
+    setCurrentTrack(dataContext?.getCurrentPlaying?.current_track);
+  }, [dataContext?.getCurrentPlaying]);
 
-      setPlayingTrack(track);
-    };
-
-    fetchTrack();
-  }, [, dataContext.getStatePlaying]);
   useEffect(() => {
     const updateOverflow = () => {
       if (titleRef.current && artistsRef.current && containerRef.current) {
@@ -35,9 +30,13 @@ export const ComponentPlayingTrack = () => {
 
         if (containerWidth < titleWidth) {
           setTitleOverflow(titleWidth - containerWidth);
+        } else {
+          setTitleOverflow(0);
         }
         if (containerWidth < artistsWidth) {
           setArtistsOverflow(artistsWidth - containerWidth);
+        } else {
+          setArtistsOverflow(0);
         }
       }
     };
@@ -48,13 +47,13 @@ export const ComponentPlayingTrack = () => {
     return () => {
       window.removeEventListener("resize", updateOverflow);
     };
-  }, [playingTrack]);
+  }, [getCurrentTrack, dataContext?.getCurrentPlaying?.current_track?.id]);
 
-  return playingTrack !== undefined || null ? (
+  return getCurrentTrack !== undefined || null ? (
     <section className={style.Content__Preview}>
       <div className={style.Preview__image}>
         <Image
-          src={playingTrack?.item?.album.images[0].url || "/FavoriteTrack.png"}
+          src={getCurrentTrack?.album?.images[0]?.url || "/FavoriteTrack.png"}
           layout="fill"
           objectFit="cover"
           className={style.image}
@@ -71,10 +70,10 @@ export const ComponentPlayingTrack = () => {
           }
           className={titleOverflow ? style.marquee : ""}
           onClick={() => {
-            router.push(`/track/${playingTrack?.item.id}`);
+            router.push(`/track/${getCurrentTrack?.id}`);
           }}
         >
-          {playingTrack?.item?.name || "Tunewave"}
+          {getCurrentTrack?.name || "Tunewave"}
         </h1>
         <nav
           ref={artistsRef}
@@ -87,21 +86,25 @@ export const ComponentPlayingTrack = () => {
             artistsOverflow ? style.marquee : ""
           }`}
         >
-          {playingTrack?.item.artists.map((artist, inx) => (
+          {getCurrentTrack?.artists?.map((artist, inx) => (
             <p
               key={inx}
               onClick={() => {
-                router.push(`/artist/${artist.id}`);
+                router.push(`/artist/${getArtistId(artist.url)}`);
               }}
             >
               {artist.name}
-              {playingTrack?.item.artists.length === inx + 1 ? (
+              {getCurrentTrack?.artists.length === inx + 1 ? (
                 <></>
               ) : (
                 <p className="pr-[5px]">,</p>
               )}
             </p>
-          )) || "By Glebunya"}
+          )) || (
+            <nav className={style.Span__Nav}>
+              <p>By Glebunya</p>
+            </nav>
+          )}
         </nav>
       </span>
     </section>

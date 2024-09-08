@@ -38,6 +38,7 @@ export const test = async (refreshToken?: string): Promise<string | null> => {
                 'Content-Type': 'application/x-www-form-urlencoded',
             },
             body: `grant_type=refresh_token&refresh_token=${refreshToken}`,
+            
             cache: "no-cache"
         });
 

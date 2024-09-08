@@ -7,7 +7,8 @@ export const InfoBar = () => {
   return (
     <InfoSideBar>
       <ComponentPlayingTrack />
-      <PlayingNowTrackArtistList />
+      {/* <PlayingNowTrackArtistList /> */}
+      <p></p>
     </InfoSideBar>
   );
 };

@@ -1,7 +1,7 @@
 "use client";
 
 import style from "./Left-side-bar.module.scss";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { IoMdArrowDropright } from "react-icons/io";
 import { MdOutlineHideSource } from "react-icons/md";
 import { GlobalContext } from "@/Context";
@@ -30,6 +30,17 @@ export const MediaLibraryBar = ({
     }, 500);
     return timer2;
   };
+  useEffect(() => {
+    const handleAction = () => {
+      setRemove(style.MediaLibrary__remove);
+      const timer2 = setTimeout(() => {
+        setRemove(" ");
+        dataCont?.setHiddenLeftBar(dataCont?.isRemoveLeft);
+      }, 500);
+      return timer2;
+    };
+    handleAction();
+  }, [dataCont?.isRemoveLeft]);
   return (
     <>
       {dataCont.isHiddenLeftBar && (

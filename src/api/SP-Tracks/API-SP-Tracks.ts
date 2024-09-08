@@ -6,7 +6,7 @@ import { fetchWithRetry } from "../ApiSpotify";
 
 export const _getSavedTrackUser = async (count: number): Promise<SpotifyTracksResponse> => {
 
-    const url = `https://api.spotify.com/v1/me/tracks?limit=20&offset=${count}`
+    const url = `https://api.spotify.com/v1/me/tracks?limit=50&offset=${count}`
 
     const response = await fetchWithRetry(url);
     if (!response.ok) {
@@ -28,9 +28,11 @@ export const _getSavedTrackUser = async (count: number): Promise<SpotifyTracksRe
 }
 
 
-export const _checkIfTracksAreSaved = async (trackIds: string[]): Promise<boolean[]> => {
+export const _checkIfTracksAreSaved = async (trackIds: string[] | string): Promise<boolean[]> => {
+    let idsString = trackIds;
+    if (typeof trackIds !== "string")
+        idsString = trackIds?.join(',');
 
-    const idsString = trackIds?.join(',');
     const url = `https://api.spotify.com/v1/me/tracks/contains?ids=${idsString}`
 
     const response = await fetchWithRetry(url);
@@ -41,6 +43,7 @@ export const _checkIfTracksAreSaved = async (trackIds: string[]): Promise<boolea
 
     }
     const data = await response.json()
+
     return data
 };
 

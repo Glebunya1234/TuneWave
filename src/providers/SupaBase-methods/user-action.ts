@@ -42,7 +42,7 @@ export const oAuthSignIn = async (provider: Provider) => {
         provider,
         options: {
             redirectTo: redirectUrl,
-            scopes: 'user-library-read user-library-modify user-read-recently-played user-top-read user-read-playback-position user-follow-read user-follow-modify playlist-modify-public playlist-modify-private playlist-read-private user-read-currently-playing user-modify-playback-state user-read-playback-state ugc-image-upload'
+            scopes: 'user-library-read user-read-private user-library-modify user-read-recently-played user-top-read user-read-playback-position user-follow-read user-follow-modify playlist-modify-public playlist-modify-private playlist-read-private user-read-currently-playing user-modify-playback-state streaming user-read-playback-state ugc-image-upload'
         }
     })
 

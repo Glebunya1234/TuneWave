@@ -12,6 +12,20 @@ export const GlobalContext = createContext<ContextType>({
     setHiddenLeftBar: () => { },
     isHiddenRightBar: true,
     setHiddenRightBar: () => { },
-    getStatePlaying: {},
+    isRemoveLeft: true,
+    setRemoveLeft: () => { },
+    isRemoveRight: true,
+    setRemoveRight: () => { },
+    getStatePlaying: {
+        progress_ms: 0,
+        is_playing: false,
+        duration_ms: 0
+    },
     setStatePlaying: () => { },
+    getCurrentPlaying: {},
+    setCurrentPlaying: () => { },
+    getDeviceID: "",
+    setDeviceID: () => { },
+    player: null,
+    setPlayer: () => { },
 });

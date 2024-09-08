@@ -28,26 +28,146 @@ export const _getCurrentlyPlayingTrack = async (token?: string | null): Promise<
     return { ...Data, item: { ...Data.item, artists: WithSavedInfo } }
 }
 
-export const _setPlayTrack = async (uri: string) => {
-
-    const url = 'https://api.spotify.com/v1/me/player/play';
+export const _SkipToNext = async (deviceId: string) => {
+    const url = `https://api.spotify.com/v1/me/player/next?device_id=${deviceId}`;
     const options: RequestInit = {
+        method: 'POST',
+    };
+    const response1 = await fetchWithRetryForWriteMethods(url, options);
+    if (!response1.ok) {
+        const error = await response1.json();
+        console.error('Error:', error);
+        return;
+    }
+    return null;
+}
+
+export const _PausePlayback = async (deviceId: string) => {
+    const url = `https://api.spotify.com/v1/me/player/pause?device_id=${deviceId}`
+    const options: RequestInit = {
+        method: 'PUT',
+    };
+    const response1 = await fetchWithRetryForWriteMethods(url, options);
+    if (!response1.ok) {
+        const error = await response1.json();
+        console.error('Error:', error);
+        return;
+    }
+    return null;
+}
+export const _SkipToBack = async (deviceId: string) => {
+    const url = `https://api.spotify.com/v1/me/player/previous?device_id=${deviceId}`;
+    const options: RequestInit = {
+        method: 'POST',
+    };
+    const response1 = await fetchWithRetryForWriteMethods(url, options);
+    if (!response1.ok) {
+        const error = await response1.json();
+        console.error('Error:', error);
+        return;
+    }
+    return null;
+}
+export const _TransferPlayback = async (deviceId: string) => {
+    const url1 = 'https://api.spotify.com/v1/me/player';
+
+    const options1: RequestInit = {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            context_uri: uri,
+            device_ids: [deviceId],
+        }),
+    };
+
+    try {
+        const response1 = await fetchWithRetryForWriteMethods(url1, options1);
+
+        if (!response1.ok) {
+            const error = await response1.json();
+            console.error('Error:', error);
+            return false;
+        }
+
+        return true;
+    } catch (error) {
+        console.error('Error:', error);
+        return false;
+    }
+};
+// export const _TransferPlayback = async (deviceId: string) => {
+
+
+//     const url1 = 'https://api.spotify.com/v1/me/player';
+
+//     const options1: RequestInit = {
+//         method: 'PUT',
+//         headers: {
+//             'Content-Type': 'application/json',
+//         },
+//         body: JSON.stringify({
+
+//             device_ids: [
+//                 deviceId
+//             ]
+//         }),
+//     };
+//     const response1 = await fetchWithRetryForWriteMethods(url1, options1);
+
+//     if (!response1.ok) {
+//         const error = await response1.json();
+//         console.error('Error:', error);
+//         return;
+//     }
+
+//     return null;
+// }
+export const _PlayTrackPlayback = async (deviceId: string) => {
+
+
+
+    const url2 = 'https://api.spotify.com/v1/me/player/play';
+
+    const options2: RequestInit = {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    };
+    const response2 = await fetchWithRetryForWriteMethods(url2, options2);
+    if (!response2.ok) {
+        const error = await response2.json();
+        console.error('Error:', error);
+        return;
+    }
+    return null;
+}
+export const _setPlayTrack = async (uri: string, deviceId: string) => {
+
+    const url2 = 'https://api.spotify.com/v1/me/player/play';
+
+    const options2: RequestInit = {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+
             offset: {
-                position: 5,
+                position: 0,
             },
+            uris: [uri],
             position_ms: 0,
         }),
     };
 
-    const response = await fetchWithRetryForWriteMethods(url, options);
-    if (!response.ok) {
-        const error = await response.json();
+
+
+    const response2 = await fetchWithRetryForWriteMethods(url2, options2);
+
+    if (!response2.ok) {
+        const error = await response2.json();
         console.error('Error:', error);
         return;
     }
@@ -90,3 +210,63 @@ export const _SaveTrack = async (ids: string) => {
     return data;
 
 }
+
+export const setRepeatMode = async (state: "off" | "context" | "track") => {
+    try {
+        const url = `https://api.spotify.com/v1/me/player/repeat?state=${state}`
+        const options: RequestInit = {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        };
+        const response = await fetchWithRetryForWriteMethods(url, options);
+        if (!response.ok) {
+            throw new Error("error");
+        }
+        return
+    } catch (error) {
+        console.error(error);
+    }
+};
+export const setPlaybackShuffle = async (state: boolean) => {
+    try {
+        const url = 'https://api.spotify.com/v1/me/player/shuffle?state=false'
+        const url2 = 'https://api.spotify.com/v1/me/player/shuffle?state=true'
+
+
+        const options1: RequestInit = {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        };
+        const response = await fetchWithRetryForWriteMethods(state ? url : url2, options1);
+
+
+
+        if (!response.ok) {
+            throw new Error("Не удалось получить очередь воспроизведения");
+        }
+        return
+    } catch (error) {
+        console.error(error);
+    }
+};
+export const getPlaybackQueue = async () => {
+    try {
+        const url = "https://api.spotify.com/v1/me/player/queue"
+        const response = await fetchWithRetry(url)
+
+        if (!response.ok) {
+            throw new Error("Не удалось получить очередь воспроизведения");
+        }
+
+        const data = await response.json();
+
+
+        return data;
+    } catch (error) {
+        console.error("Ошибка получения очереди воспроизведения:", error);
+    }
+};
