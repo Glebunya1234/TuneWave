@@ -3,12 +3,12 @@
 import style from "./PlayingNowTrackArtistList.module.scss";
 import { useRouter } from "next/navigation";
 import { useContext, useEffect, useState } from "react";
-import { GlobalContext } from "@/Context";
 import { FollowBtn } from "@/components/UI/Buttons/SaveArtistToLibBtn/FollowOrUnArtist";
 import { OpenInSpotify } from "@/components/UI/Buttons/OpenInSpotifyBtn/OpenInSpotify";
 import { _getCurrentlyPlayingTrack } from "@/api/SP-Player/API-SP-Player";
 import { _CheckIsFollowArtist } from "@/api/SP-Users/API-SP-Users";
 import type { CurrentlyPlayingTrack } from "@/types/SpotifyTypes/CurrentlyPlayingTrack/type";
+import { GlobalContext } from "@/Context";
 
 export const PlayingNowTrackArtistList = () => {
   const [playingTrack, setPlayingTrack] = useState<CurrentlyPlayingTrack>();
@@ -22,8 +22,9 @@ export const PlayingNowTrackArtistList = () => {
       const track = await _getCurrentlyPlayingTrack();
       setPlayingTrack(track);
     };
+
     fetchTrack();
-  }, [, dataContext.getStatePlaying]);
+  }, [dataContext.getCurrentPlaying?.current_track?.id]);
 
   return playingTrack !== undefined || null ? (
     <section className={style.PlayingNowTrackArtistList}>

@@ -9,7 +9,6 @@ import { OpenInSpotify } from "@/components/UI/Buttons/OpenInSpotifyBtn/OpenInSp
 
 const albumPage = async ({ params }: { params: { id: string } }) => {
   const data = await _getAlbum(params.id);
-
   return (
     <div className={style.Album}>
       <PanelTarget side="Top" />

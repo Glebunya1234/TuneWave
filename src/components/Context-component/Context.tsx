@@ -15,9 +15,17 @@ export const Context = ({ children }: { children: React.ReactNode }) => {
     useState<ContextType["isHiddenLeftBar"]>(true);
   const [isHiddenRightBar, setHiddenRightBar] =
     useState<ContextType["isHiddenRightBar"]>(true);
-  const [getStatePlaying, setStatePlaying] =
-    useState<ContextType["getStatePlaying"]>(true);
-
+  const [getStatePlaying, setStatePlaying] = useState<
+    ContextType["getStatePlaying"]
+  >({ progress_ms: 0, is_playing: false, duration_ms: 0 });
+  const [getCurrentPlaying, setCurrentPlaying] =
+    useState<ContextType["getCurrentPlaying"]>();
+  const [getDeviceID, setDeviceID] = useState<ContextType["getDeviceID"]>("");
+  const [player, setPlayer] = useState<ContextType["player"]>(null);
+  const [isRemoveLeft, setRemoveLeft] =
+    useState<ContextType["isRemoveLeft"]>(true);
+  const [isRemoveRight, setRemoveRight] =
+    useState<ContextType["isRemoveRight"]>(true);
   const valueHover = {
     getTemporaryText,
     setTemporaryText,
@@ -27,8 +35,18 @@ export const Context = ({ children }: { children: React.ReactNode }) => {
     setHiddenLeftBar,
     isHiddenRightBar,
     setHiddenRightBar,
+    isRemoveLeft,
+    setRemoveLeft,
+    isRemoveRight,
+    setRemoveRight,
     getStatePlaying,
     setStatePlaying,
+    getDeviceID,
+    setDeviceID,
+    player,
+    setPlayer,
+    getCurrentPlaying,
+    setCurrentPlaying,
   };
 
   return (

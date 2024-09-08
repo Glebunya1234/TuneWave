@@ -23,7 +23,7 @@ export const TrackComponent = async ({
         className={`${style.TrackComponent__NavPanel} border-[#c1c0c5]  border-b-[1px]`}
       >
         <PlayTrackBtn
-          id={data.id}
+          id={data.uri}
           onHover={{ isTrue: false }}
           text={"Play"}
           className={style.NavPanel__PlayTrackBtn}

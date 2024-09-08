@@ -20,6 +20,9 @@ export const SaveTrackBtn = ({
   const { mutate } = useSWRConfig();
   const [state, setState] = useState(isSave);
 
+  useEffect(() => {
+    setState(isSave);
+  }, [isSave]);
   const OnClick = async (id: string) => {
     if (!state) {
       setState(true);

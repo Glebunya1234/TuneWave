@@ -25,8 +25,8 @@ export const PlayTrackBtn = ({
 
   const OnClick = async (id: string) => {
     const track = await _getCurrentlyPlayingTrack();
-    dataContext.setStatePlaying(track);
-    await _setPlayTrack(id);
+    // dataContext.setStatePlaying(track);
+    await _setPlayTrack(id, dataContext?.getDeviceID);
   };
 
   const handleMouseEnter = (index?: boolean) => {

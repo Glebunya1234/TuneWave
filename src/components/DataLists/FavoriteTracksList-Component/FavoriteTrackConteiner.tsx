@@ -31,7 +31,7 @@ export const FavoriteTrackComponent = () => {
   useEffect(() => {
     if (data?.next !== null && fetching) {
       setOffset((prevOffset) => {
-        const newOffset = prevOffset + 20;
+        const newOffset = prevOffset + 50;
         mutate(async (currentData) => {
           const newData = await fetcher(newOffset);
           setFetching(false);

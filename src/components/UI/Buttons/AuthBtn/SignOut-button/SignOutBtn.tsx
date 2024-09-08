@@ -4,7 +4,7 @@ import React from "react";
 
 import { SignOut } from "@/providers/SupaBase-methods/user-action";
 
-export const SingOutBTN = () => {
+export const SignOutBTN = () => {
   return (
     <button
       onClick={async () => {
