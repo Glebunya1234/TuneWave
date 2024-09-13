@@ -21,13 +21,13 @@ const Profile = async () => {
           <div className={style.dash}></div>
           <div className={style.squarDash}></div>
           <aside className={style.Content__Conteiner}>
-            <FavoriteBanner />
+            {/* <FavoriteBanner />
             <RandomMix />
-            <TopArtistMix />
+            <TopArtistMix /> */}
             <FollowedArtist />
-            <FollowedAlbum />
+            {/* <FollowedAlbum />
             <ListenToThisCmp />
-            <TopGangreMix />
+            <TopGangreMix /> */}
           </aside>
         </aside>
         <PanelTarget side="Bottom" />

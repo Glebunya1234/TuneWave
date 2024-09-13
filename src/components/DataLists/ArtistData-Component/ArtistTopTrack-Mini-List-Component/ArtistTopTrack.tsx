@@ -20,6 +20,7 @@ export const ArtistTopTrack = ({ id }: { id: string }) => {
       dedupingInterval: 60000,
     }
   );
+
   const handleClick = () => {
     if (state) {
       document.documentElement.style.setProperty("--HiddenList", "250px");
@@ -34,26 +35,28 @@ export const ArtistTopTrack = ({ id }: { id: string }) => {
       </div>
     </>
   ) : (
-    <>
-      <span className={`${style.ArtistData__Span}`}>Popular tracks</span>
+    TopTracks && TopTracks.length !== 0 && (
+      <>
+        <span className={`${style.ArtistData__Span}`}>Popular tracks</span>
 
-      <div className={style.ArtistTopTrack}>
-        <PlaylistComponent
-          HiddenHeader={true}
-          Offset={0}
-          SWRKey={`artistTopTracks/${id}`}
-          Params={{ id: id, list: "", genre: "" }}
-          data={TopTracks}
-        />
-      </div>
-      <button
-        className="hover:bg-[#a0a0a025] w-full text-center"
-        onClick={() => {
-          handleClick();
-        }}
-      >
-        More...
-      </button>
-    </>
+        <div className={style.ArtistTopTrack}>
+          <PlaylistComponent
+            HiddenHeader={true}
+            Offset={0}
+            SWRKey={`artistTopTracks/${id}`}
+            Params={{ id: id, list: "", genre: "" }}
+            data={TopTracks}
+          />
+        </div>
+        <button
+          className="hover:bg-[#a0a0a025] w-full text-center"
+          onClick={() => {
+            handleClick();
+          }}
+        >
+          More...
+        </button>
+      </>
+    )
   );
 };

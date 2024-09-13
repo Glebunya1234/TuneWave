@@ -17,6 +17,7 @@ type InfoType = {
   duration_ms?: number;
   release_date?: string;
   Total?: number;
+  FollowersArtistPage?: boolean;
   FollowersTotal?: number;
   FollowersText?: string;
   hrefSpotify?: string;
@@ -31,6 +32,7 @@ export const DisplayInfo = ({
   Artists,
   release_date,
   duration_ms,
+  FollowersArtistPage,
   FollowersTotal,
   FollowersText,
   Total,
@@ -98,6 +100,11 @@ export const DisplayInfo = ({
               </>
             )}
 
+            {FollowersArtistPage !== undefined && (
+              <>
+                <span className="mr-[5px]">Followers</span>
+              </>
+            )}
             {FollowersTotal !== undefined && (
               <>
                 <span className="mr-[5px]">•</span>

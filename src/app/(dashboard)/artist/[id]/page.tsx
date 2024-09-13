@@ -17,7 +17,7 @@ const artistPage = async ({ params }: { params: { id: string } }) => {
         Type={data.type}
         Name={data.name}
         FollowersTotal={data.followers.total}
-        FollowersText="followers   •"
+        FollowersArtistPage={true}
       >
         <ArtistInfoConteiner id={params.id} />
       </DisplayInfo>
