@@ -8,19 +8,14 @@ import { PlaylistComponent } from "@/components/DataLists/PlayLists-Component/Pl
 import { Spinner } from "@/components/UI/Spinner/spinner";
 import { RecommendationsType } from "@/types/SpotifyTypes/RecommendationsType/type";
 import { DisplayInfo } from "@/components/DisplayInfo/DisplayInfo";
-import { CurrentlyPlaylistTracksItem } from "@/types/SpotifyTypes/CurrentlyPlaylist/type";
-import {
-  _getRecommendations,
-  _getSimilarPlaylist,
-} from "@/api/SP-Playlists/API-SP-MixPlaylist";
-import { _getItemsCurrentPlaylist } from "@/api/SP-Playlists/API-SP-Playlists";
+import { FollowOrUnPlaylist } from "@/components/UI/Buttons/SavePlaylistToLibBtn/FollowOrUnPlaylist";
+import { OpenInSpotify } from "@/components/UI/Buttons/OpenInSpotifyBtn/OpenInSpotify";
 import { fetcher } from "@/utils/helper/Fetchers/PlayList-Fetcher";
 import {
   _isCurrentlyPlaylistTracksItem,
   _isTypeRecommendation,
 } from "@/utils/TypeOfCustom/TypeOfCustom";
-import { FollowOrUnPlaylist } from "@/components/UI/Buttons/SavePlaylistToLibBtn/FollowOrUnPlaylist";
-import { OpenInSpotify } from "@/components/UI/Buttons/OpenInSpotifyBtn/OpenInSpotify";
+import { CurrentlyPlaylistTracksItem } from "@/types/SpotifyTypes/CurrentlyPlaylist/type";
 
 const PlaylistPage = () => {
   const searchParams = useSearchParams();

@@ -1,41 +1,44 @@
  .profile {
      width: 100%;
      height: 100%;
-     max-width: 1900px;
+
      margin-top: 10px;
      position: relative;
      display: flex;
      flex-direction: column;
      justify-content: start;
      overflow: hidden;
-
-
-
+     background-color: #00000091;
 
      .profile__Dashboard {
          width: 100%;
          height: 100%;
-         background-color: #00000091;
          display: flex;
          flex-direction: column;
+
      }
 
      .profile__Content {
+
          width: 100%;
          height: 100%;
          display: flex;
-         flex-direction: column;
-
+         justify-content: center;
          padding: 10px 60px;
-         justify-content: start;
          overflow-y: scroll;
-
-
          color: white;
 
          h1 {
              color: white;
 
+         }
+
+         .Content__Conteiner {
+             max-width: 1900px;
+             width: 100%;
+             display: flex;
+             flex-direction: column;
+             align-items: center;
          }
      }
 

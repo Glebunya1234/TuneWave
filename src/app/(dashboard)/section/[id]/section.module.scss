@@ -1,10 +1,11 @@
  .Section {
-     max-width: 1900px;
+
      width: 100%;
      height: 100%;
      margin-top: 10px;
      position: relative;
      display: flex;
+     align-items: center;
      flex-direction: column;
      justify-content: start;
      background-color: #00000091;
@@ -18,6 +19,7 @@
      }
 
      .ForUserMix_Div {
+
          color: white;
          text-transform: uppercase;
          font-family: var(--font-family-versus);
@@ -30,7 +32,7 @@
      }
 
      .Section__Content {
-
+         max-width: 1900px;
          width: 100%;
          height: 100%;
          display: grid;
