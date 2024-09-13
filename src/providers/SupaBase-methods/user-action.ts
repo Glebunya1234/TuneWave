@@ -1,7 +1,7 @@
 "use server"
 import { createClient } from "@/utils/supabase/server";
 import { Provider } from "@supabase/supabase-js";
-import { redirect } from "next/navigation";
+import { redirect, RedirectType } from "next/navigation";
 import { getURL } from "@/utils/helper/helpers";
 import { cookies } from "next/headers";
 
@@ -30,9 +30,10 @@ import { cookies } from "next/headers";
 //     }
 // }
 export const oAuthSignIn = async (provider: Provider) => {
+
     if (!provider) {
         console.log("Не авторизован");
-        return redirect(`/?message=NoProvidersSelected`)
+        return redirect(`/?message=NoProvidersSelected`, RedirectType.push)
     }
 
     const supabase = createClient();
@@ -42,8 +43,12 @@ export const oAuthSignIn = async (provider: Provider) => {
         provider,
         options: {
             redirectTo: redirectUrl,
-            scopes: 'user-library-read user-read-private user-library-modify user-read-recently-played user-top-read user-read-playback-position user-follow-read user-follow-modify playlist-modify-public playlist-modify-private playlist-read-private user-read-currently-playing user-modify-playback-state streaming user-read-playback-state ugc-image-upload'
+            scopes: 'user-library-read user-read-private user-library-modify user-read-recently-played user-top-read user-read-playback-position user-follow-read user-follow-modify playlist-modify-public playlist-modify-private playlist-read-private user-read-currently-playing user-modify-playback-state streaming user-read-playback-state ugc-image-upload',
+            queryParams: {
+                show_dialog: 'true'
+            }
         }
+
     })
 
     if (error) {
@@ -57,7 +62,7 @@ export const oAuthSignIn = async (provider: Provider) => {
 
 export const SignOut = async () => {
     const supabase = createClient();
-    await supabase.auth.signOut().then(() => {
+    await supabase.auth.signOut({ scope: 'local' }).then(() => {
         const cookieStore = cookies();
 
 

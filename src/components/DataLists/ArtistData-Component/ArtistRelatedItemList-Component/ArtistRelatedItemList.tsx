@@ -14,6 +14,7 @@ export const ArtistRelatedItemList = ({ id }: { id: string }) => {
     revalidateOnFocus: false,
     dedupingInterval: 60000,
   });
+
   const Relateditems = RelatedArtists?.slice(0, 6).map((data, index) => (
     <PanelPGAT
       key={index}
@@ -24,20 +25,23 @@ export const ArtistRelatedItemList = ({ id }: { id: string }) => {
     />
   ));
   return (
-    <>
-      <span className={`${style.ArtistData__Span} `}>
-        <h1>Related Artists</h1>
-        <Link href={`/artist/${id}/related/`} className={style.Div__link}>
-          Show all
-        </Link>
-      </span>
-      <nav className={style.ArtistData__Discography}>
-        {LoadingRelatedArtists ? (
-          <PanelSkeleton className={style.Discography__Item} />
-        ) : (
-          Relateditems
-        )}
-      </nav>
-    </>
+    RelatedArtists &&
+    RelatedArtists.length !== 0 && (
+      <>
+        <span className={`${style.ArtistData__Span} `}>
+          <h1>Related Artists</h1>
+          <Link href={`/artist/${id}/related/`} className={style.Div__link}>
+            Show all
+          </Link>
+        </span>
+        <nav className={style.ArtistData__Discography}>
+          {LoadingRelatedArtists ? (
+            <PanelSkeleton className={style.Discography__Item} />
+          ) : (
+            Relateditems
+          )}
+        </nav>
+      </>
+    )
   );
 };
