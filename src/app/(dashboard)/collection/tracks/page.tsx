@@ -10,44 +10,37 @@ const CollectionTracks = async () => {
   const userData = await GetDataProfileUser();
 
   return (
-    <div className={style.Tracks}>
-      <PanelTarget side="Top" />
-
-      <aside className={style.Tracks__Content} id="FavoriteContent">
-        <section className={style.Content__Preview}>
-          <div className={style.Preview__image}>
+    <aside className={style.Tracks} id="FavoriteContent">
+      <section className={style.Content__Preview}>
+        <div className={style.Preview__image}>
+          <Image
+            src="/FavoriteTrack.png"
+            layout="fill"
+            objectFit="cover"
+            className={style.mark}
+            alt="alt"
+          />
+        </div>
+        <div className={style.Preview__Info}>
+          <h3 className={style.Info__TrackType}>Playlist</h3>
+          <h1>FAVORITE TRACKS</h1>
+          <span className={style.Info__Track}>
             <Image
-              src="/FavoriteTrack.png"
-              layout="fill"
-              objectFit="cover"
-              className={style.mark}
-              alt="alt"
+              src={userData.user?.user_metadata.avatar_url}
+              width={25}
+              height={25}
+              alt="Arrow2"
+              className={`${style.mask} ${style["mask-parallelogram"]}`}
             />
-          </div>
-          <div className={style.Preview__Info}>
-            <h3 className={style.Info__TrackType}>Playlist</h3>
-            <h1>FAVORITE TRACKS</h1>
-            <span className={style.Info__Track}>
-              <Image
-                src={userData.user?.user_metadata.avatar_url}
-                width={25}
-                height={25}
-                alt="Arrow2"
-                className={`${style.mask} ${style["mask-parallelogram"]}`}
-              />
-              <Link href={`/artist/`}>
-                <p> {userData.user?.user_metadata?.full_name}</p>
-              </Link>
-            </span>
-          </div>
-        </section>
+            <Link href={`/artist/`}>
+              <p> {userData.user?.user_metadata?.full_name}</p>
+            </Link>
+          </span>
+        </div>
+      </section>
 
-        <FavoriteTrackComponent />
-      </aside>
-      <div className={style.dash}></div>
-      <div className={style.squarDash}></div>
-      <PanelTarget side="Bottom" />
-    </div>
+      <FavoriteTrackComponent />
+    </aside>
   );
 };
 

@@ -10,7 +10,6 @@ const artistPage = async ({ params }: { params: { id: string } }) => {
   const data = await getDataCacheArtist(params.id);
   return (
     <div className={style.Artist}>
-      <PanelTarget side="Top" />
       <DisplayInfo
         idForScroll={"ArtistPage"}
         ImageSrc={`${data?.images[0]?.url || "/FavoriteTrack.png"}`}
@@ -21,9 +20,6 @@ const artistPage = async ({ params }: { params: { id: string } }) => {
       >
         <ArtistInfoConteiner id={params.id} />
       </DisplayInfo>
-      <div className={style.dash}></div>
-      <div className={style.squarDash}></div>
-      <PanelTarget side="Bottom" />
     </div>
   );
 };

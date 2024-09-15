@@ -14,25 +14,15 @@ import { FollowedAlbum } from "@/components/Content/Mix/FollowedArtist/FollowedA
 
 const Profile = async () => {
   return (
-    <main className={style.profile}>
-      <section className={style.profile__Dashboard}>
-        <PanelTarget side="Top" />
-        <aside className={style.profile__Content}>
-          <div className={style.dash}></div>
-          <div className={style.squarDash}></div>
-          <aside className={style.Content__Conteiner}>
-            <FavoriteBanner />
-            <RandomMix />
-            <TopArtistMix />
-            <FollowedArtist />
-            <FollowedAlbum />
-            <ListenToThisCmp />
-            <TopGangreMix />
-          </aside>
-        </aside>
-        <PanelTarget side="Bottom" />
-      </section>
-    </main>
+    <section className={style.profile}>
+      <FavoriteBanner />
+      <RandomMix />
+      <TopArtistMix />
+      <FollowedArtist />
+      <FollowedAlbum />
+      <ListenToThisCmp />
+      <TopGangreMix />
+    </section>
   );
 };
 

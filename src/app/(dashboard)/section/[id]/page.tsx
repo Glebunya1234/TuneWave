@@ -136,22 +136,16 @@ const Section = ({ params }: { params: { id: string } }) => {
 
   return (
     <div className={style.Section}>
-      <PanelTarget side="Top" />
-      {isLoading ? (
+      {isLoading && (
         <div className="w-full h-full flex justify-center items-center">
           <Spinner />
         </div>
-      ) : (
-        <>
-          <div className={style.ForUserMix_Div}>{renderHeader()}</div>
-          <aside className={style.Section__Content} id="SectionPage">
-            {renderContent()}
-          </aside>
-        </>
       )}
-      <div className={style.dash}></div>
-      <div className={style.squarDash}></div>
-      <PanelTarget side="Bottom" />
+
+      <div className={style.ForUserMix_Div}>{renderHeader()}</div>
+      <aside className={style.Section__Content} id="SectionPage">
+        {renderContent()}
+      </aside>
     </div>
   );
 };

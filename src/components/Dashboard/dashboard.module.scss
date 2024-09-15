@@ -57,6 +57,21 @@
             flex-direction: column;
             align-items: center;
             overflow: hidden;
+
+            .child__Main {
+                width: 100%;
+                height: 100%;
+                align-items: center;
+                margin-top: 10px;
+                position: relative;
+                display: flex;
+                flex-direction: column;
+                justify-content: start;
+                background-color: #00000091;
+                overflow: hidden;
+                transition: all .2s ease-in-out;
+
+            }
         }
     }
 

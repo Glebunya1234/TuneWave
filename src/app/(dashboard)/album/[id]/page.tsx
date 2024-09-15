@@ -11,7 +11,6 @@ const albumPage = async ({ params }: { params: { id: string } }) => {
   const data = await _getAlbum(params.id);
   return (
     <div className={style.Album}>
-      <PanelTarget side="Top" />
       <DisplayInfo
         idForScroll={"pageTrack"}
         ImageSrc={`${
@@ -39,10 +38,6 @@ const albumPage = async ({ params }: { params: { id: string } }) => {
         </nav>
         <AlbumInformation data={data.tracks.items} />
       </DisplayInfo>
-
-      <div className={style.dash}></div>
-      <div className={style.squarDash}></div>
-      <PanelTarget side="Bottom" />
     </div>
   );
 };
