@@ -1,7 +1,6 @@
 "use server";
 import style from "./tracks.module.scss";
 import { cache } from "react";
-import { PanelTarget } from "@/components/UI/Target/PanelTarget";
 import { TrackComponent } from "@/components/DataLists/CurrentlyTrackLists-Component/TrackContent";
 import { DisplayInfo } from "@/components/DisplayInfo/DisplayInfo";
 import { _getArtists } from "@/api/SP-Artists/API-SP-Artists";
@@ -13,7 +12,6 @@ const Track = async ({ params }: { params: { id: string } }) => {
 
   return (
     <div className={style.Tracks}>
-      <PanelTarget side="Top" />
       <DisplayInfo
         idForScroll={"pageTrack"}
         ImageSrc={`${
@@ -33,10 +31,6 @@ const Track = async ({ params }: { params: { id: string } }) => {
           artist={Data.dataArtist}
         />
       </DisplayInfo>
-
-      <div className={style.dash}></div>
-      <div className={style.squarDash}></div>
-      <PanelTarget side="Bottom" />
     </div>
   );
 };

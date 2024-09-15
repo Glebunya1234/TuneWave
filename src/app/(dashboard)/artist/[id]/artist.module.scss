@@ -1,35 +1,14 @@
  .Artist {
      width: 100%;
-     align-items: center;
      height: 100%;
-     margin-top: 10px;
-     position: relative;
      display: flex;
      flex-direction: column;
      justify-content: start;
-     background-color: #00000091;
+     align-items: center;
      overflow: hidden;
-     transition: all .2s ease-in-out;
 
      .mark {
          z-index: 2;
          clip-path: circle(45% at 50% 50%);
-     }
-
-     .dash {
-         position: absolute;
-         top: 50px;
-         left: 10px;
-         width: 22px;
-         height: 70px;
-         background: repeating-linear-gradient(315deg, #b9becc, #b9becc 1.5px, transparent 0px, transparent 5px);
-     }
-
-     .squarDash {
-         @extend .dash;
-         top: 130px;
-         width: 22px;
-         height: 22px;
-         background: repeating-linear-gradient(45deg, #b9becc, #b9becc 1.5px, transparent 0px, transparent 5px);
      }
  }

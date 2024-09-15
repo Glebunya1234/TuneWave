@@ -1,61 +1,20 @@
  .profile {
      width: 100%;
+     max-width: 1900px;
      height: 100%;
-
-     margin-top: 10px;
-     position: relative;
      display: flex;
      flex-direction: column;
      justify-content: start;
+     align-items: center;
      overflow: hidden;
-     background-color: #00000091;
+     padding: 10px 60px;
+     overflow-y: scroll;
 
-     .profile__Dashboard {
-         width: 100%;
-         height: 100%;
-         display: flex;
-         flex-direction: column;
+     color: white;
 
-     }
-
-     .profile__Content {
-
-         width: 100%;
-         height: 100%;
-         display: flex;
-         justify-content: center;
-         padding: 10px 60px;
-         overflow-y: scroll;
+     h1 {
          color: white;
 
-         h1 {
-             color: white;
-
-         }
-
-         .Content__Conteiner {
-             max-width: 1900px;
-             width: 100%;
-             display: flex;
-             flex-direction: column;
-             align-items: center;
-         }
      }
 
-     .dash {
-         position: absolute;
-         top: 50px;
-         left: 10px;
-         width: 22px;
-         height: 70px;
-         background: repeating-linear-gradient(315deg, #b9becc, #b9becc 1.5px, transparent 0px, transparent 5px);
-     }
-
-     .squarDash {
-         @extend .dash;
-         top: 130px;
-         width: 22px;
-         height: 22px;
-         background: repeating-linear-gradient(45deg, #b9becc, #b9becc 1.5px, transparent 0px, transparent 5px);
-     }
  }

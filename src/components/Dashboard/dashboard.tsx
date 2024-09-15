@@ -22,7 +22,7 @@ export const Dashboard = async ({
           <MediaLibrary />
           <aside className={style.content__child}>
             <Header />
-            {children}
+            <main className={style.child__Main}>{children}</main>
           </aside>
           <InfoBar />
         </div>
