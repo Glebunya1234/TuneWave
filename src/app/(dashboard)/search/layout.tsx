@@ -3,6 +3,7 @@ import { Oswald } from "next/font/google";
 import style from "./search.module.scss";
 import "../../globals.css";
 import { PanelTarget } from "@/components/UI/Target/PanelTarget";
+import { SearchComponent } from "@/components/SearchInput/SearchInput";
 
 const inter = Oswald({
   subsets: ["latin"],
@@ -18,5 +19,10 @@ export default function LayoutSearch({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return <div className={`${inter.className} ${style.Layout}`}>{children}</div>;
+  return (
+    <div className={`${inter.className} ${style.Layout}`}>
+      <SearchComponent />
+      {children}
+    </div>
+  );
 }
