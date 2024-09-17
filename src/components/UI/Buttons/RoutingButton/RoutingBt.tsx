@@ -5,11 +5,12 @@ import { useRouter } from "next/navigation";
 import { useContext, useState } from "react";
 
 interface IMarqueeProps {
-  text: string;
+  text: any;
   className?: string;
   children?: React.ReactNode;
   helpHolder?: string;
   path?: string;
+  changeBackground: boolean;
 }
 
 export const BtnRouting: React.FC<IMarqueeProps> = ({
@@ -18,10 +19,12 @@ export const BtnRouting: React.FC<IMarqueeProps> = ({
   children,
   path,
   helpHolder,
+  changeBackground,
 }) => {
   const router = useRouter();
   const [isVisible, setVisible] = useState(false);
   const dataContext = useContext(GlobalContext);
+
   const handleMouseEnter = () => {
     dataContext?.setTemporaryText(text);
     setVisible(true);
@@ -46,13 +49,15 @@ export const BtnRouting: React.FC<IMarqueeProps> = ({
   return (
     <div className={style.RoutingBTN}>
       <button
-        className={`${style.RoutingBTN__Button} ${className}`}
+        className={`${
+          className === undefined ? style.RoutingBTN__Button : className
+        }`}
         onClick={() => {
           router.push(`${path}`);
           dataContext?.setDefaultText(path?.split("/").pop() || "");
         }}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
+        onMouseEnter={changeBackground ? handleMouseEnter : () => {}}
+        onMouseLeave={changeBackground ? handleMouseLeave : () => {}}
       >
         {text}
         {children}

@@ -1,0 +1,51 @@
+ .Ul_SearchTegsBtn {
+     width: 100%;
+     display: flex;
+     flex-direction: row;
+     align-items: center;
+     color: white;
+
+
+     .Li_SearchTegsBtn {
+         background-color: rgba(160, 160, 160, 0.1450980392);
+         height: 30px;
+         display: flex;
+         align-items: center;
+
+         .TegButton {
+             padding: 0 10px;
+             height: 30px;
+             display: flex;
+             flex-direction: row;
+             align-items: center;
+             font-size: 16px;
+             flex-direction: row-reverse;
+
+             .TegButton__Icon {
+                 margin-right: 5px;
+                 height: 20px;
+                 display: flex;
+                 align-items: center;
+                 background-color: white;
+                 border-radius: 3px;
+                 color: black;
+             }
+         }
+
+
+
+         .Active {
+             background-color: white;
+             color: black;
+
+
+         }
+
+         .Active {
+             background-color: white;
+             color: black;
+
+
+         }
+     }
+ }

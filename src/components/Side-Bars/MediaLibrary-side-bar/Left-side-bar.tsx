@@ -55,13 +55,20 @@ export const MediaLibraryBar = ({
             </CloseBarBtn>
           </aside>
           <nav className={style.MediaLibrary__Navigation}>
-            <BtnRouting helpHolder={holder.Home} text="Home" path={"/home"} />
+            <BtnRouting
+              changeBackground={true}
+              helpHolder={holder.Home}
+              text="Home"
+              path={"/home"}
+            />
             <BtnRouting
               helpHolder={holder.Search}
               text="Search"
               path={"/search"}
+              changeBackground={true}
             />
             <BtnRouting
+              changeBackground={true}
               helpHolder={holder.Settings}
               text="Settings"
               path={"/settings"}

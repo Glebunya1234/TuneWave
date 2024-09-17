@@ -1,39 +1,33 @@
-type SpotifySearchResult = {
-    albums: {
-        href: string;
-        items: Album[];
-        limit: number;
-        next: string | null;
-        offset: number;
-        previous: string | null;
-        total: number;
-    };
-    artists: {
-        href: string;
-        items: Artist[];
-        limit: number;
-        next: string | null;
-        offset: number;
-        previous: string | null;
-        total: number;
-    };
-    tracks: {
-        href: string;
-        items: Track[];
-        limit: number;
-        next: string | null;
-        offset: number;
-        previous: string | null;
-        total: number;
-    }; playlists: {
-        href: string;
-        items: Playlist[];
-        limit: number;
-        next: string | null;
-        offset: number;
-        previous: string | null;
-        total: number;
-    };
+export type SearchTracks = {
+    href: string;
+    items: Track;
+    limit: number;
+    next: string | null;
+    offset: number;
+    previous: string | null;
+    total: number;
+}
+
+export type SearchAlbums = Omit<SearchTracks, "items"> & {
+    items: Album[];
+};
+export type SearchArtists = Omit<SearchTracks, "items"> & {
+    items: Artist[];
+};
+export type SearchPlaylist = Omit<SearchTracks, "items"> & {
+    items: Playlist[];
+};
+
+
+
+
+
+
+export type SpotifySearchResult = {
+    albums?: SearchAlbums;
+    artists?: SearchArtists;
+    tracks?: SearchTracks;
+    playlists?: SearchPlaylist;
 };
 
 type Album = {
@@ -72,7 +66,7 @@ type Artist = {
     uri: string;
 };
 
-type Track = {
+type Track = [{
     album: Album;
     artists: Artist[];
     available_markets: string[];
@@ -90,7 +84,7 @@ type Track = {
     track_number: number;
     type: string;
     uri: string;
-};
+}]
 type Playlist = {
     collaborative: boolean;
     description: string;

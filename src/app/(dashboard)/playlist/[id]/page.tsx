@@ -32,11 +32,7 @@ const PlaylistPage = () => {
 
   return (
     <div className={style.Playlist}>
-      {isLoading && (
-        <div className="w-full h-full flex justify-center items-center">
-          <Spinner />
-        </div>
-      )}
+      {isLoading && <Spinner />}
       {data !== undefined ? (
         <DisplayInfo
           idForScroll={"PlaylistPage"}
@@ -87,7 +83,7 @@ const PlaylistPage = () => {
               />
               <OpenInSpotify
                 className={style.NavPanel__SaveTrackBtn}
-                href={data.infoPlaylist.external_urls.spotify}
+                href={data?.infoPlaylist?.external_urls?.spotify || ""}
               />
             </nav>
           )}

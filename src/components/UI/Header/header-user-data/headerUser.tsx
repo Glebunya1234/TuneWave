@@ -4,6 +4,7 @@ import style from "./headerUser.module.scss";
 import Image from "next/image";
 import { FaCircle } from "react-icons/fa";
 import { GetDataProfileUser } from "@/providers/SupaBase-methods/user-action";
+import { SearchComponent } from "@/components/SearchComponents/SearchInput/SearchInput";
 
 export const UserDataHeader = async () => {
   const userData = await GetDataProfileUser();
@@ -11,13 +12,14 @@ export const UserDataHeader = async () => {
   return userData !== null || undefined ? (
     <nav className={style.UserDataHeader}>
       <h1>Welcome to TuneWave</h1>
-      <aside>
+      <SearchComponent />
+      <aside className={style.Info__User}>
         <Image
           src={userData.user?.user_metadata.avatar_url}
           width={55}
           height={55}
           alt="Arrow2"
-          className={`${style.mask} ${style["mask-parallelogram"]}`}
+          className={`${style.mask}`}
         />
         <h2>{userData.user?.user_metadata?.full_name}</h2>
         <h3>

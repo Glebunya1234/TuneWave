@@ -49,7 +49,7 @@ export type SimplifiedPlaylistObject = {
 };
 export type Playlist = {
   description?: string;
-  external_urls: {
+  external_urls?: {
     spotify: string;
   };
   followers?: {
@@ -69,7 +69,7 @@ export type Playlist = {
   };
   UserFullInfo?: CurrentlyUserType;
   public?: boolean;
-  isSave: boolean;
+  isSave?: boolean;
   type: string;
 };
 

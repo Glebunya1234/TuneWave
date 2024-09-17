@@ -11,6 +11,7 @@ import { SaveTrackBtn } from "@/components/UI/Buttons/SaveTrackToLibBtn/SaveTrac
 import type { SpotifyTracksResponse } from "@/types/SpotifyTypes/TrackFavoriteType/type";
 import { formatDuration } from "@/utils/DurationFormatFunc";
 import { _getSavedTrackUser } from "@/api/SP-Tracks/API-SP-Tracks";
+import { Spinner } from "@/components/UI/Spinner/spinner";
 
 const fetcher = (offset: number) => _getSavedTrackUser(offset);
 
@@ -18,7 +19,7 @@ export const FavoriteTrackComponent = () => {
   const [offset, setOffset] = useState(0);
   const [fetching, setFetching] = useState(false);
 
-  const { data, mutate } = useSWR<SpotifyTracksResponse>(
+  const { data, isLoading, mutate } = useSWR<SpotifyTracksResponse>(
     `https://api.spotify.com/v1/me/tracks`,
     () => fetcher(offset),
     {
@@ -71,8 +72,9 @@ export const FavoriteTrackComponent = () => {
   }, []);
 
   return (
-    <Suspense fallback={<h2>🌀 Loading...</h2>}>
-      <section className={`${style.Content__playlist}`} id="FavoriteContent">
+    <section className={`${style.Content__playlist}`} id="FavoriteContent">
+      {isLoading && <Spinner />}
+      {data && (
         <aside
           className={`${style.Playlist__Track} border-[#c1c0c5]  border-b-[1px]`}
         >
@@ -84,65 +86,65 @@ export const FavoriteTrackComponent = () => {
             <IoTimerSharp className="mr-[11px]" />
           </span>
         </aside>
-        {data?.items?.map((item, index) => {
-          const albumImageUrl =
-            item.track.album.images.length > 0
-              ? item.track.album.images[0].url
-              : "";
+      )}
+      {data?.items?.map((item, index) => {
+        const albumImageUrl =
+          item.track.album.images.length > 0
+            ? item.track.album.images[0].url
+            : "";
 
-          return (
-            <div key={index} className={style.Playlist__Track}>
-              <PlayTrackBtn
-                id={item.track.uri}
-                onHover={{
-                  isTrue: true,
-                  content: (
-                    <BsFillPlayFill className="pl-[3px] text-xl text-center" />
-                  ),
-                }}
-                text={index + 1}
-                className={style.TrackIndex}
-              />
-              <div className={style.TrackImage}>
-                {albumImageUrl && (
-                  <Image
-                    src={albumImageUrl}
-                    alt={item.track.album.name}
-                    layout="fill"
-                    className={style.AlbumImage}
-                  />
-                )}
+        return (
+          <div key={index} className={style.Playlist__Track}>
+            <PlayTrackBtn
+              id={item.track.uri}
+              onHover={{
+                isTrue: true,
+                content: (
+                  <BsFillPlayFill className="pl-[3px] text-xl text-center" />
+                ),
+              }}
+              text={index + 1}
+              className={style.TrackIndex}
+            />
+            <div className={style.TrackImage}>
+              {albumImageUrl && (
+                <Image
+                  src={albumImageUrl}
+                  alt={item.track.album.name}
+                  layout="fill"
+                  className={style.AlbumImage}
+                />
+              )}
+            </div>
+            <div className={style.TrackInfo}>
+              <div className={style.TrackName}>
+                <Link href={`/track/${item.track.id}`}>
+                  <p>{item.track.name}</p>
+                </Link>
               </div>
-              <div className={style.TrackInfo}>
-                <div className={style.TrackName}>
-                  <Link href={`/track/${item.track.id}`}>
-                    <p>{item.track.name}</p>
+              <div className={style.TrackArtist}>
+                {item.track.artists.map((artist, index) => (
+                  <Link key={index} href={`/artist/${artist.id}`}>
+                    <p key={artist.name}>{artist.name}</p>
                   </Link>
-                </div>
-                <div className={style.TrackArtist}>
-                  {item.track.artists.map((artist, index) => (
-                    <Link key={index} href={`/artist/${artist.id}`}>
-                      <p key={artist.name}>{artist.name}</p>
-                    </Link>
-                  ))}
-                </div>
-              </div>
-              <Link
-                href={`/album/${item.track.album.id}`}
-                className={style.TrackAlbum}
-              >
-                <p>{item.track.album.name}</p>
-              </Link>
-              <div className={style.TrackDuration}>
-                <SaveTrackBtn id={item.track.id} isSave={item.track.isSaved} />
-              </div>
-              <div className={style.TrackDuration}>
-                {formatDuration(item.track.duration_ms)}
+                ))}
               </div>
             </div>
-          );
-        })}
-      </section>
-    </Suspense>
+            <Link
+              href={`/album/${item.track.album.id}`}
+              className={style.TrackAlbum}
+            >
+              <p>{item.track.album.name}</p>
+            </Link>
+            <div className={style.TrackDuration}>
+              <SaveTrackBtn id={item.track.id} isSave={item.track.isSaved} />
+            </div>
+            <div className={style.TrackDuration}>
+              {formatDuration(item.track.duration_ms)}
+            </div>
+          </div>
+        );
+      })}
+    </section>
   );
 };
