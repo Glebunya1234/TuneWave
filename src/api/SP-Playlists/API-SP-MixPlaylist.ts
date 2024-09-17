@@ -56,6 +56,10 @@ export const _getRecommendations = async (id?: string): Promise<RecommendationsT
                 url: "/RandomPL.png"
             }],
             type: "Playlist",
+            external_urls: {
+                spotify: ""
+            },
+            isSave: false
         }, tracks: tracksWithSavedInfo
     };
 }
