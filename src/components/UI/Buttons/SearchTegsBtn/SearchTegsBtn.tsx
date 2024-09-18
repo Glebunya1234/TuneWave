@@ -7,7 +7,7 @@ import { HiViewList } from "react-icons/hi";
 
 type SearchTegsType = {
   id: string;
-  page: string;
+  page: "All"|"Tracks"|"Album"|"Artist"|"Playlist";
 };
 const buttons = [
   { text: "All", segment: "", icon: <MdClearAll /> },

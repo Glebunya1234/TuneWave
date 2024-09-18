@@ -5,8 +5,10 @@ import { SearchTegsBtn } from "@/components/UI/Buttons/SearchTegsBtn/SearchTegsB
 const SearchId = ({ params }: { params: { id: string } }) => {
   return (
     <main className={style.Search}>
-      <SearchTegsBtn id={params.id} page="All"/>
-      <SearchContent id={params.id} />
+      <SearchTegsBtn id={params.id} page="All" />
+      <aside className={style.Search__Content}>
+        <SearchContent id={params.id} />
+      </aside>
     </main>
   );
 };
