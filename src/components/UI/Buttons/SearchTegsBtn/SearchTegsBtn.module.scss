@@ -31,6 +31,32 @@
                  border-radius: 3px;
                  color: black;
              }
+
+             @media (max-width:1000px) {
+                 font-size: 14px;
+                 height: 28px;
+
+                 .TegButton__Icon {
+                     height: 18px;
+                 }
+             }
+
+             @media (max-width:870px) {
+                 font-size: 12px;
+                 height: 26px;
+
+                 .TegButton__Icon {
+                     height: 14px;
+                 }
+             }
+             @media (max-width:450px) {
+                font-size: 10px;
+                height: 24px;
+
+                .TegButton__Icon {
+                    height: 12px;
+                }
+            }
          }
 
 

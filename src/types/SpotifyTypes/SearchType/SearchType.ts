@@ -1,6 +1,6 @@
 export type SearchTracks = {
     href: string;
-    items: Track;
+    items: Track[];
     limit: number;
     next: string | null;
     offset: number;
@@ -45,6 +45,7 @@ type Album = {
     release_date_precision: string;
     total_tracks: number;
     type: string;
+    isSaved?: boolean;
     uri: string;
 };
 
@@ -63,10 +64,11 @@ type Artist = {
     name: string;
     popularity: number;
     type: string;
+    isSaved?: boolean;
     uri: string;
 };
 
-type Track = [{
+type Track = {
     album: Album;
     artists: Artist[];
     available_markets: string[];
@@ -83,8 +85,9 @@ type Track = [{
     preview_url: string | null;
     track_number: number;
     type: string;
+    isSaved?: boolean;
     uri: string;
-}]
+}
 type Playlist = {
     collaborative: boolean;
     description: string;
@@ -103,6 +106,7 @@ type Playlist = {
         total: number;
     };
     type: string;
+    isSaved?: boolean;
     uri: string;
 };
 type Image = {

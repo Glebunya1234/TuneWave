@@ -9,6 +9,7 @@ import { OpenInSpotify } from "@/components/UI/Buttons/OpenInSpotifyBtn/OpenInSp
 
 const albumPage = async ({ params }: { params: { id: string } }) => {
   const data = await _getAlbum(params.id);
+
   return (
     <div className={style.Album}>
       <DisplayInfo
@@ -36,7 +37,7 @@ const albumPage = async ({ params }: { params: { id: string } }) => {
             href={data.external_urls.spotify}
           />
         </nav>
-        <AlbumInformation data={data.tracks.items} />
+        <AlbumInformation showSaved={true} data={data.tracks.items} />
       </DisplayInfo>
     </div>
   );

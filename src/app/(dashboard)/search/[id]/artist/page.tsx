@@ -6,7 +6,7 @@ const SearchArtistPage = ({ params }: { params: { id: string } }) => {
   return (
     <main className={style.Search}>
       <SearchTegsBtn id={params.id} page={"Artist"} />
-      <aside className={style.Search__Content__Playlist} id="idSearchArtist">
+      <aside className="w-full h-full flex items-center justify-center">
         <PAAlist
           idForScroll={"idSearchArtist"}
           Search={params.id}

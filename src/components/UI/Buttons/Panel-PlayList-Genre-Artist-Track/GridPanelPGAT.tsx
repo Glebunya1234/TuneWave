@@ -23,7 +23,7 @@ export const GridPanelPGAT = ({
             src={ImageSRC || "/FavoriteTrack.png"}
             layout="fill"
             objectFit="cover"
-            alt={`${FirstText}`}
+            alt=""
           />
           <span className={style.Item__Span}>{FirstText}</span>
         </aside>

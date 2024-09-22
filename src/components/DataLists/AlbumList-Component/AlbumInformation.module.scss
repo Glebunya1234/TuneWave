@@ -6,7 +6,7 @@
 
      .Playlist__Track {
          display: grid;
-         grid-template-columns: 20px 2fr auto auto;
+         grid-template-columns: 20px 2fr auto auto auto;
          grid-template-rows: min-content;
          align-items: center;
          margin-bottom: 10px;

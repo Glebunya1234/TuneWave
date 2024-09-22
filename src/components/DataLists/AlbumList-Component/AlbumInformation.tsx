@@ -10,8 +10,15 @@ import { PlayTrackBtn } from "@/components/UI/Buttons/PlayTrackBtn/PlayTrackBtn"
 import { BsFillPlayFill } from "react-icons/bs";
 import { SaveTrackBtn } from "@/components/UI/Buttons/SaveTrackToLibBtn/SaveTrack";
 import { TrackItem } from "@/types/SpotifyTypes/CurrentlyPlayingTrack/type";
+import { OpenInSpotify } from "@/components/UI/Buttons/OpenInSpotifyBtn/OpenInSpotify";
 
-export const AlbumInformation = ({ data }: { data: TrackItem[] }) => {
+export const AlbumInformation = ({
+  data,
+  showSaved,
+}: {
+  showSaved?: boolean;
+  data: TrackItem[];
+}) => {
   return (
     <section className={style.AlbumInformation}>
       <aside
@@ -60,12 +67,21 @@ export const AlbumInformation = ({ data }: { data: TrackItem[] }) => {
                 </div>
               </div>
               <div className={style.TrackDuration}>
-                <SaveTrackBtn
-                  id={item.id}
-                  isPage={true}
-                  isSave={item.isSaved}
+                <OpenInSpotify
+                  href={item?.external_urls?.spotify}
+                  className="flex flex-row items-center"
                 />
               </div>
+              {showSaved && (
+                <div className={style.TrackDuration}>
+                  <SaveTrackBtn
+                    id={item.id}
+                    isPage={true}
+                    isSave={item.isSaved}
+                  />
+                </div>
+              )}
+
               <div className={style.TrackDuration}>
                 {formatDuration(item.duration_ms)}
               </div>

@@ -12,6 +12,7 @@ import type { SpotifyTracksResponse } from "@/types/SpotifyTypes/TrackFavoriteTy
 import { formatDuration } from "@/utils/DurationFormatFunc";
 import { _getSavedTrackUser } from "@/api/SP-Tracks/API-SP-Tracks";
 import { Spinner } from "@/components/UI/Spinner/spinner";
+import { OpenInSpotify } from "@/components/UI/Buttons/OpenInSpotifyBtn/OpenInSpotify";
 
 const fetcher = (offset: number) => _getSavedTrackUser(offset);
 
@@ -136,6 +137,12 @@ export const FavoriteTrackComponent = () => {
             >
               <p>{item.track.album.name}</p>
             </Link>
+            <div className={style.TrackDuration}>
+              <OpenInSpotify
+                href={item?.track?.external_urls?.spotify}
+                className="flex flex-row items-center"
+              />
+            </div>
             <div className={style.TrackDuration}>
               <SaveTrackBtn id={item.track.id} isSave={item.track.isSaved} />
             </div>

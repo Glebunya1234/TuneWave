@@ -7,6 +7,8 @@ import { PlayTrackBtn } from "@/components/UI/Buttons/PlayTrackBtn/PlayTrackBtn"
 import { formatDuration } from "@/utils/DurationFormatFunc";
 import { _isCurrentlyPlaylistTracksItem } from "@/utils/TypeOfCustom/TypeOfCustom";
 import { SearchTracks } from "@/types/SpotifyTypes/SearchType/SearchType";
+import { SaveTrackBtn } from "@/components/UI/Buttons/SaveTrackToLibBtn/SaveTrack";
+import { OpenInSpotify } from "@/components/UI/Buttons/OpenInSpotifyBtn/OpenInSpotify";
 
 export const BestTracks = ({ data }: { data?: SearchTracks }) => {
   return (
@@ -49,9 +51,14 @@ export const BestTracks = ({ data }: { data?: SearchTracks }) => {
           <Link href={`/album/${item?.album?.id}`} className={style.TrackAlbum}>
             <p>{item?.album?.name}</p>
           </Link>
-
           <div className={style.TrackDuration}>
-            {/* <SaveTrackBtn id={item.id} isSave={item.isSaved} isPage={true} /> */}
+            <OpenInSpotify
+              href={item?.external_urls?.spotify}
+              className="flex flex-row items-center"
+            />
+          </div>
+          <div className={style.TrackDuration}>
+            <SaveTrackBtn id={item.id} isSave={item.isSaved} isPage={true} />
           </div>
           <div className={style.TrackDuration}>
             {formatDuration(item.duration_ms)}
