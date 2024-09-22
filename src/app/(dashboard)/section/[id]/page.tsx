@@ -134,10 +134,10 @@ const Section = ({ params }: { params: { id: string } }) => {
     }
   };
 
-  return (
+  return isLoading ? (
+    <Spinner />
+  ) : (
     <div className={style.Section}>
-      {isLoading && <Spinner />}
-
       <div className={style.ForUserMix_Div}>{renderHeader()}</div>
       <aside className={style.Section__Content} id="SectionPage">
         {renderContent()}
