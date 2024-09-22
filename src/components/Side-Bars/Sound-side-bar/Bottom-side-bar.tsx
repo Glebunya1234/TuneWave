@@ -5,6 +5,7 @@ import { SpotifyPlayer } from "@/components/UI/Player/Player";
 import Marquee from "@/components/UI/Marquee/Sound-Marquee/marquee";
 import { test } from "@/api/SP-Tokens/API-SP-Tokens";
 import { GlobalContext } from "@/Context";
+import { Spinner } from "@/components/UI/Spinner/spinner";
 
 export const SoundBar = () => {
   const [token, setToken] = useState<string | null>(null);
@@ -33,7 +34,13 @@ export const SoundBar = () => {
         />
       </div>
       <nav className={style.Player}>
-        {token ? <SpotifyPlayer token={token} /> : <p>Loading...</p>}
+        {token ? (
+          <SpotifyPlayer token={token} />
+        ) : (
+          <div className="w-full pt-[10px]">
+            <Spinner />
+          </div>
+        )}
       </nav>
     </section>
   );
