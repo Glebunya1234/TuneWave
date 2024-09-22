@@ -20,21 +20,16 @@ export const SearchContent = ({ id }: { id: string }) => {
       revalidateOnFocus: false,
     }
   );
-  // if (isLoading) return <p>Loading...</p>;
-  // console.log("object :>> ", data);
-  // if (!data || !data.tracks) {
-  //   return <p>No data available</p>;
-  // }
 
   const itemsArtists = data?.artists?.items
     ?.slice(0, 6)
     .map((data, index) => (
       <PanelPGAT
         key={index}
-        Href={`/playlist/${data.id}`}
-        FirstText={data.name}
-        SecondText={`${data.name}`}
-        ImageSRC={data.images[0].url || "/FavoriteTrack.png"}
+        Href={`/artist/${data.id}`}
+        FirstText={data?.name}
+        SecondText={`${data?.name}`}
+        ImageSRC={data?.images[0]?.url || "/FavoriteTrack.png"}
       />
     ));
   const itemsAlbums = data?.albums?.items
@@ -42,10 +37,10 @@ export const SearchContent = ({ id }: { id: string }) => {
     .map((data, index) => (
       <PanelPGAT
         key={index}
-        Href={`/playlist/${data.id}`}
+        Href={`/album/${data.id}`}
         FirstText={data.name}
         SecondText={`${data.name}`}
-        ImageSRC={data.images[0].url || "/FavoriteTrack.png"}
+        ImageSRC={data?.images[0]?.url || "/FavoriteTrack.png"}
       />
     ));
   const itemsPlaylists = data?.playlists?.items
@@ -53,10 +48,10 @@ export const SearchContent = ({ id }: { id: string }) => {
     .map((data, index) => (
       <PanelPGAT
         key={index}
-        Href={`/playlist/${data.id}`}
+        Href={`/playlist/list${data.id}?id=${data.id}`}
         FirstText={data.name}
         SecondText={`${data.name}`}
-        ImageSRC={data.images[0].url || "/FavoriteTrack.png"}
+        ImageSRC={data?.images[0]?.url || "/FavoriteTrack.png"}
       />
     ));
   return (
@@ -95,7 +90,7 @@ export const SearchContent = ({ id }: { id: string }) => {
         <div className={styleForUserMix.ForUserMix_Div}>
           <span className={styleForUserMix.Div__Span}>Artists</span>
           <Link
-            href={`/search/${id}/artists`}
+            href={`/search/${id}/artist`}
             className={styleForUserMix.Div__link}
           >
             Show all
@@ -114,7 +109,7 @@ export const SearchContent = ({ id }: { id: string }) => {
         <div className={styleForUserMix.ForUserMix_Div}>
           <span className={styleForUserMix.Div__Span}>Albums</span>
           <Link
-            href={`/search/${id}/albums`}
+            href={`/search/${id}/album`}
             className={styleForUserMix.Div__link}
           >
             Show all
@@ -133,7 +128,7 @@ export const SearchContent = ({ id }: { id: string }) => {
         <div className={styleForUserMix.ForUserMix_Div}>
           <span className={styleForUserMix.Div__Span}>Playlists</span>
           <Link
-            href={`/search/${id}/playlists`}
+            href={`/search/${id}/playlist`}
             className={styleForUserMix.Div__link}
           >
             Show all

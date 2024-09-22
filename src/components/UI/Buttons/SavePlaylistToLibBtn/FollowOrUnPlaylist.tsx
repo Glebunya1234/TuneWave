@@ -57,7 +57,7 @@ export const FollowOrUnPlaylist = ({
       {state ? (
         <>
           <p>Unfollow</p>
-          <CgPlayListCheck className="text-[30px]" />
+          <CgPlayListCheck />
         </>
       ) : (
         <>

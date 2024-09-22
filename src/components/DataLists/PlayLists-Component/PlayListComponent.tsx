@@ -12,6 +12,7 @@ import { TrackItem } from "@/types/SpotifyTypes/CurrentlyPlayingTrack/type";
 import { fetcher } from "@/utils/helper/Fetchers/PlayList-Fetcher";
 import { formatDuration } from "@/utils/DurationFormatFunc";
 import { _isCurrentlyPlaylistTracksItem } from "@/utils/TypeOfCustom/TypeOfCustom";
+import { OpenInSpotify } from "@/components/UI/Buttons/OpenInSpotifyBtn/OpenInSpotify";
 
 export const PlaylistComponent = ({
   data,
@@ -150,7 +151,12 @@ export const PlaylistComponent = ({
               >
                 <p>{item?.album?.name}</p>
               </Link>
-
+              <div className={style.TrackDuration}>
+                <OpenInSpotify
+                  href={item?.external_urls?.spotify}
+                  className="flex flex-row items-center"
+                />
+              </div>
               <div className={style.TrackDuration}>
                 <SaveTrackBtn
                   id={item.id}

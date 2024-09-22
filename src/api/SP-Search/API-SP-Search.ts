@@ -1,6 +1,7 @@
 "use server"
-import { SpotifySearchResult } from "@/types/SpotifyTypes/SearchType/SearchType";
+import { SearchTracks, SpotifySearchResult } from "@/types/SpotifyTypes/SearchType/SearchType";
 import { fetchWithRetry } from "../ApiSpotify";
+import { _checkIfTracksAreSaved } from "../SP-Tracks/API-SP-Tracks";
 
 export const _Search = async (q: string, type: string = 'album,artist,playlist,track', offset: number = 0): Promise<SpotifySearchResult | null> => {
 
@@ -15,6 +16,20 @@ export const _Search = async (q: string, type: string = 'album,artist,playlist,t
     }
 
     const data: SpotifySearchResult = await response.json()
-    console.log("data", data)
+
+    const trackIds = data?.tracks?.items?.map(track => track.id);
+    if (trackIds !== undefined && data.tracks !== undefined) {
+        const isSavedArray = await _checkIfTracksAreSaved(trackIds);
+        const tracksWithSavedInfo = data.tracks?.items.map((item, index) => ({
+            ...item,
+            isSaved: isSavedArray[index],
+
+        }));
+        return {
+            ...data,
+            tracks: { ...data.tracks, items: tracksWithSavedInfo },
+        };
+    }
+
     return data
 };

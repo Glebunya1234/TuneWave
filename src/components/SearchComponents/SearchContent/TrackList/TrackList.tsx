@@ -14,6 +14,7 @@ import { _isCurrentlyPlaylistTracksItem } from "@/utils/TypeOfCustom/TypeOfCusto
 import { SpotifySearchResult } from "@/types/SpotifyTypes/SearchType/SearchType";
 import { _Search } from "@/api/SP-Search/API-SP-Search";
 import { Spinner } from "@/components/UI/Spinner/spinner";
+import { OpenInSpotify } from "@/components/UI/Buttons/OpenInSpotifyBtn/OpenInSpotify";
 
 export const TrackListComponent = ({
   Search,
@@ -164,11 +165,16 @@ export const TrackListComponent = ({
               >
                 <p>{item?.album?.name}</p>
               </Link>
-
+              <div className={style.TrackDuration}>
+              <OpenInSpotify
+                  href={item?.external_urls?.spotify}
+                  className="flex flex-row items-center"
+                />
+              </div>
               <div className={style.TrackDuration}>
                 <SaveTrackBtn
                   id={item.id}
-                  // isSave={item.isSaved}
+                  isSave={item.isSaved}
                   isPage={true}
                 />
               </div>

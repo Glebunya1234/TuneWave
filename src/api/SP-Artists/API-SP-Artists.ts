@@ -4,7 +4,7 @@ import { _refreshToken, test } from "../SP-Tokens/API-SP-Tokens";
 import { ItemsForArtistAlbums, TrackItem } from "@/types/SpotifyTypes/CurrentlyPlayingTrack/type";
 import { _checkIfTracksAreSaved } from "../SP-Tracks/API-SP-Tracks";
 import { CurrentlyPlaylistTracksItem } from "@/types/SpotifyTypes/CurrentlyAlbum/type";
-import { _getAlbum } from "../SP-Albums/API-SP-Albums";
+import { _checkIsAlbumAreSaved, _getAlbum } from "../SP-Albums/API-SP-Albums";
 import { cacheFilePathAccess, cacheFilePathRefresh, readCache } from "../../../cache/controller";
 import { fetchWithRetry } from "../ApiSpotify";
 
@@ -151,7 +151,7 @@ export const _getArtistsAlbums = async (id: string, include_groups: string, offs
     }
 
     const getArtistsAlbumsResult: CurrentlyPlaylistTracksItem = await getArtistsAlbums.json()
-    const isSaved = await _checkIfTracksAreSaved(getArtistsAlbumsResult.items.map((it, id) => it.id))
+    const isSavedArray = await _checkIsAlbumAreSaved(getArtistsAlbumsResult.items.map((it) => it.id))
     const tracksWithSavedInfo: ItemsForArtistAlbums[] = await Promise.all(
         getArtistsAlbumsResult.items.map(async (item, index) => {
             const itemsAlbum = await _getAlbum(item.id);
@@ -160,10 +160,11 @@ export const _getArtistsAlbums = async (id: string, include_groups: string, offs
                 tracks: {
                     items: itemsAlbum.tracks.items,
                 },
-                isSaved: isSaved[index],
+                isSaved: isSavedArray[index],
             };
         })
     );
+
 
 
     return { ...getArtistsAlbumsResult, items: tracksWithSavedInfo }

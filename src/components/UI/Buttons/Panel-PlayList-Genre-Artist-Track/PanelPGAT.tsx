@@ -18,7 +18,7 @@ export const PanelPGAT = ({ Href, FirstText, SecondText, ImageSRC }: PGAT) => {
             src={ImageSRC || "/FavoriteTrack.png"}
             layout="fill"
             objectFit="cover"
-            alt={`${FirstText}`}
+            alt=""
           />
           <span className={style.Item__Span}>{FirstText}</span>
         </aside>

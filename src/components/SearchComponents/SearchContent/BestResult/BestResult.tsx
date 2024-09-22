@@ -24,8 +24,9 @@ export const BestResult = ({
           <Image
             src={ImageSrc || "/FavoriteTrack.png"}
             alt={Name || "Name"}
-            layout="fill"
-            className={style.AlbumImage}
+            width={100}
+            height={100}
+            className="aspect-square"
           />
         </aside>
 

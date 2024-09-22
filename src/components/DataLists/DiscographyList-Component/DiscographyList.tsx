@@ -1,6 +1,7 @@
 "use client";
 
 import style from "./DiscographyList.module.scss";
+
 import useSWR, { useSWRConfig } from "swr";
 import Link from "next/link";
 import Image from "next/image";
@@ -10,6 +11,8 @@ import { AlbumInformation } from "../AlbumList-Component/AlbumInformation";
 import { GridPanelPGAT } from "@/components/UI/Buttons/Panel-PlayList-Genre-Artist-Track/GridPanelPGAT";
 import { _getArtistsAlbums } from "@/api/SP-Artists/API-SP-Artists";
 import { CurrentlyPlaylistTracksItem } from "@/types/SpotifyTypes/CurrentlyAlbum/type";
+import { OpenInSpotify } from "@/components/UI/Buttons/OpenInSpotifyBtn/OpenInSpotify";
+import { FollowOrUnPlaylist } from "@/components/UI/Buttons/SavePlaylistToLibBtn/FollowOrUnPlaylist";
 
 export const DiscographyList = ({
   DataArtist,
@@ -129,8 +132,10 @@ export const DiscographyList = ({
                   <div className={style.Preview__image}>
                     <Image
                       src={it?.images[0]?.url || ""}
-                      layout="fill"
+                      width={136}
+                      height={136}
                       objectFit="cover"
+                      className="aspect-square"
                       alt=""
                     />
                   </div>
@@ -144,11 +149,23 @@ export const DiscographyList = ({
                       <span className="mx-[5px]">•</span>
                       {it.total_tracks} tracks
                     </aside>
-                    <nav></nav>
+
+                    <nav className={`${style.items__NavPanel}`}>
+                      <FollowOrUnPlaylist
+                        type="album"
+                        id={it?.id!}
+                        className={style.NavPanel__PlayTrackBtn}
+                        isSave={it?.isSaved}
+                      />
+                      <OpenInSpotify
+                        className={style.OpenSpotifyBtn}
+                        href={it?.external_urls?.spotify}
+                      />
+                    </nav>
                   </div>
                 </div>
 
-                <AlbumInformation data={it.tracks.items} />
+                <AlbumInformation data={it?.tracks?.items} />
               </section>
             ) : (
               <GridPanelPGAT

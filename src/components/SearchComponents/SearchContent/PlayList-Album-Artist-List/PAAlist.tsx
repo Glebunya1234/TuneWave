@@ -5,6 +5,7 @@ import { SpotifySearchResult } from "@/types/SpotifyTypes/SearchType/SearchType"
 import { useEffect, useState } from "react";
 import useSWR from "swr";
 
+import style from "@/app/(dashboard)/search/search.module.scss";
 import { Spinner } from "@/components/UI/Spinner/spinner";
 
 export const PAAlist = ({
@@ -96,34 +97,34 @@ export const PAAlist = ({
     }
   }, []);
 
+  if (isLoading) return <Spinner />;
   return (
-    <>
-      {isLoading && <Spinner />}
+    <section className={style.Search__Content__Playlist} id={idForScroll}>
       {playlistData?.[TypeFetchdata]?.items.map((it: any, id) => (
-        <GridPanelPGAT
-          key={id}
-          Href={
-            TypeFetchdata === "albums"
-              ? `/album/${it?.id}`
-              : TypeFetchdata === "playlists"
-              ? `/playlist/list${it?.id}?id=${it?.id}`
-              : `/artist/${it?.id}`
-          }
-          FirstText={it?.name}
-          SecondText={
-            TypeFetchdata === "albums"
-              ? it?.artists[0]?.name
-              : TypeFetchdata === "playlists"
-              ? it?.name
-              : it?.name
-          }
-          ImageSRC={
-            it?.images[0]?.url === undefined
-              ? "/FavoriteTrack.png"
-              : it?.images[0]?.url
-          }
-        />
-      ))}
-    </>
+          <GridPanelPGAT
+            key={id}
+            Href={
+              TypeFetchdata === "albums"
+                ? `/album/${it?.id}`
+                : TypeFetchdata === "playlists"
+                ? `/playlist/list${it?.id}?id=${it?.id}`
+                : `/artist/${it?.id}`
+            }
+            FirstText={it?.name}
+            SecondText={
+              TypeFetchdata === "albums"
+                ? it?.artists[0]?.name
+                : TypeFetchdata === "playlists"
+                ? it?.name
+                : it?.name
+            }
+            ImageSRC={
+              it?.images[0]?.url === undefined
+                ? "/FavoriteTrack.png"
+                : it?.images[0]?.url
+            }
+          />
+        ))}
+    </section>
   );
 };
