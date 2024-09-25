@@ -82,7 +82,7 @@ const PlaylistPage = () => {
                 isSave={data.infoPlaylist.isSave}
               />
               <OpenInSpotify
-                className={style.NavPanel__SaveTrackBtn}
+                className={style.OpenSpotifyBtn}
                 href={data?.infoPlaylist?.external_urls?.spotify || ""}
               />
             </nav>
