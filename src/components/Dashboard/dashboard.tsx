@@ -8,6 +8,7 @@ import { MediaLibrary } from "@sidebars/MediaLibrary-side-bar/MediaLibrary";
 import { InfoBar } from "@sidebars/Info-side-bar/InfoBar";
 import { IsAuthorized } from "@/providers/SupaBase-methods/user-action";
 import { SoundBar } from "../Side-Bars/Sound-side-bar/Bottom-side-bar";
+import { MediaLibraryPhone } from "../Side-Bars/MediaLibrary-side-bar-phone/MediaLibrary-phone";
 export const Dashboard = async ({
   children,
 }: {
@@ -18,6 +19,7 @@ export const Dashboard = async ({
     <main className={`${style.dashboard}`}>
       <Context>
         <MarqueeUpdater />
+        <MediaLibraryPhone />
         <div className={style.dashboard__content}>
           <MediaLibrary />
           <aside className={style.content__child}>

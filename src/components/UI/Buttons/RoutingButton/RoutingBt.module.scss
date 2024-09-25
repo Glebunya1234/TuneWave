@@ -22,6 +22,8 @@
      background-color: white;
      scale: 1.2;
 
+
+
      &:after {
        content: '';
        position: absolute;
@@ -34,6 +36,8 @@
        border-left: 0px;
        border-color: #8e56ad;
        z-index: -1;
+
+
      }
 
      &::before {
@@ -47,6 +51,7 @@
        z-index: 10;
        animation: slideOpasity .2s linear;
        opacity: 0;
+
 
 
      }
@@ -90,18 +95,20 @@
    &:active {
      background-color: #00dc00;
 
-     &:before {
-       content: '';
-       position: absolute;
-       width: 115%;
-       height: 60px;
-       top: -10px;
-       left: -10%;
-       background: url('/btnX.png') center no-repeat;
-       animation: slideOpasity2 .2s linear;
-       z-index: 10;
-       opacity: 0;
+     @media (min-width:750px) {
+       &:before {
+         content: '';
+         position: absolute;
+         width: 115%;
+         height: 60px;
+         top: -10px;
+         left: -10%;
+         background: url('/btnX.png') center no-repeat;
+         animation: slideOpasity2 .2s linear;
+         z-index: 10;
+         opacity: 0;
 
+       }
      }
    }
 
@@ -119,16 +126,14 @@
 
  .RoutingBTN__Holder_Visible {
    width: 100%;
-   // padding-left: 5px;
-   // padding-right: 5px;
+
    display: flex;
    align-items: center;
 
 
    span {
-     padding-left: 5px;
-     padding-right: 5px;
 
+     padding: 0px 5px;
      border-radius: 5px;
      position: absolute;
      top: 35px;

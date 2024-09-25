@@ -8,14 +8,25 @@ export const GlobalContext = createContext<ContextType>({
     setTemporaryText: () => { },
     getDefaultText: "Tunewave",
     setDefaultText: () => { },
+
+    isHiddenLeftPhoneBar: false,
+    setHiddenLeftPhoneBar: () => { },
     isHiddenLeftBar: true,
     setHiddenLeftBar: () => { },
+
+
     isHiddenRightBar: true,
     setHiddenRightBar: () => { },
     isRemoveLeft: true,
     setRemoveLeft: () => { },
+
+    isRemovePhoneLeft: false,
+    setRemovePhoneLeft: () => { },
+
     isRemoveRight: true,
     setRemoveRight: () => { },
+
+
     getStatePlaying: {
         progress_ms: 0,
         is_playing: false,

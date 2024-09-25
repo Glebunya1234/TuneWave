@@ -21,7 +21,7 @@ export const _getPlaylist = async (id: string): Promise<Playlist> => {
 }
 
 
-export const _getCurrentUserPlaylists = async (limit: number = 10): Promise<CurrentlyPlaylist> => {
+export const _getCurrentUserPlaylists = async (limit: number = 50): Promise<CurrentlyPlaylist> => {
 
     const url = `https://api.spotify.com/v1/me/playlists?limit=${limit}`
     const response = await fetchWithRetry(url)

@@ -12,12 +12,12 @@ export const Spinner = () => {
         </p>
       </div> */}
       <div className={style.spinner}>
-        <p className="relative mr-[17px]">
+        <span className="relative mr-[17px]">
           <p className={style.Text}>T</p>
-        </p>
-        <p className="relative mr-[17px]">
+        </span>
+        <span className="relative mr-[17px]">
           <p className={style.Text2}>W</p>
-        </p>
+        </span>
       </div>
     </aside>
   );
