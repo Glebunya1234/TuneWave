@@ -63,18 +63,20 @@
         text-decoration: none;
 
 
+        @media (min-width:870px) {
 
-        &::after {
-            content: '';
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            left: 0;
-            top: 13px;
-            animation: Hover .5s steps(1, end) infinite;
-            transform: scale(.9);
+            &::after {
+                content: '';
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                left: 0;
+                top: 13px;
+                animation: Hover .5s steps(1, end) infinite;
+                transform: scale(.9);
+            }
+
         }
-
 
     }
 
