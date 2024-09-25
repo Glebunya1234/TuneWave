@@ -142,7 +142,9 @@ export const SpotifyPlayer: React.FC<SpotifyPlayerProps> = ({ token }) => {
               >
                 <PiSpeakerHighFill />
               </button>
+             
             </nav>
+            
             <nav className={style.SoundBar__Nav}>
               <TrackPosition
                 player={player!}
@@ -163,6 +165,7 @@ export const SpotifyPlayer: React.FC<SpotifyPlayerProps> = ({ token }) => {
             >
               <CgLoadbarDoc />
             </CloseBarBtn>
+
             <CloseBarBtn
               className={style.CloseBarBtn__Button}
               onToggle={() =>

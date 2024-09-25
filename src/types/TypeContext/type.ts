@@ -13,8 +13,12 @@ export type ContextType = {
     setDefaultText: TypeSetState<string>;
     isHiddenLeftBar: boolean,
     setHiddenLeftBar: TypeSetState<boolean>;
+    isHiddenLeftPhoneBar: boolean,
+    setHiddenLeftPhoneBar: TypeSetState<boolean>;
     isHiddenRightBar: boolean,
     setHiddenRightBar: TypeSetState<boolean>;
+    isRemovePhoneLeft: boolean
+    setRemovePhoneLeft: TypeSetState<boolean>;
     isRemoveLeft: boolean
     setRemoveLeft: TypeSetState<boolean>;
     isRemoveRight: boolean

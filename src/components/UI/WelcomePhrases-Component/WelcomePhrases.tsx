@@ -8,7 +8,6 @@ const phrases = [
   "Enter a query, and we'll show you a selection of the best tracks and artists.",
   "Find music that suits your taste — enter the name of a song or artist.",
   "Start searching and dive into a world of music recommendations.",
-  "Search for your favorite tracks, albums, and artists — the music is waiting for you.",
 ];
 
 export const RandomPhrase = () => {
@@ -25,8 +24,12 @@ export const RandomPhrase = () => {
 
   return (
     <div className="w-full h-full flex flex-col items-center justify-center ">
-      <h1 className="xl:text-xl md:text-base overflow-hidden text-nowrap text-ellipsis">{phrase}</h1>
-      <h1 className="text-sm overflow-hidden text-nowrap text-ellipsis opacity-20">TUNEWAVE by Glebunya with love</h1>
+      <h1 className="xl:text-xl md:text-base overflow-hidden text-nowrap text-ellipsis">
+        {phrase}
+      </h1>
+      <h1 className="text-sm overflow-hidden text-nowrap text-ellipsis opacity-20">
+        TUNEWAVE by Glebunya with love
+      </h1>
     </div>
   );
 };

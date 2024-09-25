@@ -6,11 +6,14 @@ import { FaCircle } from "react-icons/fa";
 import { GetDataProfileUser } from "@/providers/SupaBase-methods/user-action";
 import { SearchComponent } from "@/components/SearchComponents/SearchInput/SearchInput";
 
+import { OpenPhoneSideBarBT } from "../../Buttons/OpenPhoneSideBarBT/OpenPhoneSideBarBT";
+
 export const UserDataHeader = async () => {
   const userData = await GetDataProfileUser();
 
   return userData !== null || undefined ? (
     <nav className={style.UserDataHeader}>
+      <OpenPhoneSideBarBT />
       <h1>Welcome to TuneWave</h1>
       <SearchComponent />
       <aside className={style.Info__User}>

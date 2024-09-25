@@ -11,6 +11,8 @@ export const Context = ({ children }: { children: React.ReactNode }) => {
     useState<ContextType["getTemporaryText"]>(text);
   const [getDefaultText, setDefaultText] =
     useState<ContextType["getDefaultText"]>(text);
+  const [isHiddenLeftPhoneBar, setHiddenLeftPhoneBar] =
+    useState<ContextType["isHiddenLeftPhoneBar"]>(false);
   const [isHiddenLeftBar, setHiddenLeftBar] =
     useState<ContextType["isHiddenLeftBar"]>(true);
   const [isHiddenRightBar, setHiddenRightBar] =
@@ -24,6 +26,8 @@ export const Context = ({ children }: { children: React.ReactNode }) => {
   const [player, setPlayer] = useState<ContextType["player"]>(null);
   const [isRemoveLeft, setRemoveLeft] =
     useState<ContextType["isRemoveLeft"]>(true);
+  const [isRemovePhoneLeft, setRemovePhoneLeft] =
+    useState<ContextType["isRemovePhoneLeft"]>(false);
   const [isRemoveRight, setRemoveRight] =
     useState<ContextType["isRemoveRight"]>(true);
   const valueHover = {
@@ -31,6 +35,10 @@ export const Context = ({ children }: { children: React.ReactNode }) => {
     setTemporaryText,
     getDefaultText,
     setDefaultText,
+    isHiddenLeftPhoneBar,
+    setHiddenLeftPhoneBar,
+    isRemovePhoneLeft,
+    setRemovePhoneLeft,
     isHiddenLeftBar,
     setHiddenLeftBar,
     isHiddenRightBar,
