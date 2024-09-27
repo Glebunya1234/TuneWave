@@ -182,14 +182,13 @@ export const _UnSaveTrack = async (ids: string) => {
             'Content-Type': 'application/json',
         },
     };
-    const response = await fetchWithRetryForWriteMethods(url, options);
-
-    if (!response.ok) {
-        const error = await response.json();
-        console.error('Error:', error);
-        return;
+    try {
+        await fetchWithRetryForWriteMethods(url, options);
+    } catch (error) {
+        console.error('Ошибка при удалении трека:', error);
     }
-    return null;
+
+
 }
 export const _SaveTrack = async (ids: string) => {
     const url = `https://api.spotify.com/v1/me/tracks?ids=${ids}`;
@@ -199,16 +198,11 @@ export const _SaveTrack = async (ids: string) => {
             'Content-Type': 'application/json',
         },
     };
-    const response = await fetchWithRetryForWriteMethods(url, options);
-    if (!response.ok) {
-        const error = await response.json();
-        console.error('Error:', error);
-        return;
+    try {
+        await fetchWithRetryForWriteMethods(url, options);
+    } catch (error) {
+        console.error('Ошибка при сохранении трека:', error);
     }
-
-    const data = await response.json();
-    return data;
-
 }
 
 export const setRepeatMode = async (state: "off" | "context" | "track") => {

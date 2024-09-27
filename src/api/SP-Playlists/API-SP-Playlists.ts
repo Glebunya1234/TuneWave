@@ -68,17 +68,11 @@ export const _UserFollowPlaylist = async (id: string) => {
             'Content-Type': 'application/json',
         },
     };
-    const response = await fetchWithRetryForWriteMethods(url, options);
-
-    if (!response.ok) {
-        const error = await response.json();
-        console.error('Error:', error);
-        return null
+    try {
+        await fetchWithRetryForWriteMethods(url, options);
+    } catch (error) {
+        console.error('Ошибка при сохранении плейлиста:', error);
     }
-
-
-    return null
-
 }
 export const _UserUnFollowPlaylist = async (id: string) => {
 
@@ -89,13 +83,11 @@ export const _UserUnFollowPlaylist = async (id: string) => {
             'Content-Type': 'application/json',
         },
     };
-    const response = await fetchWithRetryForWriteMethods(url, options);
 
-    if (!response.ok) {
-        const error = await response.json();
-        console.error('Error:', error);
-        return null
+    try {
+        await fetchWithRetryForWriteMethods(url, options);
+    } catch (error) {
+        console.error('Ошибка при удалении плейлиста:', error);
     }
 
-    return null
 }

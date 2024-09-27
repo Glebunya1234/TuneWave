@@ -1,12 +1,17 @@
 "use server"
 
-import { cacheFilePathAccess, readCache } from '../../cache/controller';
+import { GetDataProfileUser } from '@/providers/SupaBase-methods/user-action';
+import { readAccessToken } from '../../cache/controller';
 import { test } from './SP-Tokens/API-SP-Tokens';
 
 
 
 export const fetchWithRetry = async (url: string): Promise<Response> => {
-    let accessTokenData = readCache(cacheFilePathAccess);
+
+    const userData = await GetDataProfileUser();
+    let userId = userData.user?.id ?? "";
+    let accessTokenData = await readAccessToken(userId);
+
 
     let response = await fetch(url, {
         method: 'GET',
@@ -31,7 +36,13 @@ export const fetchWithRetry = async (url: string): Promise<Response> => {
 };
 
 export const fetchWithRetryForWriteMethods = async (url: string, options: RequestInit = {}): Promise<Response> => {
-    let accessTokenData = readCache(cacheFilePathAccess);
+
+
+
+
+    const userData = await GetDataProfileUser();
+    let userId = userData.user?.id ?? "";
+    let accessTokenData = await readAccessToken(userId);
 
     let response = await fetch(url, {
         ...options,
