@@ -5,7 +5,7 @@ import { ItemsForArtistAlbums, TrackItem } from "@/types/SpotifyTypes/CurrentlyP
 import { _checkIfTracksAreSaved } from "../SP-Tracks/API-SP-Tracks";
 import { CurrentlyPlaylistTracksItem } from "@/types/SpotifyTypes/CurrentlyAlbum/type";
 import { _checkIsAlbumAreSaved, _getAlbum } from "../SP-Albums/API-SP-Albums";
-import { cacheFilePathAccess, cacheFilePathRefresh, readCache } from "../../../cache/controller";
+
 import { fetchWithRetry } from "../ApiSpotify";
 
 export const _getOneArtist = async (ids: string): Promise<TrackArtist | undefined> => {

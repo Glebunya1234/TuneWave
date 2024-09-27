@@ -2,11 +2,10 @@ import { NextResponse } from 'next/server'
 
 import { createClient } from '@/utils/supabase/server'
 
-import path from 'path';
-import { writeCache } from '../../../../cache/controller';
+import { writeToken } from '../../../../cache/controller';
 
-const cacheFilePath = path.join('/cache', 'spotify-access-tokens.json');
-const cacheFilePath2 = path.join('/cache', 'spotify-refresh-tokens.json');
+
+
 
 export async function GET(request: Request) {
   const { searchParams, origin } = new URL(request.url)
@@ -17,8 +16,7 @@ export async function GET(request: Request) {
     const supabase = createClient()
     const { data: { session }, error } = await supabase.auth.exchangeCodeForSession(code)
     if (session?.provider_refresh_token && session?.provider_token) {
-      writeCache(session.provider_token, cacheFilePath)
-      writeCache(session.provider_refresh_token, cacheFilePath2)
+      await writeToken(session.user.id, session.provider_token, session.provider_refresh_token)
     }
     if (!error) {
       const forwardedHost = request.headers.get('x-forwarded-host') // original origin before load balancer

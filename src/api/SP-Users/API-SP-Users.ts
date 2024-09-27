@@ -19,16 +19,15 @@ export const _UserUnFollowArtist = async (ids: string) => {
             'Content-Type': 'application/json',
         },
     };
-    const response = await fetchWithRetryForWriteMethods(url, options);
 
-    if (!response.ok) {
-        const error = await response.json();
-        console.error('Error:', error);
-        return;
+    try {
+        await fetchWithRetryForWriteMethods(url, options);
+    } catch (error) {
+        console.error('Ошибка при удалении артиста:', error);
     }
 
-    await response.json();
-    return
+
+
 }
 export const _UserFollowArtist = async (ids: string) => {
     const url = `https://api.spotify.com/v1/me/following?type=artist&ids=${ids}`
@@ -38,16 +37,13 @@ export const _UserFollowArtist = async (ids: string) => {
             'Content-Type': 'application/json',
         },
     };
-    const response = await fetchWithRetryForWriteMethods(url, options);
 
-    if (!response.ok) {
-        const error = await response.json();
-        console.error('Error:', error);
-        return;
+    try {
+        await fetchWithRetryForWriteMethods(url, options);
+    } catch (error) {
+        console.error('Ошибка при сохранении артиста:', error);
     }
 
-    await response.json();
-    return
 
 }
 export const _CheckIsFollowArtist = async (ids: string | string[]): Promise<boolean[]> => {

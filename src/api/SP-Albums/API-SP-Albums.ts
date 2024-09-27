@@ -66,16 +66,13 @@ export const _UserFollowAlbum = async (ids: string) => {
             'Content-Type': 'application/json',
         },
     };
-    const response = await fetchWithRetryForWriteMethods(url, options);
 
-    if (!response.ok) {
-        const error = await response.json();
-        console.error('Error:', error);
-        return;
+    try {
+        await fetchWithRetryForWriteMethods(url, options);
+    } catch (error) {
+        console.error('Ошибка при сохранении албома:', error);
     }
 
-    await response.json();
-    return
 
 }
 export const _UserUnFollowAlbum = async (ids: string) => {
@@ -87,14 +84,10 @@ export const _UserUnFollowAlbum = async (ids: string) => {
             'Content-Type': 'application/json',
         },
     };
-    const response = await fetchWithRetryForWriteMethods(url, options);
-
-    if (!response.ok) {
-        const error = await response.json();
-        console.error('Error:', error);
-        return;
+    try {
+        await fetchWithRetryForWriteMethods(url, options);
+    } catch (error) {
+        console.error('Ошибка при удалении албома:', error);
     }
 
-    await response.json();
-    return
 }
