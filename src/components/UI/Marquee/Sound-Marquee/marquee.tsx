@@ -3,11 +3,18 @@ import React, { useRef, useEffect, useState } from "react";
 
 interface MarqueeProps {
   text: string;
+  PGAT?: boolean;
+  move?: boolean;
 }
 
-const Marquee: React.FC<MarqueeProps> = ({ text }) => {
+const Marquee: React.FC<MarqueeProps> = ({ text, PGAT, move }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [containerWidth, setContainerWidth] = useState<number>(0);
+  const [Move, setMove] = useState<boolean | undefined>(false);
+
+  useEffect(() => {
+    setMove(move);
+  }, [move]);
 
   useEffect(() => {
     const updateContainerWidth = () => {
@@ -28,14 +35,30 @@ const Marquee: React.FC<MarqueeProps> = ({ text }) => {
   };
 
   return (
-    <div className={style.marqueeContainer} ref={containerRef}>
-      <div>
-        <p>{createTextArray()}</p>
-      </div>
-      <div>
-        <p>{createTextArray()}</p>
-      </div>
-    </div>
+    <>
+      {!PGAT ? (
+        <div className={style.marqueeContainer} ref={containerRef}>
+          <div>
+            <p>{createTextArray()}</p>
+          </div>
+          <div>
+            <p>{createTextArray()}</p>
+          </div>
+        </div>
+      ) : (
+        <div
+          className={`${style.MovePGAT} ${Move ? style.MovePGAT__Move : ""}`}
+          ref={containerRef}
+        >
+          <div>
+            <p>{createTextArray()}</p>
+          </div>
+          <div>
+            <p>{createTextArray()}</p>
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 

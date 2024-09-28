@@ -1,7 +1,9 @@
+"use client";
 import Link from "next/link";
 import style from "./GridPanelPGAT.module.scss";
 import { BorderMarquee } from "../../Marquee/Border-Marquee/BorderMarquee";
 import Image from "next/image";
+import { useState } from "react";
 type PGAT = {
   Href: string;
   FirstText: string;
@@ -15,9 +17,26 @@ export const GridPanelPGAT = ({
   SecondText,
   ImageSRC,
 }: PGAT) => {
+  const [Move, setMove] = useState(false);
+  const handleEnter = () => {
+    setMove(true);
+  };
+  const handleLeave = () => {
+    setMove(false);
+  };
   return (
-    <Link href={Href} className={style.ForUserMix__Item}>
-      <BorderMarquee shape="square" text={`${SecondText}`}>
+    <Link
+      href={Href}
+      onMouseEnter={handleEnter}
+      onMouseLeave={handleLeave}
+      className={style.ForUserMix__Item}
+    >
+      <BorderMarquee
+        PGAT={true}
+        MoveChild={Move}
+        shape="square"
+        text={`${SecondText}`}
+      >
         <aside className={style.Item__Conteiner}>
           <Image
             src={ImageSRC || "/FavoriteTrack.png"}

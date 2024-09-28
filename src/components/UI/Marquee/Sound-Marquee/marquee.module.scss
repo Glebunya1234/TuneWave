@@ -35,11 +35,44 @@ $font-family-versus: 'Versus', sans-serif;
         height: 100%;
 
         animation: animate 20s linear infinite;
+
         animation-delay: calc(20s * -1)
     }
 
     div:nth-child(2) {
         @extend div;
+        animation: animate2 20s linear infinite;
+        animation-delay: calc(20s / -2)
+    }
+}
+
+.MovePGAT {
+    @extend .marqueeContainer;
+
+    div {
+
+        animation: none;
+        display: none;
+        animation-delay: calc(20s * -1)
+    }
+
+    div:nth-child(2) {
+        display: none;
+        animation: none;
+    }
+}
+
+.MovePGAT__Move {
+    @extend .marqueeContainer;
+
+    div {
+        display: inline-block;
+        animation: animate 20s linear infinite;
+        animation-delay: calc(20s * -1)
+    }
+
+    div:nth-child(2) {
+        display: inline-block;
         animation: animate2 20s linear infinite;
         animation-delay: calc(20s / -2)
     }
