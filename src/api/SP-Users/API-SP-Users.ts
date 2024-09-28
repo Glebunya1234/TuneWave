@@ -9,6 +9,12 @@ export const GetUserById = async (userId: string): Promise<CurrentlyUserType> =>
     const Data: CurrentlyUserType = await response.json();
     return Data;
 }
+export const GetUser = async (): Promise<CurrentlyUserType> => {
+    const url = `https://api.spotify.com/v1/me`
+    const response = await fetchWithRetry(url);
+    const Data: CurrentlyUserType = await response.json();
+    return Data;
+}
 
 export const _UserUnFollowArtist = async (ids: string) => {
 

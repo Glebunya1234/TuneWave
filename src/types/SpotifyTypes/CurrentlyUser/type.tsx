@@ -1,5 +1,6 @@
 export type CurrentlyUserType = {
   display_name: string;
+  country: string;
   external_urls: {
     spotify: string;
   };
@@ -15,5 +16,6 @@ export type CurrentlyUserType = {
     }
   ];
   type: string;
+  product: string;
   uri: string;
 };

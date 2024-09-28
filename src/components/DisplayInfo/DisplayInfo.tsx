@@ -48,7 +48,7 @@ export const DisplayInfo = ({
               layout="fill"
               objectFit="cover"
               className={style.mark}
-              alt="PlaylistImage"
+              alt=""
             />
           </div>
         </div>
@@ -78,7 +78,12 @@ export const DisplayInfo = ({
                   alt="User Image"
                   className={`${style.mask} ${style["mask-parallelogram"]}`}
                 />
-                <Link href={`/user/${Owner.owner?.id || "spotify"}`}>
+                <Link
+                  target="_blank"
+                  href={`https://open.spotify.com/user/${
+                    Owner.owner?.id || "spotify"
+                  }`}
+                >
                   <p className="ml-[5px]">
                     {Owner.UserFullInfo?.display_name || "TuneWave"}
                   </p>
