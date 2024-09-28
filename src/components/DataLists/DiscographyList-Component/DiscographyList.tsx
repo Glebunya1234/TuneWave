@@ -13,6 +13,7 @@ import { _getArtistsAlbums } from "@/api/SP-Artists/API-SP-Artists";
 import { CurrentlyPlaylistTracksItem } from "@/types/SpotifyTypes/CurrentlyAlbum/type";
 import { OpenInSpotify } from "@/components/UI/Buttons/OpenInSpotifyBtn/OpenInSpotify";
 import { FollowOrUnPlaylist } from "@/components/UI/Buttons/SavePlaylistToLibBtn/FollowOrUnPlaylist";
+import { Spinner } from "@/components/UI/Spinner/spinner";
 
 export const DiscographyList = ({
   DataArtist,
@@ -26,7 +27,7 @@ export const DiscographyList = ({
   id: string;
 }) => {
   const [viewState, setViewState] = useState<"list" | "grid">("list");
-  const { data, isLoading } = useSWR<CurrentlyPlaylistTracksItem>(
+  const { data, isLoading, isValidating } = useSWR<CurrentlyPlaylistTracksItem>(
     `artistDiscography/${include_groups}/${id}`,
     async () => await _getArtistsAlbums(id, include_groups),
     {
@@ -68,7 +69,6 @@ export const DiscographyList = ({
 
   useEffect(() => {
     const myDiv = document.getElementById(`${idForScroll}`);
-
     const scrollHandler = () => {
       if (myDiv) {
         if (myDiv.scrollHeight - (myDiv.scrollTop + myDiv.clientHeight) < 500) {
@@ -176,6 +176,11 @@ export const DiscographyList = ({
                 ImageSRC={it?.images[0]?.url || ""}
               />
             )
+          )}
+          {fetching && (
+            <div className="w-full h-[40px]">
+              <Spinner />
+            </div>
           )}
         </aside>
       )}
