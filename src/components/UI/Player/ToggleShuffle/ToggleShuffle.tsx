@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { PiShuffleAngularBold } from "react-icons/pi";
 import { setPlaybackShuffle } from "@/api/SP-Player/API-SP-Player";
+import { GlobalContext } from "@/Context";
 
 export const ToggleShuffle = ({
   is_successTranfser,
@@ -8,6 +9,7 @@ export const ToggleShuffle = ({
   is_successTranfser: boolean;
 }) => {
   const [Shuffle, setShuffle] = useState(false);
+
   return (
     <button
       className={`mx-3 hover:scale-[1.2] active:text-[#00fd00] ${
@@ -18,6 +20,7 @@ export const ToggleShuffle = ({
       disabled={!is_successTranfser ? true : false}
       onClick={async () => {
         setShuffle((prevState) => !prevState);
+
         await setPlaybackShuffle(Shuffle);
       }}
     >

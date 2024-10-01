@@ -16,9 +16,9 @@ const Settings = async () => {
           <div className={style.ImageStyles}>
             <Image
               src={
-                userData?.images[1].url === undefined
+                userData?.images[1]?.url === undefined
                   ? ""
-                  : userData?.images[1].url
+                  : userData?.images[1]?.url
               }
               layout="fill"
               objectFit="cover"

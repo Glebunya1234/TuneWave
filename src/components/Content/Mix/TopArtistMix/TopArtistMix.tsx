@@ -14,7 +14,8 @@ import { PanelSkeleton } from "@/components/UI/Skeleton/Panel-Skeleton/PanelSkel
 import { PanelPGAT } from "@/components/UI/Buttons/Panel-PlayList-Genre-Artist-Track/PanelPGAT";
 
 export const TopArtistMix = () => {
-  const { data: topArtist, isLoading } = useSWR<FollowedArtistType>(
+  let items;
+  const { data: topArtist, isLoading } = useSWR<FollowedArtistType | string>(
     `TopArtists`,
     async () => await _getTopArtists(),
     {
@@ -23,17 +24,19 @@ export const TopArtistMix = () => {
     }
   );
 
-  const items = topArtist?.items
-    ?.slice(0, 6)
-    .map((data, index) => (
-      <PanelPGAT
-        key={index}
-        Href={`/playlist/${data.id}`}
-        FirstText={data.name}
-        SecondText={`${data.name}`}
-        ImageSRC={data.images[0].url || "/FavoriteTrack.png"}
-      />
-    ));
+  if (typeof topArtist !== "string") {
+    items = topArtist?.items
+      ?.slice(0, 6)
+      .map((data, index) => (
+        <PanelPGAT
+          key={index}
+          Href={`/playlist/${data.id}`}
+          FirstText={data.name}
+          SecondText={`${data.name}`}
+          ImageSRC={data.images[0].url || "/FavoriteTrack.png"}
+        />
+      ));
+  } else items;
   return (
     <section className={style.ForUserMix}>
       <div className={style.ForUserMix_Div}>

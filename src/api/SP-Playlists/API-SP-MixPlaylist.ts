@@ -7,97 +7,115 @@ import { _checkIfTracksAreSaved } from "../SP-Tracks/API-SP-Tracks";
 import { _getOneArtist, _getTopArtists } from "../SP-Artists/API-SP-Artists";
 import { fetchWithRetry } from "../ApiSpotify";
 
-export const _getRecommendations = async (id?: string): Promise<RecommendationsType> => {
-    const topArtists = await _getTopArtists();
-    const seedArtists: string[] = topArtists.items.length > 0
-        ? topArtists.items.map(artist => artist.id).filter(id => id !== undefined)
-        : [];
+export const _getRecommendations = async (id?: string): Promise<RecommendationsType | string> => {
+    try {
 
-    const seedGenres: string[] = topArtists.items.length > 0
-        ? topArtists.items.flatMap(artist => artist.genres).filter(genre => genre !== undefined)
-        : [];
+        const topArtists = await _getTopArtists();
+        if (typeof topArtists === "string")
+            throw new Error('Failed to obtain sufficient data to receive recommendations');
+
+        const seedArtists: string[] = topArtists.items.length > 0
+            ? topArtists.items.map(artist => artist.id).filter(id => id !== undefined)
+            : [];
+
+        const seedGenres: string[] = topArtists.items.length > 0
+            ? topArtists.items.flatMap(artist => artist.genres).filter(genre => genre !== undefined)
+            : [];
 
 
-    const selectedSeedArtists = seedArtists.slice(0, 3);
-    const selectedSeedGenres = seedGenres.slice(0, 2);
-    if (selectedSeedArtists.length === 0 && selectedSeedGenres.length === 0) {
-        throw new Error('Не удалось получить достаточное количество данных для seed параметров');
+        const selectedSeedArtists = seedArtists.slice(0, 3);
+        const selectedSeedGenres = seedGenres.slice(0, 2);
+        if (selectedSeedArtists.length === 0 && selectedSeedGenres.length === 0) {
+            throw new Error('Failed to obtain sufficient data to receive recommendations');
+        }
+
+
+        const ArtistIDString = selectedSeedArtists.join(',');
+        const GangreString = selectedSeedGenres.join(',');
+        const encodedArtist = ArtistIDString.replace(/ /g, '+').replace(/,/g, '%2C');
+        const encodedGangre = GangreString.replace(/ /g, '+').replace(/,/g, '%2C');
+
+
+
+        const url = `https://api.spotify.com/v1/recommendations?limit=10&seed_artists=${encodedArtist}&seed_genres=${encodedGangre}`;
+        const response = await fetchWithRetry(url);
+
+        if (!response.ok) {
+            const errorText = await response.text();
+            throw new Error(`API Error: ${errorText}`);
+        }
+
+        const data: RecommendationsType = await response.json();
+
+        const trackIds = data.tracks.map(track => track.id);
+        const isSavedArray = await _checkIfTracksAreSaved(trackIds);
+
+        const tracksWithSavedInfo: TrackItem[] = data.tracks.map((track, index) => ({
+            ...track,
+            isSaved: isSavedArray[index],
+        }));
+
+        return {
+            ...data, infoPlaylist: {
+                name: "Random playlist", images: [{
+                    url: "/RandomPL.png"
+                }],
+                type: "Playlist",
+                external_urls: {
+                    spotify: ""
+                },
+                isSave: false
+            }, tracks: tracksWithSavedInfo
+        };
     }
-
-
-    const ArtistIDString = selectedSeedArtists.join(',');
-    const GangreString = selectedSeedGenres.join(',');
-    const encodedArtist = ArtistIDString.replace(/ /g, '+').replace(/,/g, '%2C');
-    const encodedGangre = GangreString.replace(/ /g, '+').replace(/,/g, '%2C');
-
-
-
-    const url = `https://api.spotify.com/v1/recommendations?limit=10&seed_artists=${encodedArtist}&seed_genres=${encodedGangre}`;
-    const response = await fetchWithRetry(url);
-
-    if (!response.ok) {
-        const errorText = await response.text();
-        throw new Error(`API Error: ${errorText}`);
+    catch (error) {
+        console.log('error :>> ', error);
+        return `${error}`
     }
-
-    const data: RecommendationsType = await response.json();
-
-    const trackIds = data.tracks.map(track => track.id);
-    const isSavedArray = await _checkIfTracksAreSaved(trackIds);
-
-    const tracksWithSavedInfo: TrackItem[] = data.tracks.map((track, index) => ({
-        ...track,
-        isSaved: isSavedArray[index],
-    }));
-
-    return {
-        ...data, infoPlaylist: {
-            name: "Random playlist", images: [{
-                url: "/RandomPL.png"
-            }],
-            type: "Playlist",
-            external_urls: {
-                spotify: ""
-            },
-            isSave: false
-        }, tracks: tracksWithSavedInfo
-    };
 }
-export const _getGengreRecommendations = async (): Promise<RecommendationsType> => {
-    const topArtists = await _getTopArtists();
+export const _getGengreRecommendations = async (): Promise<RecommendationsType | string> => {
+    try {
 
 
-    const seedGenres: string[] = topArtists.items.length > 0
-        ? topArtists.items.flatMap(artist => artist.genres).filter(genre => genre !== undefined)
-        : [];
+        const topArtists = await _getTopArtists();
+        if (typeof topArtists === "string")
+            throw new Error('Failed to obtain sufficient data to receive recommendations');
+
+        const seedGenres: string[] = topArtists.items.length > 0
+            ? topArtists.items.flatMap(artist => artist.genres).filter(genre => genre !== undefined)
+            : [];
 
 
-    const selectedSeedGenres = seedGenres.slice(0, 5);
-    if (selectedSeedGenres.length === 0) {
-        throw new Error('Не удалось получить достаточное количество данных для seed параметров');
+        const selectedSeedGenres = seedGenres.slice(0, 5);
+        if (selectedSeedGenres.length === 0) {
+            throw new Error('Failed to obtain sufficient data to receive recommendations');
+        }
+
+        const GangreString = selectedSeedGenres.join(',');
+        const encodedGangre = GangreString.replace(/ /g, '+').replace(/,/g, '%2C');
+        const url = `https://api.spotify.com/v1/recommendations?limit=10&seed_genres=${encodedGangre}`;
+        const response = await fetchWithRetry(url);
+
+        if (!response.ok) {
+            const errorText = await response.text();
+            throw new Error(`API Error: ${errorText}`);
+        }
+
+
+        const data: RecommendationsType = await response.json()
+        const trackIds = data.tracks.map(track => track.id);
+        const isSavedArray = await _checkIfTracksAreSaved(trackIds);
+
+        const tracksWithSavedInfo: TrackItem[] = data.tracks.map((track, index) => ({
+            ...track,
+            isSaved: isSavedArray[index],
+        }));
+
+        return { ...data, tracks: tracksWithSavedInfo };
     }
-
-    const GangreString = selectedSeedGenres.join(',');
-    const encodedGangre = GangreString.replace(/ /g, '+').replace(/,/g, '%2C');
-    const url = `https://api.spotify.com/v1/recommendations?limit=10&seed_genres=${encodedGangre}`;
-    const response = await fetchWithRetry(url);
-
-    if (!response.ok) {
-        const errorText = await response.text();
-        throw new Error(`API Error: ${errorText}`);
+    catch (error) {
+        return `${error}`
     }
-
-
-    const data: RecommendationsType = await response.json()
-    const trackIds = data.tracks.map(track => track.id);
-    const isSavedArray = await _checkIfTracksAreSaved(trackIds);
-
-    const tracksWithSavedInfo: TrackItem[] = data.tracks.map((track, index) => ({
-        ...track,
-        isSaved: isSavedArray[index],
-    }));
-
-    return { ...data, tracks: tracksWithSavedInfo };
 }
 
 export const _getSimilarPlaylist = async (id: string, onlyGenre?: boolean, ganreName?: string): Promise<RecommendationsType> => {
