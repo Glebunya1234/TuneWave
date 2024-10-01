@@ -26,7 +26,11 @@ const CollectionTracks = async () => {
           <h1>FAVORITE TRACKS</h1>
           <span className={style.Info__Track}>
             <Image
-              src={userData.user?.user_metadata.avatar_url}
+              src={
+                userData.user?.user_metadata.avatar_url !== undefined
+                  ? userData.user?.user_metadata.avatar_url
+                  : "/DefaultUserSmall.png"
+              }
               width={25}
               height={25}
               alt="Arrow2"

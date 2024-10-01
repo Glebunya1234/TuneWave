@@ -78,25 +78,30 @@ export const _getFollowedArtists = async (): Promise<FollowedArtistType> => {
     return getTopsUserResult.artists;
 }
 
-export const _getArtistsTopTracks = async (id: string): Promise<TrackItem[]> => {
-    const url1 = `https://api.spotify.com/v1/artists/${id}/top-tracks?market=US`;
+export const _getArtistsTopTracks = async (id: string): Promise<TrackItem[] | string> => {
+    try {
+        const url1 = `https://api.spotify.com/v1/artists/${id}/top-tracks?market=US`;
 
-    const getTopTrack = await fetchWithRetry(url1);
+        const getTopTrack = await fetchWithRetry(url1);
 
-    if (!getTopTrack.ok) {
-        throw new Error('Ошибка получения топ треков артиста');
+        if (!getTopTrack.ok) {
+            throw new Error('Ошибка получения топ треков артиста');
+        }
+
+
+        const response = await getTopTrack.json();
+        const getTopsUserResult: TrackItem[] = response.tracks;
+        const isSaved = await _checkIfTracksAreSaved(getTopsUserResult.map((it) => it.id));
+        const tracksWithSavedInfo: TrackItem[] = getTopsUserResult.map((item, index) => ({
+            ...item,
+            isSaved: isSaved[index],
+        }));
+
+        return tracksWithSavedInfo;
     }
-
-
-    const response = await getTopTrack.json();
-    const getTopsUserResult: TrackItem[] = response.tracks;
-    const isSaved = await _checkIfTracksAreSaved(getTopsUserResult.map((it) => it.id));
-    const tracksWithSavedInfo: TrackItem[] = getTopsUserResult.map((item, index) => ({
-        ...item,
-        isSaved: isSaved[index],
-    }));
-
-    return tracksWithSavedInfo;
+    catch (error) {
+        return ""
+    }
 }
 export const _getRelatedArtists = async (ids: string): Promise<TrackArtist[]> => {
 
@@ -113,34 +118,40 @@ export const _getRelatedArtists = async (ids: string): Promise<TrackArtist[]> =>
     return Data.artists
 }
 
-export const _getArtistsAlbums = async (id: string, include_groups: string, offset: number = 0): Promise<CurrentlyPlaylistTracksItem> => {
+export const _getArtistsAlbums = async (id: string, include_groups: string, offset: number = 0): Promise<CurrentlyPlaylistTracksItem | string> => {
+    try {
 
-    const url3 = `https://api.spotify.com/v1/artists/${id}/albums?include_groups=${include_groups}&offset=${offset}`
+
+        const url3 = `https://api.spotify.com/v1/artists/${id}/albums?include_groups=${include_groups}&offset=${offset}`
 
 
-    const getArtistsAlbums = await fetchWithRetry(url3);
+        const getArtistsAlbums = await fetchWithRetry(url3);
 
-    if (!getArtistsAlbums.ok) {
-        throw new Error('Ошибка получения топ артистов');
+        if (!getArtistsAlbums.ok) {
+            throw new Error('Ошибка получения топ артистов');
+        }
+
+        const getArtistsAlbumsResult: CurrentlyPlaylistTracksItem = await getArtistsAlbums.json()
+        const isSavedArray = await _checkIsAlbumAreSaved(getArtistsAlbumsResult.items.map((it) => it.id))
+        const tracksWithSavedInfo: ItemsForArtistAlbums[] = await Promise.all(
+            getArtistsAlbumsResult.items.map(async (item, index) => {
+                const itemsAlbum = await _getAlbum(item.id);
+                return {
+                    ...item,
+                    tracks: {
+                        items: itemsAlbum.tracks.items,
+                    },
+                    isSaved: isSavedArray[index],
+                };
+            })
+        );
+
+
+
+        return { ...getArtistsAlbumsResult, items: tracksWithSavedInfo }
     }
-
-    const getArtistsAlbumsResult: CurrentlyPlaylistTracksItem = await getArtistsAlbums.json()
-    const isSavedArray = await _checkIsAlbumAreSaved(getArtistsAlbumsResult.items.map((it) => it.id))
-    const tracksWithSavedInfo: ItemsForArtistAlbums[] = await Promise.all(
-        getArtistsAlbumsResult.items.map(async (item, index) => {
-            const itemsAlbum = await _getAlbum(item.id);
-            return {
-                ...item,
-                tracks: {
-                    items: itemsAlbum.tracks.items,
-                },
-                isSaved: isSavedArray[index],
-            };
-        })
-    );
-
-
-
-    return { ...getArtistsAlbumsResult, items: tracksWithSavedInfo }
+    catch (error) {
+        return ""
+    }
 }
 

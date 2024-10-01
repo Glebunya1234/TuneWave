@@ -18,7 +18,11 @@ export const UserDataHeader = async () => {
       <SearchComponent />
       <aside className={style.Info__User}>
         <Image
-          src={userData.user?.user_metadata.avatar_url}
+          src={
+            userData.user?.user_metadata.avatar_url === undefined
+              ? "/DefaultUserSmall.png"
+              : userData.user?.user_metadata.avatar_url
+          }
           width={55}
           height={55}
           alt="Arrow2"
