@@ -1,8 +1,55 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+@import url("https://fonts-online.ru/path-to-fonts/versus.css");
+@import url("https://fonts.googleapis.com/css2?family=Covered+By+Your+Grace&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Single+Day&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap");
 :root {
+  --lengthText: 1;
+  --invertFilter: 0;
+  --font-family-versus: "Versus", sans-serif;
+  --font-family-covered: "Covered By Your Grace", cursive;
+  --font-family-SingleDay: "Single Day", sans-serif;
+  --font-family-Oswald: "Oswald", sans-serif;
+  --HiddenList: 245px;
+  --text-overflow: 0px;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: black;
+  font-weight: 400;
+  font-family: var(--font-family-Oswald);
+}
+::-webkit-scrollbar {
+  width: 3px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: transparent;
+  transition: background-color 0.3s;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #5f5f5f;
+}
+::-webkit-scrollbar-thumb:active {
+  background-color: #c1c0c5;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+::-webkit-scrollbar-corner {
+  background-color: transparent;
+}
+/* :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
@@ -30,4 +77,4 @@ body {
   .text-balance {
     text-wrap: balance;
   }
-}
+} */

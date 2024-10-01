@@ -1,0 +1,81 @@
+.DiscographySingle {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    max-width: 1900px;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    transition: 1s ease-in-out;
+    overflow-y: scroll;
+    padding: 10px 60px;
+    margin-bottom: 7px;
+    color: white;
+
+    p {
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    .DiscographySingle__Span {
+
+        width: 100%;
+        justify-content: space-between;
+        display: flex;
+        flex-direction: row;
+        margin-bottom: 40px;
+
+        .Span__Link {
+            font-size: 26px;
+            text-transform: uppercase;
+            font-family: var(--font-family-versus);
+            text-overflow: ellipsis;
+            overflow: hidden;
+
+            text-overflow: ellipsis;
+
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+
+    }
+
+
+    .DiscographySingle__ContentGrid {
+
+
+        width: 100%;
+        height: 100%;
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        gap: 20px;
+        padding: 10px 60px;
+        grid-auto-rows: max-content;
+        color: white;
+        overflow-y: scroll;
+
+        @media (max-width: 1750px) {
+            grid-template-columns: repeat(5, 1fr);
+        }
+
+        @media (max-width: 1500px) {
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        @media (max-width: 1350px) {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        @media (max-width: 1070px) {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+
+
+
+    }
+
+}

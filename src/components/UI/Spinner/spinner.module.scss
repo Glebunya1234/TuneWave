@@ -1,0 +1,203 @@
+.spinner {
+    font-family: var(--font-family-versus);
+    width: 100%;
+    height: 40px;
+    overflow: hidden;
+    color: white;
+    text-align: center;
+    display: flex;
+    // padding-top: 10px;
+    font-size: 20px;
+    justify-content: center;
+    flex-direction: row;
+    position: relative;
+}
+
+
+.Text {
+    margin-right: 37px;
+    margin-left: -15px;
+    z-index: 10;
+    position: absolute;
+    animation: Animation1 1s infinite cubic-bezier(1, 0, 1, 1)
+}
+
+.Text2 {
+    margin-left: -15px;
+    position: absolute;
+    animation: Animation2 1s infinite cubic-bezier(1, 0, 1, 1)
+}
+
+.Section1 {
+    position: relative;
+    margin-right: 17px;
+
+    .Text {
+        z-index: 10;
+        position: absolute;
+        animation: Animation1 1s infinite cubic-bezier(1, 0, 1, 1)
+    }
+
+}
+
+.Section2 {
+
+    position: relative;
+
+    .Text {
+
+        position: absolute;
+        animation: Animation2 1s infinite cubic-bezier(1, 0, 1, 1)
+    }
+
+}
+
+
+
+@keyframes Animation1 {
+    0% {
+        top: 0px;
+    }
+
+    25% {
+        top: 0px;
+        font-size: 20px;
+        font-family: var(--font-family-versus);
+    }
+
+
+    26% {
+        top: -10px;
+        font-size: 32px;
+        font-family: var(--font-family-SingleDay);
+    }
+
+    45% {
+        color: white;
+        top: -10px;
+        font-size: 32px;
+        font-family: var(--font-family-SingleDay);
+    }
+
+
+    46% {
+        color: #29e229;
+        top: -10px;
+        font-size: 34px;
+        font-family: var(--font-family-covered);
+    }
+
+    64% {
+        color: #29e229;
+        top: -10px;
+        font-size: 34px;
+        font-family: var(--font-family-covered);
+    }
+
+    65% {
+        color: white;
+        top: 0px;
+        font-size: 20px;
+        font-family: var(--font-family-versus);
+    }
+
+    88% {
+        top: 0px;
+    }
+
+    93% {
+        top: -15px;
+        opacity: 1;
+    }
+
+    94% {
+        opacity: 0;
+        top: 15px;
+    }
+
+    95% {
+        opacity: 1;
+        top: 15px;
+    }
+
+    100% {
+        top: 0px;
+    }
+}
+
+
+
+@keyframes Animation2 {
+    0% {
+        top: 0px;
+    }
+
+
+    25% {
+
+        top: 0px;
+        font-size: 20px;
+        font-family: var(--font-family-versus);
+    }
+
+
+    26% {
+
+        top: -10px;
+        font-family: var(--font-family-covered);
+        font-size: 32px;
+    }
+
+    45% {
+        top: -10px;
+        font-family: var(--font-family-covered);
+        font-size: 32px;
+        color: white;
+    }
+
+
+    46% {
+        color: #29e229;
+        top: -10px;
+        font-size: 34px;
+        font-family: var(--font-family-SingleDay);
+    }
+
+    64% {
+        color: #29e229;
+        top: -10px;
+        font-size: 34px;
+        font-family: var(--font-family-SingleDay);
+    }
+
+    65% {
+        color: white;
+        top: 0px;
+        font-size: 20px;
+        font-family: var(--font-family-versus);
+    }
+
+    88% {
+        top: 0px;
+
+    }
+
+    93% {
+        top: 15px;
+        opacity: 1;
+    }
+
+    94% {
+        opacity: 0;
+        top: -15px;
+    }
+
+    95% {
+        opacity: 1;
+        top: -15px;
+    }
+
+    100% {
+        top: 0px;
+    }
+}

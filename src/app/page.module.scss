@@ -1,0 +1,235 @@
+@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap");
+$font-family-Oswald: "Oswald", sans-serif;
+
+.Body {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    font-weight: 400;
+    font-family: $font-family-Oswald;
+    background-color: black;
+}
+
+
+@keyframes Filter {
+    0% {
+        filter: invert(1);
+    }
+
+    50% {
+        filter: invert(0);
+
+    }
+}
+
+.Home {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background:
+        linear-gradient(to bottom, #15181d6c, #3e454bad),
+        url('/pattern3.png') center center;
+    overflow: hidden;
+
+
+
+    &::before {
+        filter: invert(var(--invertFilter));
+        content: " ";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -9999;
+        animation: Filter 3s;
+        background:
+            // url('../../../public/21375.png') center center ,
+            linear-gradient(to bottom, #15181d6c, #3e454bad),
+            url('/pattern3.png') center center;
+
+        background-size: 50%, 30%;
+    }
+
+
+    .Home__Nav {
+
+        width: 100%;
+
+        display: flex;
+        justify-content: end;
+
+
+        @media (max-width: 700px) {
+            justify-content: center;
+            position: static;
+            transform: rotate(0deg);
+            margin: 0px;
+            top: 0px;
+            left: 0px;
+            width: 100%;
+            height: min-content;
+
+        }
+
+
+    }
+
+    .Home__Dashboard {
+        width: 100%;
+        height: 100%;
+
+
+        background-color: #00000083;
+        background-size: 50%, 30%;
+        display: flex;
+        flex-direction: column;
+
+    }
+
+    .Home__Content {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 60px;
+        padding-right: 60px;
+
+        h1 {
+            color: white;
+
+        }
+
+        .Content__ImageConteiner {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            position: relative;
+            justify-content: center;
+            align-items: center;
+
+
+
+            .Arrow1 {
+                display: none;
+                filter: invert(1);
+                opacity: 0;
+                animation: gradientFadeIn 2s ease-in-out forwards;
+                -webkit-user-drag: none;
+                user-select: none;
+
+                @media (min-width: 720px) {
+                    display: block;
+                    position: absolute;
+                    top: -120px;
+                    left: 70%;
+                    transform: rotate(-150deg) scaleX(-1) scaleY(-1) scale(1.7);
+                    // transform: rotate(-120deg) scaleX(-1) scale(1.2);
+
+
+                }
+
+                @media (max-width: 1200px) {
+                    margin-right: 50%;
+                    transform: rotate(-150deg) scaleX(-1) scaleY(-1) scale(1);
+                }
+
+                @media (max-width: 800px) {
+                    margin-right: 50%;
+                    transform: rotate(-120deg) scaleX(-1) scaleY(-1) scale(1);
+                }
+            }
+
+
+            .Arrow2 {
+                display: none;
+                filter: invert(1);
+                opacity: 0;
+                animation: gradientFadeIn 2s ease-in-out forwards;
+                animation-delay: .8s;
+                -webkit-user-drag: none;
+                user-select: none;
+
+                @media (min-width: 720px) {
+                    position: absolute;
+                    display: block;
+                    margin-bottom: 100px;
+                    margin-right: 80%;
+                    transform: rotate(-20deg) scale(1.2);
+
+                }
+
+                @media (max-width: 1200px) {
+                    margin-right: 50%;
+                    transform: rotate(-20deg) scale(.8);
+                }
+            }
+
+            .Arrow3 {
+                display: block;
+                filter: invert(1);
+                left: 0;
+                top: 0;
+                transform: rotate(90deg) scale(.8);
+                opacity: 0;
+                animation: gradientFadeIn 2s ease-in-out forwards;
+                animation-delay: .4s;
+                -webkit-user-drag: none;
+                user-select: none;
+
+                @media (min-width:720px) {
+                    display: none;
+                }
+            }
+
+            @keyframes gradientFadeIn {
+                75% {
+                    background: linear-gradient(90deg, #ff7f5f00 0%rgba(254, 180, 123, 0)7b 100%);
+                    opacity: 0;
+                }
+
+                100% {
+                    background: linear-gradient(90deg, #ff7f5f00 0%, #feb47b00 100%);
+                    opacity: 1;
+                }
+            }
+        }
+    }
+
+    .dash {
+        position: absolute;
+        top: 50px;
+        left: 10px;
+        width: 22px;
+        height: 70px;
+        background: repeating-linear-gradient(315deg, #b9becc, #b9becc 1.5px, transparent 0px, transparent 5px);
+
+    }
+
+    .squarDash {
+        @extend .dash;
+        top: 130px;
+        width: 22px;
+        height: 22px;
+        background: repeating-linear-gradient(45deg, #b9becc, #b9becc 1.5px, transparent 0px, transparent 5px);
+    }
+
+    .backgroundMarq {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 10%;
+        z-index: -9999;
+        animation: Filter 3s;
+        filter: invert(var(--invertFilter));
+        transition: .1s ease-in-out;
+    }
+}

@@ -1,0 +1,58 @@
+ .Target {
+     width: 100%;
+     height: min-content;
+     display: flex;
+     align-items: start;
+     justify-content: space-between;
+ }
+
+ .Border {
+     position: relative;
+     margin: 10px;
+     max-width: 20px;
+
+     &::after {
+         content: '';
+         position: absolute;
+         top: 0;
+         left: 0;
+         width: 100%;
+         height: 100%;
+         scale: (2);
+         border: 1px solid #c1c0c5;
+     }
+ }
+
+ .RightDown {
+     @extend .Border;
+
+     &::after {
+
+         clip-path: polygon(0 25%, 25% 25%, 25% 0, 75% 0, 75% 25%, 55% 38%, 47% 51%, 25% 75%, 0 75%);
+     }
+ }
+
+ .RightUp {
+     @extend .Border;
+
+     &::after {
+         clip-path: polygon(0 25%, 25% 25%, 26% 47%, 53% 75%, 75% 75%, 75% 100%, 25% 100%, 25% 75%, 0 75%);
+     }
+ }
+
+ .LeftDown {
+     @extend .Border;
+
+     &::after {
+         clip-path: polygon(53% 28%, 25% 25%, 25% 0, 75% 0, 75% 25%, 100% 25%, 100% 75%, 75% 75%, 75% 53%);
+     }
+ }
+
+ .LeftUp {
+     @extend .Border;
+
+     &::after {
+         clip-path: polygon(76% 44%, 75% 25%, 100% 25%, 100% 75%, 75% 75%, 75% 100%, 25% 100%, 25% 75%, 53% 69%);
+     }
+
+ }
