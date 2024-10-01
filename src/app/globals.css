@@ -7,9 +7,9 @@
 
 @font-face {
   font-family: "Versus";
-  src: url("/src/fonts/versus.woff2") format("woff2"),
-    url("/src/fonts/versus.woff") format("woff"),
-    url("/src/fonts/versus.otf") format("opentype");
+  src: url("/fonts/versus.woff2") format("woff2"),
+    url("/fonts/versus.woff") format("woff"),
+    url("/fonts/versus.otf") format("opentype");
   font-weight: normal;
   font-style: normal;
 }
