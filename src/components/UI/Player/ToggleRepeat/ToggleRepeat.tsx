@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { RiRepeat2Fill, RiRepeatOneFill } from "react-icons/ri";
 import { setRepeatMode } from "@/api/SP-Player/API-SP-Player";
+import { GlobalContext } from "@/Context";
 
 export const ToggleRepeat = ({
   is_successTranfser,
@@ -10,18 +11,22 @@ export const ToggleRepeat = ({
   const [repeatState, setRepeatState] = useState<"off" | "context" | "track">(
     "off"
   );
+
   const toggleRepeat = () => {
     setRepeatState((prevState) => {
       if (prevState === "off") {
         setRepeatMode("context");
+
         return "context";
       }
       if (prevState === "context") {
         setRepeatMode("track");
+
         return "track";
       }
 
       setRepeatMode("off");
+
       return "off";
     });
   };

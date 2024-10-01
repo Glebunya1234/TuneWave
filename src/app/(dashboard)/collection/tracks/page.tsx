@@ -32,7 +32,7 @@ const CollectionTracks = async () => {
               alt="Arrow2"
               className={`${style.mask} ${style["mask-parallelogram"]}`}
             />
-            <Link href={`/artist/`}>
+            <Link href={`/settings`}>
               <p> {userData.user?.user_metadata?.full_name}</p>
             </Link>
           </span>

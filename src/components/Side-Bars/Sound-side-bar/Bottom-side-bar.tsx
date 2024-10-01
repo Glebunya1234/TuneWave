@@ -34,13 +34,13 @@ export const SoundBar = () => {
         />
       </div>
       <nav className={style.Player}>
-        {/* {token ? (
+        {token ? (
           <SpotifyPlayer token={token} />
         ) : (
           <div className="w-full pt-[10px]">
             <Spinner />
           </div>
-        )} */}
+        )}
       </nav>
     </section>
   );

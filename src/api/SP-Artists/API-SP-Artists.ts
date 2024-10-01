@@ -35,32 +35,35 @@ export const _getArtists = async (ids: string[] | string): Promise<TrackArtist[]
 
         if (!response.ok) {
             const Data = await response.json();
-            console.warn("artistsTrackError:", Data);
+            console.warn(Data);
             return [];
         }
 
         const Data = await response.json();
         return Data.artists;
     } catch (error) {
-        console.error("Ошибка при запросе артистов:", error);
+        console.error(error);
         return [];
     }
 }
 
 
 
-export const _getTopArtists = async (): Promise<FollowedArtistType> => {
-    const url = "https://api.spotify.com/v1/me/top/artists?limit=10"
+export const _getTopArtists = async (): Promise<FollowedArtistType | string> => {
+    try {
+        const url = "https://api.spotify.com/v1/me/top/artists?limit=10"
 
-    const getTopsUser = await fetchWithRetry(url);
-    if (!getTopsUser.ok) {
+        const getTopsUser = await fetchWithRetry(url);
+        if (!getTopsUser.ok) {
 
-        throw new Error('Ошибка получения топ артистов');
+            throw new Error('the user does not have top artists');
+        }
+        const getTopsUserResult = await getTopsUser.json()
+
+        return getTopsUserResult;
+    } catch (error) {
+        return `${error}`
     }
-    const getTopsUserResult = await getTopsUser.json()
-
-    return getTopsUserResult;
-
 }
 
 export const _getFollowedArtists = async (): Promise<FollowedArtistType> => {
@@ -69,7 +72,7 @@ export const _getFollowedArtists = async (): Promise<FollowedArtistType> => {
     const getFollowedUser = await fetchWithRetry(url);
 
     if (!getFollowedUser.ok) {
-        throw new Error('Ошибка получения топ артистов');
+        throw new Error('the user does not follow the artists');
     }
     const getTopsUserResult = await getFollowedUser.json()
     return getTopsUserResult.artists;
