@@ -11,15 +11,13 @@ import { TrackListSkeleton } from "@/components/UI/Skeleton/TrackList-Skeleton/T
 export const ArtistTopTrack = ({ id }: { id: string }) => {
   const [state, setState] = useState(false);
 
-  const { data: TopTracks, isLoading: LoadingTopTracks } = useSWR<TrackItem[]>(
-    `artistTopTracks/${id}`,
-    async () => await _getArtistsTopTracks(id),
-    {
-      keepPreviousData: true,
-      revalidateOnFocus: false,
-      dedupingInterval: 60000,
-    }
-  );
+  const { data: TopTracks, isLoading: LoadingTopTracks } = useSWR<
+    TrackItem[] | string
+  >(`artistTopTracks/${id}`, async () => await _getArtistsTopTracks(id), {
+    keepPreviousData: true,
+    revalidateOnFocus: false,
+    dedupingInterval: 60000,
+  });
 
   const handleClick = () => {
     if (state) {
@@ -35,7 +33,7 @@ export const ArtistTopTrack = ({ id }: { id: string }) => {
       </div>
     </>
   ) : (
-    TopTracks && TopTracks.length !== 0 && (
+    TopTracks && typeof TopTracks !== "string" && TopTracks.length !== 0 && (
       <>
         <span className={`${style.ArtistData__Span}`}>Popular tracks</span>
 

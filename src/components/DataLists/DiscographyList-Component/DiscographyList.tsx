@@ -27,7 +27,9 @@ export const DiscographyList = ({
   id: string;
 }) => {
   const [viewState, setViewState] = useState<"list" | "grid">("list");
-  const { data, isLoading, isValidating } = useSWR<CurrentlyPlaylistTracksItem>(
+  const { data, isLoading, isValidating } = useSWR<
+    CurrentlyPlaylistTracksItem | string
+  >(
     `artistDiscography/${include_groups}/${id}`,
     async () => await _getArtistsAlbums(id, include_groups),
     {
@@ -42,10 +44,10 @@ export const DiscographyList = ({
   const [hasMore, setHasMore] = useState<string | null>("");
   useEffect(() => {
     const fetchMoreData = async () => {
-      if (fetching && hasMore !== null) {
+      if (fetching && typeof data !== "string" && hasMore !== null) {
         const newOffset = offset + 20;
         const newData = await _getArtistsAlbums(id, include_groups, newOffset);
-
+        if (typeof newData === "string") return;
         mutate(
           `artistDiscography/${include_groups}/${id}`,
           (currentData: any) => ({
@@ -122,61 +124,65 @@ export const DiscographyList = ({
               : style.DiscographySingle__ContentGrid
           }
         >
-          {data?.items.map((it, inx) =>
-            viewState === "list" ? (
-              <section
-                key={`${it.name}-${inx}`}
-                className={style.Content__items}
-              >
-                <div className={style.items}>
-                  <div className={style.Preview__image}>
-                    <Image
-                      src={it?.images[0]?.url || ""}
-                      width={136}
-                      height={136}
-                      objectFit="cover"
-                      className="aspect-square"
-                      alt=""
-                    />
-                  </div>
-                  <div className={style.items__info}>
-                    <Link href={`/album/${it.id}`} className={style.info__Link}>
-                      {it.name}
-                    </Link>
-                    <aside>
-                      {it.album_type} <span className="mx-[5px]">•</span>
-                      {it.release_date}
-                      <span className="mx-[5px]">•</span>
-                      {it.total_tracks} tracks
-                    </aside>
-
-                    <nav className={`${style.items__NavPanel}`}>
-                      <FollowOrUnPlaylist
-                        type="album"
-                        id={it?.id!}
-                        className={style.NavPanel__PlayTrackBtn}
-                        isSave={it?.isSaved}
+          {typeof data !== "string" &&
+            data?.items.map((it, inx) =>
+              viewState === "list" ? (
+                <section
+                  key={`${it.name}-${inx}`}
+                  className={style.Content__items}
+                >
+                  <div className={style.items}>
+                    <div className={style.Preview__image}>
+                      <Image
+                        src={it?.images[0]?.url || ""}
+                        width={136}
+                        height={136}
+                        objectFit="cover"
+                        className="aspect-square"
+                        alt=""
                       />
-                      <OpenInSpotify
-                        className={style.OpenSpotifyBtn}
-                        href={it?.external_urls?.spotify}
-                      />
-                    </nav>
-                  </div>
-                </div>
+                    </div>
+                    <div className={style.items__info}>
+                      <Link
+                        href={`/album/${it.id}`}
+                        className={style.info__Link}
+                      >
+                        {it.name}
+                      </Link>
+                      <aside>
+                        {it.album_type} <span className="mx-[5px]">•</span>
+                        {it.release_date}
+                        <span className="mx-[5px]">•</span>
+                        {it.total_tracks} tracks
+                      </aside>
 
-                <AlbumInformation data={it?.tracks?.items} />
-              </section>
-            ) : (
-              <GridPanelPGAT
-                key={it.id}
-                Href={`/album/${it.id}`}
-                FirstText={it.name}
-                SecondText={it.name}
-                ImageSRC={it?.images[0]?.url || ""}
-              />
-            )
-          )}
+                      <nav className={`${style.items__NavPanel}`}>
+                        <FollowOrUnPlaylist
+                          type="album"
+                          id={it?.id!}
+                          className={style.NavPanel__PlayTrackBtn}
+                          isSave={it?.isSaved}
+                        />
+                        <OpenInSpotify
+                          className={style.OpenSpotifyBtn}
+                          href={it?.external_urls?.spotify}
+                        />
+                      </nav>
+                    </div>
+                  </div>
+
+                  <AlbumInformation data={it?.tracks?.items} />
+                </section>
+              ) : (
+                <GridPanelPGAT
+                  key={it.id}
+                  Href={`/album/${it.id}`}
+                  FirstText={it.name}
+                  SecondText={it.name}
+                  ImageSRC={it?.images[0]?.url || ""}
+                />
+              )
+            )}
           {fetching && (
             <div className="w-full h-[40px]">
               <Spinner />

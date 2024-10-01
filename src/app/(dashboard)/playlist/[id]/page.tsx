@@ -24,21 +24,28 @@ const PlaylistPage = () => {
   const list = searchParams.get("id") || "";
 
   const { data: data, isLoading } = useSWR<
-    RecommendationsType | CurrentlyPlaylistTracksItem
+    string | RecommendationsType | CurrentlyPlaylistTracksItem
   >(`playlist/${params.id}`, () => fetcher(params.id, genre, list, 0), {
     revalidateOnFocus: false,
     dedupingInterval: 60000,
   });
-
+  if (typeof data === "string") {
+    return (
+      <div className={style.Playlist}>
+        <Spinner />
+      </div>
+    );
+  }
   return (
     <div className={style.Playlist}>
       {isLoading && <Spinner />}
+
       {data !== undefined ? (
         <DisplayInfo
           idForScroll={"PlaylistPage"}
           ImageSrc={
             data?.infoPlaylist?.images[0].url === undefined
-              ? "/RandomPL.png"
+              ? "/PlayLiskDefault.png"
               : data?.infoPlaylist.images[0].url
           }
           Type={data?.infoPlaylist?.type! || ""}

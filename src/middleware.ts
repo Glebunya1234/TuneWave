@@ -5,8 +5,6 @@ import { createClient } from '@/utils/supabase/middleware';
 
 export async function middleware(request: NextRequest) {
 
-
-
   const data = await IsAuthorized()
 
   const { supabase, response } = createClient(request);
@@ -24,6 +22,15 @@ export async function middleware(request: NextRequest) {
 
 }
 export const config = {
-  matcher: ['/profile', '/settings'
+  matcher: [
+    '/search(.*)',
+    '/settings(.*)',
+    '/album(.*)',
+    '/artist(.*)',
+    '/collection(.*)',
+    '/home(.*)',
+    '/section(.*)',
+    '/track(.*)',
+    '/playlist(.*)',
   ],
 }

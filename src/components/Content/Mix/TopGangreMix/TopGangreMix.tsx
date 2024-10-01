@@ -3,29 +3,32 @@
 import Link from "next/link";
 import Image from "next/image";
 import style from "../For-user-Mix/ForUserMix.module.scss";
-import { BorderMarquee } from "@/components/UI/Marquee/Border-Marquee/BorderMarquee";
+
 import { _getTopArtists } from "@/api/SP-Artists/API-SP-Artists";
 import { PanelPGAT } from "@/components/UI/Buttons/Panel-PlayList-Genre-Artist-Track/PanelPGAT";
 
 export const TopGangreMix = async () => {
   const topArtist = await _getTopArtists();
 
-  const uniqueGenres = new Set(
-    topArtist.items
-      .filter((data) => data.genres[0] !== undefined)
-      .slice(0, 6)
-      .map((data) => data.genres[0])
-  );
+  let items;
+  if (typeof topArtist !== "string") {
+    const uniqueGenres = new Set(
+      topArtist.items
+        .filter((data) => data.genres[0] !== undefined)
+        .slice(0, 6)
+        .map((data) => data.genres[0])
+    );
 
-  const items = Array.from(uniqueGenres).map((data, index) => (
-    <PanelPGAT
-      key={index}
-      Href={`/playlist/genre?genre=${data}`}
-      FirstText={data}
-      SecondText={`${data}`}
-      ImageSRC={"/DiscLogo.png"}
-    />
-  ));
+    items = Array.from(uniqueGenres).map((data, index) => (
+      <PanelPGAT
+        key={index}
+        Href={`/playlist/genre?genre=${data}`}
+        FirstText={data}
+        SecondText={`${data}`}
+        ImageSRC={"/DiscLogo.png"}
+      />
+    ));
+  } else items;
   return (
     <section className={style.ForUserMix}>
       <div className={style.ForUserMix_Div}>

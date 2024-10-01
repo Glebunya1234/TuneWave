@@ -32,8 +32,8 @@ export const SpotifyPlayer: React.FC<SpotifyPlayerProps> = ({ token }) => {
 
   useEffect(() => {
     const transfer = async (deviceId: string) => {
-      // const success = await _TransferPlayback(deviceId);
-      // setTransfer(success);
+      const success = await _TransferPlayback(deviceId);
+      setTransfer(success);
     };
     const script = document.createElement("script");
     script.src = "https://sdk.scdn.co/spotify-player.js";

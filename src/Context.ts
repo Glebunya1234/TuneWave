@@ -44,7 +44,7 @@ export const GlobalContext = createContext<ContextType>({
     },
 
 
-    
+
     setStatePlaying: () => { },
     getCurrentPlaying: {},
     setCurrentPlaying: () => { },
@@ -52,4 +52,6 @@ export const GlobalContext = createContext<ContextType>({
     setDeviceID: () => { },
     player: null,
     setPlayer: () => { },
+
+
 });

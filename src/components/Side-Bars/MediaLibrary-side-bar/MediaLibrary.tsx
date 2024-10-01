@@ -4,7 +4,7 @@ import { MediaPlaylist } from "@/components/Content/MediaPlaylist-Component/Medi
 export const MediaLibrary = () => {
   return (
     <MediaLibraryBar>
-      {/* <MediaPlaylist /> */}
+      <MediaPlaylist />
       <p></p>
     </MediaLibraryBar>
   );

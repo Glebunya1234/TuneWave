@@ -44,4 +44,7 @@ export type ContextType = {
     player: Spotify.Player | null,
     setPlayer: TypeSetState<Spotify.Player | null>;
 
+
+
+
 };

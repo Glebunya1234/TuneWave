@@ -12,7 +12,7 @@ const artistPage = async ({ params }: { params: { id: string } }) => {
     <div className={style.Artist}>
       <DisplayInfo
         idForScroll={"ArtistPage"}
-        ImageSrc={`${data?.images[0]?.url || "/FavoriteTrack.png"}`}
+        ImageSrc={`${data?.images[0]?.url || "/DefaultForAll.png"}`}
         Type={data.type}
         Name={data.name}
         FollowersTotal={data.followers.total}

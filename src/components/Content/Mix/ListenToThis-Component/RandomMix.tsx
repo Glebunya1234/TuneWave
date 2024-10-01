@@ -12,7 +12,8 @@ import { PanelSkeleton } from "@/components/UI/Skeleton/Panel-Skeleton/PanelSkel
 import { PanelPGAT } from "@/components/UI/Buttons/Panel-PlayList-Genre-Artist-Track/PanelPGAT";
 
 export const ListenToThisCmp = () => {
-  const { data, isLoading } = useSWR<RecommendationsType>(
+  let items;
+  const { data, isLoading } = useSWR<RecommendationsType | string>(
     `ListenToThis`,
     async () => await _getRecommendations(),
     {
@@ -20,18 +21,19 @@ export const ListenToThisCmp = () => {
       dedupingInterval: 60000,
     }
   );
-
-  const items = data?.tracks
-    ?.slice(0, 6)
-    .map((data, index) => (
-      <PanelPGAT
-        key={index}
-        Href={`/track/${data.id}`}
-        FirstText={data.name}
-        SecondText={`${data.artists[0].name}`}
-        ImageSRC={data.album?.images[0]?.url || "/FavoriteTrack.png"}
-      />
-    ));
+  if (typeof data !== "string") {
+    items = data?.tracks
+      ?.slice(0, 6)
+      .map((data, index) => (
+        <PanelPGAT
+          key={index}
+          Href={`/track/${data.id}`}
+          FirstText={data.name}
+          SecondText={`${data.artists[0].name}`}
+          ImageSRC={data.album?.images[0]?.url || "/FavoriteTrack.png"}
+        />
+      ));
+  } else items;
   return (
     <section className={style.ForUserMix}>
       <div className={style.ForUserMix_Div}>

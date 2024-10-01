@@ -6,12 +6,16 @@ import { PanelPGAT } from "@/components/UI/Buttons/Panel-PlayList-Genre-Artist-T
 import { PanelSkeleton } from "@/components/UI/Skeleton/Panel-Skeleton/PanelSkeleton";
 import { _getArtistsAlbums } from "@/api/SP-Artists/API-SP-Artists";
 import { CurrentlyPlaylistTracksItem } from "@/types/SpotifyTypes/CurrentlyAlbum/type";
+import { ESLINT_DEFAULT_DIRS } from "next/dist/lib/constants";
 
 export const AlbumSingleList = ({ id }: { id: string }) => {
+  let items;
   const [stateDiscography, setStateDiscography] = useState<"single" | "album">(
     "single"
   );
-  const { data: discography, isLoading } = useSWR<CurrentlyPlaylistTracksItem>(
+  const { data: discography, isLoading } = useSWR<
+    CurrentlyPlaylistTracksItem | string
+  >(
     `artistDiscography/${stateDiscography}/${id}`,
     async () => await _getArtistsAlbums(id, stateDiscography),
     {
@@ -20,18 +24,19 @@ export const AlbumSingleList = ({ id }: { id: string }) => {
       dedupingInterval: 60000,
     }
   );
-
-  const items = discography?.items
-    ?.slice(0, 6)
-    .map((data, index) => (
-      <PanelPGAT
-        key={index}
-        Href={`/album/${data.id}`}
-        FirstText={data.name}
-        SecondText={data.name}
-        ImageSRC={data.images[0]?.url || "/FavoriteTrack.png"}
-      />
-    ));
+  if (typeof discography !== "string") {
+    items = discography?.items
+      ?.slice(0, 6)
+      .map((data, index) => (
+        <PanelPGAT
+          key={index}
+          Href={`/album/${data.id}`}
+          FirstText={data.name}
+          SecondText={data.name}
+          ImageSRC={data.images[0]?.url || "/FavoriteTrack.png"}
+        />
+      ));
+  } else items = "";
   return (
     <>
       <span className={`${style.ArtistData__Span}  `}>
