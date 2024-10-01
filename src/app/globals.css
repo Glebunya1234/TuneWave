@@ -4,14 +4,14 @@
 @import url("https://fonts-online.ru/path-to-fonts/versus.css");
 @import url("https://fonts.googleapis.com/css2?family=Covered+By+Your+Grace&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Single+Day&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap");
+ 
 :root {
   --lengthText: 1;
   --invertFilter: 0;
   --font-family-versus: "Versus", sans-serif;
   --font-family-covered: "Covered By Your Grace", cursive;
   --font-family-SingleDay: "Single Day", sans-serif;
-  --font-family-Oswald: "Oswald", sans-serif;
+ 
   --HiddenList: 245px;
   --text-overflow: 0px;
 }
@@ -24,7 +24,7 @@ body {
   overflow: hidden;
   background-color: black;
   font-weight: 400;
-  font-family: var(--font-family-Oswald);
+ 
 }
 ::-webkit-scrollbar {
   width: 3px;
