@@ -1,5 +1,5 @@
-@import url('https://fonts-online.ru/path-to-fonts/versus.css');
-$font-family-versus: 'Versus', sans-serif;
+// @import url('https://fonts-online.ru/path-to-fonts/versus.css');
+// $font-family-versus: 'Versus', sans-serif;
 
 
 .banner {
@@ -113,7 +113,7 @@ $font-family-versus: 'Versus', sans-serif;
             text-transform: uppercase;
             font-size: 40px;
             color: #272a32;
-            font-family: $font-family-versus;
+            font-family: var(--font-family-versus)
 
 
         }
@@ -154,7 +154,7 @@ $font-family-versus: 'Versus', sans-serif;
         }
 
         span {
-            font-family: $font-family-versus;
+            font-family: var(--font-family-versus);
             margin-left: 10px;
         }
     }

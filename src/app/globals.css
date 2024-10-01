@@ -1,17 +1,26 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import url("https://fonts-online.ru/path-to-fonts/versus.css");
+
 @import url("https://fonts.googleapis.com/css2?family=Covered+By+Your+Grace&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Single+Day&display=swap");
- 
+
+@font-face {
+  font-family: "Versus";
+  src: url("/src/fonts/versus.woff2") format("woff2"),
+    url("/src/fonts/versus.woff") format("woff"),
+    url("/src/fonts/versus.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
 :root {
   --lengthText: 1;
   --invertFilter: 0;
   --font-family-versus: "Versus", sans-serif;
   --font-family-covered: "Covered By Your Grace", cursive;
   --font-family-SingleDay: "Single Day", sans-serif;
- 
+
   --HiddenList: 245px;
   --text-overflow: 0px;
 }
@@ -24,7 +33,6 @@ body {
   overflow: hidden;
   background-color: black;
   font-weight: 400;
- 
 }
 ::-webkit-scrollbar {
   width: 3px;
