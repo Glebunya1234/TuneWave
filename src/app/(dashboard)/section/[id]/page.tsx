@@ -20,7 +20,11 @@ import { SavedAlbums } from "@/types/SpotifyTypes/CurrentlyAlbum/type";
 
 const Section = ({ params }: { params: { id: string } }) => {
   const { data, isLoading } = useSWR<
-    RecommendationsType | FollowedArtistType | CurrentlyPlaylist | SavedAlbums
+    | RecommendationsType
+    | FollowedArtistType
+    | CurrentlyPlaylist
+    | SavedAlbums
+    | string
   >(`${params.id}`, async () => await SectionFetcher(params.id), {
     revalidateOnFocus: false,
     dedupingInterval: 60000,
