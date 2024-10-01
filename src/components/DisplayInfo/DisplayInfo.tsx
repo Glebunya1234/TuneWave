@@ -71,7 +71,7 @@ export const DisplayInfo = ({
               <>
                 <Image
                   src={
-                    Owner.UserFullInfo?.images[0]?.url || "/FavoriteTrack.png"
+                    Owner.UserFullInfo?.images[0]?.url || "/DefaultUserSmall.png"
                   }
                   width={25}
                   height={25}

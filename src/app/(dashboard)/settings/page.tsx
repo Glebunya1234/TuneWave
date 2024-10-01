@@ -17,7 +17,7 @@ const Settings = async () => {
             <Image
               src={
                 userData?.images[1]?.url === undefined
-                  ? ""
+                  ? "/DefaultUser.png"
                   : userData?.images[1]?.url
               }
               layout="fill"

@@ -45,7 +45,7 @@ const PlaylistPage = () => {
           idForScroll={"PlaylistPage"}
           ImageSrc={
             data?.infoPlaylist?.images[0].url === undefined
-              ? "/RandomPL.png"
+              ? "/PlayLiskDefault.png"
               : data?.infoPlaylist.images[0].url
           }
           Type={data?.infoPlaylist?.type! || ""}

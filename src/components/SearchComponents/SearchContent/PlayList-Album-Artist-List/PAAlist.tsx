@@ -120,7 +120,7 @@ export const PAAlist = ({
             }
             ImageSRC={
               it?.images[0]?.url === undefined
-                ? "/FavoriteTrack.png"
+                ? "/DefaultForAll.png"
                 : it?.images[0]?.url
             }
           />
