@@ -15,6 +15,7 @@ export const oAuthSignIn = async (provider: Provider) => {
     const supabase = createClient();
 
     const redirectUrl = getURL("/auth/callback");
+    console.log('redirectUrl :>> ', redirectUrl);
     const { data, error } = await supabase.auth.signInWithOAuth({
         provider,
         options: {
