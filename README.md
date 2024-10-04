@@ -34,11 +34,11 @@
   </tr>
   
   <tr>
-    <td>
+    <td width='550px'>
        
  > - _**View saved tracks in your collection**_
     </td>
-    <td>
+    <td width='550px'>
     
   > - _**Save or delete tracks you don't like**_
     </td>
@@ -70,6 +70,37 @@
     </td>
   </tr>
 </table>
+
+<table>
+ 
+  
+ 
+  
+   <tr>
+    <td>
+       
+<p align="center" > <img src="Assets/TuneWaveDemo1.png" width='550px' alt="LogoBot">    </p>
+ </td>
+    <td>
+    
+  <p align="center" > <img src="Assets/TuneWaveDemo2.png" width='550px' alt="LogoBot">    </p>
+    </td>
+
+ 
+  </tr>
+  <tr>
+
+  <td>
+    
+  <p align="center" > <img src="Assets/TuneWaveDemo3.png" width='550px' alt="LogoBot">    </p>
+    </td>
+      <td>
+    
+<p align="center" > <img src="Assets/TuneWaveDemo4.png" width='550px' alt="LogoBot">    </p>
+    </td>
+  </tr>
+</table>
+
 
 <table style="width: 100%; max-width: 100%;">
   <tr>
