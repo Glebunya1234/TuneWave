@@ -4,252 +4,255 @@
 
 .banner {
 
-    &::after {
-        position: absolute;
-        content: "";
-        top: 50px;
-        left: 50px;
-        width: 100%;
-        height: 100%;
+&::after {
+    position: absolute;
+    content: "";
+    top: 50px;
+    left: 50px;
+    width: 100%;
+    height: 100%;
 
-        z-index: 20;
+    z-index: 20;
 
-        animation: AnimRenderBlue .2s linear;
+    animation: AnimRenderBlue .2s linear;
+
+}
+
+&::before {
+    position: absolute;
+    content: "";
+    top: -50px;
+    left: -50px;
+    width: 100%;
+    height: 100%;
+
+    z-index: 20;
+
+    animation: AnimRenderGreen .2s linear;
+
+}
+
+
+@keyframes AnimRenderBlue {
+
+    0% {
+        background: #78f27800;
+
 
     }
 
+    25% {
+        background: #0000ffa6;
+    }
+
+    50% {
+        background: #0000ffa6;
+
+    }
+
+    75% {
+
+        background: #78f27800;
+    }
+
+}
+
+@keyframes AnimRenderGreen {
+    25% {
+
+        background: #78f27800;
+    }
+
+    50% {
+        background: #78f279a6;
+
+
+    }
+
+    75% {
+        background: #78f279a6;
+
+    }
+
+    100% {
+
+        background: #78f27800;
+    }
+
+}
+
+width: 500px;
+position: relative;
+margin: 50px;
+transform: rotate(-2deg);
+
+div {
+    width: 100%;
+    height: 20px;
+    background: repeating-linear-gradient(315deg,
+            #3a3a44 0%,
+            #3a3a44 25px,
+            #272a32 25px,
+            #272a32 50px);
+}
+
+
+
+.banner__Welcome {
+    position: relative;
+    width: 100%;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #0ee913;
+
+    h1 {
+        text-transform: uppercase;
+        font-size: 40px;
+        color: #272a32;
+        font-family: var(--font-family-versus)
+
+
+    }
+
+
+}
+
+.Welcome__dash {
     &::before {
         position: absolute;
         content: "";
-        top: -50px;
-        left: -50px;
-        width: 100%;
-        height: 100%;
+        top: 2px;
+        left: 2px;
 
-        z-index: 20;
-
-        animation: AnimRenderGreen .2s linear;
-
+        width: 20px;
+        height: 92%;
+        background: repeating-linear-gradient(315deg, #272a32, #272a32 2px, transparent 0px, transparent 5px);
     }
 
+}
 
-    @keyframes AnimRenderBlue {
-
-        0% {
-            background: #78f27800;
-
-
-        }
-
-        25% {
-            background: #0000ffa6;
-        }
-
-        50% {
-            background: #0000ffa6;
-
-        }
-
-        75% {
-
-            background: #78f27800;
-        }
-
-    }
-
-    @keyframes AnimRenderGreen {
-        25% {
-
-            background: #78f27800;
-        }
-
-        50% {
-            background: #78f279a6;
-
-
-        }
-
-        75% {
-            background: #78f279a6;
-
-        }
-
-        100% {
-
-            background: #78f27800;
-        }
-
-    }
-
-    width: 500px;
+.banner__span {
     position: relative;
-    margin: 50px;
-    transform: rotate(-2deg);
+    background-color: #444351;
+    width: 100%;
+    height: 30px;
+    padding-left: 30px;
+    display: flex;
+    align-items: center;
+    color: #878793;
+
+    .span__dash {
+    @extend .Welcome__dash;
+
+    &::before {
+        background: repeating-linear-gradient(315deg, #878793, #878793 2px, transparent 0px, transparent 5px);
+    }
+
+    span {
+        font-family: var(--font-family-versus);
+        margin-left: 10px;
+    }
+}
+
+    span {
+        font-family: var(--font-family-versus);
+        margin-left: 10px;
+    }
+}
+
+.banner__descr {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #272a33;
+
+    p {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        margin: 30px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        color: #878793;
+        font-size: 20px;
+
+
+    }
+}
+
+@media (max-width: 700px) {
+
+
+
+    //.banner
+    position: static;
+    transform: rotate(0deg);
+    margin: 0px;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: min-content;
+
 
     div {
-        width: 100%;
-        height: 20px;
-        background: repeating-linear-gradient(315deg,
-                #3a3a44 0%,
-                #3a3a44 25px,
-                #272a32 25px,
-                #272a32 50px);
+        height: clamp(0rem, 2.86vw, 1.25rem);
     }
-
-
 
     .banner__Welcome {
-        position: relative;
-        width: 100%;
-        height: 70px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-color: #0ee913;
+        position: block;
+        height: min-content;
 
-
-
-        h1 {
-            text-transform: uppercase;
-            font-size: 40px;
-            color: #272a32;
-            font-family: var(--font-family-versus)
-
-
-        }
-
-
-    }
-
-    .Welcome__dash {
-        &::before {
-            position: absolute;
-            content: "";
-            top: 2px;
-            left: 2px;
-
-            width: 20px;
-            height: 92%;
-            background: repeating-linear-gradient(315deg, #272a32, #272a32 2px, transparent 0px, transparent 5px);
-        }
-
-    }
-
-    .banner__span {
-        position: relative;
-        background-color: #444351;
-        width: 100%;
-        height: 30px;
-        padding-left: 30px;
-        display: flex;
-        align-items: center;
-        color: #878793;
-
-        .span__dash {
-            @extend .Welcome__dash;
-
+        .Welcome__dash {
             &::before {
-                background: repeating-linear-gradient(315deg, #878793, #878793 2px, transparent 0px, transparent 5px);
+                display: none;
             }
         }
 
+        h1 {
+            font-size: clamp(0rem, 5.71vw, 2.5rem)
+        }
+    }
+
+    .banner__span {
+        height: min-content;
+
         span {
-            font-family: var(--font-family-versus);
-            margin-left: 10px;
+            font-size: clamp(0rem, 2.86vw, 1.25rem)
+        }
+
+        .span__dash {
+            &::before {
+                display: none;
+            }
         }
     }
 
     .banner__descr {
-        width: 100%;
-
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        background-color: #272a33;
-
         p {
-            height: 100%;
-            display: flex;
-            align-items: center;
-            margin: 30px;
-            margin-top: 20px;
-            margin-bottom: 20px;
-            color: #878793;
-            font-size: 20px;
-
-
+            margin: clamp(0rem, 4.29vw, 1.875rem);
+            margin-top: clamp(0rem, 2.86vw, 1.25rem);
+            margin-bottom: clamp(0rem, 2.86vw, 1.25rem);
+            font-size: clamp(0rem, 2.86vw, 1.25rem)
         }
     }
 
-    @media (max-width: 700px) {
+    h2 {
+        span {
+            height: 10px;
 
-
-
-        //.banner
-        position: static;
-        transform: rotate(0deg);
-        margin: 0px;
-        top: 0px;
-        left: 0px;
-        width: 100%;
-        height: min-content;
-
-
-        div {
-            height: clamp(0rem, 2.86vw, 1.25rem);
-        }
-
-        .banner__Welcome {
-            position: block;
-            height: min-content;
-
-            .Welcome__dash {
-                &::before {
-                    display: none;
-                }
-            }
-
-            h1 {
-                font-size: clamp(0rem, 5.71vw, 2.5rem)
+            &::after {
+                border-width: 0px;
             }
         }
-
-        .banner__span {
-            height: min-content;
-
-            span {
-                font-size: clamp(0rem, 2.86vw, 1.25rem)
-            }
-
-            .span__dash {
-                &::before {
-                    display: none;
-                }
-            }
-        }
-
-        .banner__descr {
-            p {
-                margin: clamp(0rem, 4.29vw, 1.875rem);
-                margin-top: clamp(0rem, 2.86vw, 1.25rem);
-                margin-bottom: clamp(0rem, 2.86vw, 1.25rem);
-                font-size: clamp(0rem, 2.86vw, 1.25rem)
-            }
-        }
-
-        h2 {
-            span {
-                height: 10px;
-
-                &::after {
-                    border-width: 0px;
-                }
-            }
-        }
-
-
-
     }
+
+
+
+}
 }
 
 // 

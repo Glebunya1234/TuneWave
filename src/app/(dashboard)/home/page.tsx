@@ -13,6 +13,8 @@ import { FollowedArtist } from "@/components/Content/Mix/FollowedAlbum/FollowedA
 import { FollowedAlbum } from "@/components/Content/Mix/FollowedArtist/FollowedArtist";
 
 const Profile = async () => {
+  console.log(process.env.NEXT_PUBLIC_VERCEL_URL)
+  console.log(process.env.NEXT_PUBLIC_SITE_URL)
   return (
     <section className={style.profile}>
       <FavoriteBanner />
