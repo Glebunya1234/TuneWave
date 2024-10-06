@@ -103,33 +103,7 @@ export const _TransferPlayback = async (deviceId: string) => {
         return false;
     }
 };
-// export const _TransferPlayback = async (deviceId: string) => {
 
-
-//     const url1 = 'https://api.spotify.com/v1/me/player';
-
-//     const options1: RequestInit = {
-//         method: 'PUT',
-//         headers: {
-//             'Content-Type': 'application/json',
-//         },
-//         body: JSON.stringify({
-
-//             device_ids: [
-//                 deviceId
-//             ]
-//         }),
-//     };
-//     const response1 = await fetchWithRetryForWriteMethods(url1, options1);
-
-//     if (!response1.ok) {
-//         const error = await response1.json();
-//         console.error('Error:', error);
-//         return;
-//     }
-
-//     return null;
-// }
 export const _PlayTrackPlayback = async (deviceId: string) => {
 
 
@@ -150,24 +124,37 @@ export const _PlayTrackPlayback = async (deviceId: string) => {
     }
     return null;
 }
-export const _setPlayTrack = async (uri: string, deviceId: string) => {
+
+export const _setPlayTrack = async (uri: string, deviceId: string, uriArray?: string[],) => {
+    const body = uriArray && uriArray.length > 0
+        ? {
+            uris: uriArray, 
+            offset: {
+                uri, 
+            },
+            position_ms: 0,
+        }
+        : {
+            uris: [uri], 
+            offset: {
+                position: 0,
+            },
+            position_ms: 0,
+        };
+
 
     const url2 = 'https://api.spotify.com/v1/me/player/play';
-
     const options2: RequestInit = {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-
-            offset: {
-                position: 0,
-            },
-            uris: [uri],
-            position_ms: 0,
-        }),
+        body: JSON.stringify(body),
     };
+
+
+
+
 
 
     try {

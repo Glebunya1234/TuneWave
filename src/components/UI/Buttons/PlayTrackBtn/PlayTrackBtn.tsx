@@ -10,6 +10,7 @@ import { BsFillPlayFill } from "react-icons/bs";
 type PlayTrackBtnType = {
   id: string;
   text: any;
+  uriArray?: string[];
   onHover: { isTrue: boolean; content?: any };
   className: string;
 };
@@ -18,15 +19,18 @@ export const PlayTrackBtn = ({
   id,
   className,
   text,
+  uriArray,
   onHover,
 }: PlayTrackBtnType) => {
   const dataContext = useContext(GlobalContext);
   const [hoverStates, setHoverStates] = useState(false);
 
   const OnClick = async (id: string) => {
-    const track = await _getCurrentlyPlayingTrack();
+    // const track = await _getCurrentlyPlayingTrack();
     // dataContext.setStatePlaying(track);
-    await _setPlayTrack(id, dataContext?.getDeviceID);
+    if (uriArray?.length === 0)
+      await _setPlayTrack(id, dataContext?.getDeviceID);
+    else await _setPlayTrack(id, dataContext?.getDeviceID, uriArray);
   };
 
   const handleMouseEnter = (index?: boolean) => {

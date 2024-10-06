@@ -2,8 +2,6 @@
 import style from "./playlist.module.scss";
 import useSWR from "swr/immutable";
 import { useParams, useSearchParams } from "next/navigation";
-
-import { PanelTarget } from "@/components/UI/Target/PanelTarget";
 import { PlaylistComponent } from "@/components/DataLists/PlayLists-Component/PlayListComponent";
 import { Spinner } from "@/components/UI/Spinner/spinner";
 import { RecommendationsType } from "@/types/SpotifyTypes/RecommendationsType/type";

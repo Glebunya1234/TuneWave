@@ -71,7 +71,7 @@ export const FavoriteTrackComponent = () => {
       };
     }
   }, []);
-
+  const uriArray = data?.items?.map((item) => item.track.uri) || [];
   return (
     <section className={`${style.Content__playlist}`} id="FavoriteContent">
       {isLoading && <Spinner />}
@@ -98,6 +98,7 @@ export const FavoriteTrackComponent = () => {
           <div key={index} className={style.Playlist__Track}>
             <PlayTrackBtn
               id={item.track.uri}
+              uriArray={uriArray}
               onHover={{
                 isTrue: true,
                 content: (

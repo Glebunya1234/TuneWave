@@ -65,7 +65,7 @@ export const PlaylistComponent = ({
 
     fetchMoreData();
   }, [fetching]);
-
+  const uriArray = data?.map((item) => item.uri) || [];
   useEffect(() => {
     const myDiv = document.getElementById("PlaylistPage");
 
@@ -112,6 +112,7 @@ export const PlaylistComponent = ({
             <div key={index} className={style.Playlist__Track}>
               <PlayTrackBtn
                 id={item.uri}
+                uriArray={uriArray}
                 onHover={{
                   isTrue: true,
                   content: (

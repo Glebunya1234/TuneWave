@@ -19,6 +19,7 @@ export const AlbumInformation = ({
   showSaved?: boolean;
   data: TrackItem[];
 }) => {
+  const uriArray = data?.map((item) => item.uri) || [];
   return (
     <section className={style.AlbumInformation}>
       <aside
@@ -38,7 +39,8 @@ export const AlbumInformation = ({
               className={style.Playlist__Track}
             >
               <PlayTrackBtn
-                id={item.id}
+                id={item.uri}
+                uriArray={uriArray}
                 text={index + 1}
                 onHover={{
                   isTrue: true,

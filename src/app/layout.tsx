@@ -6,6 +6,7 @@ import style from "./page.module.scss";
 const inter = Oswald({
   subsets: ["latin"],
   weight: "400",
+  display: "swap",
 });
 export const metadata: Metadata = {
   title: "Create Next App",
