@@ -209,6 +209,10 @@ yarn dev
   </td>
 </tr>
 
+ 
+
+
+ 
 <tr>
   <td>
  	  	 
@@ -219,4 +223,18 @@ yarn dev
 </tr>
 
 </table>
+<table style="width: 100%; max-width: 100%;">
+  <tr>
+    <td style="width: 100%; max-width: 100%;">
 
+   ## ⚠️Attentionㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ
+<tr>
+  <td>
+ 	        <p align='center'>Since using the API requires manually adding a user to the Spotify dashboard in development mode, the Spotify user data will not be loaded in the demo version!</p>
+  </td>
+</tr>
+
+  </td>
+</tr>
+
+</table>
