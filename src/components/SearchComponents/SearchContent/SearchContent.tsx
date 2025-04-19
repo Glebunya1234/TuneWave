@@ -23,6 +23,7 @@ export const SearchContent = ({ id }: { id: string }) => {
 
   const itemsArtists = data?.artists?.items
     ?.slice(0, 6)
+    ?.filter((item) => item && item.id)
     .map((data, index) => (
       <PanelPGAT
         key={index}
@@ -34,6 +35,7 @@ export const SearchContent = ({ id }: { id: string }) => {
     ));
   const itemsAlbums = data?.albums?.items
     ?.slice(0, 6)
+    ?.filter((item) => item && item.id)
     .map((data, index) => (
       <PanelPGAT
         key={index}
@@ -45,6 +47,7 @@ export const SearchContent = ({ id }: { id: string }) => {
     ));
   const itemsPlaylists = data?.playlists?.items
     ?.slice(0, 6)
+    ?.filter((item) => item && item.id)
     .map((data, index) => (
       <PanelPGAT
         key={index}
