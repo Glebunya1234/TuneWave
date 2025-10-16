@@ -49,7 +49,7 @@ export const ComponentPlayingTrack = () => {
     };
   }, [getCurrentTrack, dataContext?.getCurrentPlaying?.current_track?.id]);
 
-  return getCurrentTrack !== undefined || null ? (
+  return (
     <section className={style.Content__Preview}>
       <div className={style.Preview__image}>
         <Image
@@ -108,7 +108,5 @@ export const ComponentPlayingTrack = () => {
         </nav>
       </span>
     </section>
-  ) : (
-    <></>
   );
 };
